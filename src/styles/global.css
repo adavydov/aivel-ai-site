@@ -31,7 +31,7 @@
   --z-header: 40;
   --z-dialog: 100;
   --transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -142,6 +142,19 @@ p {
 :focus-visible {
   outline: 3px solid var(--color-gold-soft);
   outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
 }
 
 .skip-link {
@@ -299,6 +312,7 @@ p {
 
 .text-link {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   color: var(--color-ink);
@@ -995,6 +1009,68 @@ p {
 .demo-compact-footer .demo-disclaimer {
   max-width: 510px;
   margin: 0;
+}
+
+/* The homepage preview is intentionally denser so the primary action stays in the first screen. */
+.home-hero .important-signal-demo .demo-panel {
+  padding: 22px;
+}
+
+.home-hero .important-signal-demo .signal-event-row {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.home-hero .important-signal-demo .demo-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.home-hero .important-signal-demo .demo-answer-grid {
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 16px;
+}
+
+.home-hero .important-signal-demo .verified-label {
+  margin-bottom: 9px;
+}
+
+.home-hero .important-signal-demo .demo-answer-main h3 {
+  font-size: clamp(1.35rem, 2vw, 1.72rem);
+}
+
+.home-hero .important-signal-demo .signal-why {
+  margin-bottom: 14px;
+}
+
+.home-hero .important-signal-demo .signal-why p {
+  font-size: 0.82rem;
+}
+
+.home-hero .important-signal-demo .demo-metric {
+  min-height: 140px;
+  padding: 16px;
+}
+
+.home-hero .important-signal-demo .signal-action-card {
+  padding: 13px 14px;
+}
+
+.home-hero .important-signal-demo .signal-action-card p {
+  font-size: 0.74rem;
+}
+
+.home-hero .important-signal-demo .signal-proof-details {
+  margin-top: 10px;
+}
+
+.home-hero .important-signal-demo .demo-compact-footer {
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.home-hero .important-signal-demo .demo-disclaimer {
+  display: none;
 }
 
 .signal-limit svg {
@@ -2134,6 +2210,10 @@ p {
   color: var(--color-red);
 }
 
+.consent-error {
+  margin-top: -14px;
+}
+
 .consent-row {
   display: grid;
   grid-template-columns: 22px 1fr;
@@ -2207,6 +2287,11 @@ p {
   color: var(--color-red);
   background: var(--color-red-pale);
   border: 1px solid #fecaca;
+}
+
+.form-status a {
+  color: inherit;
+  font-weight: 700;
 }
 
 .form-panel {
@@ -2530,7 +2615,7 @@ p {
 
   .hero-copy h1,
   .page-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
+    font-size: clamp(2.35rem, 10.8vw, 3.2rem);
   }
 
   .hero-actions,
@@ -2567,6 +2652,10 @@ p {
   .form-grid,
   .answer-passport,
   .numbered-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero .important-signal-demo .demo-answer-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2677,14 +2766,35 @@ p {
     flex-wrap: wrap;
   }
 
+  .footer-grid a,
+  .footer-bottom a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
   .contact-dialog {
     width: calc(100% - 16px);
     max-height: calc(100dvh - 16px);
     border-radius: 22px;
   }
 
+  .dialog-head h2 {
+    font-size: clamp(1.85rem, 9vw, 2.45rem);
+  }
+
   .dialog-head .icon-button {
     flex: 0 0 auto;
+  }
+
+  .contact-dialog[open] .dialog-head .icon-button {
+    position: fixed;
+    z-index: calc(var(--z-dialog) + 1);
+    top: 14px;
+    right: 14px;
+    color: var(--color-ink);
+    background: white;
+    box-shadow: var(--shadow-sm);
   }
 }
 

@@ -1,5 +1,18 @@
 ---
 const year = new Date().getFullYear();
+const path = Astro.url.pathname;
+const isPartnerPage = path.startsWith("/buhgalterskim-kompaniyam/");
+const isEnterprisePage = [
+  "/krupnym-kompaniyam/",
+  "/avtomatizatsiya-ucheta/",
+  "/zashchita-dannyh/",
+  "/1s-i-integratsii/"
+].some((prefix) => path.startsWith(prefix));
+const footerCta = isPartnerPage
+  ? { label: "Обсудить партнёрство", topic: "partner" }
+  : isEnterprisePage
+    ? { label: "Обсудить внедрение", topic: "enterprise" }
+    : { label: "Обсудить свою ситуацию", topic: "client" };
 ---
 
 <footer class="site-footer">
@@ -8,7 +21,7 @@ const year = new Date().getFullYear();
       <p class="section-kicker section-kicker-light">Aivel</p>
       <h2>Важное — вовремя.<br />Основание — проверяемо.</h2>
     </div>
-    <button class="button button-light" type="button" data-open-demo>Попробовать демо продукта</button>
+    <button class="button button-light" type="button" data-open-contact data-contact-topic={footerCta.topic}>{footerCta.label}</button>
   </div>
 
   <div class="container footer-grid">

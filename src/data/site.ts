@@ -3,7 +3,7 @@ export const site = {
   title: "Aivel — вовремя показывает важные изменения в бизнесе",
   description:
     "Aivel ведёт учёт, помогает раньше замечать значимые изменения и показывает причину, источник и следующий шаг.",
-  url: import.meta.env.PUBLIC_SITE_URL ?? "https://aivel-ai-site.pages.dev"
+  url: import.meta.env.PUBLIC_SITE_URL ?? "https://adavydov.github.io"
 };
 
 export const navigation = [

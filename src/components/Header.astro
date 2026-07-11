@@ -4,6 +4,22 @@ import { navigation } from "../data/site";
 
 const path = Astro.url.pathname;
 const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith(href);
+const isPartnerPage = path.startsWith("/buhgalterskim-kompaniyam/");
+const isAccountingPage = path.startsWith("/buhgalterskoe-soprovozhdenie/");
+const isEnterprisePage = [
+  "/krupnym-kompaniyam/",
+  "/avtomatizatsiya-ucheta/",
+  "/zashchita-dannyh/",
+  "/1s-i-integratsii/"
+].some((prefix) => path.startsWith(prefix));
+
+const contactCta = isPartnerPage
+  ? { label: "Обсудить партнёрство", topic: "partner" }
+  : isAccountingPage
+    ? { label: "Запросить аудит", topic: "client" }
+    : isEnterprisePage
+      ? { label: "Обсудить внедрение", topic: "enterprise" }
+      : null;
 ---
 
 <header class="site-header" data-site-header>
@@ -19,9 +35,15 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
     </nav>
 
     <div class="header-actions">
-      <button class="button button-small button-primary header-cta" type="button" data-open-demo>
-        Попробовать демо
-      </button>
+      {contactCta ? (
+        <button class="button button-small button-primary header-cta" type="button" data-open-contact data-contact-topic={contactCta.topic}>
+          {contactCta.label}
+        </button>
+      ) : (
+        <button class="button button-small button-primary header-cta" type="button" data-open-demo>
+          Попробовать демо
+        </button>
+      )}
       <button
         class="icon-button mobile-menu-button"
         type="button"
@@ -40,7 +62,11 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
       {navigation.map((item) => (
         <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
       ))}
-      <button class="button button-primary" type="button" data-open-demo>Попробовать демо</button>
+      {contactCta ? (
+        <button class="button button-primary" type="button" data-open-contact data-contact-topic={contactCta.topic}>{contactCta.label}</button>
+      ) : (
+        <button class="button button-primary" type="button" data-open-demo>Попробовать демо</button>
+      )}
     </nav>
   </div>
 </header>

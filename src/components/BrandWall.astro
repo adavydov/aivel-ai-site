@@ -7,11 +7,11 @@ interface Props {
 const { compact = false, dark = false } = Astro.props;
 
 const brands = [
-  { name: "DDX", image: "/brands/ddx.png", className: "" },
-  { name: "Нефтьмагистраль", image: "/brands/neftmagistral.png", className: "" },
-  { name: "Братья Караваевы", image: "karavaevi", className: "brand-karavaevi" },
-  { name: "Гольфстрим", image: "/brands/golfstrim-official.svg", className: "brand-official-wide" },
-  { name: "ВсеИнструменты.ру", image: "/brands/vseinstrumenti-official.svg", className: "brand-official-wide" }
+  { name: "DDX", image: "/brands/ddx.png", className: "", width: 482, height: 140 },
+  { name: "Нефтьмагистраль", image: "/brands/neftmagistral.png", className: "", width: 480, height: 138 },
+  { name: "Братья Караваевы", image: "karavaevi", className: "brand-karavaevi", width: 180, height: 48 },
+  { name: "Гольфстрим", image: "/brands/golfstrim-official.svg", className: "brand-official-wide", width: 278, height: 80 },
+  { name: "ВсеИнструменты.ру", image: "/brands/vseinstrumenti-official.svg", className: "brand-official-wide", width: 411, height: 208 }
 ];
 ---
 
@@ -20,11 +20,11 @@ const brands = [
     <div class:list={["brand-tile", brand.className]} title={brand.name}>
       {brand.image === "karavaevi" ? (
         <div class="karavaevi-lockup" aria-label="Братья Караваевы">
-          <img src="/brands/karavaevi-symbol.svg" alt="" />
-          <img src="/brands/karavaevi-wordmark.svg" alt="Братья Караваевы" />
+          <img src="/brands/karavaevi-symbol.svg" width="48" height="48" alt="" loading="lazy" />
+          <img src="/brands/karavaevi-wordmark.svg" width="132" height="37" alt="Братья Караваевы" loading="lazy" />
         </div>
       ) : (
-        <img src={brand.image} alt={brand.name} loading="lazy" />
+        <img src={brand.image} width={brand.width} height={brand.height} alt={brand.name} loading="lazy" />
       )}
     </div>
   ))}

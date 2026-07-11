@@ -37,23 +37,6 @@ const accountingAreas = [
     </div>
   </section>
 
-  <section class="section safety-entry-section" aria-labelledby="safety-entry-title">
-    <div class="container safety-entry">
-      <div>
-        <p class="section-kicker">Безопасность и точность</p>
-        <h2 id="safety-entry-title">ИИ действует только в разрешённой роли.</h2>
-        <p>Контур размещения, источники, права и допустимые действия согласуются до запуска. Запрос пользователя не может дать ИИ-помощнику доступ, которого нет у его роли.</p>
-        <a class="button button-primary" href="/zashchita-dannyh/">Как защищены данные и ответы <Icon name="arrow" size={20} /></a>
-      </div>
-      <div class="safety-entry-points">
-        <div><strong>Ваш контур или изолированное облако</strong><span>Вариант размещения выбирается для проекта.</span></div>
-        <div><strong>Отдельные роли для людей и ИИ</strong><span>Каждому доступны только нужные источники и действия.</span></div>
-        <div><strong>Три линии контроля качества</strong><span>Правила, оценка неоднозначности, человек и журнал действий.</span></div>
-        <div><strong>1С и банки — по регламенту</strong><span>Юридические лица, базы, расписание и права задаются заранее.</span></div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" aria-labelledby="signal-chain-title">
     <div class="container">
       <div class="section-heading"><div><p class="section-kicker">Второй слой</p><h2 id="signal-chain-title">Из данных получается своевременный сигнал.</h2></div><p>Руководителю не нужно читать все операции. Aivel показывает только изменение, которое пересекло согласованную границу или выбилось из обычного.</p></div>
@@ -71,6 +54,23 @@ const accountingAreas = [
       <div class="section-heading"><div><p class="section-kicker">Третий слой</p><h2 id="trust-title">Пять проверок делают ответ пригодным для решения.</h2></div><p>Подробности раскрываются по запросу и не перегружают сам сигнал.</p></div>
       <div class="trust-flow signal-flow">
         {trustSteps.map((step) => <article class="trust-step"><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section safety-entry-section" aria-labelledby="safety-entry-title">
+    <div class="container safety-entry">
+      <div>
+        <p class="section-kicker">Безопасность и точность</p>
+        <h2 id="safety-entry-title">ИИ действует только в разрешённой роли.</h2>
+        <p>Контур размещения, источники, права и допустимые действия согласуются до запуска. Запрос пользователя не может дать ИИ-помощнику доступ, которого нет у его роли.</p>
+        <a class="button button-primary" href="/zashchita-dannyh/">Как защищены данные и ответы <Icon name="arrow" size={20} /></a>
+      </div>
+      <div class="safety-entry-points">
+        <div><strong>Ваш контур или изолированное облако</strong><span>Вариант размещения выбирается для проекта.</span></div>
+        <div><strong>Отдельные роли для людей и ИИ</strong><span>Каждому доступны только нужные источники и действия.</span></div>
+        <div><strong>Три линии контроля качества</strong><span>Правила, оценка неоднозначности, человек и журнал действий.</span></div>
+        <div><strong>1С и банки — по регламенту</strong><span>Юридические лица, базы, расписание и права задаются заранее.</span></div>
       </div>
     </div>
   </section>
