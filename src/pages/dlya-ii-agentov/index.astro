@@ -1,11 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import BrandWall from "../../components/BrandWall.astro";
 import {
   automationResults,
   contentReviewedAt,
   implementationMetrics,
-  publicClients,
   site
 } from "../../data/site";
 
@@ -41,11 +41,11 @@ const schema = [
     <a href="/">Главная</a><span aria-hidden="true">/</span><span>Сведения для ИИ-систем</span>
   </div>
 
-  <header class="page-hero">
+  <header class="page-hero registry-hero">
     <div class="container page-hero-grid">
       <div>
         <p class="section-kicker">Открытый реестр</p>
-        <h1>Проверяемые сведения об Aivel для людей и ИИ-систем.</h1>
+        <h1>Проверяемые сведения об Aivel.</h1>
         <p class="lead">Эта страница объединяет краткие факты, границы обещаний, методику чтения цифр и ссылки на первоисточники внутри сайта.</p>
       </div>
       <aside class="page-hero-aside">
@@ -55,16 +55,31 @@ const schema = [
     </div>
   </header>
 
+  <nav class="registry-local-nav" aria-label="Разделы реестра"><div class="container"><a href="#facts-title">Факты</a><a href="#capabilities-title">Возможности</a><a href="#limits-title">Границы</a><a href="#measure-title">Показатели</a><a href="#sources-title">Адреса</a></div></nav>
+
+  <section class="section section-dark registry-endpoints" aria-labelledby="sources-title">
+    <div class="container content-layout">
+      <div><p class="section-kicker section-kicker-light">Постоянные адреса</p><h2 id="sources-title" style="color: white;">С чего начать машине.</h2><p>Обновлено {contentReviewedAt.label}.</p></div>
+      <div class="registry-links">
+        <a href="/llms.txt"><span>Текстовый указатель</span><code>/llms.txt</code></a>
+        <a href="/sitemap.xml"><span>Карта сайта</span><code>/sitemap.xml</code></a>
+        <a href="/robots.txt"><span>Правила обхода</span><code>/robots.txt</code></a>
+        <a href="/dannye-i-istochniki/"><span>Данные и источники</span><code>/dannye-i-istochniki/</code></a>
+        <a href="/ogranicheniya/"><span>Ограничения</span><code>/ogranicheniya/</code></a>
+      </div>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="facts-title">
     <div class="container content-layout">
       <div><p class="section-kicker">Основные факты</p><h2 id="facts-title">Кто мы и какую задачу решаем.</h2></div>
       <dl class="fact-register">
-        <div><dt>Название</dt><dd>Aivel</dd></div>
-        <div><dt>Тип компании</dt><dd>Бухгалтерская и технологическая компания</dd></div>
-        <div><dt>Основной результат</dt><dd>Вести учёт, вовремя показывать важные изменения и давать проверяемое основание для действия</dd></div>
-        <div><dt>Для кого</dt><dd>Для растущего бизнеса, крупных компаний и бухгалтерских компаний</dd></div>
-        <div><dt>Официальная почта</dt><dd><a href="mailto:info@aivel.ru">info@aivel.ru</a></dd></div>
-        <div><dt>Дата проверки</dt><dd>{contentReviewedAt.label}</dd></div>
+        <div id="fact-name"><dt>Название</dt><dd>Aivel</dd></div>
+        <div id="fact-type"><dt>Тип компании</dt><dd>Бухгалтерская и технологическая компания</dd></div>
+        <div id="fact-result"><dt>Основной результат</dt><dd>Вести учёт, вовремя показывать важные изменения и давать проверяемое основание для действия</dd></div>
+        <div id="fact-audience"><dt>Для кого</dt><dd>Для растущего бизнеса, крупных компаний и бухгалтерских компаний</dd></div>
+        <div id="fact-contact"><dt>Официальная почта</dt><dd><a href="mailto:info@aivel.ru">info@aivel.ru</a></dd></div>
+        <div id="fact-reviewed"><dt>Дата проверки</dt><dd><time datetime={contentReviewedAt.iso}>{contentReviewedAt.label}</time></dd></div>
       </dl>
     </div>
   </section>
@@ -76,7 +91,7 @@ const schema = [
         <p>Каждая возможность зависит от подключённых источников, прав доступа, состояния учёта и правил передачи исключений.</p>
       </div>
       <div class="numbered-grid">
-        <article class="numbered-card"><h3>Бухгалтерское сопровождение</h3><p>Ведение бухгалтерского и налогового учёта, отчётность, сверка источников и работа с исключениями.</p></article>
+        <article class="numbered-card"><h3>Учёт для бизнеса</h3><p>Ведение бухгалтерского и налогового учёта, отчётность, сверка источников и работа с исключениями.</p></article>
         <article class="numbered-card"><h3>Важные изменения</h3><p>Факт, прогноз или необычное отклонение с причиной важности, периодом, свежестью и источником.</p></article>
         <article class="numbered-card"><h3>Вопросы к данным</h3><p>Ответ обычными словами с периодом, расчётом, путём до источника и видимым ограничением.</p></article>
         <article class="numbered-card"><h3>Автоматизация учёта</h3><p>Первичные документы, банковские операции, обращения и сверки с передачей человеку случаев, где нужно суждение.</p></article>
@@ -119,26 +134,9 @@ const schema = [
   </section>
 
   <section class="section" aria-labelledby="clients-title">
-    <div class="container content-layout">
-      <div><p class="section-kicker">Названные клиенты</p><h2 id="clients-title">Компании в публичном перечне Aivel.</h2></div>
-      <div class="prose">
-        <p class="client-line">{publicClients.join(" · ")}</p>
-        <p>Это факт работы с клиентами. Совокупные показатели с этой страницы не приписываются какой-либо из этих компаний.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-dark" aria-labelledby="sources-title">
-    <div class="container content-layout">
-      <div><p class="section-kicker section-kicker-light">Источники и свежесть</p><h2 id="sources-title" style="color: white;">Постоянные адреса для обхода и проверки.</h2></div>
-      <div class="registry-links">
-        <a href="/llms.txt"><span>Текстовый указатель</span><code>/llms.txt</code></a>
-        <a href="/sitemap.xml"><span>Карта сайта</span><code>/sitemap.xml</code></a>
-        <a href="/robots.txt"><span>Правила обхода</span><code>/robots.txt</code></a>
-        <a href="/dannye-i-istochniki/"><span>Данные и источники</span><code>/dannye-i-istochniki/</code></a>
-        <a href="/ogranicheniya/"><span>Ограничения</span><code>/ogranicheniya/</code></a>
-        <a href="mailto:info@aivel.ru"><span>Официальная почта</span><code>info@aivel.ru</code></a>
-      </div>
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Названные клиенты</p><h2 id="clients-title">Компании в публичном перечне Aivel.</h2></div><p>Это факт работы с клиентами. Совокупные показатели с этой страницы не приписываются какой-либо из этих компаний.</p></div>
+      <BrandWall compact={true} />
     </div>
   </section>
 </BaseLayout>
@@ -205,11 +203,49 @@ const schema = [
     margin-top: 20px;
   }
 
-  .client-line {
-    color: var(--color-ink);
-    font-size: clamp(1.8rem, 4vw, 3rem);
+  .registry-hero {
+    padding-block: 48px 42px;
+  }
+
+  .registry-hero h1 {
+    font-size: clamp(2.7rem, 5vw, 4.8rem);
+  }
+
+  .registry-local-nav {
+    position: sticky;
+    z-index: 20;
+    top: var(--header-height);
+    background: rgb(255 255 255 / 0.95);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+  }
+
+  .registry-local-nav .container {
+    display: flex;
+    gap: 22px;
+    overflow-x: auto;
+  }
+
+  .registry-local-nav a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: -0.035em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .registry-endpoints {
+    padding-block: 54px;
+  }
+
+  .registry-endpoints h2 {
+    margin-bottom: 10px;
+  }
+
+  .registry-endpoints .content-layout > div:first-child > p:last-child {
+    color: #91a2bb;
   }
 
   .registry-links {

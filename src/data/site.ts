@@ -8,10 +8,10 @@ export const site = {
 
 export const navigation = [
   { href: "/vazhnoe/", label: "Важное" },
-  { href: "/buhgalterskoe-soprovozhdenie/", label: "Бухгалтерское сопровождение" },
-  { href: "/kak-rabotaet/", label: "Как это работает" },
+  { href: "/buhgalterskoe-soprovozhdenie/", label: "Для бизнеса" },
+  { href: "/kak-rabotaet/", label: "Как работает" },
   { href: "/rezultaty/", label: "Результаты" },
-  { href: "/buhgalterskim-kompaniyam/", label: "Бухгалтерским компаниям" },
+  { href: "/buhgalterskim-kompaniyam/", label: "Партнёрам" },
 ];
 
 export const contentReviewedAt = {
@@ -60,7 +60,7 @@ export const automationResults = [
   }
 ] as const;
 
-export const publicClients = ["DDX", "Нефтьмагистраль"] as const;
+export const publicClients = ["DDX", "Нефтьмагистраль", "Братья Караваевы", "Гольфстрим", "ВсеИнструменты.ру"] as const;
 
 export const solutions = [
   {

@@ -38,6 +38,11 @@ const schema = {
         <p class="section-kicker">{question.data.categoryLabel}</p>
         <h1>{question.data.title}</h1>
         <p class="lead">{question.data.description}</p>
+        <div class="question-answer-lead question-answer-hero">
+          <span>Короткий ответ</span>
+          <p>{question.data.answerLead}</p>
+        </div>
+        <button class="button button-primary" type="button" data-open-demo>Задать похожий вопрос в демо</button>
       </div>
       <aside class="page-hero-aside">
         <strong>Решение, которое зависит от ответа</strong>
@@ -68,26 +73,15 @@ const schema = {
         </div>
         <div class="content-aside-card">
           <span>Следующий шаг</span>
-          <button class="button button-primary" type="button" data-open-contact style="width: 100%;">Обсудить вопрос</button>
+          <button class="button button-primary" type="button" data-open-demo style="width: 100%;">Попробовать демо</button>
         </div>
       </aside>
 
       <article class="prose">
-        <div class="question-answer-lead">
-          <span>Короткий ответ</span>
-          <p>{question.data.answerLead}</p>
-        </div>
-
         <h2>Какие данные нужны</h2>
         <ul>
           {question.data.dataNeeded.map((item: string) => <li>{item}</li>)}
         </ul>
-
-        <div class="answer-passport" aria-label="Свойства проверяемого ответа">
-          <div class="passport-item"><span>Период</span><strong>{question.data.period}</strong></div>
-          <div class="passport-item"><span>Свежесть</span><strong>{question.data.freshness}</strong></div>
-          <div class="passport-item"><span>Периметр</span><strong>{question.data.scope}</strong></div>
-        </div>
 
         <Content />
 
