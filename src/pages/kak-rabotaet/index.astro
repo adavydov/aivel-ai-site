@@ -1,15 +1,39 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import VideoDemo from "../../components/VideoDemo.astro";
 import { trustSteps } from "../../data/site";
+
+const accountingAreas = [
+  {
+    href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/",
+    label: "Первичные документы",
+    text: "Превращает входящие документы в проверяемые записи учёта и отдельно направляет исключения человеку."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/",
+    label: "Банковские операции",
+    text: "Сопоставляет платежи с договорами и аналитикой, чтобы изменение денег не осталось без объяснения."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/",
+    label: "Обращения клиентов",
+    text: "Собирает обращения, сроки и темы, из которых видны претензии, задержки и риск ухода клиента."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/",
+    label: "Сверки с контрагентами",
+    text: "Сопоставляет данные сторон и поднимает только расхождения, которые требуют решения специалиста."
+  }
+];
 ---
 
-<BaseLayout title="Как работает Aivel: от изменения до проверяемого действия" description="Готовность данных, правило важности, сигнал, источник, вопрос, специалист и действие — полный путь Aivel.">
+<BaseLayout title="Как работает Aivel: от изменения до проверяемого действия" description="Готовность данных, работа ИИ-помощников, правило важности, проверяемый сигнал и действие человека — полный путь Aivel.">
   <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Как это работает</span></div>
   <header class="page-hero">
     <div class="container page-hero-grid">
-      <div><p class="section-kicker">Принцип работы</p><h1>От изменения в данных — к действию, которое можно проверить.</h1><p class="lead">Aivel сначала проверяет готовность источников и согласованное правило важности, затем замечает изменение, объясняет основание и позволяет задать следующий вопрос.</p></div>
-      <aside class="page-hero-aside"><strong>Не наблюдаем всё</strong><p>Контролируемый периметр, свежесть источников и границы вывода видны в каждом сигнале.</p></aside>
+      <div><p class="section-kicker">Принцип работы</p><h1>От изменения в данных — к действию, которое можно проверить.</h1><p class="lead">ИИ-помощники поддерживают порядок в повторяющихся учётных процессах. После обновления подключённых источников Aivel применяет согласованные правила важности, объясняет обнаруженное изменение и показывает возможный следующий шаг.</p></div>
+      <aside class="page-hero-aside"><strong>Автоматизация — основание, а не самоцель</strong><p>Главный результат для руководителя — вовремя узнать важное. ИИ-помощники обеспечивают для этого свежие и проверяемые данные.</p></aside>
     </div>
   </header>
 
@@ -22,9 +46,40 @@ import { trustSteps } from "../../data/site";
     </div>
   </section>
 
+  <section class="section section-dark" aria-labelledby="accounting-layer-title">
+    <div class="container">
+      <div class="section-heading mechanism-heading"><div><p class="section-kicker section-kicker-light">Откуда берутся надёжные данные</p><h2 id="accounting-layer-title">Четыре ИИ-помощника создают основу для своевременного сигнала.</h2></div><p>Их можно внедрять по одному. Каждый закрывает конкретный участок, сохраняет проверку человеком и делает изменения в бизнесе заметнее.</p></div>
+      <div class="mechanism-grid">
+        {accountingAreas.map((area, index) => (
+          <a class="mechanism-card" href={area.href}>
+            <span class="mechanism-number">0{index + 1}</span>
+            <div><h3>{area.label}</h3><p>{area.text}</p></div>
+            <Icon name="arrow" size={22} />
+          </a>
+        ))}
+      </div>
+      <div class="mechanism-action">
+        <a class="button button-light" href="/avtomatizatsiya-ucheta/">Посмотреть устройство учётных процессов</a>
+        <a class="text-link text-link-light" href="/avtomatizatsiya-ucheta/kontrol-kachestva/">Как проверяется качество <Icon name="arrow" size={19} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="platform-video-title">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Посмотреть продукт</p><h2 id="platform-video-title">Платформа и контроль работы помощников.</h2></div><p>Настоящий ролик показывает, как устроен общий рабочий контур. Для отдельных операций ниже доступны собственные демонстрации.</p></div>
+      <VideoDemo
+        driveId="13shhsfSNrURD23l5y-2YZDhtITJzx_he"
+        title="Как устроена платформа Aivel"
+        description="Общий контур, в котором выполняются учётные операции, сохраняется история действий и человеку передаются исключения."
+      />
+      <p style="margin-top: 22px;"><a class="text-link" href="https://vkvideo.ru/video-227572578_456239162?list=ln-xzD9oHw5kaCSDL00dW&t=2m52s" target="_blank" rel="noopener">Большой разбор продукта во VK Видео — с 2:52 <Icon name="arrow" size={18} /></a></p>
+    </div>
+  </section>
+
   <section class="section section-warm" aria-labelledby="outcomes-title">
     <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">После сигнала</p><h2 id="outcomes-title">Спросить можно о чём угодно. Выдумывать нельзя.</h2></div><p>Вопрос помогает разобраться глубже, но не превращает неполные данные в уверенный текст.</p></div>
+      <div class="section-heading"><div><p class="section-kicker">После сигнала</p><h2 id="outcomes-title">Задайте любой вопрос о бизнесе. Aivel покажет, достаточно ли данных для ответа.</h2></div><p>Ответ ограничен подключёнными источниками и согласованным периметром. Неполные данные не превращаются в уверенный текст.</p></div>
       <div class="numbered-grid">
         <article class="numbered-card"><h3>Проверяемый ответ</h3><p>Данных достаточно; видны период, расчёт, источники и ограничение.</p></article>
         <article class="numbered-card"><h3>Уточняющий вопрос</h3><p>Нужно согласовать показатель, период, юридическое лицо или сценарий.</p></article>
@@ -47,3 +102,93 @@ import { trustSteps } from "../../data/site";
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .mechanism-heading h2,
+  .mechanism-heading > p {
+    color: white;
+  }
+
+  .mechanism-heading > p {
+    color: #cbd5e1;
+  }
+
+  .mechanism-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .mechanism-card {
+    display: grid;
+    min-height: 188px;
+    grid-template-columns: auto 1fr auto;
+    gap: 22px;
+    align-items: start;
+    padding: 26px;
+    color: white;
+    background: rgb(255 255 255 / 0.055);
+    border: 1px solid rgb(255 255 255 / 0.17);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  }
+
+  .mechanism-card:hover {
+    background: rgb(255 255 255 / 0.1);
+    border-color: var(--color-gold-soft);
+    transform: translateY(-2px);
+  }
+
+  .mechanism-card h3 {
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .mechanism-card p {
+    max-width: 520px;
+    margin-bottom: 0;
+    color: #cbd5e1;
+  }
+
+  .mechanism-number {
+    color: var(--color-gold-soft);
+    font-size: 0.8rem;
+    font-weight: 720;
+    letter-spacing: 0.08em;
+  }
+
+  .mechanism-action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .text-link-light {
+    min-height: 44px;
+    color: white;
+  }
+
+  @media (max-width: 760px) {
+    .mechanism-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mechanism-card {
+      min-height: 0;
+      grid-template-columns: auto 1fr;
+    }
+
+    .mechanism-card > svg {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mechanism-card {
+      transition: none;
+    }
+  }
+</style>

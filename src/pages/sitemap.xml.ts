@@ -4,7 +4,10 @@ import { allStaticRoutes, site } from "../data/site";
 
 export const GET: APIRoute = async () => {
   const questions = await getCollection("questions");
-  const routes = [...allStaticRoutes, ...questions.map((question) => `/voprosy/${question.id}/`)];
+  const routes = [...new Set([
+    ...allStaticRoutes,
+    ...questions.map((question) => `/voprosy/${question.id}/`)
+  ])];
   const urls = routes
     .map((route) => `<url><loc>${site.url}${route}</loc></url>`)
     .join("");

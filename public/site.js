@@ -120,21 +120,62 @@
       }
       if (status) {
         status.className = "form-status";
-        status.textContent = "Проверяем форму…";
+        status.textContent = "Готовим письмо…";
       }
 
+      const labels = {
+        name: "Имя",
+        channel: "Телефон или почта",
+        role: "Роль",
+        topic: "Тема",
+        question: "Вопрос",
+        size: "Сложность бизнеса",
+        accounting: "Как ведётся учёт",
+        clients: "Клиентов в компании",
+        goal: "Будущая роль владельца",
+        system: "Учётная система",
+        situation: "Ситуация"
+      };
+      const lines = [];
+      Array.from(form.elements).forEach((field) => {
+        if (!(field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement)) return;
+        if (!field.name || field.name === "consent" || !field.value.trim()) return;
+        const value = field instanceof HTMLSelectElement
+          ? field.selectedOptions[0]?.textContent?.trim() || field.value
+          : field.value.trim();
+        lines.push(`${labels[field.name] || field.name}: ${value}`);
+      });
+
+      const mode = form.getAttribute("data-form-mode");
+      const subjectByMode = {
+        partner: "Партнёрство с бухгалтерской компанией",
+        enterprise: "Решение для крупной компании",
+        client: "Бухгалтерское сопровождение и важные сигналы"
+      };
+      const subject = `Обращение с сайта Aivel — ${subjectByMode[mode] || "первый разговор"}`;
+      const body = [
+        "Здравствуйте!",
+        "",
+        "Хочу обсудить работу с Aivel.",
+        "",
+        ...lines,
+        "",
+        `Страница: ${window.location.href}`
+      ].join("\n");
+      const mailto = `mailto:info@aivel.ru?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
       window.setTimeout(() => {
+        window.location.href = mailto;
         if (submit instanceof HTMLButtonElement) {
           submit.disabled = false;
           submit.classList.remove("is-loading");
         }
         if (status) {
           status.className = "form-status is-success";
-          status.textContent = "Это демонстрационная версия: обращение не отправлено и данные не сохранены.";
+          status.textContent = "Письмо подготовлено. Проверьте почтовую программу и нажмите «Отправить». Если она не открылась, напишите на info@aivel.ru.";
         }
-        form.reset();
         required.forEach((field) => field.removeAttribute("aria-invalid"));
-      }, prefersReducedMotion ? 20 : 520);
+      }, prefersReducedMotion ? 20 : 220);
     });
   });
 

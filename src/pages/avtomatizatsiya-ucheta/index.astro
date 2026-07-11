@@ -1,0 +1,340 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import VideoDemo from "../../components/VideoDemo.astro";
+
+const areas = [
+  {
+    href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/",
+    number: "01",
+    title: "Первичные документы",
+    text: "Распознаёт документы, создаёт поступления в 1С, проставляет аналитику и направляет исключения человеку.",
+    proof: "80% входящего потока прошло без ручного участия в измеренном процессе."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/",
+    number: "02",
+    title: "Банковские операции",
+    text: "Разбирает назначение платежа, сопоставляет договоры, делит сумму и готовит проводку по правилам.",
+    proof: "98% точности сопоставления на проверенной выборке."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/",
+    number: "03",
+    title: "Обращения клиентов",
+    text: "Определяет тему и срочность, направляет обращение ответственному и следит за временем ответа.",
+    proof: "В подключённом массиве помогает искать претензии, задержки ответов, возможные риски ухода и услуги без счёта; вывод проверяет человек."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/",
+    number: "04",
+    title: "Сверки с контрагентами",
+    text: "Распознаёт акт, создаёт его в 1С, проводит сверку и подсвечивает расхождения.",
+    proof: "Успешные случаи проходят по правилу, расхождения получает специалист."
+  },
+  {
+    href: "/avtomatizatsiya-ucheta/kontrol-kachestva/",
+    number: "05",
+    title: "Контроль качества",
+    text: "Проверяет согласованность данных, оценивает неоднозначность и сохраняет историю действий.",
+    proof: "Три линии контроля и человек в контуре для спорных случаев."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Автоматизация учётных процессов Aivel",
+  description: "ИИ-помощники для первичных документов, банковских операций, обращений клиентов и сверок с контрагентами.",
+  provider: { "@type": "Organization", name: "Aivel" }
+};
+---
+
+<BaseLayout
+  title="ИИ-помощники для автоматизации учёта — Aivel"
+  description="Как ИИ-помощники Aivel обрабатывают первичные документы, банковские операции, обращения и сверки, чтобы важные изменения становились заметны вовремя."
+  schema={schema}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><a href="/kak-rabotaet/">Как это работает</a><span aria-hidden="true">/</span><span>Автоматизация учёта</span></div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div><p class="section-kicker">Основа своевременного сигнала</p><h1>ИИ-помощники поддерживают порядок там, где рождаются данные.</h1><p class="lead">Они забирают повторяющиеся действия, проверяют результат и передают человеку исключения. Благодаря этому Aivel может раньше заметить задержку, расхождение или необычное изменение и показать его руководителю.</p></div>
+      <aside class="page-hero-aside"><strong>Можно подключать отдельно</strong><p>Крупная компания может начать с одного учётного процесса. В бухгалтерском сопровождении те же помощники создают основу, чтобы вовремя замечать важное.</p></aside>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="areas-title">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Работающие участки</p><h2 id="areas-title">Начать можно с одного массового процесса.</h2></div><p>Для каждого участка показываем работу ИИ-помощника, роль человека, измерение результата и ограничения.</p></div>
+      <div class="area-grid">
+        {areas.map((area) => (
+          <a class="area-card" href={area.href}>
+            <div class="area-card-head"><span>{area.number}</span><Icon name="arrow" size={22} /></div>
+            <h3>{area.title}</h3>
+            <p>{area.text}</p>
+            <strong>{area.proof}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="helpers-video-title">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Несколько процессов вместе</p><h2 id="helpers-video-title">Как три ИИ-помощника работают в одном контуре.</h2></div><p>Короткая настоящая демонстрация без постановочных данных на странице сайта.</p></div>
+      <VideoDemo
+        driveId="1Brk_NX4ubphUg5mkhmDCxTWnTxE_De5A"
+        title="Работа трёх ИИ-помощников"
+        description="Ролик показывает последовательность действий нескольких помощников и передачу результата между участками процесса."
+      />
+    </div>
+  </section>
+
+  <section class="section section-dark" aria-labelledby="chain-title">
+    <div class="container">
+      <div class="section-heading chain-heading"><div><p class="section-kicker section-kicker-light">Единая цепочка</p><h2 id="chain-title">Автоматизация полезна, когда ведёт к своевременному решению.</h2></div><p>Каждый шаг оставляет проверяемое основание. Если данных или уверенности недостаточно, процесс не изображает завершённость.</p></div>
+      <ol class="proof-chain">
+        <li><span>01</span><strong>Источник</strong><p>Документ, выписка, обращение или акт сверки.</p></li>
+        <li><span>02</span><strong>ИИ-помощник</strong><p>Распознаёт, сопоставляет и выполняет согласованные действия.</p></li>
+        <li><span>03</span><strong>Проверка</strong><p>Правила, оценка неоднозначности и человек для исключений.</p></li>
+        <li><span>04</span><strong>Важное изменение</strong><p>Задержка, расхождение, отклонение или риск становятся видны.</p></li>
+        <li><span>05</span><strong>Решение</strong><p>Руководитель видит основание и действует вовремя.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="evidence-title">
+    <div class="container evidence-layout">
+      <div><p class="section-kicker">Как читать цифры</p><h2 id="evidence-title">Результат всегда привязан к процессу и выборке.</h2><p>Мы не переносим показатель одного внедрения на всех клиентов и не объединяем разные стадии обработки в одну красивую цифру.</p></div>
+      <div class="evidence-cards">
+        <article><strong>Первичные документы</strong><p>95% распознано; 75% полностью заполнено; ещё 20% заполнено на 80%; 80% общего потока прошло без ручного участия.</p></article>
+        <article><strong>Банковские операции</strong><p>98% точности сопоставления на проверенной выборке. Период, объём и правила подтверждаются отдельно для каждого внедрения.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="start-title">
+    <div class="container start-panel">
+      <div><p class="section-kicker">Первый шаг</p><h2 id="start-title">Покажем один процесс на обезличенных данных.</h2><p>Вы увидите действия ИИ-помощника, исключения, контроль человека и способ измерения результата — без обещания большой перестройки заранее.</p></div>
+      <button class="button button-primary" type="button" data-open-contact data-contact-topic="unknown">Запросить демонстрацию</button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .area-card {
+    display: flex;
+    min-height: 300px;
+    flex-direction: column;
+    padding: clamp(24px, 4vw, 36px);
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .area-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .area-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 240px;
+  }
+
+  .area-card-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    color: var(--color-gold);
+    font-size: 0.82rem;
+    font-weight: 720;
+    letter-spacing: 0.08em;
+  }
+
+  .area-card h3 {
+    margin-bottom: 12px;
+  }
+
+  .area-card p {
+    max-width: 600px;
+    margin-bottom: 24px;
+  }
+
+  .area-card strong {
+    display: block;
+    max-width: 650px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.96rem;
+    line-height: 1.45;
+  }
+
+  .chain-heading h2,
+  .chain-heading > p {
+    color: white;
+  }
+
+  .chain-heading > p {
+    color: #cbd5e1;
+  }
+
+  .proof-chain {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .proof-chain li {
+    min-height: 220px;
+    padding: 22px;
+    background: rgb(255 255 255 / 0.055);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: var(--radius-md);
+  }
+
+  .proof-chain span {
+    display: block;
+    margin-bottom: 32px;
+    color: var(--color-gold-soft);
+    font-size: 0.78rem;
+    font-weight: 720;
+  }
+
+  .proof-chain strong {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .proof-chain p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 0.93rem;
+  }
+
+  .evidence-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: clamp(40px, 8vw, 100px);
+    align-items: start;
+  }
+
+  .evidence-layout h2 {
+    margin-bottom: 22px;
+  }
+
+  .evidence-cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .evidence-cards article {
+    padding: 26px;
+    background: white;
+    border: 1px solid #eadfcb;
+    border-radius: var(--radius-md);
+  }
+
+  .evidence-cards strong {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .evidence-cards p {
+    margin: 0;
+  }
+
+  .start-panel {
+    display: flex;
+    gap: 40px;
+    align-items: end;
+    justify-content: space-between;
+    padding: clamp(32px, 6vw, 64px);
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .start-panel > div {
+    max-width: 760px;
+  }
+
+  .start-panel h2 {
+    margin-bottom: 18px;
+  }
+
+  .start-panel p {
+    margin: 0;
+  }
+
+  .start-panel .button {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 980px) {
+    .proof-chain {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .proof-chain li:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .evidence-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .area-grid,
+    .proof-chain {
+      grid-template-columns: 1fr;
+    }
+
+    .area-card,
+    .area-card:last-child {
+      min-height: 0;
+      grid-column: auto;
+    }
+
+    .proof-chain li,
+    .proof-chain li:last-child {
+      min-height: 0;
+      grid-column: auto;
+    }
+
+    .proof-chain span {
+      margin-bottom: 18px;
+    }
+
+    .start-panel {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .start-panel .button {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .area-card {
+      transition: none;
+    }
+  }
+</style>
