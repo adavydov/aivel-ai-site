@@ -6,10 +6,10 @@ import Icon from "../components/Icon.astro";
 import { implementationMetrics, site, solutions } from "../data/site";
 
 const assistantLinks = [
-  { href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/", title: "Первичные документы", proof: "80%", text: "измеренного потока без ручного участия" },
-  { href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/", title: "Банковские операции", proof: "98%", text: "точности сопоставления на проверенной выборке" },
-  { href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/", title: "Обращения клиентов", proof: "Запрос → задача", text: "исполнитель, срок и контроль результата" },
-  { href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/", title: "Сверки", proof: "Только исключения", text: "типовые случаи закрывает система" }
+  { href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/", title: "ИИ-помощник по первичным документам", proof: "80%", text: "измеренного потока без ручного участия" },
+  { href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/", title: "ИИ-помощник по банковским операциям", proof: "98%", text: "точности сопоставления на проверенной выборке" },
+  { href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/", title: "ИИ-помощник по запросам", proof: "Запрос → задача", text: "подразделение или заказчик, исполнитель, срок и контроль" },
+  { href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/", title: "ИИ-помощник по сверкам", proof: "Только исключения", text: "типовые случаи закрывает система" }
 ];
 ---
 
@@ -80,8 +80,8 @@ const assistantLinks = [
   <section class="section section-dark" aria-labelledby="mechanics-title">
     <div class="container">
       <div class="section-heading mechanics-heading" data-reveal>
-        <div><p class="section-kicker section-kicker-light">Как работает Aivel</p><h2 id="mechanics-title">Сначала четыре помощника поддерживают данные в порядке.</h2></div>
-        <p>Их можно подключать по одному. Повторяющиеся операции выполняет система, а человек получает исключения и сохраняет решение за собой.</p>
+        <div><p class="section-kicker section-kicker-light">Как работает Aivel</p><h2 id="mechanics-title">Четыре ИИ-помощника поддерживают данные в порядке.</h2></div>
+        <p>Каждый ИИ-помощник отвечает за ограниченный процесс и может внедряться отдельно. Повторяющиеся операции выполняет система, а человек получает исключения.</p>
       </div>
       <div class="home-assistants">
         {assistantLinks.map((assistant, index) => (
@@ -90,7 +90,7 @@ const assistantLinks = [
             <h3>{assistant.title}</h3>
             <strong>{assistant.proof}</strong>
             <p>{assistant.text}</p>
-            <small>Посмотреть помощника <Icon name="arrow" size={17} /></small>
+            <small>Посмотреть ИИ-помощника <Icon name="arrow" size={17} /></small>
           </a>
         ))}
       </div>
@@ -122,16 +122,16 @@ const assistantLinks = [
   <section class="section section-warm" aria-labelledby="business-title">
     <div class="container business-panel" data-reveal>
       <div>
-        <p class="section-kicker">Для бизнеса</p>
-        <h2 id="business-title">Учёт в порядке. Важное — вовремя.</h2>
-        <p>Aivel отвечает за бухгалтерский и налоговый учёт, готовность данных, своевременные сигналы и проверяемые ответы. Не нужно покупать отдельную систему поверх неподготовленной базы.</p>
-        <a class="button button-primary" href="/buhgalterskoe-soprovozhdenie/">Что получает бизнес <Icon name="arrow" size={20} /></a>
+        <p class="section-kicker">Учёт как база</p>
+        <h2 id="business-title">Сначала — корректный учёт.</h2>
+        <p>Чтобы вовремя замечать важное и получать проверяемые ответы, нужна надёжная основа. Aivel берёт на себя бухгалтерский, налоговый и кадровый учёт, зарплату, управленческий учёт и поддержку 1С.</p>
+        <a class="button button-primary" href="/buhgalterskoe-soprovozhdenie/">Что входит в основу <Icon name="arrow" size={20} /></a>
       </div>
       <div class="business-outcomes">
-        <div><Icon name="document" size={22} /><span>Обязательный учёт и отчётность</span></div>
-        <div><Icon name="spark" size={22} /><span>Сигналы о важных изменениях</span></div>
-        <div><Icon name="chart" size={22} /><span>Ответы о деньгах, прибыли и росте</span></div>
-        <div><Icon name="shield" size={22} /><span>Источники, ограничения и специалист</span></div>
+        <div><Icon name="document" size={22} /><span>Бухгалтерский и налоговый учёт</span></div>
+        <div><Icon name="person" size={22} /><span>Зарплата и кадровый учёт</span></div>
+        <div><Icon name="chart" size={22} /><span>Управленческий учёт</span></div>
+        <div><Icon name="spark" size={22} /><span>1С и экспресс-аудит</span></div>
       </div>
     </div>
   </section>
@@ -151,14 +151,6 @@ const assistantLinks = [
     </div>
   </section>
 
-  <section class="final-cta">
-    <div class="container" data-reveal>
-      <p class="section-kicker section-kicker-light">Попробуйте до разговора</p>
-      <h2>Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
-      <p>Выберите ситуацию и посмотрите, как Aivel превращает изменение в проверяемое действие.</p>
-      <button class="button button-light" type="button" data-open-demo>Открыть демо продукта</button>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>

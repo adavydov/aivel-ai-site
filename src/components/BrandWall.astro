@@ -10,8 +10,8 @@ const brands = [
   { name: "DDX", image: "/brands/ddx.png", className: "" },
   { name: "Нефтьмагистраль", image: "/brands/neftmagistral.png", className: "" },
   { name: "Братья Караваевы", image: "karavaevi", className: "brand-karavaevi" },
-  { name: "Гольфстрим", image: "/brands/golfstrim.png", className: "brand-wide" },
-  { name: "ВсеИнструменты.ру", image: "/brands/vseinstrumenti.png", className: "" }
+  { name: "Гольфстрим", image: "/brands/golfstrim-official.svg", className: "brand-official-wide" },
+  { name: "ВсеИнструменты.ру", image: "/brands/vseinstrumenti-official.svg", className: "brand-official-wide" }
 ];
 ---
 
@@ -56,8 +56,8 @@ const brands = [
     object-fit: contain;
   }
 
-  .brand-wide {
-    grid-column: span 2;
+  .brand-official-wide > img {
+    max-width: 210px;
   }
 
   .karavaevi-lockup {
@@ -92,9 +92,6 @@ const brands = [
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .brand-wide {
-      grid-column: span 1;
-    }
   }
 
   @media (max-width: 620px) {

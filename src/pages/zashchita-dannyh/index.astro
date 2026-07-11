@@ -1,28 +1,407 @@
 ---
-import TrustPage from "../../components/TrustPage.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+
+const controls = [
+  { title: "Где хранятся данные?", answer: "Решение можно разместить в контуре заказчика или в выделенном изолированном облаке. Конкретная схема, сроки хранения и удаление утверждаются до подключения." },
+  { title: "Может ли ИИ получить лишний доступ?", answer: "Нет через обычный запрос. Для людей и ИИ-помощников задаются отдельные роли: разрешённые источники, организации и действия. Текст запроса не расширяет технические права роли." },
+  { title: "Что происходит с банковскими данными?", answer: "Подключение настраивается по согласованному регламенту: отдельно задаются юридические лица, расписание получения выписок, база 1С и правила обработки операций." },
+  { title: "Что будет с обновлениями 1С?", answer: "Автоматизацию можно вынести во внешнюю обработку, чтобы не менять типовую конфигурацию без необходимости и не мешать её плановым обновлениям." },
+  { title: "Можно ли восстановить действия?", answer: "Существенные обращения, использованные источники, результат проверки, передача человеку и исправления сохраняются в журнале действий." },
+  { title: "Проверяется ли защищённость?", answer: "Для реализованного решения проводились проверки на отсутствие критических уязвимостей. Состав проверки и подтверждающие материалы предъявляются в рамках конкретного проекта." }
+] as const;
+
+const qualityLines = [
+  { number: "01", title: "Правила согласованности", text: "Итоги сверяются со строками, реквизиты — между собой, а допустимые значения — с правилами процесса." },
+  { number: "02", title: "Оценка неоднозначности", text: "Система учитывает вероятность ошибки и не должна выдавать сомнительный случай за уверенно завершённый." },
+  { number: "03", title: "Человек и журнал", text: "Неоднозначные случаи идут на ручную проверку, а действия и исправления оставляют проверяемый след." }
+] as const;
 ---
-<TrustPage
-  metaTitle="Защита финансовых данных — Aivel"
-  description="Права доступа, периметр, история действий, минимизация данных и безопасная передача специалисту."
-  kicker="Защита данных"
-  title="Финансовый ответ не должен расширять доступ к данным."
-  lead="Пользователь видит только разрешённый периметр, а каждое раскрытие источника учитывает роль, организацию и чувствительность документа."
-  asideTitle="Открытая форма"
-  asideText="Не предназначена для сумм, документов, ИНН, паролей или иных закрытых сведений."
-  sectionTitle="Контроль строится вокруг данных и действий"
-  sectionText="Конкретная архитектура размещения утверждается для проекта. Сайт показывает обязательные принципы, но не придумывает сертификаты."
-  steps={[
-    { title: "Минимальный доступ", text: "Подключаются только источники и поля, необходимые для согласованной задачи." },
-    { title: "Роли и периметр", text: "Права определяются по пользователю, компании, источнику и типу ответа." },
-    { title: "История действий", text: "Существенные обращения, источники, проверки и исправления можно восстановить." },
-    { title: "Безопасный отказ", text: "Если раскрытие запрещено, система показывает допустимый уровень основания." },
-    { title: "Специалист", text: "Передача человеку происходит в защищённом рабочем процессе, а не через открытую форму." },
-    { title: "Хранение и удаление", text: "Срок, место и порядок удаления согласуются до подключения источников." }
-  ]}
-  noticeTitle="На этой странице нет вымышленных сертификатов."
-  noticeText="Подтверждения, архитектура и договорные условия предоставляются только после фактической проверки и согласования."
-  related={[
-    { href: "/ogranicheniya/", label: "Границы обещания" },
-    { href: "/krupnym-kompaniyam/", label: "Для крупной компании" }
-  ]}
-/>
+
+<BaseLayout
+  title="Безопасность данных и контроль ИИ — Aivel"
+  description="Размещение Aivel в контуре заказчика или изолированном облаке, отдельные роли людей и ИИ-помощников, три линии контроля качества, журналы действий и человек для исключений."
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><a href="/kak-rabotaet/">Как работает</a><span aria-hidden="true">/</span><span>Безопасность и контроль</span>
+  </div>
+
+  <header class="page-hero security-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="section-kicker">Безопасность данных и контроль ИИ</p>
+        <h1>ИИ не получает свободу действий вместе с доступом к данным.</h1>
+        <p class="lead">Размещение, источники, роли и разрешённые операции проектируются вместе с рабочим процессом. Если у ИИ-помощника нет права на источник или действие, запрос пользователя не может это право добавить.</p>
+      </div>
+      <aside class="page-hero-aside security-summary">
+        <strong>Четыре границы</strong>
+        <div><Icon name="shield" size={20} /><span>согласованный контур</span></div>
+        <div><Icon name="person" size={20} /><span>отдельная роль</span></div>
+        <div><Icon name="check" size={20} /><span>проверка результата</span></div>
+        <div><Icon name="source" size={20} /><span>журнал действий</span></div>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="architecture-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Периметр</p><h2 id="architecture-title">Данные проходят только по согласованному маршруту.</h2></div>
+        <p>Схема ниже показывает принцип. Точная архитектура зависит от требований заказчика и подтверждается до внедрения.</p>
+      </div>
+      <div class="security-architecture" role="img" aria-label="Источники передают данные в согласованный контур Aivel, ИИ-помощник действует в своей роли, неоднозначные случаи получает человек">
+        <div class="architecture-sources">
+          <span>1С</span><span>Банк</span><span>Документы</span><span>Другие разрешённые источники</span>
+        </div>
+        <div class="architecture-arrow" aria-hidden="true"><Icon name="arrow" size={26} /></div>
+        <div class="architecture-core">
+          <small>Контур заказчика или изолированное облако</small>
+          <strong>ИИ-помощник</strong>
+          <p>Роль определяет данные и действия</p>
+        </div>
+        <div class="architecture-arrow" aria-hidden="true"><Icon name="arrow" size={26} /></div>
+        <div class="architecture-human">
+          <Icon name="person" size={30} />
+          <strong>Ответственный человек</strong>
+          <p>Получает исключения и принимает профессиональное решение</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="questions-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Ответы на основные опасения</p><h2 id="questions-title">Не «доверьтесь ИИ», а проверьте ограничения.</h2></div>
+        <p>Мы раскрываем то, что действительно можно подтвердить, и не заменяем технические документы общими обещаниями.</p>
+      </div>
+      <div class="security-controls">
+        {controls.map((control) => <article><h3>{control.title}</h3><p>{control.answer}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" aria-labelledby="hallucination-title">
+    <div class="container">
+      <div class="section-heading quality-heading">
+        <div><p class="section-kicker section-kicker-light">Как уменьшаем ошибки ИИ</p><h2 id="hallucination-title">Галлюцинации нельзя отменить обещанием. Их сдерживает устройство процесса.</h2></div>
+        <p>Для учётных операций Aivel использует три линии контроля качества. Чем выше неоднозначность, тем раньше результат передаётся человеку.</p>
+      </div>
+      <div class="quality-lines">
+        {qualityLines.map((line) => <article><span>{line.number}</span><h3>{line.title}</h3><p>{line.text}</p></article>)}
+      </div>
+      <div class="bounded-behaviour">
+        <div><strong>ИИ может</strong><p>Распознать, сопоставить, выполнить разрешённую операцию по правилу и подготовить основание.</p></div>
+        <div><strong>ИИ не может</strong><p>Сам расширить свою роль, скрыть нехватку данных или принять профессиональное решение вместо ответственного человека.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="bank-title">
+    <div class="container bank-layout">
+      <div>
+        <p class="section-kicker">Банк и 1С</p>
+        <h2 id="bank-title">Доступы разделены по системе, юридическому лицу и действию.</h2>
+        <p>Банковский ИИ-помощник получает выписки по регламенту, извлекает реквизиты, сопоставляет операции с договорами и готовит данные для 1С. Правила выбора базы, аналитики и обработки платежа задаются заранее.</p>
+      </div>
+      <ol class="bank-flow">
+        <li><span>01</span><div><strong>Подключение</strong><p>Согласованные банки и юридические лица.</p></div></li>
+        <li><span>02</span><div><strong>Регламент</strong><p>Расписание, база 1С и разрешённый процесс.</p></div></li>
+        <li><span>03</span><div><strong>Проверка</strong><p>Правила, неоднозначность и исключения.</p></div></li>
+        <li><span>04</span><div><strong>Журнал</strong><p>Основание действия и результат обработки.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-warm">
+    <div class="narrow">
+      <div class="notice">
+        <Icon name="shield" size={26} />
+        <p><strong>Без вымышленных сертификатов.</strong> Архитектура, результаты проверок защищённости, договорные условия и требования к хранению подтверждаются документами конкретного проекта.</p>
+      </div>
+      <div class="source-stack" aria-label="Связанные страницы">
+        <a href="/ogranicheniya/"><Icon name="arrow" size={16} />Что Aivel не обещает</a>
+        <a href="/avtomatizatsiya-ucheta/kontrol-kachestva/"><Icon name="arrow" size={16} />Контроль качества ИИ-помощников</a>
+        <a href="/krupnym-kompaniyam/"><Icon name="arrow" size={16} />Внедрение в крупной компании</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <p class="section-kicker section-kicker-light">Разобрать ваш контур</p>
+      <h2>Сначала определим данные, действия и границы доступа.</h2>
+      <p>Не отправляйте закрытые сведения через открытую форму. На первом разговоре достаточно описать процесс и требования к размещению.</p>
+      <button class="button button-light" type="button" data-open-contact data-contact-topic="enterprise">Обсудить безопасное внедрение</button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .security-hero {
+    background: linear-gradient(140deg, #f8f7f3 0%, #edf3f8 100%);
+  }
+
+  .security-summary {
+    display: grid;
+    gap: 12px;
+  }
+
+  .security-summary > div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-top: 11px;
+    border-top: 1px solid var(--color-border);
+    font-weight: 650;
+  }
+
+  .security-summary svg {
+    color: var(--color-blue);
+  }
+
+  .security-architecture {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.8fr) auto minmax(260px, 1.15fr) auto minmax(210px, 0.9fr);
+    gap: 18px;
+    align-items: center;
+    padding: clamp(24px, 5vw, 48px);
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .architecture-sources {
+    display: grid;
+    gap: 8px;
+  }
+
+  .architecture-sources span {
+    padding: 11px 13px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 650;
+  }
+
+  .architecture-arrow {
+    color: var(--color-gold);
+  }
+
+  .architecture-core,
+  .architecture-human {
+    min-height: 210px;
+    padding: 24px;
+    border-radius: var(--radius-md);
+  }
+
+  .architecture-core {
+    color: white;
+    background: var(--color-ink);
+  }
+
+  .architecture-core small,
+  .architecture-core strong {
+    display: block;
+  }
+
+  .architecture-core small {
+    min-height: 48px;
+    color: var(--color-gold-soft);
+    line-height: 1.45;
+  }
+
+  .architecture-core strong {
+    margin-top: 30px;
+    font-size: 1.35rem;
+  }
+
+  .architecture-core p {
+    margin: 8px 0 0;
+    color: #b8c6d7;
+  }
+
+  .architecture-human {
+    background: var(--color-gold-pale);
+    border: 1px solid #ead49f;
+  }
+
+  .architecture-human svg,
+  .architecture-human strong {
+    display: block;
+    color: #7a5814;
+  }
+
+  .architecture-human strong {
+    margin-top: 28px;
+  }
+
+  .architecture-human p {
+    margin: 8px 0 0;
+  }
+
+  .security-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .security-controls article {
+    min-height: 245px;
+    padding: 26px;
+    background: white;
+    border: 1px solid #eadfcb;
+    border-radius: var(--radius-md);
+  }
+
+  .security-controls p {
+    margin: 0;
+  }
+
+  .quality-heading h2,
+  .quality-heading > p {
+    color: white;
+  }
+
+  .quality-heading > p {
+    color: #c3cfde;
+  }
+
+  .quality-lines {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .quality-lines article {
+    min-height: 260px;
+    padding: 26px;
+    background: rgb(255 255 255 / 0.055);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-md);
+  }
+
+  .quality-lines span {
+    display: block;
+    margin-bottom: 48px;
+    color: var(--color-gold-soft);
+    font-size: 0.76rem;
+  }
+
+  .quality-lines h3 {
+    color: white;
+  }
+
+  .quality-lines p {
+    margin: 0;
+    color: #b8c6d7;
+  }
+
+  .bounded-behaviour {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 14px;
+    overflow: hidden;
+    background: rgb(255 255 255 / 0.14);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-md);
+  }
+
+  .bounded-behaviour > div {
+    padding: 22px;
+    background: #111d33;
+  }
+
+  .bounded-behaviour strong {
+    color: white;
+  }
+
+  .bounded-behaviour p {
+    margin: 8px 0 0;
+    color: #b8c6d7;
+  }
+
+  .bank-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(440px, 1.15fr);
+    gap: clamp(44px, 8vw, 100px);
+    align-items: start;
+  }
+
+  .bank-flow {
+    display: grid;
+    gap: 1px;
+    padding: 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    list-style: none;
+  }
+
+  .bank-flow li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 16px;
+    padding: 20px 22px;
+    background: white;
+  }
+
+  .bank-flow span {
+    color: var(--color-gold);
+    font-size: 0.76rem;
+  }
+
+  .bank-flow strong,
+  .bank-flow p {
+    display: block;
+  }
+
+  .bank-flow p {
+    margin: 5px 0 0;
+  }
+
+  @media (max-width: 980px) {
+    .security-architecture {
+      grid-template-columns: 1fr;
+    }
+
+    .architecture-arrow {
+      transform: rotate(90deg);
+      justify-self: center;
+    }
+
+    .architecture-core,
+    .architecture-human {
+      min-height: 0;
+    }
+
+    .security-controls {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bank-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .security-controls,
+    .quality-lines,
+    .bounded-behaviour {
+      grid-template-columns: 1fr;
+    }
+
+    .security-controls article,
+    .quality-lines article {
+      min-height: 0;
+    }
+
+    .quality-lines span {
+      margin-bottom: 20px;
+    }
+  }
+</style>
