@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LocalForm from "../../components/LocalForm.astro";
+import Icon from "../../components/Icon.astro";
+---
+
+<BaseLayout title="Aivel для владельцев бухгалтерских компаний" description="Меньше контроля операций — больше ценных консультаций клиентам. Технология и партнёрство Aivel для бухгалтерских фирм.">
+  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Бухгалтерским компаниям</span></div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div><p class="section-kicker">Владельцам бухгалтерских компаний</p><h1>Меньше контроля операций — больше ценных консультаций клиентам.</h1><p class="lead">Aivel переносит повторяющиеся операции, типовые вопросы и исключения в общую систему. Владелец перестаёт быть главным диспетчером и помогает клиентам принимать решения.</p></div>
+      <aside class="page-hero-aside"><strong>Не только сокращение рутины</strong><p>Главная ценность — новая роль владельца и команды, а не очередная программа автоматизации.</p></aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container partner-panel">
+      <div>
+        <p class="section-kicker">Смена роли</p>
+        <h2>Рост не должен требовать личного участия владельца в каждом исключении.</h2>
+        <p>Общая технология делает сроки, загрузку, вопросы клиентов и исключения видимыми. Владелец сохраняет отношения, но перестаёт быть обязательной точкой каждого решения.</p>
+      </div>
+      <div class="partner-role-card">
+        <div class="role-shift">
+          <div class="role-box"><span>Сегодня</span><strong>Контролировать сроки, людей и сложные вопросы</strong></div>
+          <div class="role-arrow"><Icon name="arrow" size={28} /></div>
+          <div class="role-box"><span>Новая роль</span><strong>Разбирать решения клиента и развивать отношения</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Первый заметный результат</p><h2>Типовой вопрос клиента закрывается без участия владельца.</h2></div><p>Освобождённое время используется для консультации, развития отношений или роста компании.</p></div>
+      <div class="numbered-grid">
+        <article class="numbered-card"><h3>Единые операции</h3><p>Повторяющаяся работа выполняется по согласованным правилам, а отклонения становятся видны.</p></article>
+        <article class="numbered-card"><h3>Вопросы с источником</h3><p>Типовой ответ ведёт до клиента, задачи, операции или документа.</p></article>
+        <article class="numbered-card"><h3>Управление исключениями</h3><p>Владелец получает только случаи, где действительно требуется его опыт.</p></article>
+        <article class="numbered-card"><h3>Консультационная ценность</h3><p>Команда помогает клиенту не только с отчётностью, но и с решениями.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container content-layout">
+      <div><p class="section-kicker section-kicker-light">Два разных будущих пути</p><h2 style="color: white;">Рост и преемственность не смешиваются.</h2></div>
+      <div class="prose"><p style="color: #c3cfde;"><strong style="color: white;">Рост:</strong> владелец продолжает развивать фирму, но меняет операционную роль на консультационную.</p><p style="color: #c3cfde;"><strong style="color: white;">Преемственность:</strong> владелец готовит портфель и команду к сокращению своего участия или передаче. Этот разговор ведётся отдельно и конфиденциально.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-warm"><div class="container"><LocalForm mode="partner" title="Обсудить будущую роль и партнёрство" /></div></section>
+</BaseLayout>

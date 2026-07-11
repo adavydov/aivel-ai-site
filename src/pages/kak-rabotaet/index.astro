@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { trustSteps } from "../../data/site";
+---
+
+<BaseLayout title="Как работает Aivel: от изменения до проверяемого действия" description="Готовность данных, правило важности, сигнал, источник, вопрос, специалист и действие — полный путь Aivel.">
+  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Как это работает</span></div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div><p class="section-kicker">Принцип работы</p><h1>От изменения в данных — к действию, которое можно проверить.</h1><p class="lead">Aivel сначала проверяет готовность источников и согласованное правило важности, затем замечает изменение, объясняет основание и позволяет задать следующий вопрос.</p></div>
+      <aside class="page-hero-aside"><strong>Не наблюдаем всё</strong><p>Контролируемый периметр, свежесть источников и границы вывода видны в каждом сигнале.</p></aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Цепочка сигнала</p><h2>Пять вопросов отделяют полезный сигнал от тревоги.</h2></div><p>В любой момент видно, что произошло, почему это важно, откуда взялся вывод и где начинается профессиональное суждение.</p></div>
+      <div class="trust-flow signal-flow">
+        {trustSteps.map((step) => <article class="trust-step"><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="outcomes-title">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">После сигнала</p><h2 id="outcomes-title">Спросить можно о чём угодно. Выдумывать нельзя.</h2></div><p>Вопрос помогает разобраться глубже, но не превращает неполные данные в уверенный текст.</p></div>
+      <div class="numbered-grid">
+        <article class="numbered-card"><h3>Проверяемый ответ</h3><p>Данных достаточно; видны период, расчёт, источники и ограничение.</p></article>
+        <article class="numbered-card"><h3>Уточняющий вопрос</h3><p>Нужно согласовать показатель, период, юридическое лицо или сценарий.</p></article>
+        <article class="numbered-card"><h3>Недостающие данные</h3><p>Aivel показывает, какой источник отсутствует и как это влияет на вывод.</p></article>
+        <article class="numbered-card"><h3>Ответственный специалист</h3><p>Налоговая оценка, исключение или профессиональное суждение передаются человеку.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Пять слоёв доверия</p><h2>Подробности, которые можно проверить до разговора.</h2></div><p>Технические страницы описывают не абстрактные преимущества, а конкретные границы системы.</p></div>
+      <div class="value-grid">
+        <a class="question-card question-card-compact" href="/kak-formiruetsya-otvet/"><div><span class="card-label">Ответ</span><h3>Как формируется вывод</h3></div><span class="card-arrow"><Icon name="arrow" size={20} /></span></a>
+        <a class="question-card question-card-compact" href="/dannye-i-istochniki/"><div><span class="card-label">Основание</span><h3>Данные и источники</h3></div><span class="card-arrow"><Icon name="arrow" size={20} /></span></a>
+        <a class="question-card question-card-compact" href="/1s-i-integratsii/"><div><span class="card-label">Связи</span><h3>1С и другие системы</h3></div><span class="card-arrow"><Icon name="arrow" size={20} /></span></a>
+        <a class="question-card question-card-compact" href="/zashchita-dannyh/"><div><span class="card-label">Контроль</span><h3>Защита данных</h3></div><span class="card-arrow"><Icon name="arrow" size={20} /></span></a>
+        <a class="question-card question-card-compact" href="/ogranicheniya/"><div><span class="card-label">Границы</span><h3>Что Aivel не обещает</h3></div><span class="card-arrow"><Icon name="arrow" size={20} /></span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

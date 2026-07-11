@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import LocalForm from "../../components/LocalForm.astro";
+import { serviceItems } from "../../data/site";
+---
+
+<BaseLayout
+  title="Бухгалтерское сопровождение, которое помогает замечать важное — Aivel"
+  description="Aivel ведёт учёт, готовит данные к наблюдению, помогает раньше замечать значимые изменения и отвечает на уточняющие вопросы."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Бухгалтерское сопровождение Aivel",
+    serviceType: "Бухгалтерское и налоговое сопровождение",
+    provider: { "@type": "Organization", name: "Aivel" }
+  }}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Бухгалтерское сопровождение</span>
+  </div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="section-kicker">Одна ответственность</p>
+        <h1>Бухгалтерское сопровождение, которое помогает вовремя замечать важное.</h1>
+        <p class="lead">Aivel соединяет обязательный учёт, готовность данных, проверяемые сигналы и ответы для решений. Вы не покупаете отдельную программу поверх неподготовленной базы.</p>
+      </div>
+      <aside class="page-hero-aside"><strong>Подходит</strong><p>Действующему бизнесу с регулярными операциями и решениями, которому важнее проверяемость, чем минимальная цена сдачи отчётности.</p></aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container service-shell">
+      <div class="service-copy">
+        <p class="section-kicker">Что входит</p>
+        <h2>Учёт — база, на которой можно раньше увидеть изменение.</h2>
+        <p>Мы поддерживаем не только отчётность для государства, но и готовность данных к наблюдению, сигналу и следующему вопросу владельца.</p>
+        <button class="button button-primary" type="button" data-open-contact>Обсудить сопровождение</button>
+      </div>
+      <ul class="service-list">
+        {serviceItems.map((item) => <li><span><Icon name="check" size={17} /></span>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="connection-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Подключение</p><h2 id="connection-title">Сначала определяем, что можно заметить надёжно.</h2></div>
+        <p>Сильное обещание начинается с честной карты данных и правил важности, а не с красивого уведомления.</p>
+      </div>
+      <div class="numbered-grid">
+        <article class="numbered-card"><h3>Разбираем ситуацию</h3><p>Юридические лица, режимы, объём операций, команда, вопросы владельца и текущий способ ведения.</p></article>
+        <article class="numbered-card"><h3>Проверяем основу</h3><p>Остатки, обязательства, источники, аналитика, свежесть, права и незакрытые расхождения.</p></article>
+        <article class="numbered-card"><h3>Согласуем важность</h3><p>Какие границы, сроки и отклонения требуют внимания именно в вашем бизнесе.</p></article>
+        <article class="numbered-card"><h3>Получаем первый сигнал</h3><p>Показываем изменение, основание и ограничение, затем отвечаем на уточняющий вопрос.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="fit-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Взаимное соответствие</p><h2 id="fit-title">Когда Aivel подходит — и когда лучше выбрать другое решение.</h2></div>
+        <p>Мы показываем границу до формы, чтобы не создавать лишних разговоров ни для вас, ни для команды.</p>
+      </div>
+      <div class="compare-shell">
+        <div class="compare-column">
+          <h3>Скорее не подойдёт</h3>
+          <ul class="compare-list">
+            <li><span>—</span> Нужна только минимальная цена сдачи отчётности.</li>
+            <li><span>—</span> Нет готовности подключить источники и исправить основу.</li>
+            <li><span>—</span> Требуется гарантированный юридический или инвестиционный совет от ИИ.</li>
+            <li><span>—</span> Основная задача — расследование старых нарушений.</li>
+          </ul>
+        </div>
+        <div class="compare-column">
+          <h3>Подойдёт</h3>
+          <ul class="compare-list">
+            <li><span><Icon name="check" size={15} /></span> Решения о деньгах и росте повторяются.</li>
+            <li><span><Icon name="check" size={15} /></span> Ответ сейчас собирается у нескольких людей.</li>
+            <li><span><Icon name="check" size={15} /></span> Полноценную финансовую службу создавать рано.</li>
+            <li><span><Icon name="check" size={15} /></span> Важны своевременность, источник и ответственный специалист.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" aria-labelledby="price-title">
+    <div class="container content-layout">
+      <div>
+        <p class="section-kicker section-kicker-light">Принцип стоимости</p>
+        <h2 id="price-title" style="color: white;">Цена зависит от сложности поставки, а не от обещаний.</h2>
+      </div>
+      <div class="prose">
+        <p style="color: #c3cfde;">Учитываются число юридических лиц, режим налогообложения, объём операций, сотрудники, состояние учёта, источники и требуемая глубина ответов. После короткого разбора вы получаете состав работ и факторы цены.</p>
+        <p style="color: #c3cfde;">До проверки мы не публикуем универсальную цену, срок подключения или процент экономии.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm">
+    <div class="container"><LocalForm mode="client" title="Определим, какие изменения нельзя узнавать слишком поздно" /></div>
+  </section>
+</BaseLayout>

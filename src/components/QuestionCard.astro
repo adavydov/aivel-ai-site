@@ -1,0 +1,24 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  categoryLabel: string;
+  compact?: boolean;
+}
+
+const { slug, title, description, categoryLabel, compact = false } = Astro.props;
+---
+
+<article class:list={["question-card", compact && "question-card-compact"]}>
+  <div>
+    <span class="card-label">{categoryLabel}</span>
+    <h3><a href={`/voprosy/${slug}/`}>{title}</a></h3>
+    {!compact && <p>{description}</p>}
+  </div>
+  <a class="card-arrow" href={`/voprosy/${slug}/`} aria-label={`Открыть вопрос: ${title}`}>
+    <Icon name="arrow" size={22} />
+  </a>
+</article>

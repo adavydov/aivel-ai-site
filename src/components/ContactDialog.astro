@@ -1,0 +1,73 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<dialog class="contact-dialog" data-contact-dialog aria-labelledby="contact-title">
+  <div class="dialog-shell">
+    <div class="dialog-head">
+      <div>
+        <p class="section-kicker">Первый разговор</p>
+        <h2 id="contact-title">Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
+      </div>
+      <button class="icon-button" type="button" aria-label="Закрыть форму" data-close-contact>
+        <Icon name="close" size={24} />
+      </button>
+    </div>
+
+    <form class="contact-form" data-local-form novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="contact-name">Имя <span aria-hidden="true">*</span></label>
+          <input id="contact-name" name="name" autocomplete="name" required />
+          <p class="field-error" data-error-for="contact-name"></p>
+        </div>
+        <div class="field">
+          <label for="contact-channel">Телефон или почта <span aria-hidden="true">*</span></label>
+          <input id="contact-channel" name="channel" autocomplete="email" required />
+          <p class="field-error" data-error-for="contact-channel"></p>
+        </div>
+        <div class="field">
+          <label for="contact-role">Ваша роль</label>
+          <select id="contact-role" name="role">
+            <option value="owner">Владелец бизнеса</option>
+            <option value="ceo">Генеральный директор</option>
+            <option value="finance">Финансовый руководитель</option>
+            <option value="accounting-firm">Владелец бухгалтерской компании</option>
+            <option value="other">Другая роль</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contact-topic">Что требует внимания</label>
+          <select id="contact-topic" name="topic">
+            <option value="money">Деньги и обязательства</option>
+            <option value="profit">Прибыль и расходы</option>
+            <option value="growth">Рост, найм и запас денег</option>
+            <option value="unknown">Хочу определить вместе</option>
+            <option value="service">Бухгалтерское сопровождение</option>
+            <option value="partner">Партнёрство</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="contact-question">Что вы боитесь узнать слишком поздно</label>
+        <textarea id="contact-question" name="question" rows="4" aria-describedby="question-help"></textarea>
+        <p class="field-help" id="question-help">Не указывайте ИНН, суммы, имена контрагентов и другие закрытые сведения. Детали обсудим в защищённом канале.</p>
+      </div>
+
+      <label class="consent-row">
+        <input type="checkbox" name="consent" required />
+        <span>Согласен на обработку контактных данных для ответа на обращение.</span>
+      </label>
+
+      <div class="form-actions">
+        <button class="button button-primary" type="submit" data-submit-button>
+          <span>Определить важные сигналы</span>
+          <span class="button-loader" aria-hidden="true"></span>
+        </button>
+        <p>Локальный прототип: данные никуда не отправляются и не сохраняются.</p>
+      </div>
+      <div class="form-status" role="status" aria-live="polite" data-form-status></div>
+    </form>
+  </div>
+</dialog>

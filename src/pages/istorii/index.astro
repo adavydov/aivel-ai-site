@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Примеры решений: изменение, источник, действие — Aivel" description="Два учебных разбора, показывающих путь от важного изменения до проверяемого решения.">
+  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Примеры решений</span></div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div><p class="section-kicker">Учебные разборы</p><h1>Не уведомление ради тревоги. Цепочка, которую можно проверить.</h1><p class="lead">Пока публичные истории конечных клиентов проходят проверку и согласование, демонстрационная версия показывает два явно помеченных учебных сценария.</p></div>
+      <aside class="page-hero-aside"><strong>Что будет в реальной истории</strong><p>Изменение, причина важности, период, источники, вопрос, решение, результат, методика и разрешение клиента.</p></aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <article class="scenario-card">
+        <div>
+          <p class="section-kicker">Учебный пример 01</p>
+          <h2>Прибыль 2,4 млн ₽, а денег стало меньше.</h2>
+          <p>Aivel заметил, что деньги уменьшились вопреки прибыли месяца. Проверка показала: часть выручки не поступила, запасы выросли и был погашен займ.</p>
+          <a class="button button-light" href="/voprosy/pochemu-pribyl-est-a-deneg-net/">Разобрать вопрос</a>
+        </div>
+        <div class="decision-path">
+          <div><span>Сигнал</span><p>Деньги уменьшились вопреки прибыли месяца.</p></div>
+          <div><span>Основание</span><p>Банк, продажи, склад, задолженность и график займа.</p></div>
+          <div><span>Вопрос</span><p>Почему прибыль не превратилась в деньги?</p></div>
+          <div><span>Решение</span><p>Не выводить деньги до проверки оплаты покупателей и закупки.</p></div>
+          <div><span>Контроль</span><p>Повторно проверить остаток и дебиторку через 14 дней.</p></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-warm">
+    <div class="container">
+      <article class="scenario-card">
+        <div>
+          <p class="section-kicker">Учебный пример 02</p>
+          <h2>Найм возможен, но с контрольной точкой.</h2>
+          <p>Условия найма изменились после уточнения полной стоимости роли. Осторожный сценарий сохранил нужный запас денег, если результат проверяется на 90-й день.</p>
+          <a class="button button-light" href="/voprosy/mozhno-li-nanyat-sotrudnika/">Разобрать вопрос</a>
+        </div>
+        <div class="decision-path">
+          <div><span>Сигнал</span><p>Полная стоимость роли выше заложенной в план.</p></div>
+          <div><span>Основание</span><p>Штатное расписание, банк, календарь и план продаж.</p></div>
+          <div><span>Вопрос</span><p>Выдержит ли бизнес нового сотрудника сейчас?</p></div>
+          <div><span>Решение</span><p>Нанять при сохранении минимального резерва 3,2 млн ₽.</p></div>
+          <div><span>Контроль</span><p>Зафиксировать результат роли и пересчитать сценарий через 90 дней.</p></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container"><p class="section-kicker section-kicker-light">Ваша ситуация</p><h2>Построим цепочку на реальных данных вашего бизнеса.</h2><p>Сначала согласуем, что важно заметить, и безопасно подключим источники.</p><button class="button button-light" type="button" data-open-contact>Определить важное</button></div>
+  </section>
+</BaseLayout>

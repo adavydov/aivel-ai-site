@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { solutions } from "../../data/site";
+---
+
+<BaseLayout
+  title="Важные изменения в деньгах, расходах и росте — Aivel"
+  description="Три группы изменений, о которых владельцу важно узнать до решения: деньги и обязательства, прибыль и расходы, рост и запас денег."
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Ситуации решений</span>
+  </div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="section-kicker">Классы важных изменений</p>
+        <h1>Сначала заметить изменение. Затем понять, что оно меняет.</h1>
+        <p class="lead">Выберите область, за которой важно следить. Внутри — события, уточняющие вопросы, нужные данные и границы вывода.</p>
+      </div>
+      <aside class="page-hero-aside"><strong>Одна учётная основа</strong><p>Сигнал и следующий вопрос используют общие источники и не требуют новой ручной сборки каждый раз.</p></aside>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container solution-grid">
+      {solutions.map((solution, index) => (
+        <a class="solution-card" data-accent={solution.accent} href={`/resheniya/${solution.slug}/`}>
+          <div>
+            <span class="solution-number">{String(index + 1).padStart(2, "0")}</span>
+            <p class="card-label">{solution.eyebrow}</p>
+            <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem);">{solution.title}</h2>
+            <p>{solution.description}</p>
+          </div>
+          <div class="solution-link-row"><span>Изменения и вопросы</span><span><Icon name="arrow" size={22} /></span></div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="final-cta"><div class="container"><p class="section-kicker section-kicker-light">Учебные примеры</p><h2>Посмотрите, как выглядит проверяемый сигнал.</h2><p>Что произошло, почему важно, источник, действие и граница — в одном блоке.</p><a class="button button-light" href="/vazhnoe/">Что Aivel замечает</a></div></section>
+</BaseLayout>

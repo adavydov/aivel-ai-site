@@ -1,0 +1,47 @@
+---
+import Icon from "./Icon.astro";
+import { navigation } from "../data/site";
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="site-header" data-site-header>
+  <div class="container header-inner">
+    <a class="brand brand-surface" href="/" aria-label="Aivel — на главную">
+      <img class="brand-logo" src="/aivel-wordmark-light.png" width="114" height="20" alt="Aivel" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Основная навигация">
+      {navigation.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <button class="button button-small button-primary header-cta" type="button" data-open-contact>
+        Обсудить важное
+      </button>
+      <button
+        class="icon-button mobile-menu-button"
+        type="button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-mobile-menu-button
+      >
+        <Icon name="menu" size={24} />
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu>
+    <nav class="container" aria-label="Мобильная навигация">
+      {navigation.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+      ))}
+      <a href="/krupnym-kompaniyam/">Крупным компаниям</a>
+      <button class="button button-primary" type="button" data-open-contact>Определить важные сигналы</button>
+    </nav>
+  </div>
+</header>

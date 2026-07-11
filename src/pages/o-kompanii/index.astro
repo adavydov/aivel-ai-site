@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+---
+
+<BaseLayout title="О компании Aivel" description="Aivel — бухгалтерская группа и технологическая компания, помогающая раньше замечать важное и проверять основание до решения.">
+  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>О компании</span></div>
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div><p class="section-kicker">О компании</p><h1>Aivel превращает учёт в систему, которая помогает вовремя замечать важное.</h1><p class="lead">Мы соединяем бухгалтерское сопровождение, проверяемые сигналы и ответы, общую технологию группы и опыт автоматизации сложных учётных процессов.</p></div>
+      <aside class="page-hero-aside"><strong>Один принцип</strong><p>ИИ обрабатывает повторяющееся. Специалист отвечает за исключения и профессиональное суждение.</p></aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Три слоя Aivel</p><h2>Одна технология — разные роли в системе.</h2></div><p>Сайт ставит конечный бизнес в центр, но не скрывает корпоративный опыт и партнёрскую модель.</p></div>
+      <div class="numbered-grid">
+        <article class="numbered-card"><h3>Конечный бизнес</h3><p>Бухгалтерское сопровождение, важные изменения и проверяемые ответы о деньгах, прибыли, обязательствах и росте.</p><a class="text-link" href="/buhgalterskoe-soprovozhdenie/">Сопровождение <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Крупные компании</h3><p>Вопросы к учётным данным и автоматизация выбранных процессов с правами и проверкой исключений.</p><a class="text-link" href="/krupnym-kompaniyam/">Решения <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Бухгалтерские компании</h3><p>Общая технология, управляемый портфель и переход владельца к консультационной роли.</p><a class="text-link" href="/buhgalterskim-kompaniyam/">Партнёрство <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Общая дисциплина</h3><p>Готовность данных, источник, история действий, безопасный отказ и ответственный специалист.</p><a class="text-link" href="/kak-rabotaet/">Как это работает <Icon name="arrow" size={18} /></a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container content-layout">
+      <div><p class="section-kicker section-kicker-light">Что изменилось</p><h2 style="color: white;">От заказных цифровых сотрудников — к бухгалтерской системе решений.</h2></div>
+      <div class="prose"><p style="color: #c3cfde;">Предыдущий сайт показывал набор цифровых ролей и автоматизацию отдельных операций. Новый Aivel фокусируется на одной причинной цепочке: подготовленный учёт → важное изменение → проверяемое основание → уточняющий вопрос → решение.</p><p style="color: #c3cfde;">Корпоративные внедрения остаются важным доказательством технологии, но не конкурируют с главным предложением конечному бизнесу.</p></div>
+    </div>
+  </section>
+
+  <section class="final-cta"><div class="container"><p class="section-kicker section-kicker-light">Познакомиться</p><h2>Начнём с того, что нельзя узнать слишком поздно.</h2><p>Коротко разберём ситуацию и честно скажем, что Aivel сможет видеть по доступным данным.</p><button class="button button-light" type="button" data-open-contact>Определить важное</button></div></section>
+</BaseLayout>

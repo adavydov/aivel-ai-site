@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ImportantSignalDemo from "../../components/ImportantSignalDemo.astro";
+import Icon from "../../components/Icon.astro";
+import { importantSignals } from "../../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Что Aivel помогает заметить вовремя",
+    description: "Учебные примеры значимых изменений с периодом, источниками, причиной важности и ограничениями."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: importantSignals.map((signal, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: signal.signal
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title="Что важно заметить в бизнесе вовремя — Aivel"
+  description="Примеры важных изменений: запас денег, задержка оплат и рост расходов — с периодом, источниками, причиной важности и ограничениями."
+  schema={schema}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Важные изменения</span>
+  </div>
+
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="section-kicker">Что Aivel замечает</p>
+        <h1>Важные изменения, о которых нельзя узнавать слишком поздно.</h1>
+        <p class="lead">Aivel помогает раньше замечать изменения в деньгах, обязательствах, расходах и прибыльности. Каждый сигнал показывает причину важности, источник и следующий шаг.</p>
+      </div>
+      <aside class="page-hero-aside">
+        <strong>Честная граница</strong>
+        <p>Aivel не гарантирует обнаружение любого события. Результат зависит от подключённых источников, их свежести и согласованных правил важности.</p>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="examples-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Три типа обнаружения</p><h2 id="examples-title">Факт, прогноз и необычное отклонение.</h2></div>
+        <p>Все примеры обезличены и созданы для обучения. Они показывают форму результата, а не обещают такой же вывод для вашей компании.</p>
+      </div>
+      <ImportantSignalDemo />
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="classes-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Классы изменений</p><h2 id="classes-title">С чего можно начать наблюдение.</h2></div>
+        <p>Первая проверка должна быть узкой: только события, для которых понятны источник, правило важности и возможное действие.</p>
+      </div>
+      <div class="numbered-grid">
+        <article class="numbered-card"><h3>Денег может не хватить к обязательствам</h3><p>Прогноз остатка пересекает согласованную границу к дате налогов, зарплаты или крупного платежа.</p><a class="text-link" href="/voprosy/hvatit-li-deneg-na-nalogi-i-zarplatu/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Значимая оплата задержалась</h3><p>Просрочка конкретного покупателя уже влияет на резерв денег или порядок ближайших выплат.</p><a class="text-link" href="/voprosy/kto-zaderzhivaet-oplatu/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Расходы отклонились от обычного</h3><p>Изменение оказалось сильнее ожидаемого и влияет на прибыльность направления, проекта или клиента.</p><a class="text-link" href="/voprosy/gde-vyrosli-rashody/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Прибыль и деньги расходятся</h3><p>Прибыль признана, но деньги ушли в задолженность, запасы, займ или другое движение.</p><a class="text-link" href="/voprosy/pochemu-pribyl-est-a-deneg-net/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Запас денег сокращается</h3><p>Текущий темп обязательных расходов уменьшает время на решение быстрее согласованного плана.</p><a class="text-link" href="/voprosy/na-skolko-mesyatsev-hvatit-deneg/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card"><h3>Прибыльность клиента или проекта снизилась</h3><p>Доходы и связанные расходы изменились так, что прежнее решение о цене или составе работ стоит проверить.</p><a class="text-link" href="/voprosy/kakie-klienty-i-proekty-pribylny/">Разобрать вопрос <Icon name="arrow" size={18} /></a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="importance-title">
+    <div class="container content-layout">
+      <div><p class="section-kicker">Не универсальная тревога</p><h2 id="importance-title">Важность определяется вместе с вами.</h2></div>
+      <div class="prose">
+        <p>Одна и та же сумма или задержка может быть критичной для одного бизнеса и обычной для другого. Поэтому Aivel согласует периметр, границы, сроки, получателей и порядок передачи специалисту.</p>
+        <p>Если данных недостаточно, источники расходятся или событие нельзя определить надёжно, система должна показать пробел вместо уверенного сигнала.</p>
+        <p><a class="text-link" href="/dannye-i-istochniki/">Как готовятся источники <Icon name="arrow" size={18} /></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <p class="section-kicker section-kicker-light">Ваш контролируемый периметр</p>
+      <h2>Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
+      <p>Разберём первые события, источники и правила, с которых имеет смысл начать.</p>
+      <button class="button button-light" type="button" data-open-contact>Определить важные сигналы</button>
+    </div>
+  </section>
+</BaseLayout>
