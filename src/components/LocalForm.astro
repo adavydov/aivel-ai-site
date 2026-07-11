@@ -19,13 +19,13 @@ const submitLabel = mode === "partner"
     <div class="form-grid">
       <div class="field">
         <label for={`${mode}-name`}>Имя <span aria-hidden="true">*</span></label>
-        <input id={`${mode}-name`} name="name" autocomplete="name" required />
-        <p class="field-error" data-error-for={`${mode}-name`}></p>
+        <input id={`${mode}-name`} name="name" autocomplete="name" aria-describedby={`${mode}-name-error`} required />
+        <p class="field-error" id={`${mode}-name-error`} data-error-for={`${mode}-name`}></p>
       </div>
       <div class="field">
         <label for={`${mode}-channel`}>Телефон или почта <span aria-hidden="true">*</span></label>
-        <input id={`${mode}-channel`} name="channel" autocomplete="email" required />
-        <p class="field-error" data-error-for={`${mode}-channel`}></p>
+        <input id={`${mode}-channel`} name="channel" autocomplete="off" placeholder="+7 900 000-00-00 или name@company.ru" aria-describedby={`${mode}-channel-error`} required />
+        <p class="field-error" id={`${mode}-channel-error`} data-error-for={`${mode}-channel`}></p>
       </div>
 
       {mode === "client" && (
@@ -104,15 +104,16 @@ const submitLabel = mode === "partner"
     </div>
 
     <label class="consent-row">
-      <input type="checkbox" name="consent" required />
-      <span>Понимаю: сайт подготовит письмо, а данные будут переданы только после того, как я сам отправлю его из почтовой программы.</span>
+      <input id={`${mode}-consent`} type="checkbox" name="consent" aria-describedby={`${mode}-consent-error`} required />
+      <span>Согласен подготовить обращение. Данные будут переданы только после отправки письма из моей почтовой программы.</span>
     </label>
+    <p class="field-error consent-error" id={`${mode}-consent-error`} data-error-for={`${mode}-consent`}></p>
 
     <div class="form-actions">
       <button class="button button-primary" type="submit" data-submit-button>
         <span>{submitLabel}</span><span class="button-loader" aria-hidden="true"></span>
       </button>
-      <p>Откроется подготовленное письмо на info@aivel.ru. Сайт сам ничего не отправляет.</p>
+      <p>После проверки появится ссылка на подготовленное письмо. Сайт сам ничего не отправляет.</p>
     </div>
     <div class="form-status" role="status" aria-live="polite" data-form-status></div>
   </form>

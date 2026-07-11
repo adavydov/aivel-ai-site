@@ -5,10 +5,10 @@ import VideoDemo from "../../components/VideoDemo.astro";
 import { trustSteps } from "../../data/site";
 
 const accountingAreas = [
-  { href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/", label: "Первичные документы", proof: "80% потока", text: "Распознаёт документ, создаёт запись в 1С и передаёт человеку неоднозначные случаи." },
-  { href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/", label: "Банковские операции", proof: "98% точности", text: "Сопоставляет платежи с договорами и аналитикой, разделяет сложные платежи." },
-  { href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/", label: "Обращения клиентов", proof: "Запрос → задача", text: "Назначает исполнителя, срок и порядок передачи руководителю." },
-  { href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/", label: "Сверки", proof: "Только исключения", text: "Закрывает совпадения по правилам и поднимает расхождения специалисту." }
+  { href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/", label: "ИИ-помощник по первичным документам", proof: "80% потока", text: "Распознаёт документ, создаёт запись в 1С и передаёт человеку неоднозначные случаи." },
+  { href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/", label: "ИИ-помощник по банковским операциям", proof: "98% точности", text: "Сопоставляет платежи с договорами и аналитикой, разделяет сложные платежи." },
+  { href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/", label: "ИИ-помощник по запросам", proof: "Запрос → задача", text: "Направляет запрос подразделения или заказчика исполнителю, задаёт срок и контролирует результат." },
+  { href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/", label: "ИИ-помощник по сверкам", proof: "Только исключения", text: "Закрывает совпадения по правилам и поднимает расхождения специалисту." }
 ];
 ---
 
@@ -16,8 +16,8 @@ const accountingAreas = [
   <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Как работает</span></div>
   <header class="page-hero mechanics-hero">
     <div class="container page-hero-grid">
-      <div><p class="section-kicker">Механика продукта</p><h1>Рутину выполняют помощники. Важное получает руководитель.</h1><p class="lead">Aivel соединяет повторяющиеся учётные операции, правила важности и проверяемый ответ в одну цепочку. Ниже — не общие принципы, а конкретные части продукта.</p></div>
-      <aside class="page-hero-aside mechanics-aside"><strong>Коротко</strong><div><span>1</span>Помощники обновляют данные</div><div><span>2</span>Aivel замечает изменение</div><div><span>3</span>Человек принимает решение</div></aside>
+      <div><p class="section-kicker">Механика продукта</p><h1>ИИ-помощники выполняют рутину. Руководитель видит важное.</h1><p class="lead">Aivel соединяет повторяющиеся учётные операции, правила важности и проверяемый ответ в одну цепочку.</p></div>
+      <aside class="page-hero-aside mechanics-aside"><strong>Коротко</strong><div><span>1</span>ИИ-помощники обновляют данные</div><div><span>2</span>Aivel замечает изменение</div><div><span>3</span>Человек принимает решение</div></aside>
     </div>
   </header>
 
@@ -58,10 +58,27 @@ const accountingAreas = [
     </div>
   </section>
 
+  <section class="section safety-entry-section" aria-labelledby="safety-entry-title">
+    <div class="container safety-entry">
+      <div>
+        <p class="section-kicker">Безопасность и точность</p>
+        <h2 id="safety-entry-title">ИИ действует только в разрешённой роли.</h2>
+        <p>Контур размещения, источники, права и допустимые действия согласуются до запуска. Запрос пользователя не может дать ИИ-помощнику доступ, которого нет у его роли.</p>
+        <a class="button button-primary" href="/zashchita-dannyh/">Как защищены данные и ответы <Icon name="arrow" size={20} /></a>
+      </div>
+      <div class="safety-entry-points">
+        <div><strong>Ваш контур или изолированное облако</strong><span>Вариант размещения выбирается для проекта.</span></div>
+        <div><strong>Отдельные роли для людей и ИИ</strong><span>Каждому доступны только нужные источники и действия.</span></div>
+        <div><strong>Три линии контроля качества</strong><span>Правила, оценка неоднозначности, человек и журнал действий.</span></div>
+        <div><strong>1С и банки — по регламенту</strong><span>Юридические лица, базы, расписание и права задаются заранее.</span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="platform-video-title">
     <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Настоящий продукт</p><h2 id="platform-video-title">Платформа и контроль работы помощников.</h2></div><p>Ролик показывает общий рабочий контур. На страницах помощников доступны демонстрации отдельных операций.</p></div>
-      <VideoDemo driveId="13shhsfSNrURD23l5y-2YZDhtITJzx_he" title="Как устроена платформа Aivel" description="Общий контур, в котором выполняются учётные операции, сохраняется история действий и человеку передаются исключения." />
+      <div class="section-heading"><div><p class="section-kicker">Настоящий продукт</p><h2 id="platform-video-title">Посмотрите, как Aivel выполняет операции и передаёт исключения человеку.</h2></div></div>
+      <VideoDemo driveId="13shhsfSNrURD23l5y-2YZDhtITJzx_he" title="Как устроена платформа Aivel" description="Задача поступает в рабочий контур, ИИ-помощник выполняет разрешённые действия, сохраняет историю и передаёт специалисту неоднозначные случаи." />
       <p style="margin-top: 22px;"><a class="text-link" href="https://vkvideo.ru/video-227572578_456239162?list=ln-xzD9oHw5kaCSDL00dW&t=2m52s" target="_blank" rel="noopener">Большой разбор продукта во VK Видео — с 2:52 <Icon name="arrow" size={18} /></a></p>
     </div>
   </section>
@@ -191,6 +208,49 @@ const accountingAreas = [
     box-shadow: var(--shadow-sm);
   }
 
+  .safety-entry-section {
+    background: var(--color-paper);
+  }
+
+  .safety-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(460px, 1.18fr);
+    gap: clamp(42px, 8vw, 96px);
+    align-items: center;
+  }
+
+  .safety-entry > div:first-child p:not(.section-kicker) {
+    max-width: 650px;
+    font-size: 1.06rem;
+  }
+
+  .safety-entry-points {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .safety-entry-points > div {
+    min-height: 155px;
+    padding: 22px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .safety-entry-points strong,
+  .safety-entry-points span {
+    display: block;
+  }
+
+  .safety-entry-points span {
+    margin-top: 10px;
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
   .working-chain span {
     display: block;
     margin-bottom: 46px;
@@ -247,6 +307,10 @@ const accountingAreas = [
   }
 
   @media (max-width: 900px) {
+    .safety-entry {
+      grid-template-columns: 1fr;
+    }
+
     .details-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -255,6 +319,7 @@ const accountingAreas = [
   @media (max-width: 700px) {
     .mechanism-grid,
     .working-chain,
+    .safety-entry-points,
     .details-grid {
       grid-template-columns: 1fr;
     }

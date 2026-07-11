@@ -22,13 +22,13 @@ export const GET: APIRoute = () => new Response(
 - автоматизация первичных документов, банковских операций, обращений и сверок.
 
 Канонические страницы:
-- Важные изменения и вопросы: ${site.url}/vazhnoe/
-- Для бизнеса — учёт и своевременные сигналы: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Увидеть важное — изменения, сигналы и вопросы: ${site.url}/vazhnoe/
+- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, зарплата и 1С: ${site.url}/buhgalterskoe-soprovozhdenie/
 - Как работает продукт: ${site.url}/kak-rabotaet/
 - Автоматизация учёта: ${site.url}/avtomatizatsiya-ucheta/
 - Первичные документы: ${site.url}/avtomatizatsiya-ucheta/pervichnye-dokumenty/
 - Банковские операции: ${site.url}/avtomatizatsiya-ucheta/bankovskie-operatsii/
-- Обращения клиентов: ${site.url}/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/
+- Запросы подразделений и клиентов: ${site.url}/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/
 - Сверки с контрагентами: ${site.url}/avtomatizatsiya-ucheta/sverki-s-kontragentami/
 - Контроль качества: ${site.url}/avtomatizatsiya-ucheta/kontrol-kachestva/
 - Результаты внедрений: ${site.url}/rezultaty/

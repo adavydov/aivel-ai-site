@@ -6,8 +6,8 @@ import Icon from "./Icon.astro";
   <div class="dialog-shell">
     <div class="dialog-head">
       <div>
-        <p class="section-kicker">Первый разговор</p>
-        <h2 id="contact-title">Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
+        <p class="section-kicker" data-contact-kicker>Первый разговор</p>
+        <h2 id="contact-title" data-contact-title>Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
       </div>
       <button class="icon-button" type="button" aria-label="Закрыть форму" data-close-contact>
         <Icon name="close" size={24} />
@@ -18,13 +18,13 @@ import Icon from "./Icon.astro";
       <div class="form-grid">
         <div class="field">
           <label for="contact-name">Имя <span aria-hidden="true">*</span></label>
-          <input id="contact-name" name="name" autocomplete="name" required />
-          <p class="field-error" data-error-for="contact-name"></p>
+          <input id="contact-name" name="name" autocomplete="name" aria-describedby="contact-name-error" required />
+          <p class="field-error" id="contact-name-error" data-error-for="contact-name"></p>
         </div>
         <div class="field">
           <label for="contact-channel">Телефон или почта <span aria-hidden="true">*</span></label>
-          <input id="contact-channel" name="channel" autocomplete="email" required />
-          <p class="field-error" data-error-for="contact-channel"></p>
+          <input id="contact-channel" name="channel" autocomplete="off" placeholder="+7 900 000-00-00 или name@company.ru" aria-describedby="contact-channel-error" required />
+          <p class="field-error" id="contact-channel-error" data-error-for="contact-channel"></p>
         </div>
         <div class="field">
           <label for="contact-role">Ваша роль</label>
@@ -43,7 +43,8 @@ import Icon from "./Icon.astro";
             <option value="profit">Прибыль и расходы</option>
             <option value="growth">Рост, найм и запас денег</option>
             <option value="unknown">Хочу определить вместе</option>
-            <option value="service">Учёт и своевременные сигналы</option>
+            <option value="client">Учёт и экспресс-аудит</option>
+            <option value="enterprise">Автоматизация в крупной компании</option>
             <option value="partner">Партнёрство</option>
           </select>
         </div>
@@ -56,16 +57,17 @@ import Icon from "./Icon.astro";
       </div>
 
       <label class="consent-row">
-        <input type="checkbox" name="consent" required />
-        <span>Понимаю: сайт подготовит письмо, а данные будут переданы только после того, как я сам отправлю его из почтовой программы.</span>
+        <input id="contact-consent" type="checkbox" name="consent" aria-describedby="contact-consent-error" required />
+        <span>Согласен подготовить обращение. Данные будут переданы только после отправки письма из моей почтовой программы.</span>
       </label>
+      <p class="field-error consent-error" id="contact-consent-error" data-error-for="contact-consent"></p>
 
       <div class="form-actions">
         <button class="button button-primary" type="submit" data-submit-button>
-          <span>Определить важные сигналы</span>
+          <span data-contact-submit-label>Определить важные сигналы</span>
           <span class="button-loader" aria-hidden="true"></span>
         </button>
-        <p>Откроется подготовленное письмо на info@aivel.ru. Сайт сам ничего не отправляет.</p>
+        <p>После проверки появится ссылка на подготовленное письмо. Сайт сам ничего не отправляет.</p>
       </div>
       <div class="form-status" role="status" aria-live="polite" data-form-status></div>
     </form>

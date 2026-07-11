@@ -16,6 +16,21 @@ const related = question.data.related
   .map((slug: string) => questions.find((entry: typeof question) => entry.id === slug))
   .filter((entry): entry is NonNullable<typeof entry> => entry !== undefined);
 
+const demoScenarioByQuestion: Record<string, "cash" | "payment" | "expense" | "hiring"> = {
+  "chto-izmenilos-za-mesyats": "expense",
+  "gde-vyrosli-rashody": "expense",
+  "hvatit-li-deneg-na-nalogi-i-zarplatu": "cash",
+  "kakie-klienty-i-proekty-pribylny": "expense",
+  "kakie-obyazatelstva-vperedi": "cash",
+  "kto-zaderzhivaet-oplatu": "payment",
+  "mozhno-li-nanyat-sotrudnika": "hiring",
+  "na-skolko-mesyatsev-hvatit-deneg": "cash",
+  "pochemu-pribyl-est-a-deneg-net": "cash",
+  "skolko-deneg-mozhno-vyvesti": "cash"
+};
+const demoScenario = demoScenarioByQuestion[question.id] || "cash";
+const contactTopic = demoScenario === "expense" ? "profit" : demoScenario === "hiring" ? "growth" : "money";
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -42,7 +57,7 @@ const schema = {
           <span>Короткий ответ</span>
           <p>{question.data.answerLead}</p>
         </div>
-        <button class="button button-primary" type="button" data-open-demo>Задать похожий вопрос в демо</button>
+        <button class="button button-primary" type="button" data-open-demo data-demo-scenario={demoScenario}>Показать похожую ситуацию в демо</button>
       </div>
       <aside class="page-hero-aside">
         <strong>Решение, которое зависит от ответа</strong>
@@ -72,8 +87,9 @@ const schema = {
           <a class="text-link" href="/vazhnoe/">Как выглядит сигнал <Icon name="arrow" size={17} /></a>
         </div>
         <div class="content-aside-card">
-          <span>Следующий шаг</span>
-          <button class="button button-primary" type="button" data-open-demo style="width: 100%;">Попробовать демо</button>
+          <span>Проверить основание</span>
+          <p>Как Aivel показывает источники, свежесть и границы ответа.</p>
+          <a class="text-link" href="/kak-formiruetsya-otvet/">Разобрать ответ <Icon name="arrow" size={17} /></a>
         </div>
       </aside>
 
@@ -110,7 +126,7 @@ const schema = {
           <p>Пример на сайте не является ответом для вашей компании. Реальный вывод зависит от подключённых источников, периода и состояния учёта.</p>
         </blockquote>
 
-        <button class="button button-primary" type="button" data-open-contact>Обсудить вопрос и сопровождение <Icon name="arrow" size={20} /></button>
+        <button class="button button-primary" type="button" data-open-contact data-contact-topic={contactTopic}>Обсудить вопрос и сопровождение <Icon name="arrow" size={20} /></button>
       </article>
     </div>
   </section>

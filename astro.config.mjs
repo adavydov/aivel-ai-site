@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 
-const publicSite = process.env.PUBLIC_SITE_URL ?? "https://aivel-ai-site.pages.dev";
+const publicSite = process.env.PUBLIC_SITE_URL ?? "https://adavydov.github.io";
 
 export default defineConfig({
   site: publicSite,
