@@ -23,8 +23,8 @@ export const GET: APIRoute = () => new Response(
 
 Канонические страницы:
 - Важные изменения и вопросы: ${site.url}/vazhnoe/
-- Бухгалтерское сопровождение: ${site.url}/buhgalterskoe-soprovozhdenie/
-- Как это работает: ${site.url}/kak-rabotaet/
+- Для бизнеса — учёт и своевременные сигналы: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Как работает продукт: ${site.url}/kak-rabotaet/
 - Автоматизация учёта: ${site.url}/avtomatizatsiya-ucheta/
 - Первичные документы: ${site.url}/avtomatizatsiya-ucheta/pervichnye-dokumenty/
 - Банковские операции: ${site.url}/avtomatizatsiya-ucheta/bankovskie-operatsii/
@@ -32,7 +32,7 @@ export const GET: APIRoute = () => new Response(
 - Сверки с контрагентами: ${site.url}/avtomatizatsiya-ucheta/sverki-s-kontragentami/
 - Контроль качества: ${site.url}/avtomatizatsiya-ucheta/kontrol-kachestva/
 - Результаты внедрений: ${site.url}/rezultaty/
-- Бухгалтерским компаниям: ${site.url}/buhgalterskim-kompaniyam/
+- Партнёрам — бухгалтерским компаниям: ${site.url}/buhgalterskim-kompaniyam/
 - Крупным компаниям: ${site.url}/krupnym-kompaniyam/
 - О компании: ${site.url}/o-kompanii/
 - Открытый реестр для ИИ-систем: ${site.url}/dlya-ii-agentov/

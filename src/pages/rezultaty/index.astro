@@ -1,11 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import BrandWall from "../../components/BrandWall.astro";
 import {
   automationResults,
   contentReviewedAt,
   implementationMetrics,
-  publicClients,
   site
 } from "../../data/site";
 
@@ -43,36 +43,25 @@ const schema = [
   </div>
 
   <header class="page-hero">
-    <div class="container page-hero-grid">
-      <div>
-        <p class="section-kicker">Реализованные внедрения</p>
-        <h1>Автоматизация, результат которой можно измерить.</h1>
-        <p class="lead">На этой странице собраны совокупные показатели реализованных проектов Aivel. Мы отделяем измеренный факт от обещания для будущего клиента.</p>
-      </div>
-      <aside class="page-hero-aside">
-        <strong>Важная граница</strong>
-        <p>Показатели не приписываются отдельным названным клиентам и не гарантируют такой же эффект в другом контуре.</p>
-      </aside>
-    </div>
-  </header>
-
-  <section class="section" aria-labelledby="summary-title">
     <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">Совокупный итог</p><h2 id="summary-title">Что показали реализованные проекты.</h2></div>
-        <p>Цифры относятся к разным внедрениям и не должны складываться в один прогноз.</p>
+      <div class="page-hero-grid results-hero-grid">
+        <div>
+          <p class="section-kicker">Реализованные внедрения</p>
+          <h1>Сразу к измеренному результату.</h1>
+          <p class="lead">Совокупные показатели проектов Aivel. Мы отделяем измеренный факт от обещания для будущего клиента.</p>
+        </div>
+        <aside class="page-hero-aside">
+          <strong>Важная граница</strong>
+          <p>Показатели относятся к разным внедрениям, не складываются в один прогноз и не гарантируют такой же эффект в другом контуре.</p>
+        </aside>
       </div>
-      <div class="metric-grid">
+      <div class="metric-grid hero-metric-grid">
         {implementationMetrics.map((metric) => (
-          <article class="metric-card">
-            <strong>{metric.value}</strong>
-            <h3>{metric.label}</h3>
-            <p>{metric.note}</p>
-          </article>
+          <article class="metric-card"><strong>{metric.value}</strong><h3>{metric.label}</h3><p>{metric.note}</p></article>
         ))}
       </div>
     </div>
-  </section>
+  </header>
 
   <section class="section section-warm" aria-labelledby="areas-title">
     <div class="container">
@@ -93,17 +82,9 @@ const schema = [
   </section>
 
   <section class="section" aria-labelledby="clients-title">
-    <div class="container content-layout">
-      <div>
-        <p class="section-kicker">Опыт внедрений</p>
-        <h2 id="clients-title">Клиенты, с которыми работала команда Aivel.</h2>
-      </div>
-      <div class="prose">
-        <div class="client-grid" aria-label="Названные клиенты Aivel">
-          {publicClients.map((client) => <div class="client-name">{client}</div>)}
-        </div>
-        <p class="client-note">Это перечень клиентов, а не распределение приведённых выше показателей по компаниям.</p>
-      </div>
+    <div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Опыт внедрений</p><h2 id="clients-title">Компании, с которыми работала команда Aivel.</h2></div><p>Бренды подтверждают опыт работы со сложными контурами, но не распределяют приведённые выше показатели по конкретным компаниям.</p></div>
+      <BrandWall />
     </div>
   </section>
 
@@ -134,8 +115,7 @@ const schema = [
 
 <style>
   .metric-grid,
-  .automation-grid,
-  .client-grid {
+  .automation-grid {
     display: grid;
     gap: 20px;
   }
@@ -145,8 +125,7 @@ const schema = [
   }
 
   .metric-card,
-  .automation-card,
-  .client-name {
+  .automation-card {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
@@ -187,25 +166,12 @@ const schema = [
     font-weight: 700;
   }
 
-  .client-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .results-hero-grid {
+    align-items: start;
   }
 
-  .client-name {
-    display: grid;
-    min-height: 132px;
-    padding: 24px;
-    place-items: center;
-    color: var(--color-ink);
-    font-size: clamp(1.55rem, 3vw, 2.2rem);
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .client-note {
-    margin-top: 18px;
-    color: var(--color-muted);
-    font-size: 0.94rem;
+  .hero-metric-grid {
+    margin-top: 42px;
   }
 
   .method-copy p {
@@ -227,8 +193,7 @@ const schema = [
   }
 
   @media (max-width: 680px) {
-    .automation-grid,
-    .client-grid {
+    .automation-grid {
       grid-template-columns: 1fr;
     }
 
