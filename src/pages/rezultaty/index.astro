@@ -1,0 +1,240 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import {
+  automationResults,
+  contentReviewedAt,
+  implementationMetrics,
+  publicClients,
+  site
+} from "../../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Результаты внедрений Aivel",
+    description: "Совокупные показатели автоматизации учётных процессов и границы их применения.",
+    url: `${site.url}/rezultaty/`,
+    dateModified: contentReviewedAt.iso,
+    inLanguage: "ru-RU"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Участки автоматизации Aivel",
+    itemListElement: automationResults.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.title,
+      description: `${item.result} ${item.scope}`
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title="Результаты внедрений Aivel"
+  description="Измеримые итоги автоматизации первичных документов, банковских операций, обращений и сверок — с методикой и ограничениями."
+  schema={schema}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Результаты</span>
+  </div>
+
+  <header class="page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="section-kicker">Реализованные внедрения</p>
+        <h1>Автоматизация, результат которой можно измерить.</h1>
+        <p class="lead">На этой странице собраны совокупные показатели реализованных проектов Aivel. Мы отделяем измеренный факт от обещания для будущего клиента.</p>
+      </div>
+      <aside class="page-hero-aside">
+        <strong>Важная граница</strong>
+        <p>Показатели не приписываются отдельным названным клиентам и не гарантируют такой же эффект в другом контуре.</p>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="summary-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Совокупный итог</p><h2 id="summary-title">Что показали реализованные проекты.</h2></div>
+        <p>Цифры относятся к разным внедрениям и не должны складываться в один прогноз.</p>
+      </div>
+      <div class="metric-grid">
+        {implementationMetrics.map((metric) => (
+          <article class="metric-card">
+            <strong>{metric.value}</strong>
+            <h3>{metric.label}</h3>
+            <p>{metric.note}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="areas-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Участки учёта</p><h2 id="areas-title">Что уже выполняется в общем контуре.</h2></div>
+        <p>Автоматизация закрывает типовой путь. Неполные данные, расхождения и профессиональное суждение остаются у специалиста.</p>
+      </div>
+      <div class="automation-grid">
+        {automationResults.map((item) => (
+          <article class="automation-card">
+            <h3>{item.title}</h3>
+            <p class="automation-result">{item.result}</p>
+            <p>{item.scope}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="clients-title">
+    <div class="container content-layout">
+      <div>
+        <p class="section-kicker">Опыт внедрений</p>
+        <h2 id="clients-title">Клиенты, с которыми работала команда Aivel.</h2>
+      </div>
+      <div class="prose">
+        <div class="client-grid" aria-label="Названные клиенты Aivel">
+          {publicClients.map((client) => <div class="client-name">{client}</div>)}
+        </div>
+        <p class="client-note">Это перечень клиентов, а не распределение приведённых выше показателей по компаниям.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" aria-labelledby="method-title">
+    <div class="container content-layout">
+      <div>
+        <p class="section-kicker section-kicker-light">Как читать цифры</p>
+        <h2 id="method-title" style="color: white;">Показатель имеет смысл только вместе с периметром.</h2>
+      </div>
+      <div class="prose method-copy">
+        <p><strong>До запуска</strong> фиксируются объём операций, ручной труд, доля исключений и требуемое качество.</p>
+        <p><strong>Во время проверки</strong> автоматизация работает на реальной выборке, а ошибки и исключения учитываются отдельно.</p>
+        <p><strong>После запуска</strong> сравниваются автоматическая доля, точность, труд на исключениях и экономический эффект.</p>
+        <p class="reviewed">Сведения проверены {contentReviewedAt.label}.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <p class="section-kicker section-kicker-light">Начать с измерения</p>
+      <h2>Выберем один процесс и заранее согласуем критерий успеха.</h2>
+      <p>Сначала — исходная выборка и границы. Затем — параллельная проверка и решение по фактическому результату.</p>
+      <a class="button button-light" href="/krupnym-kompaniyam/">Обсудить автоматизацию <Icon name="arrow" size={20} /></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .metric-grid,
+  .automation-grid,
+  .client-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metric-card,
+  .automation-card,
+  .client-name {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .metric-card,
+  .automation-card {
+    padding: 30px;
+  }
+
+  .metric-card > strong {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--color-blue);
+    font-size: clamp(2.35rem, 5vw, 4.25rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .metric-card h3,
+  .automation-card h3 {
+    margin: 0 0 12px;
+  }
+
+  .metric-card p,
+  .automation-card p {
+    margin: 0;
+  }
+
+  .automation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .automation-result {
+    margin-bottom: 12px !important;
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .client-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .client-name {
+    display: grid;
+    min-height: 132px;
+    padding: 24px;
+    place-items: center;
+    color: var(--color-ink);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .client-note {
+    margin-top: 18px;
+    color: var(--color-muted);
+    font-size: 0.94rem;
+  }
+
+  .method-copy p {
+    color: #c3cfde;
+  }
+
+  .method-copy strong {
+    color: white;
+  }
+
+  .method-copy .reviewed {
+    color: var(--color-gold-soft);
+  }
+
+  @media (max-width: 840px) {
+    .metric-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .automation-grid,
+    .client-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-card,
+    .automation-card {
+      padding: 24px;
+    }
+  }
+</style>

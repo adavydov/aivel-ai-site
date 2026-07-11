@@ -40,7 +40,6 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
       {navigation.map((item) => (
         <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
       ))}
-      <a href="/krupnym-kompaniyam/">Крупным компаниям</a>
       <button class="button button-primary" type="button" data-open-contact>Определить важные сигналы</button>
     </nav>
   </div>

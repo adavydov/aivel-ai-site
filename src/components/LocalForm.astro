@@ -13,9 +13,9 @@ const submitLabel = mode === "partner"
 ---
 
 <div class="form-panel">
-  <p class="section-kicker">Локальная форма</p>
+  <p class="section-kicker">Первый разговор</p>
   <h2 style="font-size: clamp(2rem, 4vw, 3.4rem);">{title}</h2>
-  <form class="inline-form" data-local-form novalidate>
+  <form class="inline-form" data-local-form data-form-mode={mode} action="mailto:info@aivel.ru" method="post" enctype="text/plain">
     <div class="form-grid">
       <div class="field">
         <label for={`${mode}-name`}>Имя <span aria-hidden="true">*</span></label>
@@ -105,14 +105,14 @@ const submitLabel = mode === "partner"
 
     <label class="consent-row">
       <input type="checkbox" name="consent" required />
-      <span>Согласен на обработку контактных данных для ответа на обращение.</span>
+      <span>Понимаю: сайт подготовит письмо, а данные будут переданы только после того, как я сам отправлю его из почтовой программы.</span>
     </label>
 
     <div class="form-actions">
       <button class="button button-primary" type="submit" data-submit-button>
         <span>{submitLabel}</span><span class="button-loader" aria-hidden="true"></span>
       </button>
-      <p>Локальный прототип: форма ничего не отправляет и не сохраняет.</p>
+      <p>Откроется подготовленное письмо на info@aivel.ru. Сайт сам ничего не отправляет.</p>
     </div>
     <div class="form-status" role="status" aria-live="polite" data-form-status></div>
   </form>

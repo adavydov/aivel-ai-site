@@ -1,35 +1,118 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import { contentReviewedAt, site } from "../../data/site";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "О компании Aivel",
+    description: "Проверяемые сведения о бухгалтерской и технологической компании Aivel.",
+    url: `${site.url}/o-kompanii/`,
+    dateModified: contentReviewedAt.iso,
+    inLanguage: "ru-RU",
+    about: { "@id": `${site.url}/#organization` }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${site.url}/#organization`,
+    name: "Aivel",
+    url: site.url,
+    email: "info@aivel.ru",
+    description: site.description
+  }
+];
 ---
 
-<BaseLayout title="О компании Aivel" description="Aivel — бухгалтерская группа и технологическая компания, помогающая раньше замечать важное и проверять основание до решения.">
-  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>О компании</span></div>
+<BaseLayout
+  title="О компании Aivel"
+  description="Aivel — бухгалтерская и технологическая компания: сопровождение бизнеса, автоматизация учёта, важные изменения и проверяемые ответы."
+  schema={schema}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>О компании</span>
+  </div>
+
   <header class="page-hero">
     <div class="container page-hero-grid">
-      <div><p class="section-kicker">О компании</p><h1>Aivel превращает учёт в систему, которая помогает вовремя замечать важное.</h1><p class="lead">Мы соединяем бухгалтерское сопровождение, проверяемые сигналы и ответы, общую технологию группы и опыт автоматизации сложных учётных процессов.</p></div>
-      <aside class="page-hero-aside"><strong>Один принцип</strong><p>ИИ обрабатывает повторяющееся. Специалист отвечает за исключения и профессиональное суждение.</p></aside>
+      <div>
+        <p class="section-kicker">О компании</p>
+        <h1>Aivel соединяет бухгалтерское сопровождение и технологию учёта.</h1>
+        <p class="lead">Мы помогаем бизнесу вести учёт, вовремя замечать важные изменения и проверять основание до решения. Для крупных компаний Aivel автоматизирует выбранные участки учёта.</p>
+      </div>
+      <aside class="page-hero-aside">
+        <strong>Официальная связь</strong>
+        <p><a href="mailto:info@aivel.ru">info@aivel.ru</a></p>
+        <p>Не отправляйте финансовые данные через открытую почту. Сначала согласуем защищённый способ обмена.</p>
+      </aside>
     </div>
   </header>
 
-  <section class="section">
+  <section class="section" aria-labelledby="work-title">
     <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Три слоя Aivel</p><h2>Одна технология — разные роли в системе.</h2></div><p>Сайт ставит конечный бизнес в центр, но не скрывает корпоративный опыт и партнёрскую модель.</p></div>
+      <div class="section-heading">
+        <div><p class="section-kicker">Три направления</p><h2 id="work-title">Одна учётная основа — разные способы приносить ценность.</h2></div>
+        <p>Конечный бизнес, крупные компании и бухгалтерские компании покупают разный результат, но используют общую дисциплину данных и исключений.</p>
+      </div>
       <div class="numbered-grid">
-        <article class="numbered-card"><h3>Конечный бизнес</h3><p>Бухгалтерское сопровождение, важные изменения и проверяемые ответы о деньгах, прибыли, обязательствах и росте.</p><a class="text-link" href="/buhgalterskoe-soprovozhdenie/">Сопровождение <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Крупные компании</h3><p>Вопросы к учётным данным и автоматизация выбранных процессов с правами и проверкой исключений.</p><a class="text-link" href="/krupnym-kompaniyam/">Решения <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Бухгалтерские компании</h3><p>Общая технология, управляемый портфель и переход владельца к консультационной роли.</p><a class="text-link" href="/buhgalterskim-kompaniyam/">Партнёрство <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Общая дисциплина</h3><p>Готовность данных, источник, история действий, безопасный отказ и ответственный специалист.</p><a class="text-link" href="/kak-rabotaet/">Как это работает <Icon name="arrow" size={18} /></a></article>
+        <article class="numbered-card">
+          <h3>Растущему бизнесу</h3>
+          <p>Бухгалтерское сопровождение, важные изменения и проверяемые ответы о деньгах, прибыли, обязательствах и росте.</p>
+          <a class="text-link" href="/buhgalterskoe-soprovozhdenie/">Бухгалтерское сопровождение <Icon name="arrow" size={18} /></a>
+        </article>
+        <article class="numbered-card">
+          <h3>Крупным компаниям</h3>
+          <p>Автоматизация первичных документов, банковских операций, обращений и сверок в согласованном контуре.</p>
+          <a class="text-link" href="/krupnym-kompaniyam/">Решения для крупных компаний <Icon name="arrow" size={18} /></a>
+        </article>
+        <article class="numbered-card">
+          <h3>Бухгалтерским компаниям</h3>
+          <p>Общая технология и производственный контур, которые снижают зависимость от ручной рутины и помогают владельцу перейти к консультационной роли.</p>
+          <a class="text-link" href="/buhgalterskim-kompaniyam/">Партнёрство с Aivel <Icon name="arrow" size={18} /></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="principles-title">
+    <div class="container content-layout">
+      <div><p class="section-kicker">Принципы</p><h2 id="principles-title">Технология не должна создавать новую непрозрачность.</h2></div>
+      <div class="prose">
+        <p><strong>Источник виден.</strong> Сигнал или ответ показывает период, свежесть, расчёт и путь до разрешённого основания.</p>
+        <p><strong>Граница видна.</strong> Неполные данные, расхождения и профессиональное суждение не маскируются уверенным текстом.</p>
+        <p><strong>Человек отвечает за суждение.</strong> ИИ обрабатывает повторяющееся, а исключение, налоговая оценка и решение остаются у ответственного специалиста.</p>
+        <p><a class="text-link" href="/rezultaty/">Измеримые результаты внедрений <Icon name="arrow" size={18} /></a></p>
       </div>
     </div>
   </section>
 
   <section class="section section-dark">
     <div class="container content-layout">
-      <div><p class="section-kicker section-kicker-light">Что изменилось</p><h2 style="color: white;">От заказных цифровых сотрудников — к бухгалтерской системе решений.</h2></div>
-      <div class="prose"><p style="color: #c3cfde;">Предыдущий сайт показывал набор цифровых ролей и автоматизацию отдельных операций. Новый Aivel фокусируется на одной причинной цепочке: подготовленный учёт → важное изменение → проверяемое основание → уточняющий вопрос → решение.</p><p style="color: #c3cfde;">Корпоративные внедрения остаются важным доказательством технологии, но не конкурируют с главным предложением конечному бизнесу.</p></div>
+      <div><p class="section-kicker section-kicker-light">Проверяемость</p><h2 style="color: white;">Открытые сведения без скрытой версии.</h2></div>
+      <div class="prose about-links">
+        <p>Краткие факты, возможности, ограничения, методика показателей и машиночитаемые ссылки собраны в отдельном открытом реестре.</p>
+        <p><a class="text-link light-link" href="/dlya-ii-agentov/">Сведения для ИИ-систем <Icon name="arrow" size={18} /></a></p>
+        <p class="reviewed">Сведения проверены {contentReviewedAt.label}.</p>
+      </div>
     </div>
   </section>
-
-  <section class="final-cta"><div class="container"><p class="section-kicker section-kicker-light">Познакомиться</p><h2>Начнём с того, что нельзя узнать слишком поздно.</h2><p>Коротко разберём ситуацию и честно скажем, что Aivel сможет видеть по доступным данным.</p><button class="button button-light" type="button" data-open-contact>Определить важное</button></div></section>
 </BaseLayout>
+
+<style>
+  .page-hero-aside a {
+    color: var(--color-blue);
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  .about-links p {
+    color: #c3cfde;
+  }
+
+  .about-links .light-link,
+  .about-links .reviewed {
+    color: var(--color-gold-soft);
+  }
+</style>

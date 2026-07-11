@@ -7,13 +7,60 @@ export const site = {
 };
 
 export const navigation = [
-  { href: "/vazhnoe/", label: "Важные изменения" },
-  { href: "/voprosy/", label: "Вопросы бизнеса" },
+  { href: "/vazhnoe/", label: "Важное" },
   { href: "/buhgalterskoe-soprovozhdenie/", label: "Бухгалтерское сопровождение" },
   { href: "/kak-rabotaet/", label: "Как это работает" },
+  { href: "/rezultaty/", label: "Результаты" },
   { href: "/buhgalterskim-kompaniyam/", label: "Бухгалтерским компаниям" },
-  { href: "/o-kompanii/", label: "О компании" }
 ];
+
+export const contentReviewedAt = {
+  iso: "2026-07-11",
+  label: "11 июля 2026 года"
+} as const;
+
+export const implementationMetrics = [
+  {
+    value: "80–90%",
+    label: "рутины в отдельных ключевых процессах выполнялось без участия человека",
+    note: "Диапазон из реализованных внедрений Aivel; состав процессов и выборки различался."
+  },
+  {
+    value: "до 30%",
+    label: "ресурса бухгалтерской функции высвобождалось в отдельных проектах",
+    note: "Показатель относился к подразделениям от 50 сотрудников и зависит от объёма типовых операций."
+  },
+  {
+    value: "6–8 месяцев",
+    label: "срок окупаемости реализованных проектов",
+    note: "Срок оценивается после фиксации исходных затрат и фактического эффекта."
+  }
+] as const;
+
+export const automationResults = [
+  {
+    title: "Первичные документы",
+    result: "80% документов обрабатывались без участия человека.",
+    scope: "Распознавание, создание документа в 1С и заполнение учётных признаков."
+  },
+  {
+    title: "Банковские операции",
+    result: "98% — точность сопоставления платежей на измеренной выборке.",
+    scope: "Извлечение реквизитов, сопоставление с договорами, разделение платежа и заполнение аналитики."
+  },
+  {
+    title: "Обращения и задачи",
+    result: "Обращения распределяются по ответственным, а срок и состояние задачи становятся видимы.",
+    scope: "Письмо или запрос превращается в задачу с исполнителем и контролем срока."
+  },
+  {
+    title: "Сверки с контрагентами",
+    result: "Успешное совпадение проходит по правилу, расхождение передаётся специалисту.",
+    scope: "Распознавание акта, создание сверки в 1С, проверка и выделение расхождений."
+  }
+] as const;
+
+export const publicClients = ["DDX", "Нефтьмагистраль"] as const;
 
 export const solutions = [
   {
@@ -316,20 +363,25 @@ export const faqs = [
 export const allStaticRoutes = [
   "/",
   "/vazhnoe/",
-  "/voprosy/",
-  "/resheniya/",
   ...solutions.map((solution) => `/resheniya/${solution.slug}/`),
   "/buhgalterskoe-soprovozhdenie/",
   "/kak-rabotaet/",
+  "/avtomatizatsiya-ucheta/",
+  "/avtomatizatsiya-ucheta/pervichnye-dokumenty/",
+  "/avtomatizatsiya-ucheta/bankovskie-operatsii/",
+  "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/",
+  "/avtomatizatsiya-ucheta/sverki-s-kontragentami/",
+  "/avtomatizatsiya-ucheta/kontrol-kachestva/",
   "/kak-formiruetsya-otvet/",
   "/dannye-i-istochniki/",
   "/1s-i-integratsii/",
   "/zashchita-dannyh/",
   "/ogranicheniya/",
-  "/istorii/",
+  "/rezultaty/",
   "/buhgalterskim-kompaniyam/",
   "/krupnym-kompaniyam/",
   "/o-kompanii/",
+  "/dlya-ii-agentov/",
   "/kontakty/",
   "/konfidentsialnost/",
   "/personalnye-dannye/"

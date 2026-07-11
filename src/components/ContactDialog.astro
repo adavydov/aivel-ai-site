@@ -14,7 +14,7 @@ import Icon from "./Icon.astro";
       </button>
     </div>
 
-    <form class="contact-form" data-local-form novalidate>
+    <form class="contact-form" data-local-form data-form-mode="client" action="mailto:info@aivel.ru" method="post" enctype="text/plain">
       <div class="form-grid">
         <div class="field">
           <label for="contact-name">Имя <span aria-hidden="true">*</span></label>
@@ -57,7 +57,7 @@ import Icon from "./Icon.astro";
 
       <label class="consent-row">
         <input type="checkbox" name="consent" required />
-        <span>Согласен на обработку контактных данных для ответа на обращение.</span>
+        <span>Понимаю: сайт подготовит письмо, а данные будут переданы только после того, как я сам отправлю его из почтовой программы.</span>
       </label>
 
       <div class="form-actions">
@@ -65,7 +65,7 @@ import Icon from "./Icon.astro";
           <span>Определить важные сигналы</span>
           <span class="button-loader" aria-hidden="true"></span>
         </button>
-        <p>Локальный прототип: данные никуда не отправляются и не сохраняются.</p>
+        <p>Откроется подготовленное письмо на info@aivel.ru. Сайт сам ничего не отправляет.</p>
       </div>
       <div class="form-status" role="status" aria-live="polite" data-form-status></div>
     </form>

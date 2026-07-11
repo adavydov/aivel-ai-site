@@ -23,22 +23,27 @@ const questionSlugs = [
 const routes = [
   "",
   "vazhnoe",
-  "voprosy",
-  "resheniya",
   "resheniya/dengi-i-obyazatelstva",
   "resheniya/pribyl-i-rentabelnost",
   "resheniya/rost-naim-i-zapas-deneg",
   "buhgalterskoe-soprovozhdenie",
   "kak-rabotaet",
+  "avtomatizatsiya-ucheta",
+  "avtomatizatsiya-ucheta/pervichnye-dokumenty",
+  "avtomatizatsiya-ucheta/bankovskie-operatsii",
+  "avtomatizatsiya-ucheta/kommunikatsii-s-klientami",
+  "avtomatizatsiya-ucheta/sverki-s-kontragentami",
+  "avtomatizatsiya-ucheta/kontrol-kachestva",
   "kak-formiruetsya-otvet",
   "dannye-i-istochniki",
   "1s-i-integratsii",
   "zashchita-dannyh",
   "ogranicheniya",
-  "istorii",
+  "rezultaty",
   "buhgalterskim-kompaniyam",
   "krupnym-kompaniyam",
   "o-kompanii",
+  "dlya-ii-agentov",
   "kontakty"
 ];
 
@@ -84,7 +89,8 @@ test("all primary routes render semantic pages", async () => {
     assert.equal(count(html, /<title>/g), 1, `${route || "/"} must have one title`);
     assert.match(html, /<meta name="description"/);
     assert.match(html, /<link rel="canonical"/);
-    assert.match(html, /href="\/voprosy\/"/);
+    assert.match(html, /href="\/vazhnoe\/"/);
+    assert.match(html, /href="\/kak-rabotaet\/"/);
   }
 });
 
@@ -104,9 +110,31 @@ test("machine-readable discovery files include question pages", async () => {
   const llms = await readFile(path.join(dist, "llms.txt"), "utf8");
   for (const slug of questionSlugs) assert.match(sitemap, new RegExp(`/voprosy/${slug}/`));
   assert.match(sitemap, /\/vazhnoe\//);
+  assert.match(sitemap, /\/rezultaty\//);
+  assert.match(sitemap, /\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
+  assert.doesNotMatch(sitemap, /<loc>[^<]+\/voprosy\/<\/loc>/);
+  assert.doesNotMatch(sitemap, /<loc>[^<]+\/istorii\/<\/loc>/);
   assert.match(robots, /OAI-SearchBot/);
   assert.match(llms, /Публичные примеры используют обезличенные учебные данные/);
   assert.match(llms, /не гарантирует обнаружение любого события/i);
+});
+
+test("legacy hubs redirect without hiding question and solution pages", async () => {
+  const redirects = await readFile(path.join(dist, "_redirects"), "utf8");
+  assert.match(redirects, /^\/voprosy \/vazhnoe\/#voprosy 301$/m);
+  assert.match(redirects, /^\/resheniya \/vazhnoe\/ 301$/m);
+  assert.match(redirects, /^\/istorii \/rezultaty\/ 301$/m);
+  assert.doesNotMatch(redirects, /\/voprosy\/\*/);
+  assert.doesNotMatch(redirects, /\/resheniya\/\*/);
+});
+
+test("real product demonstrations are attached to the relevant pages", async () => {
+  const how = await readFile(routeFile("kak-rabotaet"), "utf8");
+  const primary = await readFile(routeFile("avtomatizatsiya-ucheta/pervichnye-dokumenty"), "utf8");
+  const reconciliation = await readFile(routeFile("avtomatizatsiya-ucheta/sverki-s-kontragentami"), "utf8");
+  assert.match(how, /drive\.google\.com\/file\/d\/13shhsfSNrURD23l5y-2YZDhtITJzx_he\/preview/);
+  assert.match(primary, /drive\.google\.com\/file\/d\/1mjxxrczIp2mPWiIwWw1o2AerElWcS0vB\/preview/);
+  assert.match(reconciliation, /drive\.google\.com\/file\/d\/13UrEvxoF5-LAdpLStHbuPHffqebFK139\/preview/);
 });
 
 test("all internal links resolve inside the static build", async () => {
