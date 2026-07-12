@@ -1,0 +1,527 @@
+---
+import Icon from "./Icon.astro";
+import { signalDeliveryExamples } from "../data/site";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const instance = compact ? "home" : "page";
+---
+
+<div class:list={["signal-email-demo", compact && "is-compact"]} data-signal-carousel>
+  <div class="delivery-context">
+    <div class="delivery-primary"><Icon name="mail" size={18} /><span>Сигнал для руководителя</span></div>
+    <div class="telegram-note"><Icon name="message" size={17} /><span>Можно получать и в Telegram</span></div>
+  </div>
+
+  <div class="signal-scenario-tabs" role="tablist" aria-label="Четыре примера важных ситуаций">
+    {signalDeliveryExamples.map((example, index) => (
+      <button
+        type="button"
+        role="tab"
+        id={`signal-${instance}-tab-${example.id}`}
+        aria-controls={`signal-${instance}-panel-${example.id}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        tabindex={index === 0 ? 0 : -1}
+        data-signal-carousel-tab
+      >
+        <span aria-hidden="true">0{index + 1}</span>
+        <strong>{example.tab}</strong>
+      </button>
+    ))}
+  </div>
+
+  <div class="signal-slides">
+    {signalDeliveryExamples.map((example, index) => (
+      <section
+        class="signal-slide"
+        role="tabpanel"
+        id={`signal-${instance}-panel-${example.id}`}
+        aria-labelledby={`signal-${instance}-tab-${example.id}`}
+        tabindex="0"
+        hidden={index !== 0}
+        data-signal-carousel-panel
+      >
+        <div class="email-stage">
+          <article class="email-window" aria-label="Учебный пример письма от Aivel">
+            <header class="email-head">
+              <span class="sender-mark" aria-hidden="true">A</span>
+              <span class="email-sender">
+                <strong>Aivel</strong>
+                <small>signals@aivel.ru</small>
+              </span>
+              <span class="email-time">{example.detectedAt}</span>
+            </header>
+
+            <div class="email-subject">
+              <span>Тема</span>
+              <h3>{example.subject}</h3>
+            </div>
+
+            <div class="email-body">
+              <div class="email-signal-line">
+                <span class="signal-label">Важное изменение</span>
+                <span class="signal-metric"><strong>{example.metric}</strong> {example.metricLabel}</span>
+              </div>
+
+              <p class="message-summary">{example.signal}</p>
+
+              <dl class="message-explanation">
+                <div>
+                  <dt>Почему важно</dt>
+                  <dd>{example.whyImportant}</dd>
+                </div>
+                <div class="message-action">
+                  <dt>Что сделать сейчас</dt>
+                  <dd>{example.action}</dd>
+                </div>
+              </dl>
+
+              <div class="message-source">
+                <Icon name="source" size={18} />
+                <p><strong>Основание</strong>{example.sourceSummary}</p>
+              </div>
+            </div>
+
+            <footer class="email-foot">
+              <span class="email-reply"><Icon name="message" size={16} />Можно ответить и уточнить расчёт или источник</span>
+              <span class="email-example"><Icon name="shield" size={16} />Учебный пример</span>
+            </footer>
+          </article>
+        </div>
+      </section>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll("[data-signal-carousel]").forEach((carousel) => {
+    if (!(carousel instanceof HTMLElement) || carousel.dataset.carouselReady === "true") return;
+    carousel.dataset.carouselReady = "true";
+
+    const tabs = Array.from(carousel.querySelectorAll("[data-signal-carousel-tab]"));
+    const panels = Array.from(carousel.querySelectorAll("[data-signal-carousel-panel]"));
+
+    const activate = (index: number, focus = false) => {
+      const activeIndex = (index + tabs.length) % tabs.length;
+      tabs.forEach((tab, tabIndex) => {
+        const active = tabIndex === activeIndex;
+        tab.setAttribute("aria-selected", String(active));
+        tab.setAttribute("tabindex", active ? "0" : "-1");
+      });
+      panels.forEach((panel, panelIndex) => {
+        if (panel instanceof HTMLElement) panel.hidden = panelIndex !== activeIndex;
+      });
+      const activeTab = tabs[activeIndex];
+      if (focus && activeTab instanceof HTMLElement) activeTab.focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activate(index));
+      tab.addEventListener("keydown", (event) => {
+        if (!(event instanceof KeyboardEvent) || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        if (event.key === "Home") activate(0, true);
+        if (event.key === "End") activate(tabs.length - 1, true);
+        if (event.key === "ArrowLeft") activate(index - 1, true);
+        if (event.key === "ArrowRight") activate(index + 1, true);
+      });
+    });
+  });
+</script>
+
+<style>
+  .signal-email-demo {
+    overflow: hidden;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .delivery-context {
+    display: flex;
+    min-height: 52px;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .delivery-primary,
+  .telegram-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 750;
+  }
+
+  .delivery-primary {
+    color: var(--color-ink-soft);
+  }
+
+  .telegram-note {
+    color: var(--color-muted);
+  }
+
+  .telegram-note svg {
+    color: var(--color-blue);
+  }
+
+  .signal-scenario-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    background: var(--color-border);
+  }
+
+  .signal-scenario-tabs button {
+    min-height: 58px;
+    padding: 9px 12px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 0;
+    line-height: 1.2;
+    text-align: left;
+    transition: color var(--transition), background-color var(--transition), box-shadow var(--transition);
+  }
+
+  .signal-scenario-tabs button > span {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--color-muted);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .signal-scenario-tabs button strong {
+    font-size: 0.75rem;
+  }
+
+  .signal-scenario-tabs button:hover {
+    background: var(--color-paper);
+  }
+
+  .signal-scenario-tabs button[aria-selected="true"] {
+    color: var(--color-ink);
+    background: var(--color-gold-pale);
+    box-shadow: inset 0 -3px 0 var(--color-gold);
+  }
+
+  .signal-slide[hidden] {
+    display: none;
+  }
+
+  .email-stage {
+    display: grid;
+    min-height: 480px;
+    padding: clamp(16px, 2.5vw, 28px);
+    place-items: center;
+    background:
+      radial-gradient(circle at 90% 0%, rgb(161 98 7 / 0.075), transparent 20rem),
+      linear-gradient(145deg, #f3f5f7, #e8edf2);
+  }
+
+  .email-window {
+    width: min(100%, 760px);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid rgb(15 23 42 / 0.11);
+    border-radius: 14px;
+    box-shadow: 0 20px 56px rgb(15 23 42 / 0.12);
+  }
+
+  .email-head {
+    display: flex;
+    min-height: 58px;
+    gap: 11px;
+    align-items: center;
+    padding: 9px 16px;
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sender-mark {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    color: white;
+    background: var(--color-ink);
+    border-radius: 9px;
+    font-size: 0.86rem;
+    font-weight: 800;
+    place-items: center;
+  }
+
+  .email-sender {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .email-sender strong {
+    font-size: 0.82rem;
+  }
+
+  .email-sender small,
+  .email-time {
+    color: var(--color-muted);
+    font-size: 0.67rem;
+  }
+
+  .email-time {
+    flex: 0 0 auto;
+  }
+
+  .email-subject {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .email-subject > span {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--color-muted);
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .email-subject h3 {
+    margin: 0;
+    font-size: clamp(1.12rem, 2vw, 1.5rem);
+    line-height: 1.16;
+  }
+
+  .email-body {
+    padding: clamp(16px, 2.4vw, 24px);
+  }
+
+  .email-signal-line {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .signal-label {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    padding: 4px 9px;
+    color: var(--color-red);
+    background: var(--color-red-pale);
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .signal-metric {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    text-align: right;
+  }
+
+  .signal-metric strong {
+    color: var(--color-red);
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .message-summary {
+    margin-bottom: 12px;
+    color: var(--color-text);
+    font-size: 0.88rem;
+    line-height: 1.48;
+  }
+
+  .message-explanation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .message-explanation > div {
+    padding: 11px 12px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-border);
+    border-radius: 11px;
+  }
+
+  .message-explanation .message-action {
+    background: var(--color-gold-pale);
+    border-color: rgb(161 98 7 / 0.2);
+  }
+
+  .message-explanation dt {
+    margin-bottom: 4px;
+    color: var(--color-muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .message-explanation dd {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.75rem;
+    line-height: 1.42;
+  }
+
+  .message-source {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding-top: 10px;
+    margin-top: 10px;
+    color: var(--color-blue);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .message-source svg {
+    flex: 0 0 auto;
+    margin-top: 1px;
+  }
+
+  .message-source p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.67rem;
+    line-height: 1.4;
+  }
+
+  .message-source strong {
+    display: block;
+    margin-bottom: 1px;
+    color: var(--color-ink-soft);
+  }
+
+  .email-foot {
+    display: flex;
+    gap: 10px 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    color: var(--color-muted);
+    background: var(--color-paper);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.62rem;
+  }
+
+  .email-foot > span {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .email-reply {
+    color: var(--color-blue);
+    font-weight: 750;
+  }
+
+  .is-compact .delivery-context {
+    min-height: 46px;
+    padding-block: 7px;
+  }
+
+  .is-compact .signal-scenario-tabs button {
+    min-height: 52px;
+    padding-block: 7px;
+  }
+
+  .is-compact .email-stage {
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .is-compact .email-head {
+    min-height: 50px;
+    padding-block: 6px;
+  }
+
+  .is-compact .email-subject {
+    padding-block: 10px;
+  }
+
+  .is-compact .email-body {
+    padding: 14px 16px;
+  }
+
+  .is-compact .message-summary {
+    font-size: 0.8rem;
+  }
+
+  .is-compact .message-explanation dd {
+    font-size: 0.69rem;
+  }
+
+  @media (max-width: 760px) {
+    .signal-scenario-tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .email-stage {
+      min-height: 0;
+      padding: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .delivery-context {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .telegram-note {
+      padding-left: 0;
+    }
+
+    .signal-scenario-tabs button {
+      min-height: 58px;
+    }
+
+    .email-time {
+      display: none;
+    }
+
+    .email-signal-line {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .signal-metric {
+      text-align: left;
+    }
+
+    .message-explanation {
+      grid-template-columns: 1fr;
+    }
+
+    .email-foot {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal-scenario-tabs button {
+      transition: none;
+    }
+  }
+</style>

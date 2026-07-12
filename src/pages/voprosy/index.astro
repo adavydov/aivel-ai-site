@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import AnswerDemo from "../../components/AnswerDemo.astro";
 import QuestionCard from "../../components/QuestionCard.astro";
 import Icon from "../../components/Icon.astro";
 import { solutions } from "../../data/site";
@@ -11,41 +10,31 @@ const bySlug = new Map(questions.map((question) => [question.id, question]));
 ---
 
 <BaseLayout
-  title="Вопросы после важного изменения — Aivel"
-  description="Десять вопросов владельца бизнеса после важного сигнала: какие данные нужны, как проверить ответ и какое решение от него зависит."
+  title="Разборы важных ситуаций в бизнесе — Aivel"
+  description="Типичные важные ситуации в бизнесе: какие данные позволяют заметить их раньше, как проверить основание и какое решение от них зависит."
   schema={{
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Вопросы бизнеса",
-    description: "Проверяемые ответы по данным учёта"
+    name: "Разборы важных ситуаций",
+    description: "Проверяемые сигналы по данным учёта"
   }}
 >
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
-    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Вопросы бизнеса</span>
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Разборы ситуаций</span>
   </div>
   <header class="page-hero">
     <div class="container page-hero-grid">
       <div>
         <p class="section-kicker">После важного сигнала</p>
-        <h1>Увидели изменение — спросите, что оно значит для решения.</h1>
-        <p class="lead">Выберите вопрос, который уже влияет на деньги или рост. На каждой странице видно, какие данные нужны, как проверить основание и где требуется специалист.</p>
+        <h1>Проверьте, как Aivel замечает типичную важную ситуацию.</h1>
+        <p class="lead">Выберите событие, которое влияет на деньги или рост. На каждой странице видно, какие данные нужны, как проверить основание и где требуется специалист.</p>
       </div>
       <aside class="page-hero-aside">
-        <strong>Вопрос остаётся сильной возможностью</strong>
-        <p>Aivel может обратить внимание на изменение первым, а затем ответить на уточнение обычными словами на той же учётной основе.</p>
+        <strong>Справочник, а не отдельный кабинет</strong>
+        <p>Эти разборы помогают понять механику. В работе Aivel сообщает о согласованном событии сам — до того, как руководитель догадается искать его в отчётах.</p>
       </aside>
     </div>
   </header>
-
-  <section class="section" aria-labelledby="answer-example-title">
-    <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">Проверяемый ответ</p><h2 id="answer-example-title">Не просто объяснение — период, расчёт, источник и граница.</h2></div>
-        <p>Подготовленные примеры показывают, как после сигнала раскрыть причину или проверить решение глубже.</p>
-      </div>
-      <AnswerDemo />
-    </div>
-  </section>
 
   <div>
     {solutions.map((solution, index) => {
@@ -79,10 +68,10 @@ const bySlug = new Map(questions.map((question) => [question.id, question]));
 
   <section class="final-cta">
     <div class="container">
-      <p class="section-kicker section-kicker-light">Нет вашего вопроса?</p>
-      <h2>Спросить можно о чём угодно. Выдумывать ответ нельзя.</h2>
-      <p>Aivel даст проверяемый ответ, задаст уточнение, покажет пробел или подключит специалиста. А на странице <a href="/vazhnoe/" style="color: inherit;">важных изменений</a> видно, как такая ситуация может быть замечена раньше.</p>
-      <button class="button button-light" type="button" data-open-contact>Обсудить важную ситуацию</button>
+      <p class="section-kicker section-kicker-light">Не ждать вопроса</p>
+      <h2>Настройте наблюдение до того, как проблема станет очевидной.</h2>
+      <p>Выберем первые события, подключим основание и определим, кому отправлять короткий сигнал в Telegram или по почте.</p>
+      <button class="button button-light" type="button" data-open-contact data-contact-topic="client">Настроить первые сигналы</button>
     </div>
   </section>
 </BaseLayout>

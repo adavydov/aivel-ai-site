@@ -12,6 +12,7 @@ const pages = [
     kicker: "Первичные документы",
     title: "Из входящего документа — в проверяемую запись учёта.",
     lead: "ИИ-помощник распознаёт документ, создаёт поступление в 1С, заполняет аналитику и отдельно направляет человеку всё, что нельзя провести уверенно.",
+    heroOutcome: { value: "80%", label: "общего потока прошло без ручного участия в одной измеренной проверке" },
     asideTitle: "Связь с важным сигналом",
     asideText: "Чем раньше первичный документ попал в учёт, тем раньше становятся видны рост расходов, обязательства и отклонения от привычной картины.",
     task: "Снизить ручную обработку большого потока разных документов, не скрывая неполные и неоднозначные случаи.",
@@ -52,6 +53,7 @@ const pages = [
       "Сохраняем причины передачи документа человеку.",
       "Перед расширением повторяем проверку на документах конкретного заказчика."
     ],
+    measureSummary: "Все четыре показателя считались от одного общего входящего потока: отдельно распознавание, полнота заполнения и отсутствие ручного действия.",
     limits: [
       "Результат зависит от качества файлов, состава документов, настройки 1С и справочников.",
       "Процент распознавания нельзя приравнивать к полностью завершённой операции.",
@@ -59,6 +61,7 @@ const pages = [
       "Показатели одного внедрения не обещают тот же результат в другом потоке.",
       "Размер выборки и период не раскрыты в публичных материалах и должны подтверждаться до использования показателей."
     ],
+    limitSummary: "Размер выборки и период публично не раскрыты. Результат зависит от качества файлов, справочников и настройки 1С; распознавание не равно полностью завершённой операции.",
     related: [
       { href: "/avtomatizatsiya-ucheta/kontrol-kachestva/", label: "Контроль качества" },
       { href: "/dannye-i-istochniki/", label: "Данные и источники" }
@@ -71,6 +74,7 @@ const pages = [
     kicker: "Банковские операции",
     title: "Платёж получает договор, аналитику и проверяемое основание.",
     lead: "ИИ-помощник разбирает назначение платежа, сопоставляет его с данными учёта, при необходимости делит сумму между договорами и готовит операцию для 1С.",
+    heroOutcome: { value: "98%", label: "точности сопоставления в конкретной проверенной выборке" },
     asideTitle: "Связь с важным сигналом",
     asideText: "Разнесённые банковские операции помогают раньше заметить задержку оплаты, необычный расход, изменение денежного потока или сокращение запаса денег.",
     task: "Сократить ручной разбор выписок и быстрее связывать движение денег с договорами, организациями и аналитикой.",
@@ -103,12 +107,14 @@ const pages = [
       "Отдельно считаем ошибочные совпадения, пропуски и случаи передачи человеку.",
       "Для каждого внедрения подтверждаем период, объём и правила измерения."
     ],
+    measureSummary: "98% — доля правильных сопоставлений в конкретной проверке по заранее согласованному критерию. Объём и период выборки нужно подтверждать для каждого внедрения.",
     limits: [
       "Точность зависит от качества назначения платежа и состояния договорного учёта.",
       "98% нельзя переносить на другой поток без отдельной проверки.",
       "Неоднозначное совпадение не должно проводиться только ради высокого процента автоматизации.",
       "Окончательные правила проведения и контроля согласуются с заказчиком."
     ],
+    limitSummary: "Показатель нельзя переносить на другой поток без проверки. Качество зависит от назначения платежа и договорного учёта; неоднозначный случай получает человек.",
     related: [
       { href: "/avtomatizatsiya-ucheta/kontrol-kachestva/", label: "Контроль качества" },
       { href: "/1s-i-integratsii/", label: "1С и другие системы" }
@@ -121,6 +127,7 @@ const pages = [
     kicker: "Запросы к бухгалтерии",
     title: "Важный запрос не должен потеряться между почтой и задачами.",
     lead: "ИИ-помощник анализирует отправителя, тему, текст и вложения, определяет маршрут и срочность, а затем контролирует время до ответа. В обычном бизнесе это запросы подразделений и внутренних заказчиков; в бухгалтерской компании — обращения клиентов.",
+    heroOutcome: { value: "Маршрут + срок", label: "каждое обращение получает ответственного и правило подъёма просрочки" },
     asideTitle: "Связь с важным сигналом",
     asideText: "В подключённом массиве можно искать повторяющиеся вопросы, просроченные ответы и темы, которые требуют внимания руководителя. Найденные признаки проверяет человек.",
     task: "Собрать запросы из согласованных каналов, направить их ответственным и вовремя поднять то, что требует внимания владельца или руководителя.",
@@ -145,7 +152,7 @@ const pages = [
     resultTitle: "Сначала подтверждаем маршрут, сроки и полноту охвата.",
     resultLead: "В исходных материалах нет проверенного общего процента сокращения претензий или просрочек. Поэтому количественный результат публикуется только после замера конкретного потока.",
     metrics: [
-      { value: "4", label: "типа важных признаков: претензии, просрочки, риск ухода, невыставленные услуги" }
+      { value: "Пилот", label: "сначала измеряем правильность маршрута, время ответа, просрочки и ошибочные тревоги" }
     ],
     measure: [
       "Считаем долю обращений, попавших в правильный маршрут.",
@@ -153,12 +160,14 @@ const pages = [
       "Проверяем полноту обнаружения претензий и ошибочные тревоги.",
       "Отдельно подтверждаем найденные риски ухода и невыставленные услуги."
     ],
+    measureSummary: "На пилоте считаем правильность маршрута, время до первого ответа, просрочки, полноту обнаружения важных обращений и ошибочные тревоги.",
     limits: [
       "ИИ-помощник видит только подключённые и разрешённые каналы.",
       "Срочность и риск зависят от согласованных правил и контекста клиента.",
       "Сообщение не заменяет решение ответственного специалиста.",
       "Без исходного замера нельзя обещать процент сокращения претензий или ухода."
     ],
+    limitSummary: "Публичного исходного замера пока нет, поэтому процент сокращения претензий или просрочек не обещаем. Помощник видит только разрешённые каналы.",
     related: [
       { href: "/avtomatizatsiya-ucheta/kontrol-kachestva/", label: "Контроль качества" },
       { href: "/zashchita-dannyh/", label: "Защита данных" }
@@ -167,10 +176,11 @@ const pages = [
   {
     slug: "sverki-s-kontragentami",
     metaTitle: "ИИ-помощник для сверок с контрагентами — Aivel",
-    description: "Как ИИ-помощник Aivel распознаёт акты сверки, сопоставляет данные и передаёт расхождения бухгалтеру.",
+    description: "Как ИИ-помощник Aivel проводит до 95% сверок без участия человека и передаёт расхождения бухгалтеру.",
     kicker: "Сверки с контрагентами",
-    title: "Типовая сверка проходит без постоянного участия бухгалтера. Расхождение получает человек.",
+    title: "До 95% сверок проходят без участия человека.",
     lead: "ИИ-помощник распознаёт акт в разных видах файлов, создаёт его в 1С, сопоставляет данные и проводит успешный случай либо подсвечивает расхождения.",
+    heroOutcome: { value: "до 95%", label: "сверок прошли без участия человека в измеренном процессе" },
     asideTitle: "Связь с важным сигналом",
     asideText: "Расхождение, которое раньше обнаруживалось при закрытии периода, становится отдельным проверяемым сигналом для бухгалтера и руководителя.",
     task: "Убрать повторяющуюся подготовку и сопоставление актов, сохранив профессиональную проверку расхождений.",
@@ -196,10 +206,11 @@ const pages = [
       title: "Как проходит сверка с контрагентом",
       description: "Настоящая запись показывает распознавание акта, сопоставление с данными 1С и выделение расхождений для специалиста."
     },
-    resultKicker: "Подтверждённая логика",
-    resultTitle: "Функциональность подтверждена, общий процент пока не заявляем.",
-    resultLead: "В исходных материалах описан работающий процесс, но нет выборки с подтверждённой долей автоматических сверок. Такой показатель нужно измерить отдельно.",
+    resultKicker: "Результат внедрения",
+    resultTitle: "Типовые сверки закрывает ИИ-помощник. Расхождения получает человек.",
+    resultLead: "В измеренном процессе до 95% сверок проходили без участия человека.",
     metrics: [
+      { value: "до 95%", label: "сверок без участия человека" },
       { value: "2", label: "исхода: провести успешную сверку или передать расхождение человеку" }
     ],
     measure: [
@@ -208,12 +219,14 @@ const pages = [
       "Отдельно проверяем пропущенные и ошибочно найденные расхождения.",
       "Измеряем время специалиста на один акт до и после внедрения."
     ],
+    measureSummary: "Считались полученные акты, корректно созданные и проведённые сверки, ошибочные или пропущенные расхождения и время специалиста.",
     limits: [
       "Качество зависит от полноты данных обеих сторон и вида входящего акта.",
       "Найденное расхождение не объясняет его причину автоматически.",
       "Корректировки и профессиональные решения остаются у бухгалтера.",
-      "Без проверенной выборки нельзя обещать долю сверок без участия человека."
+      "Доля автоматических сверок зависит от качества входящих актов и правил конкретного контура."
     ],
+    limitSummary: "Объём и период измерения публично не раскрыты. Доля зависит от качества актов и правил контура; расхождения и корректировки остаются у бухгалтера.",
     related: [
       { href: "/avtomatizatsiya-ucheta/kontrol-kachestva/", label: "Контроль качества" },
       { href: "/1s-i-integratsii/", label: "1С и другие системы" }
@@ -226,6 +239,7 @@ const pages = [
     kicker: "Контроль качества",
     title: "ИИ-помощник не должен скрывать сомнение за уверенным ответом.",
     lead: "Каждый учётный процесс строится с проверками согласованности, оценкой неоднозначности и отдельным маршрутом для человека. Действия сохраняются для последующей проверки.",
+    heroOutcome: { value: "3 линии", label: "согласованность данных, оценка неоднозначности и человек в контуре" },
     asideTitle: "Связь с важным сигналом",
     asideText: "Сигнал ценен только тогда, когда руководитель может проверить основание, свежесть и границы вывода. Контроль качества защищает эту цепочку от ложной уверенности.",
     task: "Не допустить, чтобы высокая доля автоматизации скрыла ошибку, пропуск или неоднозначный случай.",
@@ -258,12 +272,14 @@ const pages = [
       "Проверяем контрольную выборку независимо от автоматического результата.",
       "Сохраняем причины исправлений и повторно проверяем процесс после изменения правил."
     ],
+    measureSummary: "Для контрольной выборки отдельно считаются ошибочные совпадения, пропуски и доля передачи человеку; исправления сохраняются и проверяются повторно.",
     limits: [
       "Контроль снижает риск, но не создаёт гарантии отсутствия ошибок.",
       "Качество проверки зависит от эталонной выборки и полноты исходных данных.",
       "Профессиональное суждение и ответственность не передаются системе.",
       "Показатель качества имеет смысл только вместе с объёмом, периодом и видом процесса."
     ],
+    limitSummary: "Три линии контроля снижают риск, но не гарантируют отсутствие ошибок. Качество вывода зависит от эталонной выборки и полноты исходных данных.",
     related: [
       { href: "/zashchita-dannyh/", label: "Защита данных" },
       { href: "/ogranicheniya/", label: "Границы решения" }
@@ -274,6 +290,21 @@ const pages = [
 }
 
 const { page } = Astro.props;
+
+const commonDemo = {
+  driveId: "1Brk_NX4ubphUg5mkhmDCxTWnTxE_De5A",
+  title: "Как несколько ИИ-помощников работают вместе",
+  description: "Это общий обзор совместной работы нескольких помощников. Он показывает подход Aivel, но не является отдельным доказательством именно этого процесса."
+};
+
+const hasDedicatedDemo = Boolean(page.demo);
+const demo = page.demo ?? commonDemo;
+const processSteps = [
+  { title: "Получает вход", text: page.actions[0] },
+  { title: "Понимает контекст", text: page.actions.slice(1, 3).join(" ") },
+  { title: "Доводит до результата", text: page.actions.slice(3).join(" ") },
+  { title: "Передаёт исключение", text: page.human.join(" ") }
+];
 
 const schema = {
   "@context": "https://schema.org",
@@ -287,85 +318,109 @@ const schema = {
 
 <BaseLayout title={page.metaTitle} description={page.description} schema={schema}>
   <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><a href="/kak-rabotaet/">Как это работает</a><span aria-hidden="true">/</span><a href="/avtomatizatsiya-ucheta/">Автоматизация учёта</a><span aria-hidden="true">/</span><span>{page.kicker}</span></div>
-  <header class="page-hero">
-    <div class="container page-hero-grid">
-      <div><p class="section-kicker">{page.kicker}</p><h1>{page.title}</h1><p class="lead">{page.lead}</p></div>
-      <aside class="page-hero-aside"><strong>{page.asideTitle}</strong><p>{page.asideText}</p></aside>
+  <header class="page-hero assistant-hero">
+    <div class="container assistant-hero-grid">
+      <div>
+        <p class="section-kicker">ИИ-помощник · {page.kicker}</p>
+        <h1>{page.title}</h1>
+        <p class="lead">{page.lead}</p>
+      </div>
+      <aside class="assistant-hero-proof" aria-label="Главный результат и связь с важным сигналом">
+        <div class="hero-outcome">
+          <span>Результат процесса</span>
+          <strong>{page.heroOutcome.value}</strong>
+          <p>{page.heroOutcome.label}</p>
+        </div>
+        <div class="hero-signal-link">
+          <span><Icon name="chart" size={20} /></span>
+          <div><strong>{page.asideTitle}</strong><p>{page.asideText}</p></div>
+        </div>
+      </aside>
     </div>
   </header>
 
-  <section class="section" aria-labelledby="task-title">
-    <div class="container process-layout">
-      <div class="process-intro"><p class="section-kicker">Задача</p><h2 id="task-title">Что должен изменить процесс</h2><p>{page.task}</p></div>
-      <div class="process-actions">
-        <h3>Что делает ИИ-помощник</h3>
-        <ol>
-          {page.actions.map((action, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><p>{action}</p></li>)}
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="human-title">
+  <section class="section section-warm assistant-operation" aria-labelledby="operation-title">
     <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Разделение ответственности</p><h2 id="human-title">Что остаётся человеку</h2></div><p>Автоматизация не забирает профессиональное суждение и не маскирует исключение под завершённую операцию.</p></div>
-      <div class="human-grid">
-        {page.human.map((item) => <article><span><Icon name="person" size={24} /></span><p>{item}</p></article>)}
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="section-kicker">Операция целиком</p>
+          <h2 id="operation-title">От входящих данных — до результата и исключения человеку.</h2>
+        </div>
+        <p>{page.task}</p>
       </div>
+
+      <VideoDemo driveId={demo.driveId} title={demo.title} description={demo.description} />
+      {!hasDedicatedDemo && <p class="shared-demo-note"><Icon name="source" size={17} /> Общий ролик показывает совместную работу нескольких ИИ-помощников; отдельную операцию проверяем на демонстрации.</p>}
+
+      <ol class="assistant-flow" aria-label={`Как работает ИИ-помощник «${page.kicker}»`}>
+        {processSteps.map((step, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div><h3>{step.title}</h3><p>{step.text}</p></div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="connections-title">
-    <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Соединения</p><h2 id="connections-title">С какими системами связан процесс</h2></div><p>Точный состав зависит от периметра, прав и учётной конфигурации заказчика.</p></div>
-      <div class="connection-grid">
-        {page.connections.map((connection) => <article><span><Icon name="source" size={24} /></span><h3>{connection.title}</h3><p>{connection.text}</p></article>)}
-      </div>
-    </div>
-  </section>
-
-  {"demo" in page && page.demo && (
-    <section class="section section-warm" aria-labelledby="demo-title">
-      <div class="container">
-        <div class="section-heading"><div><p class="section-kicker">Настоящая работа</p><h2 id="demo-title">Посмотрите процесс на экране.</h2></div><p>Ролик показывает саму последовательность действий. Показатели результата и ограничения приведены отдельно ниже.</p></div>
-        <VideoDemo driveId={page.demo.driveId} title={page.demo.title} description={page.demo.description} />
-      </div>
-    </section>
-  )}
-
-  <section class="section section-dark" aria-labelledby="result-title">
+  <section class="section section-dark assistant-result" aria-labelledby="result-title">
     <div class="container result-layout">
-      <div><p class="section-kicker section-kicker-light">{page.resultKicker}</p><h2 id="result-title">{page.resultTitle}</h2><p>{page.resultLead}</p></div>
+      <div>
+        <p class="section-kicker section-kicker-light">{page.resultKicker}</p>
+        <h2 id="result-title">{page.resultTitle}</h2>
+        <p>{page.resultLead}</p>
+      </div>
       <div class="metric-grid">
         {page.metrics.map((metric) => <article><strong>{metric.value}</strong><p>{metric.label}</p></article>)}
       </div>
     </div>
+    <div class="container result-proof-strip">
+      <article><span><Icon name="check" size={19} /></span><div><strong>Как проверяли</strong><p>{page.measureSummary}</p></div></article>
+      <article><span><Icon name="shield" size={19} /></span><div><strong>Граница вывода</strong><p>{page.limitSummary}</p></div></article>
+    </div>
   </section>
 
-  <section class="section" aria-labelledby="measure-title">
-    <div class="container evidence-grid">
-      <div class="evidence-block">
-        <p class="section-kicker">Как измерять</p>
-        <h2 id="measure-title">Показатель должен выдержать проверку.</h2>
-        <ul>{page.measure.map((item) => <li><Icon name="check" size={20} /><span>{item}</span></li>)}</ul>
+  <section class="section assistant-difference" aria-labelledby="difference-title">
+    <div class="container">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="section-kicker">Отличие Aivel</p>
+          <h2 id="difference-title">Не обработать фрагмент. Завершить разрешённый процесс.</h2>
+        </div>
+        <p>Точечное решение отдаёт промежуточный результат человеку. Aivel проверяет связи, выполняет допустимое действие и сохраняет историю.</p>
       </div>
-      <aside class="limit-block">
-        <p class="section-kicker">Ограничения</p>
-        <h3>Где нельзя обещать больше</h3>
-        <ul>{page.limits.map((item) => <li>{item}</li>)}</ul>
-      </aside>
-    </div>
-  </section>
 
-  <section class="section section-warm">
-    <div class="container final-panel">
-      <div><p class="section-kicker">Проверка на вашем процессе</p><h2>Покажем работу на обезличенной выборке.</h2><p>До разговора о расширении зафиксируем исходный показатель, границу участия человека и условие успешной проверки.</p></div>
-      <button class="button button-primary" type="button" data-open-contact data-contact-topic="unknown">Запросить демонстрацию</button>
+      <div class="assistant-comparison">
+        <article class="point-solution">
+          <span class="comparison-label">Точечное решение</span>
+          <h3>Закрывает один шаг.</h3>
+          <ul>
+            <li><Icon name="document" size={19} /> Получает отдельный файл или запись</li>
+            <li><Icon name="source" size={19} /> Возвращает поля, метку или черновик</li>
+            <li><Icon name="person" size={19} /> Остальной путь завершает человек</li>
+          </ul>
+        </article>
+        <article class="aivel-solution">
+          <span class="comparison-label">Aivel</span>
+          <h3>Доводит операцию до результата.</h3>
+          <div class="connection-list">
+            {page.connections.map((connection) => (
+              <div><Icon name="check" size={18} /><span><strong>{connection.title}</strong>{connection.text}</span></div>
+            ))}
+          </div>
+          <p><Icon name="source" size={18} /> Источник, проверки, действие и передача исключения остаются в аудиторском следе.</p>
+        </article>
+      </div>
+
+      <div class="final-panel assistant-final">
+        <div><p class="section-kicker">Проверка на вашем процессе</p><h2>Покажем работу на обезличенной выборке.</h2><p>Зафиксируем исходный показатель, границу участия человека и условие успешной проверки.</p></div>
+        <button class="button button-primary" type="button" data-open-contact data-contact-topic="unknown">Запросить демонстрацию</button>
+      </div>
+      <nav class="related-links" aria-label="Связанные страницы">
+        <a href="/avtomatizatsiya-ucheta/">Все ИИ-помощники <Icon name="arrow" size={18} /></a>
+        {page.related.map((item) => <a href={item.href}>{item.label} <Icon name="arrow" size={18} /></a>)}
+      </nav>
     </div>
-    <nav class="container related-links" aria-label="Связанные страницы">
-      <a href="/avtomatizatsiya-ucheta/">Все учётные процессы <Icon name="arrow" size={18} /></a>
-      {page.related.map((item) => <a href={item.href}>{item.label} <Icon name="arrow" size={18} /></a>)}
-    </nav>
   </section>
 </BaseLayout>
 
@@ -626,10 +681,366 @@ const schema = {
     border-color: var(--color-gold);
   }
 
+  .assistant-hero {
+    padding-block: clamp(44px, 6vw, 78px);
+  }
+
+  .assistant-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.72fr);
+    gap: clamp(42px, 7vw, 96px);
+    align-items: center;
+  }
+
+  .assistant-hero h1 {
+    max-width: 900px;
+    font-size: clamp(3rem, 5vw, 4rem);
+  }
+
+  .assistant-hero-proof {
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hero-outcome {
+    padding: clamp(24px, 3vw, 36px);
+    color: white;
+    background: var(--color-ink);
+  }
+
+  .hero-outcome > span,
+  .comparison-label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-gold-soft);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .hero-outcome strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-gold-soft);
+    font-size: clamp(2.2rem, 4vw, 4.2rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .hero-outcome p {
+    margin: 0;
+    color: #d4deea;
+    line-height: 1.48;
+  }
+
+  .hero-signal-link {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    padding: 22px 24px;
+    align-items: start;
+  }
+
+  .hero-signal-link > span {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    color: var(--color-blue);
+    background: var(--color-blue-pale);
+    border-radius: 12px;
+    place-items: center;
+  }
+
+  .hero-signal-link strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .hero-signal-link p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .compact-heading {
+    margin-bottom: 22px;
+  }
+
+  .assistant-operation,
+  .assistant-result,
+  .assistant-difference {
+    padding-block: clamp(44px, 4vw, 56px);
+  }
+
+  .assistant-operation .section-heading h2,
+  .assistant-difference .section-heading h2 {
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  }
+
+  .assistant-operation :global(.video-demo-copy) {
+    padding: clamp(22px, 3vw, 32px);
+  }
+
+  .assistant-operation :global(.video-demo-copy h3) {
+    font-size: clamp(1.55rem, 2.5vw, 2.4rem);
+  }
+
+  .shared-demo-note {
+    display: flex;
+    max-width: 900px;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 14px 0 0;
+    color: var(--color-muted);
+    font-size: 0.78rem;
+  }
+
+  .shared-demo-note svg {
+    flex: 0 0 auto;
+    color: var(--color-blue);
+  }
+
+  .assistant-flow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    margin: 16px 0 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    list-style: none;
+  }
+
+  .assistant-flow li {
+    min-width: 0;
+    padding: 17px;
+    background: white;
+  }
+
+  .assistant-flow li > span {
+    display: block;
+    margin-bottom: 13px;
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 750;
+  }
+
+  .assistant-flow h3 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .assistant-flow p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    line-height: 1.46;
+  }
+
+  .result-proof-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: clamp(24px, 3vw, 34px);
+  }
+
+  .result-proof-strip article {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    padding: 18px;
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-md);
+  }
+
+  .result-proof-strip article > span {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    color: var(--color-gold-soft);
+    border: 1px solid rgb(245 201 121 / 0.3);
+    border-radius: 11px;
+    place-items: center;
+  }
+
+  .result-proof-strip strong {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+  }
+
+  .result-proof-strip p {
+    margin: 0;
+    color: #c3cfde;
+    font-size: 0.8rem;
+    line-height: 1.48;
+  }
+
+  .assistant-difference {
+    background: var(--color-paper);
+  }
+
+  .assistant-comparison {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 14px;
+  }
+
+  .assistant-comparison > article {
+    padding: clamp(22px, 2.5vw, 28px);
+    border-radius: var(--radius-lg);
+  }
+
+  .point-solution {
+    background: white;
+    border: 1px solid var(--color-border);
+  }
+
+  .point-solution .comparison-label {
+    color: var(--color-muted);
+  }
+
+  .aivel-solution {
+    color: white;
+    background: var(--color-ink);
+    border: 1px solid var(--color-ink);
+  }
+
+  .aivel-solution h3 {
+    color: white;
+  }
+
+  .assistant-comparison h3 {
+    margin-bottom: 16px;
+  }
+
+  .point-solution ul,
+  .connection-list {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .point-solution li,
+  .connection-list > div {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--color-border);
+    line-height: 1.45;
+  }
+
+  .point-solution li svg {
+    color: var(--color-muted);
+  }
+
+  .connection-list > div {
+    border-color: rgb(255 255 255 / 0.14);
+  }
+
+  .connection-list svg {
+    margin-top: 3px;
+    color: var(--color-gold-soft);
+  }
+
+  .connection-list span,
+  .connection-list strong {
+    display: block;
+  }
+
+  .connection-list span {
+    color: #c3cfde;
+    font-size: 0.85rem;
+  }
+
+  .connection-list strong {
+    margin-bottom: 3px;
+    color: white;
+  }
+
+  .aivel-solution > p {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding-top: 14px;
+    margin: 14px 0 0;
+    color: #c3cfde;
+    border-top: 1px solid rgb(255 255 255 / 0.14);
+    font-size: 0.82rem;
+  }
+
+  .aivel-solution > p svg {
+    flex: 0 0 auto;
+    color: var(--color-gold-soft);
+  }
+
+  .assistant-final {
+    padding: clamp(22px, 2.5vw, 28px);
+    margin-top: clamp(24px, 3vw, 30px);
+  }
+
+  .assistant-final h2 {
+    margin-bottom: 10px;
+    font-size: clamp(1.9rem, 2.8vw, 2.3rem);
+  }
+
+  .assistant-final p:last-child {
+    font-size: 0.92rem;
+  }
+
+  .assistant-difference .related-links {
+    margin-top: 16px;
+  }
+
+  .assistant-result .result-layout {
+    gap: clamp(34px, 6vw, 76px);
+  }
+
+  .assistant-result .result-layout h2 {
+    font-size: clamp(2.3rem, 4vw, 3.8rem);
+  }
+
+  .assistant-result .metric-grid article {
+    min-height: 140px;
+    padding: 20px;
+  }
+
+  .assistant-result .metric-grid strong {
+    font-size: clamp(2.35rem, 4vw, 3.8rem);
+  }
+
   @media (max-width: 900px) {
     .process-layout,
     .result-layout,
     .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .assistant-hero-grid,
+    .assistant-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .assistant-hero-proof {
+      max-width: 720px;
+    }
+
+    .assistant-flow {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-proof-strip {
       grid-template-columns: 1fr;
     }
 
@@ -664,6 +1075,20 @@ const schema = {
 
     .final-panel .button {
       width: 100%;
+    }
+
+    .assistant-flow {
+      grid-template-columns: 1fr;
+    }
+
+    .assistant-flow li > span {
+      margin-bottom: 14px;
+    }
+
+    .hero-signal-link,
+    .result-proof-strip article {
+      grid-template-columns: 36px 1fr;
+      padding: 18px;
     }
   }
 

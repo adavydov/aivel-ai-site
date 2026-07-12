@@ -18,7 +18,7 @@ const { slug, title, description, categoryLabel, compact = false } = Astro.props
     <h3><a href={`/voprosy/${slug}/`}>{title}</a></h3>
     {!compact && <p>{description}</p>}
   </div>
-  <a class="card-arrow" href={`/voprosy/${slug}/`} aria-label={`Открыть вопрос: ${title}`}>
+  <a class="card-arrow" href={`/voprosy/${slug}/`} aria-label={`Открыть разбор: ${title}`}>
     <Icon name="arrow" size={22} />
   </a>
 </article>

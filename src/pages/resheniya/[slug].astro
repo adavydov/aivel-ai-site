@@ -16,7 +16,7 @@ const groupQuestions = solution.questionSlugs
   .filter((question): question is NonNullable<typeof question> => question !== undefined);
 ---
 
-<BaseLayout title={`${solution.title} — вопросы и решения Aivel`} description={solution.description}>
+<BaseLayout title={`${solution.title} — важные сигналы Aivel`} description={solution.description}>
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
     <a href="/">Главная</a><span aria-hidden="true">/</span><a href="/vazhnoe/">Важное</a><span aria-hidden="true">/</span><span>{solution.title}</span>
   </div>
@@ -27,15 +27,15 @@ const groupQuestions = solution.questionSlugs
         <h1>{solution.title}</h1>
         <p class="lead">{solution.description}</p>
       </div>
-      <aside class="page-hero-aside"><strong>От изменения к действию</strong><p>Aivel помогает заметить событие, а каждый следующий вопрос показывает данные, источник и границу профессионального суждения.</p></aside>
+      <aside class="page-hero-aside"><strong>От изменения к действию</strong><p>Aivel сам замечает согласованное событие, а короткое сообщение показывает основание и границу профессионального суждения.</p></aside>
     </div>
   </header>
 
   <section class="section">
     <div class="container">
       <div class="section-heading">
-        <div><p class="section-kicker">После сигнала</p><h2>Что нужно уточнить до решения</h2></div>
-        <p>Откройте вопрос, чтобы увидеть короткий ответ, паспорт данных и роль специалиста. <a href="/vazhnoe/">Примеры обнаружения</a> показывают предшествующий шаг.</p>
+        <div><p class="section-kicker">Подробные разборы</p><h2>Как проверяется каждая важная ситуация</h2></div>
+        <p>Откройте разбор, чтобы увидеть нужные данные, основание и роль специалиста. <a href="/vazhnoe/#primery-soobshcheniy">Примеры сообщений</a> показывают, что получает руководитель.</p>
       </div>
       <div class="question-grid">
         {groupQuestions.map((question) => (
@@ -54,10 +54,10 @@ const groupQuestions = solution.questionSlugs
     <div class="container content-layout">
       <div>
         <p class="section-kicker">Одна услуга вместо новой сборки</p>
-        <h2>Вопросы работают только на подготовленной учётной основе.</h2>
+        <h2>Сигналы работают только на подготовленной учётной основе.</h2>
       </div>
       <div class="prose">
-        <p>Aivel ведёт и сверяет учёт, согласует показатели и показывает свежесть источников. Поэтому следующий вопрос не требует снова собирать таблицу с нуля.</p>
+        <p>Aivel ведёт и сверяет учёт, согласует показатели и показывает свежесть источников. Поэтому каждый новый сигнал не требует снова собирать таблицу с нуля.</p>
         <p><a class="text-link" href="/buhgalterskoe-soprovozhdenie/">Как устроено сопровождение <Icon name="arrow" size={20} /></a></p>
       </div>
     </div>
@@ -65,10 +65,10 @@ const groupQuestions = solution.questionSlugs
 
   <section class="final-cta">
     <div class="container">
-      <p class="section-kicker section-kicker-light">Ваш вопрос</p>
-      <h2>Проверим, какие данные нужны именно вашему бизнесу.</h2>
+      <p class="section-kicker section-kicker-light">Ваши первые сигналы</p>
+      <h2>Проверим, какие события и данные важны именно вашему бизнесу.</h2>
       <p>Не отправляйте финансовые сведения через открытую форму. Начнём с ситуации и согласуем защищённый способ подключения.</p>
-      <button class="button button-light" type="button" data-open-contact>Обсудить вопрос</button>
+      <button class="button button-light" type="button" data-open-contact data-contact-topic="client">Настроить первые сигналы</button>
     </div>
   </section>
 </BaseLayout>

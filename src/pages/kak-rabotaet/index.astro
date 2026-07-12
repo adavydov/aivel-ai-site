@@ -1,340 +1,367 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Icon from "../../components/Icon.astro";
 import VideoDemo from "../../components/VideoDemo.astro";
-import { trustSteps } from "../../data/site";
 
-const accountingAreas = [
-  { href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/", label: "ИИ-помощник по первичным документам", proof: "80% потока", text: "Распознаёт документ, создаёт запись в 1С и передаёт человеку неоднозначные случаи." },
-  { href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/", label: "ИИ-помощник по банковским операциям", proof: "98% точности", text: "Сопоставляет платежи с договорами и аналитикой, разделяет сложные платежи." },
-  { href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/", label: "ИИ-помощник по запросам", proof: "Запрос → задача", text: "Направляет запрос подразделения или заказчика исполнителю, задаёт срок и контролирует результат." },
-  { href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/", label: "ИИ-помощник по сверкам", proof: "Только исключения", text: "Закрывает совпадения по правилам и поднимает расхождения специалисту." }
+const operationSteps = [
+  { number: "01", title: "Получить задачу", text: "Документ, платёж или запрос поступает из разрешённого источника." },
+  { number: "02", title: "Выполнить проверки", text: "ИИ сверяет данные, правила и обязательные поля до совершения действия." },
+  { number: "03", title: "Завершить или передать", text: "Типовая операция выполняется автоматически. Расхождение уходит специалисту вместе с контекстом." },
+  { number: "04", title: "Сохранить результат", text: "Запись или документ создаётся в 1С, а каждый шаг остаётся в журнале." }
+];
+
+const controlAreas = [
+  {
+    label: "Разрешённая роль",
+    title: "ИИ не может выйти за границы операции.",
+    text: "Для каждого помощника заранее задаются источники, доступные поля, допустимые действия и условия остановки."
+  },
+  {
+    label: "Исключение человеку",
+    title: "Неоднозначность не маскируется под ответ.",
+    text: "Неполные данные, расхождение или необходимость профессионального суждения создают задачу специалисту."
+  },
+  {
+    label: "Точность",
+    title: "Свободный ответ не заменяет проверку.",
+    text: "Результат проходит правила полноты, справочники и контрольные соотношения. Ошибка проверки блокирует завершение операции."
+  },
+  {
+    label: "Безопасность",
+    title: "Данные остаются в согласованном периметре.",
+    text: "Размещение — в изолированном российском контуре или внутри контура компании. Права выдаются отдельно людям и ИИ."
+  }
+];
+
+const endToEndSteps = [
+  "Забрать документ или данные из источника",
+  "Распознать и определить операцию",
+  "Проверить реквизиты, правила и связи",
+  "Создать запись или документ в 1С",
+  "Передать исключение специалисту",
+  "Сохранить основание и историю действий"
 ];
 ---
 
-<BaseLayout title="Как работает Aivel: четыре ИИ-помощника и своевременные сигналы" description="Четыре ИИ-помощника поддерживают учётные данные, Aivel замечает важное изменение и показывает проверяемое действие.">
-  <div class="container breadcrumbs" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Как работает</span></div>
+<BaseLayout
+  title="Как работает Aivel: операция, контроль и аудиторский след"
+  description="Aivel выполняет учётную операцию от получения данных до записи в 1С, передаёт исключения специалисту и сохраняет проверяемую историю действий."
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Как работает</span>
+  </div>
+
   <header class="page-hero mechanics-hero">
-    <div class="container page-hero-grid">
-      <div><p class="section-kicker">Механика продукта</p><h1>ИИ-помощники выполняют рутину. Руководитель видит важное.</h1><p class="lead">Aivel соединяет повторяющиеся учётные операции, правила важности и проверяемый ответ в одну цепочку.</p></div>
-      <aside class="page-hero-aside mechanics-aside"><strong>Коротко</strong><div><span>1</span>ИИ-помощники обновляют данные</div><div><span>2</span>Aivel замечает изменение</div><div><span>3</span>Человек принимает решение</div></aside>
+    <div class="container mechanics-intro">
+      <p class="section-kicker">Механика продукта</p>
+      <h1>ИИ выполняет операцию. Человек подключается к исключению.</h1>
+      <p class="lead">Aivel проходит разрешённый процесс по заданным правилам, фиксирует каждый шаг и не завершает операцию, если данных или уверенности недостаточно.</p>
     </div>
   </header>
 
-  <section class="section section-dark" aria-labelledby="accounting-layer-title">
-    <div class="container">
-      <div class="section-heading mechanism-heading"><div><p class="section-kicker section-kicker-light">Первый слой</p><h2 id="accounting-layer-title">Четыре работающих ИИ-помощника.</h2></div><p>Каждый закрывает ограниченный процесс и может внедряться отдельно. Цифры относятся к измеренным потокам реализованных проектов.</p></div>
-      <div class="mechanism-grid">
-        {accountingAreas.map((area, index) => (
-          <a class="mechanism-card" href={area.href}>
-            <span class="mechanism-number">0{index + 1}</span>
-            <div><h3>{area.label}</h3><strong>{area.proof}</strong><p>{area.text}</p></div>
-            <Icon name="arrow" size={22} />
-          </a>
-        ))}
+  <div class="mechanics-content">
+    <section class="section video-section" aria-labelledby="platform-video-title">
+      <div class="container">
+        <div class="section-heading video-heading">
+          <div>
+            <p class="section-kicker">Операция в продукте</p>
+            <h2 id="platform-video-title">От задачи до результата и проверки человеком.</h2>
+          </div>
+          <p>На демонстрации видны действия ИИ, условия остановки и передача неоднозначного случая специалисту.</p>
+        </div>
+        <VideoDemo
+          driveId="13shhsfSNrURD23l5y-2YZDhtITJzx_he"
+          title="Как устроена платформа Aivel"
+          description="Задача поступает в рабочий контур, ИИ-помощник выполняет разрешённые действия, сохраняет историю и передаёт специалисту неоднозначные случаи."
+        />
+        <ol class="operation-flow" aria-label="Этапы выполнения операции">
+          {operationSteps.map((step) => (
+            <li>
+              <span>{step.number}</span>
+              <div><h3>{step.title}</h3><p>{step.text}</p></div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <div class="mechanism-action"><a class="button button-light" href="/avtomatizatsiya-ucheta/">Все процессы и демонстрации</a><a class="text-link text-link-light" href="/rezultaty/">Как измерены результаты <Icon name="arrow" size={19} /></a></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" aria-labelledby="signal-chain-title">
-    <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Второй слой</p><h2 id="signal-chain-title">Из данных получается своевременный сигнал.</h2></div><p>Руководителю не нужно читать все операции. Aivel показывает только изменение, которое пересекло согласованную границу или выбилось из обычного.</p></div>
-      <div class="working-chain">
-        <article><span>01</span><h3>Источники обновились</h3><p>1С, банк, документы, обязательства и обращения в выбранном периметре.</p></article>
-        <article><span>02</span><h3>Сработала проверка</h3><p>Правило, прогноз или необычное отклонение связывает изменение с решением.</p></article>
-        <article><span>03</span><h3>Появился сигнал</h3><p>Что произошло, почему важно, на чём основано и что сделать сейчас.</p></article>
+    <section class="section section-warm" aria-labelledby="control-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Контроль по устройству</p>
+            <h2 id="control-title">Роли, проверки и безопасность встроены в процесс.</h2>
+          </div>
+          <p>ИИ не принимает произвольных решений: ему доступны только согласованные данные и действия.</p>
+        </div>
+        <div class="control-grid">
+          {controlAreas.map((area) => (
+            <article class="control-card">
+              <span>{area.label}</span>
+              <h3>{area.title}</h3>
+              <p>{area.text}</p>
+            </article>
+          ))}
+        </div>
+        <div class="audit-trail" aria-labelledby="audit-title">
+          <div>
+            <p class="section-kicker">Аудиторский след</p>
+            <h3 id="audit-title">Любой результат можно восстановить по шагам.</h3>
+          </div>
+          <p>Журнал хранит исходные данные, выполненные проверки, изменения, исполнителя, время и итоговый статус. Специалист видит не только исключение, но и причину его появления.</p>
+        </div>
       </div>
-      <div class="demo-entry"><div><p class="section-kicker">Попробовать</p><h3>Задайте вопрос на учебных данных.</h3><p>Демо покажет сигнал, основание, ограничение и следующий шаг.</p></div><button class="button button-primary" type="button" data-open-demo>Открыть демо продукта</button></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section section-warm" aria-labelledby="trust-title">
-    <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Третий слой</p><h2 id="trust-title">Пять проверок делают ответ пригодным для решения.</h2></div><p>Подробности раскрываются по запросу и не перегружают сам сигнал.</p></div>
-      <div class="trust-flow signal-flow">
-        {trustSteps.map((step) => <article class="trust-step"><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}
+    <section class="section section-dark comparison-section" aria-labelledby="comparison-title">
+      <div class="container">
+        <div class="section-heading comparison-heading">
+          <div>
+            <p class="section-kicker section-kicker-light">Не только распознавание</p>
+            <h2 id="comparison-title">Обычное распознавание закрывает фрагмент. Aivel — процесс целиком.</h2>
+          </div>
+          <p>Результат Aivel — не набор извлечённых полей, а завершённая операция или подготовленное исключение для специалиста.</p>
+        </div>
+        <div class="comparison-grid">
+          <article class="comparison-card comparison-card-muted">
+            <span class="comparison-label">Распознавание документов</span>
+            <h3>Из файла — в набор полей.</h3>
+            <ol>
+              <li><span>01</span>Получить отдельный файл</li>
+              <li><span>02</span>Распознать реквизиты</li>
+              <li><span>03</span>Передать результат человеку</li>
+            </ol>
+            <p>Проверка, ввод в учётную систему и разбор расхождений остаются отдельными ручными этапами.</p>
+          </article>
+          <article class="comparison-card comparison-card-aivel">
+            <span class="comparison-label">Aivel</span>
+            <h3>От источника — до результата в 1С.</h3>
+            <ol>
+              {endToEndSteps.map((step, index) => (
+                <li><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>
+              ))}
+            </ol>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="section safety-entry-section" aria-labelledby="safety-entry-title">
-    <div class="container safety-entry">
-      <div>
-        <p class="section-kicker">Безопасность и точность</p>
-        <h2 id="safety-entry-title">ИИ действует только в разрешённой роли.</h2>
-        <p>Контур размещения, источники, права и допустимые действия согласуются до запуска. Запрос пользователя не может дать ИИ-помощнику доступ, которого нет у его роли.</p>
-        <a class="button button-primary" href="/zashchita-dannyh/">Как защищены данные и ответы <Icon name="arrow" size={20} /></a>
-      </div>
-      <div class="safety-entry-points">
-        <div><strong>Ваш контур или изолированное облако</strong><span>Вариант размещения выбирается для проекта.</span></div>
-        <div><strong>Отдельные роли для людей и ИИ</strong><span>Каждому доступны только нужные источники и действия.</span></div>
-        <div><strong>Три линии контроля качества</strong><span>Правила, оценка неоднозначности, человек и журнал действий.</span></div>
-        <div><strong>1С и банки — по регламенту</strong><span>Юридические лица, базы, расписание и права задаются заранее.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="platform-video-title">
-    <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Настоящий продукт</p><h2 id="platform-video-title">Посмотрите, как Aivel выполняет операции и передаёт исключения человеку.</h2></div></div>
-      <VideoDemo driveId="13shhsfSNrURD23l5y-2YZDhtITJzx_he" title="Как устроена платформа Aivel" description="Задача поступает в рабочий контур, ИИ-помощник выполняет разрешённые действия, сохраняет историю и передаёт специалисту неоднозначные случаи." />
-      <p style="margin-top: 22px;"><a class="text-link" href="https://vkvideo.ru/video-227572578_456239162?list=ln-xzD9oHw5kaCSDL00dW&t=2m52s" target="_blank" rel="noopener">Большой разбор продукта во VK Видео — с 2:52 <Icon name="arrow" size={18} /></a></p>
-    </div>
-  </section>
-
-  <section class="section section-dark" aria-labelledby="details-title">
-    <div class="container">
-      <div class="section-heading details-heading"><div><p class="section-kicker section-kicker-light">Проверить устройство</p><h2 id="details-title">Данные, права, источники и ограничения — открыто.</h2></div><p>Отдельные страницы дают людям и ИИ-системам устойчивые адреса для проверки фактов о продукте.</p></div>
-      <div class="details-grid">
-        <a href="/kak-formiruetsya-otvet/"><span>Ответ</span><strong>Как формируется вывод</strong><Icon name="arrow" size={20} /></a>
-        <a href="/dannye-i-istochniki/"><span>Основание</span><strong>Данные и источники</strong><Icon name="arrow" size={20} /></a>
-        <a href="/1s-i-integratsii/"><span>Связи</span><strong>1С и другие системы</strong><Icon name="arrow" size={20} /></a>
-        <a href="/zashchita-dannyh/"><span>Контроль</span><strong>Защита данных</strong><Icon name="arrow" size={20} /></a>
-        <a href="/ogranicheniya/"><span>Границы</span><strong>Что Aivel не обещает</strong><Icon name="arrow" size={20} /></a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
   .mechanics-hero {
-    padding-block: clamp(50px, 6vw, 82px);
+    padding-block: clamp(42px, 5vw, 68px) clamp(24px, 3vw, 38px);
+  }
+
+  .mechanics-intro {
+    max-width: 1000px;
   }
 
   .mechanics-hero h1 {
-    font-size: clamp(2.9rem, 5vw, 4.8rem);
+    max-width: 970px;
+    font-size: clamp(2.75rem, 5.4vw, 5.2rem);
   }
 
-  .mechanics-aside {
+  .mechanics-hero .lead {
+    max-width: 800px;
+  }
+
+  .video-section {
+    padding-top: clamp(24px, 4vw, 54px);
+  }
+
+  .video-heading {
+    align-items: end;
+  }
+
+  .operation-flow {
     display: grid;
-    gap: 10px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    margin: 20px 0 0;
+    list-style: none;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
 
-  .mechanics-aside > div {
+  .operation-flow li {
     display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 8px;
-    align-items: center;
-    padding: 10px 0;
-    border-top: 1px solid var(--color-border);
-    font-size: 0.88rem;
-    font-weight: 650;
+    min-height: 200px;
+    align-content: space-between;
+    padding: 24px;
+    background: var(--color-surface);
   }
 
-  .mechanics-aside span,
-  .mechanism-number {
+  .operation-flow > li > span {
     color: var(--color-gold);
-    font-size: 0.74rem;
+    font-size: 0.76rem;
+    font-weight: 750;
   }
 
-  .mechanism-heading h2,
-  .mechanism-heading > p,
-  .details-heading h2 {
-    color: white;
+  .operation-flow h3 {
+    margin: 32px 0 8px;
+    font-size: 1.08rem;
   }
 
-  .mechanism-heading > p,
-  .details-heading > p {
-    color: #c3cfde;
+  .operation-flow p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
   }
 
-  .mechanism-grid {
+  .control-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 
-  .mechanism-card {
-    display: grid;
-    min-height: 215px;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px;
-    align-items: start;
+  .control-card {
+    min-height: 220px;
     padding: 26px;
-    color: white;
-    background: rgb(255 255 255 / 0.055);
-    border: 1px solid rgb(255 255 255 / 0.15);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    text-decoration: none;
+    box-shadow: var(--shadow-sm);
   }
 
-  .mechanism-card:hover {
+  .control-card > span,
+  .comparison-label {
+    color: var(--color-gold);
+    font-size: 0.73rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .control-card h3 {
+    max-width: 520px;
+    margin: 34px 0 10px;
+  }
+
+  .control-card p {
+    max-width: 620px;
+    margin: 0;
+    color: var(--color-muted);
+  }
+
+  .audit-trail {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(28px, 7vw, 90px);
+    align-items: end;
+    padding: 28px;
+    margin-top: 14px;
+    background: var(--color-ink);
+    border-radius: var(--radius-md);
+  }
+
+  .audit-trail h3,
+  .audit-trail p {
+    color: white;
+  }
+
+  .audit-trail h3,
+  .audit-trail p {
+    margin-bottom: 0;
+  }
+
+  .audit-trail > p {
+    color: #c3cfde;
+  }
+
+  .comparison-heading h2,
+  .comparison-heading > p {
+    color: white;
+  }
+
+  .comparison-heading > p {
+    color: #c3cfde;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 14px;
+  }
+
+  .comparison-card {
+    padding: clamp(24px, 3vw, 34px);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--radius-md);
+  }
+
+  .comparison-card-muted {
+    background: rgb(255 255 255 / 0.045);
+  }
+
+  .comparison-card-aivel {
     background: rgb(255 255 255 / 0.1);
     border-color: var(--color-gold-soft);
   }
 
-  .mechanism-card h3 {
-    margin-bottom: 10px;
+  .comparison-card h3 {
+    margin: 26px 0;
     color: white;
   }
 
-  .mechanism-card strong {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--color-gold-soft);
-    font-size: 1.35rem;
-  }
-
-  .mechanism-card p {
-    margin-bottom: 0;
-    color: #c3cfde;
-  }
-
-  .mechanism-action {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    align-items: center;
-    margin-top: 28px;
-  }
-
-  .text-link-light {
-    color: white;
-  }
-
-  .working-chain {
+  .comparison-card ol {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  .working-chain article {
-    min-height: 230px;
-    padding: 26px;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .safety-entry-section {
-    background: var(--color-paper);
-  }
-
-  .safety-entry {
+  .comparison-card li {
     display: grid;
-    grid-template-columns: minmax(0, 0.82fr) minmax(460px, 1.18fr);
-    gap: clamp(42px, 8vw, 96px);
-    align-items: center;
-  }
-
-  .safety-entry > div:first-child p:not(.section-kicker) {
-    max-width: 650px;
-    font-size: 1.06rem;
-  }
-
-  .safety-entry-points {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .safety-entry-points > div {
-    min-height: 155px;
-    padding: 22px;
-    background: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .safety-entry-points strong,
-  .safety-entry-points span {
-    display: block;
-  }
-
-  .safety-entry-points span {
-    margin-top: 10px;
-    color: var(--color-muted);
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
-  .working-chain span {
-    display: block;
-    margin-bottom: 46px;
-    color: var(--color-gold);
-    font-size: 0.76rem;
-  }
-
-  .demo-entry {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 26px;
-    margin-top: 14px;
-    background: var(--color-gold-pale);
-    border: 1px solid #ecd49d;
-    border-radius: var(--radius-md);
-  }
-
-  .demo-entry h3,
-  .demo-entry p:last-child {
-    margin-bottom: 0;
-  }
-
-  .details-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 34px 1fr;
     gap: 10px;
-  }
-
-  .details-grid a {
-    display: flex;
-    min-height: 180px;
-    flex-direction: column;
-    padding: 20px;
+    padding: 13px 0;
     color: white;
-    background: rgb(255 255 255 / 0.055);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    border-radius: var(--radius-md);
-    text-decoration: none;
+    border-top: 1px solid rgb(255 255 255 / 0.13);
   }
 
-  .details-grid span {
+  .comparison-card li span {
     color: var(--color-gold-soft);
     font-size: 0.74rem;
   }
 
-  .details-grid strong {
-    margin-top: 18px;
-  }
-
-  .details-grid svg {
-    margin-top: auto;
+  .comparison-card > p {
+    margin: 24px 0 0;
+    color: #aebdce;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 900px) {
-    .safety-entry {
-      grid-template-columns: 1fr;
+    .operation-flow {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .details-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .comparison-grid {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 700px) {
-    .mechanism-grid,
-    .working-chain,
-    .safety-entry-points,
-    .details-grid {
+    .mechanics-hero h1 {
+      font-size: clamp(2.55rem, 13vw, 4rem);
+    }
+
+    .operation-flow,
+    .control-grid,
+    .audit-trail {
       grid-template-columns: 1fr;
     }
 
-    .mechanism-card {
-      grid-template-columns: auto 1fr;
+    .operation-flow li {
+      min-height: 0;
     }
 
-    .mechanism-card > svg {
-      display: none;
+    .control-card {
+      min-height: 0;
     }
 
-    .demo-entry {
-      align-items: stretch;
-      flex-direction: column;
-    }
   }
 </style>

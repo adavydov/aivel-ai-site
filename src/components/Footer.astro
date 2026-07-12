@@ -9,7 +9,7 @@ const isEnterprisePage = [
   "/1s-i-integratsii/"
 ].some((prefix) => path.startsWith(prefix));
 const footerCta = isPartnerPage
-  ? { label: "Обсудить партнёрство", topic: "partner" }
+  ? null
   : isEnterprisePage
     ? { label: "Обсудить внедрение", topic: "enterprise" }
     : { label: "Обсудить свою ситуацию", topic: "client" };
@@ -21,7 +21,7 @@ const footerCta = isPartnerPage
       <p class="section-kicker section-kicker-light">Aivel</p>
       <h2>Важное — вовремя.<br />Основание — проверяемо.</h2>
     </div>
-    <button class="button button-light" type="button" data-open-contact data-contact-topic={footerCta.topic}>{footerCta.label}</button>
+    {footerCta && <button class="button button-light" type="button" data-open-contact data-contact-topic={footerCta.topic}>{footerCta.label}</button>}
   </div>
 
   <div class="container footer-grid">
@@ -34,7 +34,7 @@ const footerCta = isPartnerPage
 
     <div>
       <h3>Разделы</h3>
-      <a href="/vazhnoe/">Увидеть важное</a>
+      <a href="/">Увидеть важное</a>
       <a href="/resheniya/dengi-i-obyazatelstva/">Деньги и обязательства</a>
       <a href="/resheniya/pribyl-i-rentabelnost/">Прибыль и расходы</a>
       <a href="/resheniya/rost-naim-i-zapas-deneg/">Рост, найм и запас денег</a>
@@ -46,9 +46,8 @@ const footerCta = isPartnerPage
       <h3>Как это работает</h3>
       <a href="/kak-rabotaet/">Путь от изменения к действию</a>
       <a href="/avtomatizatsiya-ucheta/">Автоматизация учёта</a>
-      <a href="/kak-formiruetsya-otvet/">Проверяемый ответ</a>
+      <a href="/kak-formiruetsya-otvet/">Как проверяется сигнал</a>
       <a href="/dannye-i-istochniki/">Данные и источники</a>
-      <a href="/1s-i-integratsii/">1С и связи с системами</a>
       <a href="/zashchita-dannyh/">Защита данных</a>
       <a href="/ogranicheniya/">Ограничения</a>
     </div>

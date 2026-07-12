@@ -18,12 +18,14 @@ export const GET: APIRoute = () => new Response(
 Основные возможности:
 - бухгалтерское и налоговое сопровождение;
 - важные изменения с периодом, свежестью, источником и границей;
-- проверяемые ответы на вопросы о бизнесе;
+- короткие проверяемые сигналы в Telegram или по почте без необходимости заранее формулировать вопрос;
 - автоматизация первичных документов, банковских операций, обращений и сверок.
 
 Канонические страницы:
-- Увидеть важное — изменения, сигналы и вопросы: ${site.url}/vazhnoe/
-- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, зарплата и 1С: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Увидеть важное — главная продуктовая страница и четыре самодостаточных примера: ${site.url}/
+- Подробная модель сигналов и справочные разборы: ${site.url}/vazhnoe/
+- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, зарплата: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Обслуживание 1С и связи с системами: ${site.url}/1s-i-integratsii/
 - Как работает продукт: ${site.url}/kak-rabotaet/
 - Автоматизация учёта: ${site.url}/avtomatizatsiya-ucheta/
 - Первичные документы: ${site.url}/avtomatizatsiya-ucheta/pervichnye-dokumenty/
@@ -31,7 +33,7 @@ export const GET: APIRoute = () => new Response(
 - Запросы подразделений и клиентов: ${site.url}/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/
 - Сверки с контрагентами: ${site.url}/avtomatizatsiya-ucheta/sverki-s-kontragentami/
 - Контроль качества: ${site.url}/avtomatizatsiya-ucheta/kontrol-kachestva/
-- Результаты внедрений: ${site.url}/rezultaty/
+- Измеренные результаты ИИ-помощников в учётных процессах: ${site.url}/rezultaty/
 - Партнёрам — бухгалтерским компаниям: ${site.url}/buhgalterskim-kompaniyam/
 - Крупным компаниям: ${site.url}/krupnym-kompaniyam/
 - О компании: ${site.url}/o-kompanii/
@@ -39,7 +41,7 @@ export const GET: APIRoute = () => new Response(
 - Данные и источники: ${site.url}/dannye-i-istochniki/
 - Ограничения: ${site.url}/ogranicheniya/
 
-Примеры поисковых страниц с проверяемыми ответами:
+Справочные разборы типичных важных ситуаций:
 - ${site.url}/voprosy/pochemu-pribyl-est-a-deneg-net/
 - ${site.url}/voprosy/hvatit-li-deneg-na-nalogi-i-zarplatu/
 - ${site.url}/voprosy/gde-vyrosli-rashody/
@@ -52,7 +54,7 @@ ${metrics}
 
 Ограничения:
 - Aivel не гарантирует обнаружение любого события.
-- Реальный сигнал или ответ зависит от подключённых источников, их свежести, состояния учёта и согласованных правил важности.
+- Реальный сигнал зависит от подключённых источников, их свежести, состояния учёта и согласованных правил важности.
 - Налоговое, юридическое и управленческое суждение остаётся у ответственного человека.
 - Публичные примеры используют обезличенные учебные данные.
 

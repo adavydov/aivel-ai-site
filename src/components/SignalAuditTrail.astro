@@ -1,0 +1,468 @@
+---
+import Icon from "./Icon.astro";
+
+const evidenceSteps = [
+  {
+    number: "01",
+    label: "Почему это важно",
+    title: "На дату выплат денег станет меньше безопасного запаса",
+    body: "18 июля одновременно запланированы зарплата, налоги и оплаты поставщикам. Два ожидаемых поступления пока не подтверждены и в расчёт не включены.",
+  },
+  {
+    number: "02",
+    label: "Правило и граница",
+    title: "Запас денег — не меньше 1 млн ₽",
+    body: "Горизонт проверки — 14 дней. Учитываются обязательные выплаты и только подтверждённые поступления. Сигнал появляется при пересечении согласованной границы.",
+  },
+  {
+    number: "03",
+    label: "Расчёт показателя",
+    title: "620 тыс. ₽ вместо 1 млн ₽",
+    body: "4,8 млн ₽ на счетах + 2,1 млн ₽ подтверждённых поступлений − 2,7 млн ₽ налогов − 2,4 млн ₽ зарплаты − 1,18 млн ₽ поставщикам = 620 тыс. ₽.",
+  },
+  {
+    number: "04",
+    label: "Операции и источники",
+    title: "Каждая сумма ведёт к исходной записи",
+    sources: [
+      "Банк · остатки на двух счетах: 4,8 млн ₽",
+      "Поступления · подтверждено 2,1 млн ₽",
+      "Налоги и зарплата · 5,1 млн ₽ к выплате",
+      "Поставщики · обязательные платежи 1,18 млн ₽",
+    ],
+  },
+];
+---
+
+<section class="signal-audit-screen" id="audit-trail" aria-labelledby="signal-audit-title">
+  <div class="container signal-audit-layout">
+    <header class="signal-audit-heading">
+      <div>
+        <p class="section-kicker">03 · Почему можно доверять</p>
+        <h2 id="signal-audit-title">За каждым сигналом — понятный путь к данным.</h2>
+      </div>
+      <p>
+        Руководитель видит не только вывод, но и почему он появился: правило, расчёт и исходные операции.
+        Неоднозначные случаи передаются специалисту на проверку.
+      </p>
+    </header>
+
+    <article class="audit-window" aria-label="Учебный пример аудиторского следа сигнала">
+      <div class="signal-summary">
+        <div class="signal-summary-main">
+          <span class="signal-icon" aria-hidden="true"><Icon name="chart" size={22} /></span>
+          <div>
+            <span class="signal-type">Сигнал руководителю</span>
+            <h3>Запас денег снизится ниже границы 18 июля</h3>
+          </div>
+        </div>
+        <div class="signal-result">
+          <strong>−380 тыс. ₽</strong>
+          <span>до безопасной границы</span>
+        </div>
+      </div>
+
+      <ol class="evidence-chain" aria-label="Как подтверждён вывод">
+        {evidenceSteps.map((step) => (
+          <li class="evidence-step">
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">{step.number}</span>
+              <span class="step-label">{step.label}</span>
+            </div>
+            <strong class="step-title">{step.title}</strong>
+            {step.body && <p>{step.body}</p>}
+            {step.sources && (
+              <ul class="source-list">
+                {step.sources.map((source) => (
+                  <li><Icon name="source" size={15} /><span>{source}</span></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+
+      <footer class="audit-status">
+        <dl class="audit-meta">
+          <div>
+            <dt>Сформирован</dt>
+            <dd>Сегодня, 09:40 мск</dd>
+          </div>
+          <div>
+            <dt>Ответственный</dt>
+            <dd>Бухгалтер-эксперт по контуру «Деньги»</dd>
+          </div>
+          <div>
+            <dt>Статус проверки</dt>
+            <dd class="verified-status"><Icon name="check" size={16} /> Основание проверено</dd>
+          </div>
+        </dl>
+
+        <div class="verification-note">
+          <Icon name="shield" size={20} />
+          <p>
+            ИИ формулирует сообщение по связанным данным и правилам. Если основания недостаточно или данные
+            расходятся, сигнал получает статус «Нужна проверка» и передаётся человеку.
+          </p>
+        </div>
+      </footer>
+    </article>
+
+    <p class="example-note">Учебный пример на обезличенных данных</p>
+  </div>
+</section>
+
+<style>
+  .signal-audit-screen {
+    min-height: calc(100svh - var(--header-height));
+    padding-block: clamp(56px, 7vw, 88px);
+    scroll-margin-top: var(--header-height);
+    background:
+      radial-gradient(circle at 8% 90%, rgb(245 201 121 / 0.13), transparent 24rem),
+      var(--color-paper);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .signal-audit-layout {
+    display: grid;
+    gap: clamp(24px, 3vw, 36px);
+  }
+
+  .signal-audit-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.65fr);
+    gap: clamp(32px, 6vw, 88px);
+    align-items: end;
+  }
+
+  .signal-audit-heading .section-kicker {
+    margin-bottom: 12px;
+  }
+
+  .signal-audit-heading h2 {
+    max-width: 780px;
+    margin-bottom: 0;
+    font-size: clamp(2.25rem, 4.2vw, 4.15rem);
+  }
+
+  .signal-audit-heading > p {
+    max-width: 520px;
+    margin-bottom: 4px;
+    color: var(--color-text);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.55;
+  }
+
+  .audit-window {
+    overflow: hidden;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .signal-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    padding: clamp(18px, 2.2vw, 28px);
+    color: white;
+    background: var(--color-ink);
+  }
+
+  .signal-summary-main {
+    display: flex;
+    min-width: 0;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .signal-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    color: var(--color-gold-soft);
+    border: 1px solid rgb(245 201 121 / 0.38);
+    border-radius: 13px;
+    place-items: center;
+  }
+
+  .signal-type {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-gold-soft);
+    font-size: 0.75rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .signal-summary h3 {
+    margin: 0;
+    color: white;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    line-height: 1.2;
+  }
+
+  .signal-result {
+    min-width: 150px;
+    padding-left: 24px;
+    border-left: 1px solid rgb(255 255 255 / 0.18);
+    text-align: right;
+  }
+
+  .signal-result strong,
+  .signal-result span {
+    display: block;
+  }
+
+  .signal-result strong {
+    color: var(--color-gold-soft);
+    font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+  }
+
+  .signal-result span {
+    margin-top: 3px;
+    color: rgb(255 255 255 / 0.72);
+    font-size: 0.75rem;
+  }
+
+  .evidence-chain {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.95fr 1fr 1.05fr 1.3fr;
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    background: var(--color-border);
+    list-style: none;
+  }
+
+  .evidence-step {
+    min-width: 0;
+    padding: clamp(16px, 1.8vw, 24px);
+    background: var(--color-surface);
+  }
+
+  .step-heading {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .step-number {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    color: var(--color-ink);
+    background: var(--color-gold-soft);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    place-items: center;
+  }
+
+  .step-label {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 780;
+    letter-spacing: 0.055em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .step-title {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-ink-soft);
+    font-size: 0.94rem;
+    line-height: 1.38;
+  }
+
+  .evidence-step p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .source-list {
+    display: grid;
+    gap: 5px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .source-list li {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    color: var(--color-text);
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .source-list svg {
+    flex: 0 0 auto;
+    margin-top: 1px;
+    color: var(--color-blue);
+  }
+
+  .audit-status {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+    gap: 1px;
+    background: var(--color-border);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .audit-meta {
+    display: grid;
+    grid-template-columns: 0.72fr 1.25fr 0.88fr;
+    gap: 16px;
+    padding: 16px clamp(18px, 2vw, 26px);
+    margin: 0;
+    background: var(--color-paper);
+  }
+
+  .audit-meta div {
+    min-width: 0;
+  }
+
+  .audit-meta dt {
+    margin-bottom: 3px;
+    color: var(--color-muted);
+    font-size: 0.7rem;
+    font-weight: 780;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .audit-meta dd {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.78rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .verified-status {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    color: var(--color-green) !important;
+  }
+
+  .verified-status svg {
+    flex: 0 0 auto;
+  }
+
+  .verification-note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 16px clamp(18px, 2vw, 24px);
+    color: var(--color-blue);
+    background: var(--color-blue-pale);
+  }
+
+  .verification-note svg {
+    flex: 0 0 auto;
+    margin-top: 1px;
+  }
+
+  .verification-note p {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.77rem;
+    line-height: 1.46;
+  }
+
+  .example-note {
+    margin: -22px 0 0;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    text-align: right;
+  }
+
+  @media (max-width: 1020px) {
+    .signal-audit-heading {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .signal-audit-heading > p {
+      margin: 0;
+    }
+
+    .evidence-chain {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .audit-status {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .signal-audit-screen {
+      min-height: auto;
+      padding-block: 56px;
+    }
+
+    .signal-audit-screen .container {
+      width: min(100% - 32px, var(--container));
+    }
+
+    .signal-audit-heading h2 {
+      font-size: clamp(2.15rem, 11vw, 3.2rem);
+    }
+
+    .signal-summary {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .signal-result {
+      padding: 14px 0 0;
+      border-top: 1px solid rgb(255 255 255 / 0.18);
+      border-left: 0;
+      text-align: left;
+    }
+
+    .evidence-chain,
+    .audit-meta {
+      grid-template-columns: 1fr;
+    }
+
+    .evidence-step {
+      position: relative;
+      padding-left: 24px;
+      border-left: 3px solid var(--color-gold-soft);
+    }
+
+    .audit-meta {
+      gap: 12px;
+    }
+
+    .example-note {
+      margin-top: -16px;
+      text-align: left;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal-audit-screen {
+      scroll-behavior: auto;
+    }
+  }
+</style>

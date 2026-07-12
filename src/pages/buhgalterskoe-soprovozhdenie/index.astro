@@ -1,28 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
-import LocalForm from "../../components/LocalForm.astro";
+import AccountingFoundationMap from "../../components/AccountingFoundationMap.astro";
 
 const services = [
   { icon: "document", title: "Бухгалтерский учёт", text: "Первичные документы, операции, закрытие периода, обязательная отчётность и ответы на требования." },
   { icon: "shield", title: "Налоговый учёт", text: "Расчёты, декларации, календарь обязательств и контроль налоговых рисков вместе с ответственным специалистом." },
   { icon: "person", title: "Зарплата и кадры", text: "Начисления, выплаты, кадровые документы, приём, переводы, увольнения и обязательная отчётность." },
-  { icon: "chart", title: "Управленческий учёт", text: "Показатели, справочники и разрезы, которые помогают видеть деньги, прибыльность и состояние направлений." },
-  { icon: "spark", title: "1С и обмен данными", text: "Поддержка действующей базы, настройка, развитие, внешние обработки и связи с согласованными источниками." },
-  { icon: "check", title: "Экспресс-аудит", text: "Быстрая проверка состояния учёта, расхождений, незакрытых периодов и готовности данных к решениям." }
+  { icon: "chart", title: "Управленческий учёт", text: "Показатели, справочники и разрезы, которые помогают видеть деньги, прибыльность и состояние направлений." }
 ] as const;
 
-const foundationSteps = [
-  { number: "01", title: "Операции отражены", text: "Документы, банк, зарплата и обязательства попадают в учёт полностью и вовремя." },
-  { number: "02", title: "Основа проверена", text: "Периоды закрыты, остатки сходятся, ошибки и неоднозначные случаи переданы специалисту." },
-  { number: "03", title: "Появилась картина", text: "Данные можно разложить по деньгам, направлениям, клиентам, проектам и центрам ответственности." },
-  { number: "04", title: "Важное видно раньше", text: "Только после этого Aivel надёжно замечает отклонения и отвечает на вопросы руководителя." }
-] as const;
 ---
 
 <BaseLayout
-  title="Учёт как база: бухгалтерия, налоги, кадры и 1С — Aivel"
-  description="Aivel ведёт бухгалтерский, налоговый и кадровый учёт, рассчитывает зарплату, ставит управленческий учёт, поддерживает 1С и проводит экспресс-аудит."
+  title="Учёт как база: бухгалтерия, налоги, кадры и управленческие данные — Aivel"
+  description="Как Aivel собирает данные, выполняет типовые учётные операции, передаёт исключения специалистам и создаёт проверенную основу для важных сигналов."
   schema={{
     "@context": "https://schema.org",
     "@type": "Service",
@@ -36,319 +28,329 @@ const foundationSteps = [
   </div>
 
   <header class="page-hero accounting-hero">
-    <div class="container page-hero-grid">
-      <div>
+    <div class="container compact-hero">
+      <div class="hero-copy">
         <p class="section-kicker">Учёт как база</p>
-        <h1>Бухгалтерия, на которой держатся решения.</h1>
-        <p class="lead">Важное можно заметить вовремя только тогда, когда документы, обязательства, зарплата и управленческие разрезы отражены корректно. Aivel берёт эту основу на себя — от обязательного учёта до 1С.</p>
+        <h1>Чтобы увидеть важное, сначала нужен точный учёт.</h1>
+        <p class="lead">Aivel собирает данные из рабочих систем, ИИ-помощники выполняют типовые операции, а специалисты разбирают исключения. Так появляется проверенная база, на которой можно вовремя замечать изменения.</p>
         <div class="hero-actions">
-          <button class="button button-primary" type="button" data-open-contact data-contact-topic="client">Разобрать состояние учёта</button>
-          <a class="button button-secondary" href="#services">Что берём на себя</a>
+          <button class="button button-primary" type="button" data-open-contact data-contact-topic="client">Записаться на разбор учёта</button>
         </div>
       </div>
-      <aside class="page-hero-aside foundation-aside">
-        <strong>Одна основа</strong>
-        <p>Бухгалтерский и налоговый учёт, зарплата, кадры, управленческие данные и 1С не живут отдельно друг от друга.</p>
-        <div><span>Сначала</span><b>корректный учёт</b></div>
-        <div><span>Затем</span><b>важные сигналы и ответы</b></div>
-      </aside>
+      <ol class="hero-chain" aria-label="Как формируется основа">
+        <li><span>01</span><strong>Собрать</strong><small>данные из источников</small></li>
+        <li><span>02</span><strong>Проверить</strong><small>правила и исключения</small></li>
+        <li><span>03</span><strong>Отразить</strong><small>операции в учёте</small></li>
+        <li><span>04</span><strong>Увидеть</strong><small>важное изменение</small></li>
+      </ol>
     </div>
   </header>
 
-  <section class="section" id="services" aria-labelledby="services-title">
+  <section class="section foundation-screen" aria-labelledby="foundation-title">
     <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">Что берём на себя</p><h2 id="services-title">От обязательного учёта до данных для управления.</h2></div>
-        <p>Можно передать весь контур или начать с проверки и одного участка. Состав работ фиксируется после разбора текущей базы и процессов.</p>
+      <div class="foundation-intro">
+        <div><p class="section-kicker">Одна цепочка</p><h2 id="foundation-title">От исходных данных — до сигнала руководителю.</h2></div>
+        <p>Не отдельная программа поверх беспорядка, а связанный процесс: источник, операция, проверка, учётная база и только затем — важное изменение.</p>
       </div>
-      <div class="accounting-services">
-        {services.map((service) => (
-          <article>
-            <span class="service-icon"><Icon name={service.icon} size={23} /></span>
-            <h3>{service.title}</h3>
-            <p>{service.text}</p>
-          </article>
-        ))}
-      </div>
+      <AccountingFoundationMap />
     </div>
   </section>
 
-  <section class="section section-dark" aria-labelledby="foundation-title">
-    <div class="container">
-      <div class="section-heading foundation-heading">
-        <div><p class="section-kicker section-kicker-light">Как связаны учёт и важное</p><h2 id="foundation-title">Сигналу нужен твёрдый фундамент.</h2></div>
-        <p>ИИ не исправляет плохую основу уверенным текстом. Сначала данные приводятся в состояние, которому можно доверять.</p>
-      </div>
-      <div class="foundation-flow">
-        {foundationSteps.map((step) => (
-          <article><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>
-        ))}
-      </div>
-      <p class="foundation-link"><a class="text-link text-link-light" href="/vazhnoe/">Что Aivel замечает на этой основе <Icon name="arrow" size={18} /></a></p>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="audit-title">
-    <div class="container audit-layout">
-      <div>
-        <p class="section-kicker">Экспресс-аудит</p>
-        <h2 id="audit-title">Не обещаем порядок, пока не увидели исходную точку.</h2>
-        <p>Проверяем базу 1С, закрытие периодов, остатки, обязательства, аналитику, кадровый контур и обмены. После проверки понятны риски, объём восстановления и порядок перехода.</p>
-        <button class="button button-primary" type="button" data-open-contact data-contact-topic="client">Запросить экспресс-аудит</button>
-      </div>
-      <div class="audit-result">
-        <p class="card-label">На выходе</p>
-        <ul>
-          <li><Icon name="check" size={18} /><span>карта проблем и расхождений;</span></li>
-          <li><Icon name="check" size={18} /><span>оценка готовности бухгалтерского и управленческого учёта;</span></li>
-          <li><Icon name="check" size={18} /><span>план исправления с очерёдностью;</span></li>
-          <li><Icon name="check" size={18} /><span>понятный состав регулярной работы и поддержки 1С.</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="one-c-title">
-    <div class="container one-c-layout">
-      <div class="one-c-mark" aria-hidden="true">1С</div>
-      <div>
-        <p class="section-kicker">1С не остаётся за скобками</p>
-        <h2 id="one-c-title">Поддерживаем систему, в которой работает учёт.</h2>
-        <p>Проверяем текущую конфигурацию, права, аналитику и доработки. Если база подходит, сохраняем её и развиваем без ненужной замены. Внешние обработки позволяют отделять автоматизацию от типовой конфигурации и её обновлений.</p>
-        <div class="one-c-points">
-          <span>Настройка и поддержка</span><span>Доработки и обмены</span><span>Права и аналитика</span><span>Связь с банками и источниками</span>
+  <section class="section section-warm coverage-screen" aria-labelledby="services-title">
+    <div class="container coverage-layout">
+      <div class="coverage-main">
+        <p class="section-kicker">Что входит в основу</p>
+        <h2 id="services-title">Весь учёт — в одном проверяемом контуре.</h2>
+        <p class="coverage-lead">Можно передать Aivel весь контур или начать с участка, который сильнее всего мешает видеть реальную картину.</p>
+        <div class="accounting-services">
+          {services.map((service) => (
+            <article>
+              <span class="service-icon"><Icon name={service.icon} size={23} /></span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+            </article>
+          ))}
         </div>
-        <a class="text-link" href="/1s-i-integratsii/">Подробнее о 1С и подключениях <Icon name="arrow" size={18} /></a>
+      </div>
+      <div class="entry-cards">
+        <article class="entry-card audit-card">
+          <span class="entry-icon"><Icon name="check" size={22} /></span>
+          <div>
+            <p class="card-label">Первый шаг к внедрению</p>
+            <h3>Экспресс-аудит</h3>
+            <p>Проверяем базу 1С, закрытие периодов, остатки, обязательства, аналитику и обмены.</p>
+            <strong>На выходе: риски, объём восстановления и первый участок внедрения.</strong>
+          </div>
+        </article>
+        <article class="entry-card one-c-card">
+          <span class="one-c-badge" aria-hidden="true">1С</span>
+          <div>
+            <p class="card-label">Поддерживающая система</p>
+            <h3>1С на обслуживании</h3>
+            <p>Поддерживаем действующую базу, обновления, права, доработки и обмены.</p>
+            <strong>1С — не вид учёта, а система, в которой он ведётся.</strong>
+          </div>
+        </article>
+        <p class="scope-note">Состав работ фиксируем после разбора: что входит в регулярное сопровождение, что требует восстановления и какой участок можно автоматизировать первым.</p>
       </div>
     </div>
-  </section>
-
-  <section class="section section-dark" aria-labelledby="model-title">
-    <div class="container content-layout service-model">
-      <div><p class="section-kicker section-kicker-light">Состав и стоимость</p><h2 id="model-title">Вы платите за реальный контур работы.</h2></div>
-      <div class="prose">
-        <p>На стоимость влияют число юридических лиц, режимы налогообложения, объём операций, сотрудники, состояние учёта, конфигурация 1С и нужные управленческие разрезы.</p>
-        <p>После разбора мы фиксируем, что входит в регулярную работу, что требует восстановления и какие задачи можно автоматизировать.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm">
-    <div class="container"><LocalForm mode="client" title="Разберём текущий учёт и предложим понятный следующий шаг" /></div>
   </section>
 </BaseLayout>
 
 <style>
   .accounting-hero {
+    padding-block: clamp(50px, 6vw, 82px);
     background: linear-gradient(135deg, #f9f7f1 0%, #eef3f8 100%);
   }
 
-  .foundation-aside {
+  .compact-hero {
     display: grid;
-    gap: 12px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(430px, 0.8fr);
+    gap: clamp(40px, 7vw, 96px);
+    align-items: end;
   }
 
-  .foundation-aside > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 12px;
-    border-top: 1px solid var(--color-border);
+  .accounting-hero h1 {
+    max-width: 900px;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
   }
 
-  .foundation-aside span {
+  .hero-actions {
+    margin-top: 28px;
+  }
+
+  .hero-chain {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    list-style: none;
+  }
+
+  .hero-chain li {
+    display: grid;
+    min-height: 118px;
+    align-content: end;
+    padding: 18px;
+    background: white;
+  }
+
+  .hero-chain span {
+    align-self: start;
+    margin-bottom: 20px;
+    color: var(--color-gold);
+    font-size: 0.7rem;
+    font-weight: 750;
+  }
+
+  .hero-chain strong,
+  .hero-chain small {
+    display: block;
+  }
+
+  .hero-chain small {
+    margin-top: 3px;
     color: var(--color-muted);
-    font-size: 0.78rem;
   }
 
-  .foundation-aside b {
-    text-align: right;
-    font-size: 0.86rem;
+  .foundation-screen {
+    padding-block: clamp(56px, 7vw, 88px);
+  }
+
+  .foundation-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.55fr);
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 32px;
+  }
+
+  .foundation-intro h2,
+  .foundation-intro > p {
+    margin-bottom: 0;
+  }
+
+  .foundation-intro > p {
+    max-width: 520px;
+  }
+
+  .coverage-screen {
+    padding-block: clamp(56px, 7vw, 88px);
+  }
+
+  .coverage-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.65fr);
+    gap: clamp(36px, 6vw, 76px);
+    align-items: start;
+  }
+
+  .coverage-main h2 {
+    margin-bottom: 14px;
+  }
+
+  .coverage-lead {
+    max-width: 720px;
+    margin-bottom: 24px;
   }
 
   .accounting-services {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .accounting-services article {
-    min-height: 250px;
-    padding: 26px;
+    display: grid;
+    min-height: 150px;
+    grid-template-columns: 42px 1fr;
+    gap: 0 12px;
+    align-content: start;
+    padding: 18px;
     background: white;
-    border: 1px solid var(--color-border);
+    border: 1px solid #eadfcb;
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
   }
 
   .service-icon {
     display: grid;
-    width: 44px;
-    height: 44px;
-    margin-bottom: 34px;
+    width: 42px;
+    height: 42px;
+    grid-row: 1 / span 2;
     color: var(--color-blue);
     background: #edf4fa;
-    border-radius: 12px;
+    border-radius: 11px;
     place-items: center;
+  }
+
+  .accounting-services h3 {
+    margin: 2px 0 7px;
+    font-size: 1rem;
   }
 
   .accounting-services p {
+    grid-column: 2;
     margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
   }
 
-  .foundation-heading h2,
-  .foundation-heading > p {
-    color: white;
-  }
-
-  .foundation-heading > p {
-    color: #c3cfde;
-  }
-
-  .foundation-flow {
+  .entry-cards {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    overflow: hidden;
-    background: rgb(255 255 255 / 0.12);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    border-radius: var(--radius-lg);
+    gap: 12px;
   }
 
-  .foundation-flow article {
-    min-height: 250px;
-    padding: 26px;
-    background: #111d33;
-  }
-
-  .foundation-flow span {
-    display: block;
-    margin-bottom: 44px;
-    color: var(--color-gold-soft);
-    font-size: 0.76rem;
-  }
-
-  .foundation-flow h3 {
-    color: white;
-  }
-
-  .foundation-flow p {
-    margin: 0;
-    color: #aebdd0;
-  }
-
-  .foundation-link {
-    margin: 24px 0 0;
-  }
-
-  .audit-layout,
-  .one-c-layout {
+  .entry-card {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
-    gap: clamp(44px, 8vw, 100px);
-    align-items: center;
-  }
-
-  .audit-result {
-    padding: clamp(28px, 5vw, 46px);
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 14px;
+    padding: 20px;
     background: white;
     border: 1px solid #eadfcb;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
   }
 
-  .audit-result ul {
+  .entry-icon,
+  .one-c-badge {
     display: grid;
-    gap: 18px;
-    padding: 0;
-    margin: 24px 0 0;
-    list-style: none;
-  }
-
-  .audit-result li {
-    display: grid;
-    grid-template-columns: 22px 1fr;
-    gap: 10px;
-  }
-
-  .audit-result svg {
-    color: var(--color-green);
-  }
-
-  .one-c-layout {
-    grid-template-columns: minmax(260px, 0.56fr) minmax(0, 1.44fr);
-  }
-
-  .one-c-mark {
-    display: grid;
-    min-height: 330px;
-    color: #161616;
-    background: #ffd83d;
-    border-radius: var(--radius-xl);
-    font-size: clamp(5rem, 12vw, 9rem);
-    font-weight: 800;
-    letter-spacing: -0.08em;
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
     place-items: center;
   }
 
-  .one-c-points {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 24px 0;
+  .entry-icon {
+    color: var(--color-green);
+    background: var(--color-green-pale);
   }
 
-  .one-c-points span {
-    padding: 9px 12px;
-    background: var(--color-paper);
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 650;
+  .one-c-badge {
+    color: #161616;
+    background: #ffd83d;
+    font-size: 1.3rem;
+    font-weight: 800;
   }
 
-  .service-model h2,
-  .service-model p {
-    color: white;
+  .entry-card h3 {
+    margin: 3px 0 7px;
   }
 
-  .service-model p {
-    color: #c3cfde;
+  .entry-card p {
+    margin: 0;
+    font-size: 0.86rem;
+  }
+
+  .entry-card strong {
+    display: block;
+    margin-top: 10px;
+    color: var(--color-ink-soft);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .scope-note {
+    padding: 4px 4px 0;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   @media (max-width: 920px) {
-    .accounting-services {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .foundation-flow {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .audit-layout,
-    .one-c-layout {
+    .compact-hero,
+    .foundation-intro,
+    .coverage-layout {
       grid-template-columns: 1fr;
+    }
+
+    .compact-hero {
+      align-items: start;
     }
   }
 
   @media (max-width: 620px) {
-    .accounting-services,
-    .foundation-flow {
+    .hero-chain,
+    .accounting-services {
       grid-template-columns: 1fr;
     }
 
-    .accounting-services article,
-    .foundation-flow article {
+    .hero-chain li {
+      min-height: 0;
+      grid-template-columns: 34px 1fr;
+      gap: 0 10px;
+      padding: 14px;
+    }
+
+    .hero-chain span {
+      grid-row: 1 / span 2;
+      margin: 4px 0 0;
+    }
+
+    .hero-chain strong,
+    .hero-chain small {
+      grid-column: 2;
+    }
+
+    .accounting-services article {
       min-height: 0;
     }
 
-    .foundation-flow span {
-      margin-bottom: 20px;
+    .entry-card {
+      grid-template-columns: 44px minmax(0, 1fr);
+      padding: 16px;
     }
 
-    .one-c-mark {
-      min-height: 220px;
+    .entry-icon,
+    .one-c-badge {
+      width: 44px;
+      height: 44px;
     }
   }
 </style>

@@ -9,12 +9,19 @@ import {
   site
 } from "../../data/site";
 
+const assistantPages = [
+  { ...automationResults[0], href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/" },
+  { ...automationResults[1], href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/" },
+  { ...automationResults[2], href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/" },
+  { ...automationResults[3], href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/" }
+] as const;
+
 const schema = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Результаты внедрений Aivel",
-    description: "Совокупные показатели автоматизации учётных процессов и границы их применения.",
+    name: "Результаты ИИ-помощников Aivel в учётных процессах",
+    description: "Измеренные результаты ИИ-помощников в первичных документах, банковских операциях, обращениях и сверках.",
     url: `${site.url}/rezultaty/`,
     dateModified: contentReviewedAt.iso,
     inLanguage: "ru-RU"
@@ -22,38 +29,34 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Участки автоматизации Aivel",
-    itemListElement: automationResults.map((item, index) => ({
+    name: "ИИ-помощники Aivel в учётных процессах",
+    itemListElement: assistantPages.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.title,
-      description: `${item.result} ${item.scope}`
+      description: `${item.result} ${item.scope}`,
+      url: `${site.url}${item.href}`
     }))
   }
 ];
 ---
 
 <BaseLayout
-  title="Результаты внедрений Aivel"
-  description="Измеримые итоги автоматизации первичных документов, банковских операций, обращений и сверок — с методикой и ограничениями."
+  title="Результаты ИИ-помощников Aivel"
+  description="Измеренные результаты ИИ-помощников Aivel в первичных документах, банковских операциях, обращениях и сверках."
   schema={schema}
 >
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
     <a href="/">Главная</a><span aria-hidden="true">/</span><span>Результаты</span>
   </div>
 
-  <header class="page-hero">
-    <div class="container">
-      <div class="page-hero-grid results-hero-grid">
-        <div>
-          <p class="section-kicker">Реализованные внедрения</p>
-          <h1>Сразу к измеренному результату.</h1>
-          <p class="lead">Совокупные показатели проектов Aivel. Мы отделяем измеренный факт от обещания для будущего клиента.</p>
-        </div>
-        <aside class="page-hero-aside">
-          <strong>Важная граница</strong>
-          <p>Показатели относятся к разным внедрениям, не складываются в один прогноз и не гарантируют такой же эффект в другом контуре.</p>
-        </aside>
+  <header class="page-hero results-page-hero">
+    <div class="container results-hero-layout">
+      <div class="results-hero-grid">
+        <p class="section-kicker">Подтверждено во внедрениях</p>
+        <h1>Измеренные результаты ИИ‑помощников в учёте.</h1>
+        <p class="lead">Здесь — результаты базового слоя Aivel: ИИ-помощники выполняют учётные операции и передают человеку исключения.</p>
+        <p class="hero-bridge"><strong>Надёжно выполненный учёт — фундамент,</strong> на котором Aivel видит важное и формирует сигналы для руководителя.</p>
       </div>
       <div class="metric-grid hero-metric-grid">
         {implementationMetrics.map((metric) => (
@@ -66,15 +69,21 @@ const schema = [
   <section class="section section-warm" aria-labelledby="areas-title">
     <div class="container">
       <div class="section-heading">
-        <div><p class="section-kicker">Участки учёта</p><h2 id="areas-title">Что уже выполняется в общем контуре.</h2></div>
-        <p>Автоматизация закрывает типовой путь. Неполные данные, расхождения и профессиональное суждение остаются у специалиста.</p>
+        <div><p class="section-kicker">ИИ-помощники в учёте</p><h2 id="areas-title">Результат — внутри конкретного процесса.</h2></div>
+        <p>Каждая карточка показывает измеренный итог и весь путь от входящих данных до результата в учётной системе.</p>
       </div>
-      <div class="automation-grid">
-        {automationResults.map((item) => (
-          <article class="automation-card">
-            <h3>{item.title}</h3>
-            <p class="automation-result">{item.result}</p>
-            <p>{item.scope}</p>
+      <div class="automation-grid" role="list">
+        {assistantPages.map((item) => (
+          <article class="automation-card" role="listitem">
+            <a class="automation-card-link" href={item.href} aria-label={`Открыть страницу ИИ-помощника «${item.title}»`}>
+              <span class="automation-eyebrow">ИИ-помощник</span>
+              <h3>{item.title}</h3>
+              <span class="automation-label">Результат процесса</span>
+              <p class="automation-result">{item.result}</p>
+              <span class="automation-label">От входа до результата</span>
+              <p class="automation-scope">{item.scope}</p>
+              <span class="automation-cta">Подробнее о помощнике <Icon name="arrow" size={20} /></span>
+            </a>
           </article>
         ))}
       </div>
@@ -83,34 +92,12 @@ const schema = [
 
   <section class="section" aria-labelledby="clients-title">
     <div class="container">
-      <div class="section-heading"><div><p class="section-kicker">Опыт внедрений</p><h2 id="clients-title">Компании, с которыми работала команда Aivel.</h2></div><p>Бренды подтверждают опыт работы со сложными контурами, но не распределяют приведённые выше показатели по конкретным компаниям.</p></div>
+      <div class="section-heading"><div><p class="section-kicker">Опыт внедрений</p><h2 id="clients-title">Реальные компании. Реальные учётные контуры.</h2></div><p>Бренды подтверждают опыт команды; приведённые результаты не распределены по конкретным компаниям.</p></div>
       <BrandWall />
+      <p class="reference-conclusion"><strong>Что это даёт Aivel:</strong> ИИ-помощники снимают рутину с учётной функции и создают надёжную основу, чтобы показывать руководителю действительно важное.</p>
     </div>
   </section>
 
-  <section class="section section-dark" aria-labelledby="method-title">
-    <div class="container content-layout">
-      <div>
-        <p class="section-kicker section-kicker-light">Как читать цифры</p>
-        <h2 id="method-title" style="color: white;">Показатель имеет смысл только вместе с периметром.</h2>
-      </div>
-      <div class="prose method-copy">
-        <p><strong>До запуска</strong> фиксируются объём операций, ручной труд, доля исключений и требуемое качество.</p>
-        <p><strong>Во время проверки</strong> автоматизация работает на реальной выборке, а ошибки и исключения учитываются отдельно.</p>
-        <p><strong>После запуска</strong> сравниваются автоматическая доля, точность, труд на исключениях и экономический эффект.</p>
-        <p class="reviewed">Сведения проверены {contentReviewedAt.label}.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="final-cta">
-    <div class="container">
-      <p class="section-kicker section-kicker-light">Начать с измерения</p>
-      <h2>Выберем один процесс и заранее согласуем критерий успеха.</h2>
-      <p>Сначала — исходная выборка и границы. Затем — параллельная проверка и решение по фактическому результату.</p>
-      <a class="button button-light" href="/krupnym-kompaniyam/">Обсудить автоматизацию <Icon name="arrow" size={20} /></a>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
@@ -132,8 +119,7 @@ const schema = [
     box-shadow: var(--shadow-sm);
   }
 
-  .metric-card,
-  .automation-card {
+  .metric-card {
     padding: 30px;
   }
 
@@ -146,13 +132,11 @@ const schema = [
     letter-spacing: -0.045em;
   }
 
-  .metric-card h3,
-  .automation-card h3 {
+  .metric-card h3 {
     margin: 0 0 12px;
   }
 
-  .metric-card p,
-  .automation-card p {
+  .metric-card p {
     margin: 0;
   }
 
@@ -160,30 +144,181 @@ const schema = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .automation-card {
+    min-width: 0;
+    overflow: hidden;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .automation-card:hover,
+  .automation-card:focus-within {
+    border-color: var(--color-ink);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .automation-card-link {
+    display: flex;
+    min-height: 100%;
+    padding: 30px;
+    color: inherit;
+    text-decoration: none;
+    flex-direction: column;
+  }
+
+  .automation-card-link:focus-visible {
+    outline: 3px solid var(--color-gold-soft);
+    outline-offset: -5px;
+  }
+
+  .automation-eyebrow,
+  .automation-label {
+    display: block;
+    color: var(--color-muted);
+    font-size: 0.76rem;
+    font-weight: 720;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .automation-eyebrow {
+    margin-bottom: 12px;
+    color: var(--color-gold);
+  }
+
+  .automation-card h3 {
+    margin: 0 0 28px;
+  }
+
+  .automation-label {
+    margin-bottom: 8px;
+  }
+
   .automation-result {
-    margin-bottom: 12px !important;
+    margin: 0 0 24px;
     color: var(--color-ink);
+    font-size: 1.08rem;
     font-weight: 700;
   }
 
+  .automation-scope {
+    margin: 0 0 26px;
+  }
+
+  .automation-cta {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 9px;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-weight: 700;
+  }
+
+  .automation-cta svg {
+    transition: transform var(--transition);
+  }
+
+  .automation-card:hover .automation-cta svg,
+  .automation-card:focus-within .automation-cta svg {
+    transform: translateX(4px);
+  }
+
+  .results-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(440px, 0.82fr);
+    gap: clamp(44px, 7vw, 96px);
+    align-items: center;
+  }
+
   .results-hero-grid {
-    align-items: start;
+    max-width: 760px;
+  }
+
+  .results-page-hero h1 {
+    font-size: clamp(3rem, 5vw, 4rem);
+  }
+
+  .hero-bridge {
+    max-width: 760px;
+    padding-left: 18px;
+    margin: 30px 0 0;
+    color: var(--color-ink-soft);
+    border-left: 3px solid var(--color-gold-soft);
+    font-size: 1.06rem;
+  }
+
+  .hero-bridge strong {
+    color: var(--color-ink);
   }
 
   .hero-metric-grid {
-    margin-top: 42px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 0;
   }
 
-  .method-copy p {
-    color: #c3cfde;
+  .hero-metric-grid .metric-card {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.38fr) minmax(0, 0.62fr);
+    column-gap: 18px;
+    align-items: center;
+    padding: 22px 24px;
   }
 
-  .method-copy strong {
-    color: white;
+  .hero-metric-grid .metric-card > strong {
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: clamp(2.1rem, 3.5vw, 3.5rem);
   }
 
-  .method-copy .reviewed {
-    color: var(--color-gold-soft);
+  .hero-metric-grid .metric-card h3 {
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .hero-metric-grid .metric-card p {
+    color: var(--color-muted);
+    font-size: 0.69rem;
+    line-height: 1.4;
+  }
+
+  .reference-conclusion {
+    max-width: 920px;
+    padding: 22px 24px;
+    margin: 28px 0 0;
+    color: var(--color-ink-soft);
+    background: var(--color-blue-pale);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .reference-conclusion strong {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 1060px) {
+    .results-hero-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .results-hero-grid {
+      max-width: 900px;
+    }
+
+    .hero-metric-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-metric-grid .metric-card {
+      display: block;
+    }
+
+    .hero-metric-grid .metric-card > strong {
+      margin-bottom: 16px;
+    }
   }
 
   @media (max-width: 840px) {
@@ -198,8 +333,22 @@ const schema = [
     }
 
     .metric-card,
-    .automation-card {
+    .automation-card-link {
       padding: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .automation-card,
+    .automation-cta svg {
+      transition: none;
+    }
+
+    .automation-card:hover,
+    .automation-card:focus-within,
+    .automation-card:hover .automation-cta svg,
+    .automation-card:focus-within .automation-cta svg {
+      transform: none;
     }
   }
 </style>

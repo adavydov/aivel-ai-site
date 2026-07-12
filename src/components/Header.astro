@@ -40,8 +40,8 @@ const contactCta = isPartnerPage
           {contactCta.label}
         </button>
       ) : (
-        <button class="button button-small button-primary header-cta" type="button" data-open-demo>
-          Попробовать демо
+        <button class="button button-small button-primary header-cta" type="button" data-open-contact data-contact-topic="demo">
+          Записаться на демо
         </button>
       )}
       <button
@@ -65,7 +65,7 @@ const contactCta = isPartnerPage
       {contactCta ? (
         <button class="button button-primary" type="button" data-open-contact data-contact-topic={contactCta.topic}>{contactCta.label}</button>
       ) : (
-        <button class="button button-primary" type="button" data-open-demo>Попробовать демо</button>
+        <button class="button button-primary" type="button" data-open-contact data-contact-topic="demo">Записаться на демо</button>
       )}
     </nav>
   </div>

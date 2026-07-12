@@ -1,254 +1,399 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ImportantSignalDemo from "../../components/ImportantSignalDemo.astro";
-import AnswerDemo from "../../components/AnswerDemo.astro";
-import QuestionCard from "../../components/QuestionCard.astro";
+import SignalDeliveryCarousel from "../../components/SignalDeliveryCarousel.astro";
 import Icon from "../../components/Icon.astro";
-import { importantSignals } from "../../data/site";
-
-const questions = (await getCollection("questions")).sort((a, b) => a.data.order - b.data.order);
+import { signalDeliveryExamples } from "../../data/site";
 
 const schema = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Важное в бизнесе: сигналы и проверяемые ответы Aivel",
+    name: "Увидеть важное вовремя — сигналы Aivel",
     description:
-      "Aivel замечает значимые изменения, объясняет их важность и позволяет задать уточняющий вопрос по тем же данным."
+      "Aivel сам замечает значимые изменения и присылает короткое проверяемое сообщение в Telegram или по почте."
   },
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: importantSignals.map((signal, index) => ({
+    itemListElement: signalDeliveryExamples.map((example, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: signal.signal
+      name: example.subject
     }))
   }
 ];
 ---
 
 <BaseLayout
-  title="Важное в бизнесе: сигналы и проверяемые ответы — Aivel"
-  description="Aivel вовремя замечает важные изменения, показывает их основание и отвечает на уточняющие вопросы по данным учёта."
+  title="Увидеть важное вовремя: сигналы в Telegram и по почте — Aivel"
+  description="Aivel сам замечает важные изменения и присылает короткое сообщение: что произошло, почему важно, что сделать и на чём основан вывод."
   schema={schema}
 >
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
-    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Важное</span>
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Увидеть важное</span>
   </div>
 
-  <header class="page-hero unified-hero">
+  <header class="page-hero signal-hero">
     <div class="container page-hero-grid">
       <div>
-        <p class="section-kicker">Одна цепочка от изменения до решения</p>
-        <h1>Сначала Aivel замечает важное. Затем вы можете спросить о чём угодно.</h1>
-        <p class="lead">Система обращает внимание на значимое изменение, объясняет, почему оно требует решения, и показывает основание. После этого вы уточняете причину, проверяете сценарий или раскрываете цифру до операции.</p>
-        <nav class="mode-nav" aria-label="Сценарии работы с важным">
-          <a href="#signaly"><span>01</span><strong>Aivel замечает сам</strong></a>
-          <a href="#voprosy"><span>02</span><strong>Вы спрашиваете сами</strong></a>
-        </nav>
+        <p class="section-kicker">Aivel замечает сам</p>
+        <h1>Важное само приходит к вам — пока ещё можно повлиять.</h1>
+        <p class="lead">Короткое сообщение в Telegram или по почте: что произошло, почему это важно, что сделать сейчас и на чём основан вывод. Не нужно открывать новый кабинет или заранее знать правильный вопрос.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#primery-soobshcheniy">Посмотреть сообщения <Icon name="arrow" size={20} /></a>
+          <button class="button button-secondary" type="button" data-open-contact data-contact-topic="client">Выбрать первые сигналы</button>
+        </div>
       </div>
-      <aside class="page-hero-aside">
-        <strong>Проверяемость важнее уверенного тона</strong>
-        <p>Сигнал и ответ показывают период, свежесть, источники, расчёт и границу вывода. Если данных недостаточно, Aivel показывает пробел или подключает специалиста.</p>
+      <aside class="page-hero-aside signal-hero-aside">
+        <strong>Продукт почти не требует интерфейса</strong>
+        <ul>
+          <li><Icon name="check" size={18} /> Без отдельного кабинета</li>
+          <li><Icon name="check" size={18} /> Без заранее сформулированного вопроса</li>
+          <li><Icon name="check" size={18} /> С основанием и следующим шагом</li>
+        </ul>
       </aside>
     </div>
   </header>
 
-  <section class="section section-warm" aria-labelledby="chain-title">
+  <section class="section message-demo-section" aria-labelledby="messages-title">
     <div class="container">
       <div class="section-heading">
-        <div><p class="section-kicker">Как возникает решение</p><h2 id="chain-title">Вопрос — не отдельный продукт, а следующий шаг после сигнала.</h2></div>
-        <p>Один и тот же учётный контур помогает сначала не пропустить изменение, а затем разобраться, что именно оно меняет для бизнеса.</p>
+        <div><p class="section-kicker">Так выглядит продукт</p><h2 id="messages-title">Одно понятное сообщение вместо ещё одного сложного кабинета.</h2></div>
+        <p>Переключите четыре ситуации. Сигналы приходят сами; для каждого заранее определены получатель, канал и момент, когда ещё можно действовать.</p>
       </div>
-      <ol class="unified-chain" aria-label="Путь от изменения к проверке результата">
-        <li><span>01</span><strong>Изменение</strong><p>В подключённом источнике появляется новый факт, прогноз или отклонение.</p></li>
-        <li><span>02</span><strong>Важность</strong><p>Aivel связывает его с согласованной границей, сроком или возможным последствием.</p></li>
-        <li><span>03</span><strong>Уточнение</strong><p>Вы спрашиваете о причине, другом сценарии или составе цифры обычными словами.</p></li>
-        <li><span>04</span><strong>Решение</strong><p>Получаете следующий шаг, основание и дату повторной проверки.</p></li>
+      <div id="primery-soobshcheniy">
+        <SignalDeliveryCarousel />
+      </div>
+      <p class="demo-note"><Icon name="shield" size={18} /> Учебные примеры на обезличенных данных. В реальной работе события и границы настраиваются под ваш бизнес.</p>
+    </div>
+  </section>
+
+  <section class="section section-warm" aria-labelledby="fear-map-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Что нельзя узнать поздно</p><h2 id="fear-map-title">Страх превращается в конкретное событие для наблюдения.</h2></div>
+        <p>Мы не обещаем следить «за всем». Начинаем с нескольких решений, где цена опоздания понятна владельцу.</p>
+      </div>
+      <div class="risk-map">
+        <article>
+          <span>Деньги</span>
+          <h3>Хватит ли на обязательства</h3>
+          <p>Запас денег, ближайшие налоги и зарплата, задержки крупных оплат и сокращение времени на решение.</p>
+        </article>
+        <article>
+          <span>Прибыль</span>
+          <h3>Где незаметно теряется результат</h3>
+          <p>Необычный рост расходов, снижение прибыльности клиента или направления, расхождение прибыли и денег.</p>
+        </article>
+        <article>
+          <span>Рост</span>
+          <h3>Выдержит ли бизнес следующий шаг</h3>
+          <p>Полная стоимость найма, запас денег после решения и условия, при которых рост остаётся безопасным.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="setup-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Как запускается наблюдение</p><h2 id="setup-title">Три шага — и важное приходит само.</h2></div>
+        <p>Не нужно переносить всю работу в новую систему. Aivel использует согласованные источники и доставляет вывод туда, где вы уже читаете сообщения.</p>
+      </div>
+      <ol class="delivery-steps">
+        <li><span>01</span><h3>Выбираем первые риски</h3><p>Фиксируем 3–5 событий, которые нельзя узнать поздно, их границы и время для действия.</p></li>
+        <li><span>02</span><h3>Подключаем основание</h3><p>Определяем нужные данные, частоту обновления и случаи, которые должен проверить специалист.</p></li>
+        <li><span>03</span><h3>Назначаем получателей</h3><p>Сообщение приходит в Telegram или на почту владельцу и тем, кто отвечает за следующий шаг.</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="section" id="signaly" aria-labelledby="signals-title">
+  <section class="section section-dark" id="voprosy" aria-labelledby="situation-guides-title">
     <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">Aivel обращает внимание сам</p><h2 id="signals-title">Узнайте о важном до того, как решение опоздает.</h2></div>
-        <p>Наблюдение начинается с узкого набора событий, для которых понятны источник, правило важности, получатель и возможное действие.</p>
+      <div class="section-heading situation-guides-heading">
+        <div><p class="section-kicker section-kicker-light">Подробные разборы</p><h2 id="situation-guides-title">Проверьте логику типичных событий.</h2></div>
+        <p>Короткое сообщение ведёт к расчёту и источникам. Эти страницы показывают, какие данные нужны и где остаётся профессиональное суждение.</p>
       </div>
-      <ImportantSignalDemo />
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="classes-title">
-    <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">С чего начать наблюдение</p><h2 id="classes-title">Изменения, которые уже влияют на деньги и действия.</h2></div>
-        <p>Это не общий поток уведомлений. Каждое событие связано с конкретным решением владельца или руководителя.</p>
-      </div>
-      <div class="numbered-grid">
-        <article class="numbered-card"><h3>Денег может не хватить к обязательствам</h3><p>Прогноз остатка пересекает согласованную границу к дате налогов, зарплаты или крупного платежа.</p><a class="text-link" href="/voprosy/hvatit-li-deneg-na-nalogi-i-zarplatu/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Значимая оплата задержалась</h3><p>Просрочка покупателя уже влияет на резерв денег или порядок ближайших выплат.</p><a class="text-link" href="/voprosy/kto-zaderzhivaet-oplatu/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Расходы отклонились от обычного</h3><p>Изменение оказалось сильнее ожидаемого и влияет на прибыльность направления, проекта или клиента.</p><a class="text-link" href="/voprosy/gde-vyrosli-rashody/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Прибыль и деньги расходятся</h3><p>Прибыль признана, но деньги ушли в задолженность, запасы, займ или другое движение.</p><a class="text-link" href="/voprosy/pochemu-pribyl-est-a-deneg-net/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Запас денег сокращается</h3><p>Текущий темп обязательных расходов уменьшает время на решение быстрее согласованного плана.</p><a class="text-link" href="/voprosy/na-skolko-mesyatsev-hvatit-deneg/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-        <article class="numbered-card"><h3>Прибыльность клиента снизилась</h3><p>Доходы и связанные расходы изменились так, что цену или состав работ стоит проверить.</p><a class="text-link" href="/voprosy/kakie-klienty-i-proekty-pribylny/">Посмотреть разбор <Icon name="arrow" size={18} /></a></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="voprosy" aria-labelledby="questions-title">
-    <div class="container">
-      <div class="section-heading">
-        <div><p class="section-kicker">Вы спрашиваете сами</p><h2 id="questions-title">Задайте любой вопрос о бизнесе — и проверьте, откуда взялся ответ.</h2></div>
-        <p>Вопрос можно задать после сигнала или независимо от него. Aivel отвечает по доступным данным, уточняет смысл, показывает пробел или передаёт вопрос специалисту.</p>
-      </div>
-      <AnswerDemo />
-      <div class="question-divider">
-        <p class="section-kicker">Десять частых решений владельца</p>
-        <h2>Начните с вопроса, который уже влияет на деньги или рост.</h2>
-      </div>
-      <div class="question-grid">
-        {questions.map((question) => (
-          <QuestionCard
-            slug={question.id}
-            title={question.data.title}
-            description={question.data.description}
-            categoryLabel={question.data.categoryLabel}
-          />
+      <div class="situation-links">
+        {signalDeliveryExamples.map((example) => (
+          <a href={example.detailsHref}>
+            <span>{example.tab}</span>
+            <strong>{example.subject}</strong>
+            <Icon name="arrow" size={20} />
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-warm" aria-labelledby="limits-title">
-    <div class="container content-layout">
-      <div><p class="section-kicker">Честная граница</p><h2 id="limits-title">Aivel не выдумывает недостающие факты.</h2></div>
-      <div class="prose">
-        <p>Aivel не гарантирует обнаружение любого события. Одна и та же сумма или задержка может быть критичной для одного бизнеса и обычной для другого, поэтому мы вместе определяем периметр, границы, сроки, получателей и порядок передачи специалисту.</p>
-        <p>Если источник не подключён, устарел или расходится с другим, это видно рядом с выводом. Профессиональное суждение остаётся за человеком.</p>
-        <p><a class="text-link" href="/kak-rabotaet/">Как устроена вся цепочка <Icon name="arrow" size={18} /></a></p>
+  <section class="section section-warm" aria-labelledby="trust-title">
+    <div class="container trust-layout">
+      <div>
+        <p class="section-kicker">Коротко — не значит без основания</p>
+        <h2 id="trust-title">Сначала суть. Подробности — по ссылке.</h2>
+      </div>
+      <div class="trust-copy">
+        <p>Aivel не гарантирует обнаружение любого события. До запуска мы согласуем источники, границы, сроки и получателей. Если данных недостаточно или они расходятся, автоматический вывод не подменяет проверку специалиста.</p>
+        <ul>
+          <li><Icon name="source" size={20} /><span><strong>Видно основание</strong> Источники и время обновления находятся рядом с сигналом.</span></li>
+          <li><Icon name="shield" size={20} /><span><strong>Факт не смешан с прогнозом</strong> В сообщении понятно, что уже произошло, а что является расчётным сценарием.</span></li>
+          <li><Icon name="person" size={20} /><span><strong>Сложное проверяет человек</strong> Неоднозначные случаи передаются специалисту до управленческого решения.</span></li>
+        </ul>
+        <a class="text-link" href="/kak-rabotaet/">Как устроена вся цепочка <Icon name="arrow" size={18} /></a>
       </div>
     </div>
   </section>
 
   <section class="final-cta">
     <div class="container">
-      <p class="section-kicker section-kicker-light">Ваш контролируемый периметр</p>
+      <p class="section-kicker section-kicker-light">Начать с малого</p>
       <h2>Что в вашем бизнесе нельзя узнать слишком поздно?</h2>
-      <p>Разберём первые события, источники и вопросы, с которых имеет смысл начать.</p>
-      <button class="button button-light" type="button" data-open-contact>Определить важные сигналы</button>
+      <p>Определим первые 3–5 сигналов, нужные источники, получателей и следующий шаг для каждого события.</p>
+      <button class="button button-light" type="button" data-open-contact data-contact-topic="client">Настроить первые сигналы</button>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .unified-hero {
-    padding-bottom: clamp(64px, 8vw, 104px);
+  .signal-hero {
+    padding-bottom: clamp(70px, 9vw, 118px);
   }
 
-  .mode-nav {
+  .signal-hero .lead {
+    max-width: 790px;
+  }
+
+  .signal-hero-aside ul {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-    margin-top: 32px;
-  }
-
-  .mode-nav a {
-    min-height: 72px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border: 1px solid var(--line, #dfe4e7);
-    border-radius: 16px;
-    color: inherit;
-    background: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: border-color 180ms ease, background-color 180ms ease;
-  }
-
-  .mode-nav a:hover,
-  .mode-nav a:focus-visible {
-    border-color: var(--ink, #12211d);
-    background: #fff;
-  }
-
-  .mode-nav span {
-    color: var(--accent, #0f766e);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-  }
-
-  .unified-chain {
+    padding: 0;
+    margin: 22px 0 0;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    margin: 36px 0 0;
-    padding: 1px;
-    border-radius: 22px;
-    overflow: hidden;
-    background: rgba(19, 41, 34, 0.14);
   }
 
-  .unified-chain li {
-    min-height: 220px;
-    padding: 28px;
-    background: #fff;
+  .signal-hero-aside li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--color-text);
   }
 
-  .unified-chain span {
-    display: block;
-    margin-bottom: 40px;
-    color: var(--accent, #0f766e);
+  .signal-hero-aside li svg {
+    flex: 0 0 auto;
+    margin-top: 4px;
+    color: var(--color-green);
+  }
+
+  .message-demo-section {
+    padding-top: clamp(72px, 8vw, 116px);
+  }
+
+  .demo-note {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    max-width: 760px;
+    margin: 18px 0 0;
+    color: var(--color-muted);
     font-size: 0.78rem;
+  }
+
+  .demo-note svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+
+  .risk-map {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .risk-map article {
+    min-height: 280px;
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .risk-map article > span {
+    display: inline-flex;
+    margin-bottom: clamp(42px, 6vw, 74px);
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 800;
     letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .unified-chain strong {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.18rem;
+  .risk-map h3 {
+    margin-bottom: 12px;
   }
 
-  .unified-chain p {
+  .risk-map p {
     margin: 0;
   }
 
-  .question-divider {
-    max-width: 760px;
-    margin: clamp(64px, 8vw, 104px) 0 30px;
+  .delivery-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border-radius: var(--radius-lg);
+    list-style: none;
   }
 
-  .question-divider h2 {
+  .delivery-steps li {
+    min-height: 310px;
+    padding: clamp(24px, 3vw, 38px);
+    background: var(--color-surface);
+  }
+
+  .delivery-steps li > span {
+    display: block;
+    margin-bottom: clamp(52px, 7vw, 92px);
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .delivery-steps p {
     margin-bottom: 0;
   }
 
-  @media (max-width: 900px) {
-    .unified-chain {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .situation-guides-heading h2,
+  .situation-guides-heading p {
+    color: white;
+  }
+
+  .situation-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .situation-links a {
+    display: grid;
+    min-height: 132px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    align-items: center;
+    padding: 22px;
+    color: white;
+    background: rgb(255 255 255 / 0.045);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background-color var(--transition), border-color var(--transition);
+  }
+
+  .situation-links a:hover {
+    background: rgb(255 255 255 / 0.08);
+    border-color: rgb(245 201 121 / 0.45);
+  }
+
+  .situation-links a > span {
+    color: var(--color-gold-soft);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .situation-links strong {
+    grid-column: 1;
+    max-width: 520px;
+    line-height: 1.28;
+  }
+
+  .situation-links svg {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .trust-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(42px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .trust-copy > p {
+    margin-bottom: 26px;
+    font-size: 1.05rem;
+  }
+
+  .trust-copy ul {
+    display: grid;
+    gap: 10px;
+    padding: 0;
+    margin: 0 0 26px;
+    list-style: none;
+  }
+
+  .trust-copy li {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .trust-copy li svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+    color: var(--color-blue);
+  }
+
+  .trust-copy li span {
+    color: var(--color-text);
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .trust-copy li strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 880px) {
+    .risk-map,
+    .delivery-steps,
+    .trust-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .risk-map article,
+    .delivery-steps li {
+      min-height: 0;
+    }
+
+    .risk-map article > span,
+    .delivery-steps li > span {
+      margin-bottom: 28px;
     }
   }
 
   @media (max-width: 620px) {
-    .mode-nav,
-    .unified-chain {
+    .situation-links {
       grid-template-columns: 1fr;
     }
 
-    .unified-chain li {
-      min-height: auto;
-    }
-
-    .unified-chain span {
-      margin-bottom: 22px;
+    .situation-links a {
+      min-height: 116px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mode-nav a {
+    .situation-links a {
       transition: none;
     }
   }

@@ -3,40 +3,77 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import LocalForm from "../../components/LocalForm.astro";
 import Icon from "../../components/Icon.astro";
 
-const networkFacts = [
-  { value: "1 000", label: "клиентов в партнёрской сети" },
+const scaleFacts = [
   { value: "400+ млн ₽", label: "выручка сети в пересчёте на год" },
-  { value: "30+", label: "разработчиков ИИ, 1С и платформы" },
-  { value: "8", label: "сделок за шесть месяцев" }
+  { value: "1 000+", label: "клиентов в партнёрской сети" },
+  { value: "3 страны", label: "география клиентов сети" }
 ];
 
-const ownerResults = [
+const expertiseTracks = [
   {
-    title: "Свобода от ежедневной операционной рутины",
-    text: "Меньше ручного контроля, переписки и повторяющихся случаев, требующих вмешательства руководителя. Внимание владельца остаётся для действительно сложных задач."
+    number: "01",
+    title: "География",
+    current: "Действующее ядро: Москва и Санкт-Петербург",
+    sought: "Ищем сильные команды в новых регионах"
   },
   {
-    title: "Более высокая роль у клиента",
-    text: "Больше времени на денежный поток, налоги, риски и решения — то, за что клиент ценит личное участие владельца."
+    number: "02",
+    title: "Отрасли",
+    current: "Уже представлены: медицина, строительство, B2B-услуги, продавцы на торговых площадках",
+    sought: "Открыты другие отрасли с глубокой предметной экспертизой"
   },
   {
-    title: "Более ценное предложение",
-    text: "Учёт остаётся основой, а поверх него появляются своевременные сигналы, разбор причин и финансовые консультации."
-  },
-  {
-    title: "Участие в следующем этапе роста",
-    text: "Партнёр получает технологию и общий контур, сохраняя роль в компании и возможность участвовать в её дальнейшем развитии."
+    number: "03",
+    title: "Функции",
+    current: "Бухгалтерский и налоговый учёт, зарплата и кадры, управленческий учёт",
+    sought: "Расширяем специализации и технологические решения"
   }
+];
+
+const technologyFlows = [
+  {
+    icon: "document" as const,
+    title: "Первичные документы",
+    flow: ["Получить документ", "Проверить и распознать", "Создать документ в 1С"],
+    value: "80%",
+    metric: "измеренного потока прошло без ручного участия"
+  },
+  {
+    icon: "chart" as const,
+    title: "Банковские операции",
+    flow: ["Получить выписку", "Сопоставить платёж", "Заполнить операцию и аналитику в 1С"],
+    value: "98%",
+    metric: "точности сопоставления на проверенной выборке"
+  },
+  {
+    icon: "check" as const,
+    title: "Сверки с контрагентами",
+    flow: ["Собрать данные сторон", "Провести сверку", "Передать специалисту только расхождения"],
+    value: "до 95%",
+    metric: "типовых сверок прошло без участия человека"
+  }
+];
+
+const nextContours = ["Зарплата и кадры", "Операции торговых площадок", "Внутренний аудит"];
+
+const ownerValue = [
+  "обсуждать с клиентом денежный поток и риски до того, как они станут проблемой",
+  "объяснять причины изменений по данным, а не собирать отчёт вручную",
+  "развивать отраслевую практику и отношения с ключевыми клиентами"
+];
+
+const decisionQuestions = [
+  "Какой вы хотите видеть свою роль в компании через два–три года?",
+  "Какие повторяющиеся процессы сегодня требуют вашего личного контроля?",
+  "В чём ваша сильнейшая экспертиза: регион, отрасль или функция?",
+  "Какие процессы и данные уже готовы к подключению ИИ-помощников?",
+  "Что важнее на следующем этапе: рост, снижение зависимости от владельца или преемственность?"
 ];
 
 const objections = [
   {
-    question: "Нужно ли продавать компанию целиком?",
-    answer: "Нет. Aivel рассматривает структуры с контрольной долей от 51%. Продавать 100% необязательно; точная доля, роль владельца и порядок принятия решений обсуждаются индивидуально."
-  },
-  {
     question: "Что произойдёт с клиентами и командой?",
-    answer: "Первые 30 дней посвящены защите основы: фиксируются клиенты, команда, договоры, доступы, риски и исходные показатели. Изменения внедряются поэтапно, чтобы не нарушить обслуживание."
+    answer: "Сначала фиксируются клиенты, команда, договоры, доступы, риски и исходные показатели. Изменения внедряются поэтапно, чтобы не нарушить обслуживание."
   },
   {
     question: "Собственник должен выйти из бизнеса?",
@@ -44,15 +81,15 @@ const objections = [
   },
   {
     question: "ИИ заменит бухгалтеров?",
-    answer: "ИИ-помощники забирают повторяющиеся действия и готовят исключения для проверки. Профессиональное суждение, ответственность и работа со сложными ситуациями остаются у людей."
+    answer: "ИИ-помощники выполняют типовые действия и передают исключения специалистам. Профессиональное суждение, ответственность и работа со сложными ситуациями остаются у людей."
   },
   {
-    question: "Можно ли сначала проверить технологию, а потом обсуждать сделку?",
-    answer: "Да. Первый шаг — технологический разбор на 60–90 минут: демонстрация работающих ИИ-помощников, разбор двух–трёх процессов и предварительная оценка эффекта. Обязательства принимать решение о партнёрстве нет."
+    question: "Можно сначала посмотреть технологию?",
+    answer: "Да. На демонстрации можно увидеть работающих ИИ-помощников, разобрать два–три процесса вашей компании и предварительно оценить применимость технологии без обязательства обсуждать партнёрство."
   },
   {
     question: "Как защищаются данные компании и клиентов?",
-    answer: "Доступы, источники, права и порядок обработки данных согласуются до подключения. Подробная схема защиты и договорные условия рассматриваются на технологическом разборе.",
+    answer: "Источники, доступы, права и порядок обработки данных согласуются до подключения. Действия помощников ограничены ролями и сохраняются в аудиторском следе.",
     href: "/zashchita-dannyh/",
     linkLabel: "Посмотреть принципы защиты данных"
   }
@@ -80,350 +117,183 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Aivel для бухгалтерских компаний — рост без новой операционной нагрузки"
-  description="Работающие ИИ-помощники, общий операционный контур и партнёрская модель Aivel для собственников бухгалтерских компаний."
+  title="Aivel для бухгалтерских компаний — технология для новой роли собственника"
+  description="Партнёрская сеть Aivel, работающие ИИ-помощники и новая роль собственника бухгалтерской компании: меньше операционной рутины, больше ценности для клиента."
   schema={schema}
 >
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
-    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Бухгалтерским компаниям</span>
+    <a href="/">Главная</a><span aria-hidden="true">/</span><span>Партнёрам</span>
   </div>
 
   <header class="page-hero partner-hero">
-    <div class="container page-hero-grid">
-      <div>
+    <div class="container partner-hero-grid">
+      <div class="hero-copy">
         <p class="section-kicker">Собственникам бухгалтерских компаний</p>
-        <h1>Расти без роста операционной рутины. <span>Стать финансовым партнёром клиентов.</span></h1>
-        <p class="lead">Aivel подключает работающих ИИ-помощников, объединяет процессы в общий контур и освобождает собственника от повторяющегося исполнения. Отношения с клиентами остаются у вас — времени на их деньги, риски и развитие становится больше.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="/avtomatizatsiya-ucheta/">Посмотреть работающих ИИ-помощников</a>
-          <a class="button button-secondary" href="#partner-form">Оценить партнёрство конфиденциально</a>
+        <h1>Расти без новой операционной рутины. <span>Стать финансовым партнёром клиентов.</span></h1>
+        <p class="lead">Aivel объединяет сильные бухгалтерские компании и даёт им работающих ИИ-помощников. Технология выполняет типовые операции, команда разбирает исключения, а собственник тратит больше времени на деньги, риски и решения клиентов.</p>
+        <div class="hero-actions" aria-label="Следующие шаги">
+          <a class="button button-primary" href="#technology">Посмотреть технологию</a>
+          <a class="button button-secondary" href="#partner-form">Оценить партнёрство</a>
         </div>
       </div>
 
-      <aside class="page-hero-aside role-aside" aria-label="Переход к новой роли">
-        <p class="aside-label">Не выйти из профессии, а подняться на уровень выше</p>
-        <div class="role-path">
-          <div><span>01</span><strong>Исполнять и контролировать</strong></div>
-          <Icon name="arrow" size={22} />
-          <div><span>02</span><strong>Управлять системой</strong></div>
-          <Icon name="arrow" size={22} />
-          <div class="role-path-final"><span>03</span><strong>Помогать клиенту принимать решения</strong></div>
+      <aside class="opportunity-map" aria-labelledby="opportunity-title">
+        <div class="map-heading">
+          <p class="section-kicker">Карта возможностей</p>
+          <h2 id="opportunity-title">Сеть уже работает. Карта ещё открыта.</h2>
+        </div>
+
+        <div class="scale-facts" aria-label="Масштаб партнёрской сети">
+          {scaleFacts.map((fact) => (
+            <div><strong>{fact.value}</strong><span>{fact.label}</span></div>
+          ))}
+        </div>
+
+        <div class="expertise-list">
+          {expertiseTracks.map((track) => (
+            <article>
+              <span class="track-number">{track.number}</span>
+              <div>
+                <h3>{track.title}</h3>
+                <p>{track.current}</p>
+                <strong>{track.sought}</strong>
+              </div>
+            </article>
+          ))}
         </div>
       </aside>
     </div>
   </header>
 
-  <section class="section" aria-labelledby="why-now-title">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Почему присоединяться сейчас</p>
-          <h2 id="why-now-title">Основа уже создана. Окно лидерства ещё открыто.</h2>
+    <section class="section technology-owner" id="technology" aria-labelledby="technology-title">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div>
+            <p class="section-kicker">От источника до результата</p>
+            <h2 id="technology-title">Не распознавание отдельного документа, а завершённая операция в 1С.</h2>
+          </div>
+          <p>ИИ-помощник проходит весь типовой процесс. Если ситуация выходит за правила, он передаёт её специалисту вместе с данными и историей действий.</p>
         </div>
-        <p>Партнёр входит не в эксперимент, а в работающий контур — при этом большинство регионов и отраслевых направлений сети ещё формируются.</p>
-      </div>
 
-      <div class="why-grid">
-        <article class="why-card" data-reveal>
-          <span>01</span>
-          <h3>Технология и сеть уже работают</h3>
-          <p>Есть действующая клиентская база, команда разработки, восемь проведённых сделок и опыт подключения компаний к общему контуру.</p>
-        </article>
-        <article class="why-card why-card-accent" data-reveal>
-          <span>02</span>
-          <h3>Позиции лидеров ещё не распределены</h3>
-          <p>Сегодня партнёрская география сосредоточена в Москве и Санкт-Петербурге. Новый участник может претендовать на ведущую роль в своём регионе или специализации.</p>
-        </article>
-        <article class="why-card" data-reveal>
-          <span>03</span>
-          <h3>Клиентам уже недостаточно только учёта</h3>
-          <p>Следующая ценность — вовремя заметить важное, объяснить причину по данным и помочь принять решение. У владельца появляется время именно на эту работу.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="network-map-title">
-    <div class="container network-snapshot">
-      <div class="network-map" aria-label="География партнёрской сети и клиентов">
-        <div class="map-title"><span>Партнёрская сеть</span><strong>Москва и Санкт-Петербург — действующее ядро</strong></div>
-        <div class="map-canvas">
-          <span class="map-line map-line-one" aria-hidden="true"></span>
-          <span class="map-line map-line-two" aria-hidden="true"></span>
-          <div class="map-node map-node-main"><span>Москва</span><strong>партнёры</strong></div>
-          <div class="map-node map-node-main map-node-spb"><span>Санкт-Петербург</span><strong>партнёры</strong></div>
-          <div class="map-node map-node-client map-node-kz"><span>Казахстан</span><strong>клиенты сети</strong></div>
-          <div class="map-node map-node-client map-node-uz"><span>Узбекистан</span><strong>клиенты сети</strong></div>
-          <div class="map-node map-node-open"><span>Ваш регион</span><strong>окно лидерства открыто</strong></div>
+        <div class="technology-grid">
+          {technologyFlows.map((item) => (
+            <article class="technology-card" data-reveal>
+              <div class="technology-card-head">
+                <span class="technology-icon"><Icon name={item.icon} size={24} /></span>
+                <h3>{item.title}</h3>
+              </div>
+              <ol class="operation-flow">
+                {item.flow.map((step, index) => (
+                  <li>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{step}</strong>
+                  </li>
+                ))}
+              </ol>
+              <div class="technology-metric"><strong>{item.value}</strong><span>{item.metric}</span></div>
+            </article>
+          ))}
         </div>
-        <p>Схема воспроизводит географию из партнёрской презентации; актуальный состав сети подтверждается перед обсуждением сделки.</p>
-      </div>
 
-      <div class="segment-map">
-        <div><p class="section-kicker">Клиенты сети</p><h2 id="network-map-title">Понятный рынок, на котором уже есть масштаб.</h2></div>
-        <div class="segment-price-grid"><article><span>Малый бизнес</span><strong>15–25 тыс. ₽</strong><p>средний месячный платёж за обслуживание в срезе презентации</p></article><article><span>Средний бизнес</span><strong>от 150 тыс. ₽</strong><p>месячный платёж в более сложном контуре</p></article></div>
-        <div class="segment-tags" aria-label="Основные услуги и отрасли"><span>Бухгалтерский и налоговый учёт</span><span>Зарплата и кадры</span><span>Казначейство</span><span>Управленческий учёт</span><span>Строительство</span><span>Торговые площадки</span><span>Медицина</span><span>Оптовая торговля</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-dark" aria-labelledby="growth-title">
-    <div class="container growth-layout">
-      <div class="growth-copy">
-        <p class="section-kicker section-kicker-light">Ловушка линейного роста</p>
-        <h2 id="growth-title">Больше клиентов не должно означать больше личного контроля.</h2>
-        <p>В обычной модели каждое расширение требует новых бухгалтеров, новых руководителей и ещё одного уровня проверки. Aivel переносит повторяющееся исполнение и часть контроля в систему.</p>
-      </div>
-      <div class="growth-comparison">
-        <article>
-          <span>Обычная модель</span>
-          <strong>Клиенты → сотрудники → руководители → контроль владельца</strong>
-          <p>Выручка растёт вместе с числом ручных операций и ежедневных случаев, требующих вмешательства владельца.</p>
-        </article>
-        <div class="comparison-arrow" aria-hidden="true"><Icon name="arrow" size={28} /></div>
-        <article class="growth-model-new">
-          <span>Модель Aivel</span>
-          <strong>Клиенты → ИИ и 1С → люди на исключениях → время на клиента</strong>
-          <p>Повторяющиеся процессы масштабируются технологией, а доверие и профессиональное суждение остаются у команды.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="role-title">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Смена роли</p>
-          <h2 id="role-title">Собственник движется от исполнения к финансовому консультированию.</h2>
+        <div class="control-layer" aria-label="Контроль качества операций">
+          <div><Icon name="spark" size={24} /><span><strong>ИИ выполняет типовой процесс</strong> от получения данных до результата</span></div>
+          <Icon class="control-arrow" name="arrow" size={22} />
+          <div><Icon name="person" size={24} /><span><strong>Человек разбирает исключения</strong> и принимает профессиональные решения</span></div>
+          <Icon class="control-arrow" name="arrow" size={22} />
+          <div><Icon name="source" size={24} /><span><strong>Аудиторский след сохраняет</strong> источник, действие, результат и проверку</span></div>
         </div>
-        <p>Платформа забирает повторяющиеся действия и часть операционного контроля. Владелец не отдаляется от клиента — он становится ему нужнее.</p>
-      </div>
 
-      <div class="role-ladder">
-        <article>
-          <span>1</span>
-          <p class="role-name">Бухгалтер</p>
-          <h3>Исполняет и контролирует</h3>
-          <ul><li>документы и сроки</li><li>отчётность и ошибки</li><li>случаи, требующие вмешательства</li></ul>
-        </article>
-        <article>
-          <span>2</span>
-          <p class="role-name">Управленец</p>
-          <h3>Управляет системой</h3>
-          <ul><li>команда и процессы</li><li>качество и загрузка</li><li>экономика компании</li></ul>
-        </article>
-        <article class="role-adviser">
-          <span>3</span>
-          <p class="role-name">Финансовый партнёр</p>
-          <h3>Помогает принимать решения</h3>
-          <ul><li>денежный поток</li><li>налоги и риски</li><li>сценарии роста</li></ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="rabotayushchie-pomoshchniki" aria-labelledby="agents-title">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Работающий продукт</p>
-          <h2 id="agents-title">Рутину снимают конкретные ИИ-помощники, а не общее обещание автоматизации.</h2>
+        <div class="next-contours">
+          <div><p class="section-kicker">Следующие контуры</p><h3>Расширяем процессы без неподтверждённых обещаний.</h3></div>
+          <ul>{nextContours.map((item) => <li>{item}</li>)}</ul>
         </div>
-        <p>Каждый помощник закрывает ограниченный процесс, показывает результат и передаёт человеку исключения, которые требуют профессионального решения.</p>
+        <p class="evidence-note">Показатели относятся к измеренным контурам разных проектов. Для новой компании исходный уровень и критерии успеха определяются отдельно.</p>
       </div>
 
-      <div class="agent-grid">
-        <a class="agent-card" href="/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/" data-reveal>
-          <div class="agent-icon"><Icon name="person" size={26} /></div>
-          <p class="agent-state">Работает</p>
-          <h3>Коммуникации</h3>
-          <p>Собирает обращения, создаёт задачи, назначает исполнителя и контролирует срок.</p>
-          <strong>Запрос → задача → исполнитель → результат</strong>
-          <small>Посмотреть устройство процесса <Icon name="arrow" size={17} /></small>
-        </a>
-        <a class="agent-card agent-card-featured" href="/avtomatizatsiya-ucheta/pervichnye-dokumenty/" data-reveal>
-          <div class="agent-icon"><Icon name="document" size={26} /></div>
-          <p class="agent-state">Работает</p>
-          <h3>Первичные документы</h3>
-          <p>Распознаёт документ, открывает нужную базу 1С, создаёт документ и заполняет аналитику.</p>
-          <strong><b>80%</b> измеренного потока без ручного участия</strong>
-          <small>Посмотреть устройство процесса <Icon name="arrow" size={17} /></small>
-        </a>
-        <a class="agent-card" href="/avtomatizatsiya-ucheta/bankovskie-operatsii/" data-reveal>
-          <div class="agent-icon"><Icon name="chart" size={26} /></div>
-          <p class="agent-state">Работает</p>
-          <h3>Банк</h3>
-          <p>Получает выписки, сопоставляет платежи, делит их по договорам и проставляет аналитику.</p>
-          <strong><b>98%</b> точности сопоставления на проверенной выборке</strong>
-          <small>Посмотреть устройство процесса <Icon name="arrow" size={17} /></small>
-        </a>
-        <a class="agent-card" href="/avtomatizatsiya-ucheta/sverki-s-kontragentami/" data-reveal>
-          <div class="agent-icon"><Icon name="check" size={26} /></div>
-          <p class="agent-state">Работает</p>
-          <h3>Сверки</h3>
-          <p>Закрывает типовые случаи и передаёт специалисту только расхождения.</p>
-          <strong>Человек работает с исключениями</strong>
-          <small>Посмотреть устройство процесса <Icon name="arrow" size={17} /></small>
-        </a>
-      </div>
-
-      <div class="agent-next">
-        <div><p class="section-kicker">Следующий контур</p><h3>Зарплата, торговые площадки и внутренний аудит</h3></div>
-        <p>Эти процессы находятся в развитии. На встрече мы разделяем уже работающие возможности и план внедрения.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="result-title">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Результат для собственника</p>
-          <h2 id="result-title">Технология освобождает время. Партнёр превращает его в новую ценность.</h2>
+      <div class="owner-shift owner-shift-panel" aria-labelledby="owner-shift-title">
+        <div class="container owner-shift-grid">
+          <div>
+            <p class="section-kicker section-kicker-light">Что получает собственник</p>
+            <h2 id="owner-shift-title">ИИ освобождает время. Собственник превращает его в ценность для клиента.</h2>
+            <p>Учёт остаётся надёжной основой. Владелец меньше контролирует повторяющееся исполнение и чаще помогает клиенту принимать финансовые решения.</p>
+          </div>
+          <div class="value-path">
+            <div class="value-source"><span>Было</span><strong>операции, переписка, повторная проверка</strong></div>
+            <Icon name="arrow" size={26} />
+            <div class="value-result">
+              <span>Освободившееся время</span>
+              <ul>{ownerValue.map((item) => <li><Icon name="check" size={18} />{item}</li>)}</ul>
+            </div>
+          </div>
         </div>
-        <p>Смысл партнёрства не в том, чтобы заменить людей программой. Смысл — изменить модель роста и роль собственника.</p>
       </div>
-      <div class="numbered-grid">
-        {ownerResults.map((item) => (
-          <article class="numbered-card" data-reveal><h3>{item.title}</h3><p>{item.text}</p></article>
-        ))}
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section section-dark" aria-labelledby="proof-title">
-    <div class="container">
-      <div class="section-heading proof-heading">
-        <div>
-          <p class="section-kicker section-kicker-light">Подтверждение масштабом</p>
-          <h2 id="proof-title">Aivel уже собрал работающую основу партнёрской сети.</h2>
+    <section class="section decision-section" aria-labelledby="decision-title">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div>
+            <h2 id="decision-title">Пять вопросов, которые действительно важно прояснить.</h2>
+          </div>
+          <p>Они показывают, совпадают ли ваши цели, сильные стороны компании и возможности партнёрской сети.</p>
         </div>
-        <p>Технология, команда и опыт подключения компаний существуют сегодня — партнёру не нужно создавать их с нуля.</p>
-      </div>
+        <ol class="decision-list">
+          {decisionQuestions.map((question, index) => (
+            <li><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong></li>
+          ))}
+        </ol>
 
-      <div class="network-facts">
-        {networkFacts.map((fact) => (
-          <div><strong>{fact.value}</strong><span>{fact.label}</span></div>
-        ))}
-      </div>
-
-      <article class="partner-case">
-        <div>
-          <p class="case-label">Действующий партнёр сети</p>
-          <h3>«Задачи и Решения»</h3>
-          <p>Собственник продолжает развивать бизнес внутри партнёрской модели Aivel.</p>
+        <div class="partner-faq-panel">
+          <div class="faq-layout" aria-labelledby="faq-title">
+            <div class="faq-intro">
+              <p class="section-kicker">Прямые ответы</p>
+              <h2 id="faq-title">Частые вопросы.</h2>
+              <p>Коротко о клиентах, команде, роли собственника, технологии и данных.</p>
+            </div>
+            <div class="faq-list">
+              {objections.map((item, index) => (
+                <details open={index === 0}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                  {"href" in item && item.href && <a class="text-link" href={item.href}>{item.linkLabel} <Icon name="arrow" size={17} /></a>}
+                </details>
+              ))}
+            </div>
+          </div>
         </div>
-        <div class="case-facts">
-          <div><strong>400+</strong><span>клиентов</span></div>
-          <div><strong>35+</strong><span>сотрудников</span></div>
-          <div><strong>+127%</strong><span>рост год к году</span></div>
+      </div>
+    </section>
+
+    <section class="section final-step" id="partner-form" aria-labelledby="next-step-title">
+      <div class="container final-step-grid">
+        <div class="final-step-copy">
+          <p class="section-kicker">Следующий шаг</p>
+          <h2 id="next-step-title">Посмотрите технологию или расскажите о своей компании.</h2>
+          <p>На демонстрации покажем завершённые процессы в 1С и работу с исключениями. В анкете достаточно указать масштаб компании и вашу цель — без закрытых данных.</p>
+          <button class="button button-secondary" type="button" data-open-contact data-contact-topic="unknown">Записаться на демонстрацию</button>
         </div>
-      </article>
-      <p class="evidence-note">Показатели зафиксированы в партнёрской презентации Aivel и относятся к её срезу, а не к универсальному результату каждой компании. Актуальные дата и состав периметра подтверждаются до обсуждения условий.</p>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="days-title">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">Целевой план первых 90 дней</p>
-          <h2 id="days-title">Сначала защищаем основу. Затем меняем готовые процессы.</h2>
+        <div class="partner-form-shell">
+          <LocalForm mode="partner" title="Короткая анкета о компании" submitLabel="Обсудить партнёрство конфиденциально" />
         </div>
-        <p>Срок и состав этапов подтверждаются после проверки 1С, данных, доступов и требуемых доработок. Клиенты, команда и качество обслуживания важнее скорости внедрения.</p>
       </div>
-
-      <div class="integration-timeline">
-        <article>
-          <div class="timeline-head"><span>01</span><strong>0–30 дней</strong></div>
-          <h3>Защищаем базу</h3>
-          <p>Фиксируем клиентов, команду, риски, доступы, договоры и исходные показатели. Определяем, что нельзя потерять и где измерять эффект.</p>
-        </article>
-        <article>
-          <div class="timeline-head"><span>02</span><strong>30–90 дней</strong></div>
-          <h3>Подключаем выбранных помощников</h3>
-          <p>При готовности данных настраиваем связь с 1С и запускаем согласованные процессы: обращения, первичные документы, банк или сверки.</p>
-        </article>
-        <article>
-          <div class="timeline-head"><span>03</span><strong>После запуска</strong></div>
-          <h3>Переводим операции в систему</h3>
-          <p>Типовые операции переходят в общий контур: нормативы сроков и качества, данные, расчёты и люди на исключениях.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" aria-labelledby="participation-title">
-    <div class="container participation-panel">
-      <div class="participation-number" aria-label="Доля участия от 51 процента"><span>от</span><strong>51%</strong></div>
-      <div>
-        <p class="section-kicker">Контрольная доля</p>
-        <h2 id="participation-title">Продавать 100% компании необязательно.</h2>
-        <p>Aivel рассматривает структуры участия от 51%. Точная доля, роль собственника, устройство управления и экономические условия определяются индивидуально.</p>
-        <ul class="check-list">
-          <li><Icon name="check" size={20} /> собственник может продолжать развивать компанию;</li>
-          <li><Icon name="check" size={20} /> технология и общий контур предоставляются Aivel;</li>
-          <li><Icon name="check" size={20} /> доверие клиентов и финансовое консультирование остаются у партнёра;</li>
-          <li><Icon name="check" size={20} /> сценарий преемственности обсуждается отдельно и конфиденциально.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="faq-title">
-    <div class="container faq-layout">
-      <div class="faq-intro">
-        <p class="section-kicker">Прямые ответы</p>
-        <h2 id="faq-title">Что важно выяснить до решения.</h2>
-        <p>Первый разговор не обязывает к сделке. Его задача — понять, работает ли модель для обеих сторон.</p>
-      </div>
-      <div class="faq-list">
-        {objections.map((item, index) => (
-          <details open={index === 0}>
-            <summary>{item.question}</summary>
-            <p>{item.answer}</p>
-            {"href" in item && item.href && <a class="text-link" href={item.href}>{item.linkLabel} <Icon name="arrow" size={17} /></a>}
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-dark next-step" aria-labelledby="next-step-title">
-    <div class="container">
-      <div class="section-heading proof-heading">
-        <div>
-          <p class="section-kicker section-kicker-light">Следующий шаг</p>
-          <h2 id="next-step-title">Сначала предметно проверим потенциал.</h2>
-        </div>
-        <p>Можно начать с технологии или сразу оценить партнёрскую модель. Ни один вариант не создаёт обязательства совершать сделку.</p>
-      </div>
-      <div class="next-step-grid">
-        <article>
-          <span>60–90 минут</span>
-          <h3>Технологический разбор</h3>
-          <ul><li>демонстрация работающих ИИ-помощников;</li><li>разбор двух–трёх процессов вашей компании;</li><li>предварительная оценка эффекта;</li><li>обсуждение 1С и источников данных.</li></ul>
-          <a class="button button-light" href="/avtomatizatsiya-ucheta/">Сначала посмотреть технологию</a>
-        </article>
-        <article>
-          <span>Конфиденциально</span>
-          <h3>Предварительная оценка партнёрства</h3>
-          <ul><li>выручка, прибыль, клиенты и команда;</li><li>цели и будущая роль собственника;</li><li>потенциал финансового консультирования;</li><li>предварительное понимание структуры участия.</li></ul>
-          <a class="button button-light" href="#partner-form">Проверить взаимное соответствие</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-warm" id="partner-form">
-    <div class="container"><LocalForm mode="partner" title="Обсудить будущую роль и партнёрство" /></div>
-  </section>
+    </section>
 </BaseLayout>
 
 <style>
+  .partner-hero {
+    padding-top: clamp(24px, 4vw, 52px);
+  }
+
+  .partner-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(520px, 1.18fr);
+    gap: clamp(40px, 6vw, 82px);
+    align-items: center;
+  }
+
   .partner-hero h1 {
-    font-size: clamp(3.1rem, 4.6vw, 4.9rem);
+    max-width: 780px;
+    font-size: clamp(2.9rem, 4.3vw, 4.8rem);
   }
 
   .partner-hero h1 span {
@@ -431,889 +301,622 @@ const schema = [
     color: var(--color-gold);
   }
 
-  .partner-hero .hero-actions {
-    margin-top: 32px;
-    margin-bottom: 0;
+  .partner-hero .lead {
+    max-width: 720px;
   }
 
-  .network-snapshot {
+  .hero-actions {
     display: grid;
-    grid-template-columns: minmax(440px, 1fr) minmax(0, 0.9fr);
-    gap: clamp(40px, 7vw, 88px);
-    align-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 650px;
+    margin-top: 30px;
   }
 
-  .network-map {
-    padding: 26px;
+  .hero-actions .button {
+    width: 100%;
+    min-height: 54px;
+    justify-content: center;
+    padding-inline: 20px;
+    text-align: center;
+  }
+
+  .opportunity-map {
+    padding: clamp(24px, 3vw, 36px);
     background: var(--color-ink);
-    border-radius: var(--radius-lg);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
   }
 
-  .map-title span,
-  .map-title strong {
-    display: block;
+  .map-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+    gap: 22px;
+    align-items: end;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
   }
 
-  .map-title span {
+  .map-heading .section-kicker {
+    margin: 0;
     color: var(--color-gold-soft);
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
-  .map-title strong {
-    margin-top: 5px;
+  .map-heading h2 {
+    margin: 0;
     color: white;
+    font-size: clamp(1.55rem, 2.5vw, 2.35rem);
   }
 
-  .map-canvas {
-    position: relative;
-    min-height: 360px;
-    margin-block: 22px 16px;
+  .scale-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin-block: 22px;
     overflow: hidden;
-    background:
-      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-      radial-gradient(circle at 50% 50%, rgb(245 201 121 / 0.12), transparent 55%);
-    background-size: 42px 42px, 42px 42px, auto;
-    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 0.12);
     border-radius: var(--radius-md);
   }
 
-  .map-node {
-    position: absolute;
-    z-index: 2;
-    min-width: 130px;
-    padding: 12px 14px;
-    background: #15223a;
-    border: 1px solid rgb(255 255 255 / 0.14);
-    border-radius: 12px;
-    box-shadow: 0 12px 30px rgb(0 0 0 / 0.2);
+  .scale-facts div {
+    min-width: 0;
+    padding: 18px;
+    background: rgb(255 255 255 / 0.04);
   }
 
-  .map-node::before {
-    position: absolute;
-    top: -7px;
-    left: 15px;
-    width: 12px;
-    height: 12px;
-    background: var(--color-gold-soft);
-    border: 3px solid #15223a;
-    border-radius: 50%;
-    content: "";
-  }
-
-  .map-node span,
-  .map-node strong {
+  .scale-facts strong,
+  .scale-facts span {
     display: block;
   }
 
-  .map-node span {
-    color: white;
-    font-size: 0.86rem;
-    font-weight: 700;
+  .scale-facts strong {
+    margin-bottom: 10px;
+    color: var(--color-gold-soft);
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
   }
 
-  .map-node strong {
-    margin-top: 3px;
-    color: #91a2bb;
-    font-size: 0.66rem;
-  }
-
-  .map-node-main { top: 42%; left: 42%; }
-  .map-node-spb { top: 16%; left: 30%; }
-  .map-node-kz { right: 8%; bottom: 18%; }
-  .map-node-uz { right: 28%; bottom: 5%; }
-  .map-node-open { top: 18%; right: 5%; border-style: dashed; }
-
-  .map-node-open::before {
-    background: transparent;
-    border-color: var(--color-gold-soft);
-  }
-
-  .map-line {
-    position: absolute;
-    z-index: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--color-gold-soft), transparent);
-    transform-origin: left center;
-  }
-
-  .map-line-one { top: 38%; left: 38%; width: 45%; transform: rotate(22deg); }
-  .map-line-two { top: 31%; left: 34%; width: 34%; transform: rotate(-16deg); }
-
-  .network-map > p {
-    margin: 0;
-    color: #8194ad;
-    font-size: 0.72rem;
-  }
-
-  .segment-map h2 {
-    font-size: clamp(2.3rem, 4vw, 3.8rem);
-  }
-
-  .segment-price-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 24px;
-  }
-
-  .segment-price-grid article {
-    padding: 20px;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-  }
-
-  .segment-price-grid span,
-  .segment-price-grid strong {
-    display: block;
-  }
-
-  .segment-price-grid span {
-    color: var(--color-muted);
-    font-size: 0.75rem;
-  }
-
-  .segment-price-grid strong {
-    margin-block: 10px;
-    color: var(--color-gold);
-    font-size: 1.8rem;
-  }
-
-  .segment-price-grid p {
-    margin: 0;
-    font-size: 0.78rem;
-  }
-
-  .segment-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 14px;
-  }
-
-  .segment-tags span {
-    padding: 7px 10px;
-    color: var(--color-text);
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 650;
-  }
-
-  .role-aside {
-    padding: 28px;
-  }
-
-  .aside-label {
-    padding-bottom: 18px;
-    margin-bottom: 18px;
-    color: var(--color-text);
-    border-bottom: 1px solid var(--color-border);
-    font-size: 0.86rem;
-    font-weight: 650;
-  }
-
-  .role-path {
-    display: grid;
-    gap: 12px;
-  }
-
-  .role-path > svg {
-    margin-left: 12px;
-    color: var(--color-gold);
-    transform: rotate(90deg);
-  }
-
-  .role-path > div {
-    padding: 14px;
-    background: var(--color-paper);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-  }
-
-  .role-path .role-path-final {
-    background: var(--color-gold-pale);
-    border-color: #ecd49d;
-  }
-
-  .role-path span,
-  .role-path strong {
-    display: block;
-  }
-
-  .role-path span {
-    margin-bottom: 4px;
-    color: var(--color-gold);
-    font-size: 0.69rem;
-    font-weight: 720;
-    letter-spacing: 0.08em;
-  }
-
-  .role-path strong {
+  .scale-facts span {
+    color: #b9c6d6;
+    font-size: 0.73rem;
     line-height: 1.35;
   }
 
-  .why-grid,
-  .role-ladder,
-  .integration-timeline,
-  .next-step-grid {
+  .expertise-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    gap: 8px;
   }
 
-  .why-card {
-    min-height: 330px;
-    padding: 30px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .why-card-accent {
-    background: var(--color-gold-pale);
-    border-color: #ecd49d;
-  }
-
-  .why-card > span {
-    display: block;
-    margin-bottom: 58px;
-    color: var(--color-gold);
-    font-size: 0.74rem;
-    font-weight: 720;
-    letter-spacing: 0.1em;
-  }
-
-  .why-card h3 {
-    font-size: 1.42rem;
-  }
-
-  .why-card p {
-    margin-bottom: 0;
-  }
-
-  .growth-layout {
+  .expertise-list article {
     display: grid;
-    grid-template-columns: minmax(0, 0.72fr) minmax(480px, 1.28fr);
-    gap: clamp(48px, 8vw, 108px);
-    align-items: center;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    padding: 14px;
+    background: rgb(255 255 255 / 0.045);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-sm);
   }
 
-  .growth-copy > p:last-child {
-    color: #c3cfde;
-  }
-
-  .growth-comparison {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 14px;
-    align-items: stretch;
-  }
-
-  .growth-comparison article {
-    padding: 28px;
-    background: rgb(255 255 255 / 0.055);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    border-radius: var(--radius-lg);
-  }
-
-  .growth-comparison article > span {
-    display: block;
-    margin-bottom: 44px;
-    color: #91a3ba;
-    font-size: 0.72rem;
-    font-weight: 720;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .growth-comparison article > strong {
-    display: block;
-    margin-bottom: 20px;
-    color: white;
-    font-size: 1.05rem;
-    line-height: 1.45;
-  }
-
-  .growth-comparison article > p {
-    margin: 0;
-    color: #b9c6d6;
-    font-size: 0.9rem;
-  }
-
-  .growth-comparison .growth-model-new {
-    background: linear-gradient(145deg, rgb(245 201 121 / 0.2), rgb(245 201 121 / 0.07));
-    border-color: rgb(245 201 121 / 0.35);
-  }
-
-  .comparison-arrow {
-    display: grid;
-    place-items: center;
+  .track-number {
     color: var(--color-gold-soft);
+    font-size: 0.7rem;
+    font-weight: 750;
   }
 
-  .role-ladder article {
-    padding: 30px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-  }
-
-  .role-ladder article > span {
-    display: grid;
-    width: 38px;
-    height: 38px;
-    margin-bottom: 48px;
-    place-items: center;
-    color: var(--color-gold);
-    background: var(--color-gold-pale);
-    border-radius: 50%;
-    font-size: 0.8rem;
-    font-weight: 720;
-  }
-
-  .role-ladder .role-adviser {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-  }
-
-  .role-ladder .role-adviser h3,
-  .role-ladder .role-adviser li {
+  .expertise-list h3 {
+    margin-bottom: 5px;
     color: white;
+    font-size: 1rem;
   }
 
-  .role-name {
-    margin-bottom: 8px;
-    color: var(--color-gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-
-  .role-ladder ul,
-  .next-step-grid ul {
-    padding-left: 20px;
-    margin: 22px 0 0;
-  }
-
-  .role-ladder li,
-  .next-step-grid li {
-    margin-bottom: 7px;
-    color: var(--color-text);
-  }
-
-  .agent-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-  }
-
-  .agent-card {
-    position: relative;
+  .expertise-list p,
+  .expertise-list strong {
     display: block;
-    min-height: 320px;
-    padding: 32px;
-    overflow: hidden;
-    color: inherit;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    text-decoration: none;
-    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-  }
-
-  .agent-card:hover,
-  .agent-card:focus-visible {
-    border-color: var(--color-gold);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-
-  .agent-card-featured {
-    background: var(--color-gold-pale);
-    border-color: #ecd49d;
-  }
-
-  .agent-icon {
-    display: grid;
-    width: 52px;
-    height: 52px;
-    margin-bottom: 30px;
-    place-items: center;
-    color: var(--color-gold);
-    background: var(--color-paper);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-  }
-
-  .agent-state {
-    position: absolute;
-    top: 32px;
-    right: 32px;
-    padding: 7px 11px;
-    color: var(--color-green);
-    background: var(--color-green-pale);
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 700;
-  }
-
-  .agent-card > strong {
-    display: block;
-    padding-top: 18px;
-    margin-top: 26px;
-    color: var(--color-ink);
-    border-top: 1px solid var(--color-border);
+    margin: 0;
+    font-size: 0.74rem;
     line-height: 1.4;
   }
 
-  .agent-card > strong b {
-    color: var(--color-gold);
-    font-size: 1.45rem;
-    font-variant-numeric: tabular-nums;
+  .expertise-list p {
+    color: #aebdd0;
   }
 
-  .agent-card > small {
-    display: flex;
-    min-height: 44px;
-    align-items: center;
-    gap: 8px;
-    margin-top: 18px;
-    color: var(--color-ink);
-    font-size: 0.86rem;
-    font-weight: 700;
+  .expertise-list strong {
+    margin-top: 4px;
+    color: var(--color-gold-soft);
   }
 
-  .agent-next {
+  .compact-heading {
+    margin-bottom: 30px;
+  }
+
+  .technology-owner {
+    padding-bottom: 0;
+  }
+
+  .technology-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 42px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .technology-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: 26px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .technology-card-head {
+    display: flex;
+    min-height: 48px;
     align-items: center;
-    padding: 28px 32px;
-    margin-top: 18px;
+    gap: 12px;
+  }
+
+  .technology-card-head h3 {
+    margin: 0;
+    font-size: 1.18rem;
+  }
+
+  .technology-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    place-items: center;
+    color: var(--color-gold);
+    background: var(--color-gold-pale);
+    border-radius: 12px;
+  }
+
+  .operation-flow {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    margin: 24px 0;
+    list-style: none;
+  }
+
+  .operation-flow li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    padding-bottom: 18px;
+  }
+
+  .operation-flow li:not(:last-child)::after {
+    position: absolute;
+    top: 22px;
+    bottom: 3px;
+    left: 11px;
+    width: 1px;
+    background: var(--color-border-strong);
+    content: "";
+  }
+
+  .operation-flow li:last-child {
+    padding-bottom: 0;
+  }
+
+  .operation-flow span {
+    color: var(--color-gold);
+    font-size: 0.66rem;
+    font-weight: 750;
+  }
+
+  .operation-flow strong {
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .technology-metric {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: center;
+    padding-top: 18px;
+    margin-top: auto;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .technology-metric strong {
+    color: var(--color-gold);
+    font-size: clamp(1.7rem, 2.7vw, 2.35rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .technology-metric span {
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .control-layer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 22px;
+    margin-top: 14px;
+    color: white;
+    background: var(--color-ink);
+    border-radius: var(--radius-lg);
+  }
+
+  .control-layer > div {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .control-layer > div > svg,
+  .control-arrow {
+    color: var(--color-gold-soft);
+  }
+
+  .control-layer span,
+  .control-layer strong {
+    display: block;
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .control-layer span {
+    color: #b8c5d6;
+  }
+
+  .control-layer strong {
+    color: white;
+  }
+
+  .next-contours {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: 28px;
+    align-items: center;
+    padding: 20px 24px;
+    margin-top: 14px;
     background: var(--color-paper);
     border: 1px dashed var(--color-border-strong);
     border-radius: var(--radius-lg);
   }
 
-  .agent-next h3,
-  .agent-next p {
+  .next-contours h3,
+  .next-contours .section-kicker {
     margin-bottom: 0;
   }
 
-  .project-result-strip {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    margin-top: 18px;
-    overflow: hidden;
-    background: var(--color-border);
+  .next-contours h3 {
+    margin-top: 5px;
+    font-size: 1.05rem;
+  }
+
+  .next-contours ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .next-contours li {
+    padding: 8px 12px;
+    background: white;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-  }
-
-  .project-result-strip > div {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 20px;
-    align-items: center;
-    padding: 28px;
-    background: var(--color-surface);
-  }
-
-  .project-result-strip strong,
-  .network-facts strong,
-  .case-facts strong {
-    font-variant-numeric: tabular-nums;
-  }
-
-  .project-result-strip strong {
-    color: var(--color-gold);
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    line-height: 1;
-  }
-
-  .project-result-strip span {
-    color: var(--color-text);
-    font-size: 0.86rem;
-    line-height: 1.45;
-  }
-
-  .proof-heading > p {
-    color: #c3cfde;
-  }
-
-  .network-facts {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .network-facts > div {
-    min-height: 150px;
-    padding: 24px;
-    background: rgb(255 255 255 / 0.055);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    border-radius: var(--radius-md);
-  }
-
-  .network-facts strong,
-  .network-facts span {
-    display: block;
-  }
-
-  .network-facts strong {
-    margin-bottom: 30px;
-    color: var(--color-gold-soft);
-    font-size: clamp(1.55rem, 3vw, 2.35rem);
-    line-height: 1;
-  }
-
-  .network-facts span {
-    color: #c3cfde;
-    font-size: 0.86rem;
-    line-height: 1.4;
-  }
-
-  .partner-case {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(460px, 1.2fr);
-    gap: 48px;
-    align-items: center;
-    padding: 34px;
-    margin-top: 18px;
-    background: rgb(255 255 255 / 0.055);
-    border: 1px solid rgb(245 201 121 / 0.3);
-    border-radius: var(--radius-lg);
-  }
-
-  .case-label {
-    margin-bottom: 8px;
-    color: var(--color-gold-soft) !important;
-    font-size: 0.72rem;
-    font-weight: 720;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .partner-case h3 {
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-  }
-
-  .partner-case p:last-child {
-    margin-bottom: 0;
-    color: #c3cfde;
-  }
-
-  .case-facts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-
-  .case-facts > div {
-    padding: 22px;
-    background: rgb(15 23 42 / 0.45);
-    border-radius: var(--radius-md);
-  }
-
-  .case-facts strong,
-  .case-facts span {
-    display: block;
-  }
-
-  .case-facts strong {
-    margin-bottom: 7px;
-    color: white;
-    font-size: 1.55rem;
-  }
-
-  .case-facts span {
-    color: #9dafc4;
-    font-size: 0.78rem;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 650;
   }
 
   .evidence-note {
     max-width: 900px;
-    margin: 18px 0 0;
-    color: #8194ad !important;
-    font-size: 0.72rem;
-  }
-
-  .integration-timeline {
-    position: relative;
-  }
-
-  .integration-timeline::before {
-    position: absolute;
-    top: 29px;
-    right: 16%;
-    left: 16%;
-    height: 1px;
-    background: var(--color-border-strong);
-    content: "";
-  }
-
-  .integration-timeline article {
-    position: relative;
-    padding: 28px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .timeline-head {
-    display: flex;
-    min-height: 44px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 42px;
-  }
-
-  .timeline-head span {
-    display: grid;
-    width: 40px;
-    height: 40px;
-    place-items: center;
-    color: var(--color-gold);
-    background: var(--color-gold-pale);
-    border: 1px solid #ecd49d;
-    border-radius: 50%;
-    font-size: 0.74rem;
-    font-weight: 720;
-  }
-
-  .timeline-head strong {
+    margin: 12px 0 0;
     color: var(--color-muted);
-    font-size: 0.8rem;
+    font-size: 0.68rem;
   }
 
-  .integration-timeline p {
-    margin-bottom: 0;
-  }
-
-  .participation-panel {
+  .owner-shift-grid {
     display: grid;
-    grid-template-columns: minmax(240px, 0.5fr) minmax(0, 1.5fr);
-    gap: clamp(44px, 8vw, 100px);
+    grid-template-columns: minmax(0, 0.85fr) minmax(500px, 1.15fr);
+    gap: clamp(42px, 7vw, 92px);
     align-items: center;
-    padding: clamp(36px, 6vw, 72px);
-    background: var(--color-surface);
-    border: 1px solid #eadfc9;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
   }
 
-  .participation-number {
-    display: grid;
-    min-height: 250px;
-    place-content: center;
-    text-align: center;
+  .owner-shift-panel {
+    padding-block: clamp(56px, 7vw, 92px);
+    margin-top: clamp(64px, 8vw, 110px);
     background: var(--color-ink);
-    border-radius: var(--radius-lg);
   }
 
-  .participation-number span,
-  .participation-number strong {
-    display: block;
-  }
-
-  .participation-number span {
-    color: var(--color-gold-soft);
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .participation-number strong {
+  .owner-shift h2 {
     color: white;
-    font-size: clamp(4rem, 8vw, 7rem);
-    line-height: 1;
   }
 
-  .check-list {
+  .owner-shift p {
+    color: #bac7d7;
+  }
+
+  .value-path {
     display: grid;
-    gap: 10px;
-    padding: 0;
-    margin: 28px 0 0;
-    list-style: none;
+    grid-template-columns: minmax(0, 0.65fr) auto minmax(0, 1.35fr);
+    gap: 14px;
+    align-items: stretch;
   }
 
-  .check-list li {
-    display: grid;
-    grid-template-columns: 22px 1fr;
-    gap: 10px;
-    align-items: start;
+  .value-path > svg {
+    align-self: center;
+    color: var(--color-gold-soft);
   }
 
-  .check-list svg {
-    margin-top: 3px;
-    color: var(--color-gold);
-  }
-
-  .next-step {
-    border-bottom: 1px solid rgb(255 255 255 / 0.08);
-  }
-
-  .next-step-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .next-step-grid article {
-    display: flex;
-    min-height: 410px;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: clamp(28px, 4vw, 42px);
+  .value-source,
+  .value-result {
+    padding: 24px;
     background: rgb(255 255 255 / 0.055);
     border: 1px solid rgb(255 255 255 / 0.12);
     border-radius: var(--radius-lg);
   }
 
-  .next-step-grid article > span {
-    margin-bottom: 34px;
+  .value-source > span,
+  .value-result > span {
+    display: block;
+    margin-bottom: 20px;
     color: var(--color-gold-soft);
-    font-size: 0.74rem;
-    font-weight: 720;
+    font-size: 0.7rem;
+    font-weight: 750;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .next-step-grid li {
-    color: #c3cfde;
+  .value-source strong {
+    color: white;
+    font-size: 1.05rem;
+    line-height: 1.45;
   }
 
-  .next-step-grid .button {
-    margin-top: auto;
+  .value-result ul {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  @media (max-width: 1060px) {
-    .growth-layout,
-    .partner-case,
-    .network-snapshot {
+  .value-result li {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    color: white;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .value-result li svg {
+    margin-top: 2px;
+    color: var(--color-gold-soft);
+  }
+
+  .decision-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .partner-faq-panel {
+    padding: clamp(28px, 4vw, 48px);
+    margin-top: clamp(50px, 7vw, 88px);
+    background: var(--color-warm);
+    border: 1px solid #efe7d8;
+    border-radius: var(--radius-xl);
+  }
+
+  .decision-list li {
+    min-width: 0;
+    padding: 22px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .decision-list span,
+  .decision-list strong {
+    display: block;
+  }
+
+  .decision-list span {
+    margin-bottom: 32px;
+    color: var(--color-gold);
+    font-size: 0.7rem;
+    font-weight: 750;
+  }
+
+  .decision-list strong {
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .final-step {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .final-step-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.62fr) minmax(0, 1.38fr);
+    gap: clamp(40px, 7vw, 88px);
+    align-items: start;
+  }
+
+  .final-step-copy {
+    position: sticky;
+    top: 110px;
+  }
+
+  .final-step-copy h2 {
+    font-size: clamp(2.1rem, 3.7vw, 3.6rem);
+  }
+
+  .final-step-copy .button {
+    min-height: 50px;
+    margin-top: 12px;
+  }
+
+  .partner-form-shell {
+    min-width: 0;
+  }
+
+  :global(#partner-form .form-panel > .section-kicker) {
+    display: none;
+  }
+
+  @media (max-width: 1120px) {
+    .partner-hero-grid,
+    .owner-shift-grid {
       grid-template-columns: 1fr;
     }
 
-    .network-facts {
-      grid-template-columns: repeat(2, 1fr);
+    .opportunity-map {
+      max-width: 820px;
     }
 
-    .partner-case {
-      gap: 28px;
+    .decision-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 860px) {
-    .why-grid,
-    .role-ladder,
-    .integration-timeline {
+    .technology-grid {
       grid-template-columns: 1fr;
     }
 
-    .why-card {
-      min-height: auto;
+    .technology-card {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+      column-gap: 24px;
     }
 
-    .why-card > span,
-    .role-ladder article > span {
-      margin-bottom: 28px;
+    .technology-card-head {
+      grid-column: 1;
     }
 
-    .integration-timeline::before {
-      display: none;
+    .operation-flow {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      margin: 0;
     }
 
-    .participation-panel {
+    .technology-metric {
+      grid-column: 1;
+    }
+
+    .control-layer {
       grid-template-columns: 1fr;
     }
 
-    .participation-number {
-      min-height: 200px;
+    .control-arrow {
+      margin-left: 10px;
+      transform: rotate(90deg);
+    }
+
+    .final-step-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .final-step-copy {
+      position: static;
     }
   }
 
   @media (max-width: 680px) {
-    .agent-grid,
-    .next-step-grid,
-    .project-result-strip,
-    .agent-next,
-    .case-facts,
-    .network-facts {
+    .partner-hero h1 {
+      font-size: clamp(2.45rem, 12vw, 3.2rem);
+    }
+
+    .hero-actions,
+    .map-heading,
+    .next-contours,
+    .technology-card,
+    .value-path {
       grid-template-columns: 1fr;
     }
 
-    .growth-comparison {
+    .hero-actions .button {
+      min-height: 50px;
+    }
+
+    .opportunity-map {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+    }
+
+    .scale-facts {
       grid-template-columns: 1fr;
     }
 
-    .comparison-arrow {
-      justify-content: start;
-      padding-left: 20px;
+    .scale-facts div {
+      display: grid;
+      grid-template-columns: minmax(110px, 0.5fr) 1fr;
+      gap: 12px;
+      align-items: center;
     }
 
-    .comparison-arrow svg {
+    .scale-facts strong {
+      margin: 0;
+    }
+
+    .technology-card {
+      padding: 22px;
+    }
+
+    .technology-card-head,
+    .operation-flow,
+    .technology-metric {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .operation-flow {
+      margin: 24px 0;
+    }
+
+    .next-contours ul {
+      justify-content: flex-start;
+    }
+
+    .value-path > svg {
       transform: rotate(90deg);
     }
 
-    .agent-card {
-      min-height: auto;
-      padding: 26px;
-    }
-
-    .agent-state {
-      top: 26px;
-      right: 26px;
-    }
-
-    .agent-next,
-    .project-result-strip > div {
-      gap: 16px;
-      padding: 24px;
-    }
-
-    .partner-case,
-    .participation-panel {
-      padding: 26px;
-    }
-
-    .network-facts > div {
-      min-height: auto;
-    }
-
-    .network-facts strong {
-      margin-bottom: 12px;
-    }
-
-    .next-step-grid article {
-      min-height: auto;
-    }
-
-    .next-step-grid .button {
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .map-canvas {
-      min-height: 440px;
-    }
-
-    .map-node-main { top: 42%; left: 8%; }
-    .map-node-spb { top: 13%; left: 8%; }
-    .map-node-open { top: 15%; right: 5%; }
-    .map-node-kz { right: 5%; bottom: 24%; }
-    .map-node-uz { left: 12%; bottom: 5%; }
-
-    .segment-price-grid {
+    .decision-list {
       grid-template-columns: 1fr;
+    }
+
+    .decision-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .decision-list span {
+      margin: 0;
+    }
+
+    .final-step-copy .button {
+      width: 100%;
     }
   }
 </style>

@@ -2,14 +2,15 @@
 interface Props {
   mode?: "client" | "partner" | "enterprise";
   title?: string;
+  submitLabel?: string;
 }
 
-const { mode = "client", title = "Определить важные сигналы и обсудить сопровождение" } = Astro.props;
-const submitLabel = mode === "partner"
+const { mode = "client", title = "Определить важные сигналы и обсудить сопровождение", submitLabel: customSubmitLabel } = Astro.props;
+const submitLabel = customSubmitLabel ?? (mode === "partner"
   ? "Обсудить партнёрство конфиденциально"
   : mode === "enterprise"
     ? "Обсудить задачу в вашем контуре"
-    : "Определить важные сигналы";
+    : "Определить важные сигналы");
 ---
 
 <div class="form-panel">
