@@ -8,14 +8,14 @@ export const site = {
 
 export const navigation = [
   { href: "/", label: "Увидеть важное" },
-  { href: "/buhgalterskoe-soprovozhdenie/", label: "Учёт как база" },
-  { href: "/kak-rabotaet/", label: "Как работает" },
-  { href: "/buhgalterskim-kompaniyam/", label: "Партнёрам" },
+  { href: "/buhgalterskoe-soprovozhdenie/", label: "Наладить учёт" },
+  { href: "/kak-rabotaet/", label: "Понять, как это работает" },
+  { href: "/buhgalterskim-kompaniyam/", label: "Стать партнёром" },
 ];
 
 export const contentReviewedAt = {
-  iso: "2026-07-11",
-  label: "11 июля 2026 года"
+  iso: "2026-07-13",
+  label: "13 июля 2026 года"
 } as const;
 
 export const implementationMetrics = [
@@ -63,6 +63,24 @@ export const accountingAgents = [
     scope: "Создаёт сверку в 1С, сопоставляет данные и выделяет расхождения.",
     human: "Расхождение или спорная операция сразу передаются специалисту.",
     href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/"
+  },
+  {
+    slug: "zakrytie-perioda",
+    icon: "shield",
+    title: "Закрытие периода",
+    result: "Каждая стандартная проверка получает статус и проверяемое основание.",
+    scope: "Выполняет согласованный перечень проверок и собирает отклонения перед закрытием.",
+    human: "Отклонения и профессиональные решения остаются у ответственного бухгалтера.",
+    href: "/avtomatizatsiya-ucheta/zakrytie-perioda/"
+  },
+  {
+    slug: "zarplata-i-kadry",
+    icon: "person",
+    title: "Зарплата и кадры",
+    result: "Расчёт и кадровые события проходят единый перечень проверок.",
+    scope: "Собирает кадровые изменения, проверяет данные и выполняет расчёт по настроенным правилам.",
+    human: "Нетиповые начисления и неполные кадровые данные проверяет специалист.",
+    href: "/avtomatizatsiya-ucheta/zarplata-i-kadry/"
   },
   {
     slug: "kommunikatsii-s-klientami",
@@ -445,6 +463,8 @@ export const allStaticRoutes = [
   "/avtomatizatsiya-ucheta/bankovskie-operatsii/",
   "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/",
   "/avtomatizatsiya-ucheta/sverki-s-kontragentami/",
+  "/avtomatizatsiya-ucheta/zakrytie-perioda/",
+  "/avtomatizatsiya-ucheta/zarplata-i-kadry/",
   "/avtomatizatsiya-ucheta/kontrol-kachestva/",
   "/kak-formiruetsya-otvet/",
   "/dannye-i-istochniki/",

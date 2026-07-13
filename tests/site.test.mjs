@@ -33,6 +33,8 @@ const routes = [
   "avtomatizatsiya-ucheta/bankovskie-operatsii",
   "avtomatizatsiya-ucheta/kommunikatsii-s-klientami",
   "avtomatizatsiya-ucheta/sverki-s-kontragentami",
+  "avtomatizatsiya-ucheta/zakrytie-perioda",
+  "avtomatizatsiya-ucheta/zarplata-i-kadry",
   "avtomatizatsiya-ucheta/kontrol-kachestva",
   "kak-formiruetsya-otvet",
   "dannye-i-istochniki",
@@ -107,15 +109,19 @@ test("accounting page leads from a reliable foundation to agents, 1C and an audi
   assert.match(html, /Почти сразу/);
   assert.match(html, /По единым правилам/);
   assert.match(html, /Ничего не теряется/);
-  assert.equal(count(html, /class="agent-card"/g), 4);
+  assert.equal(count(html, /class="agent-card"/g), 6);
   assert.equal(count(html, /id="rezultaty-vnedreniy"/g), 1);
   assert.match(html, /80% документов/);
   assert.match(html, /98% — точность сопоставления/);
   assert.match(html, /До 95% сверок/);
+  assert.match(html, /Каждая стандартная проверка получает статус/);
+  assert.match(html, /Расчёт и кадровые события проходят единый перечень проверок/);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/bankovskie-operatsii\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/kommunikatsii-s-klientami\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/sverki-s-kontragentami\//);
+  assert.match(html, /href="\/avtomatizatsiya-ucheta\/zakrytie-perioda\//);
+  assert.match(html, /href="\/avtomatizatsiya-ucheta\/zarplata-i-kadry\//);
   assert.match(html, /1С на обслуживании/);
   assert.match(html, /Лицензии и запуск/);
   assert.match(html, /Облако или контур компании/);
@@ -164,21 +170,56 @@ test("mechanics page starts with a real operation and distinguishes Aivel from r
   assert.doesNotMatch(html, /Покажем один процесс от начала до результата/);
 });
 
-test("partner page leads with partnership and states the control stake once", async () => {
+test("partner page tells one clear story from value to the next step", async () => {
   const html = await readFile(routeFile("buhgalterskim-kompaniyam"), "utf8");
+  assert.match(html, /Расти без найма/);
+  assert.match(html, /Стать финансовым партнёром для клиента/);
+  assert.match(html, /В чём суть партнёрства/);
+  assert.match(html, /Что получает собственник/);
+  assert.match(html, /Почему сейчас/);
+  assert.match(html, /Частые вопросы/);
+  assert.match(html, /Следующий шаг/);
+  assert.equal(count(html, /class="partner-faq-item"/g), 6);
+  assert.match(html, /Не потеряю ли я контроль и не отстраните ли меня после сделки/);
+  assert.match(html, /корпоративный договор/);
+  assert.match(html, /Партнёр отвечает за рост, новую выручку, развитие существующей базы и клиентский сервис/);
+  assert.match(html, /Aivel отвечает за технологии, организацию производственного процесса, его эффективность и целевую рентабельность/);
+  assert.match(html, /Как убедиться, что технология действительно работает/);
+  assert.match(html, /в бухгалтерских компаниях и у крупных корпоративных клиентов/);
+  assert.match(html, /по согласованию с действующим клиентом и с соблюдением конфиденциальности/);
+  assert.match(html, /сама сделка не включает гарантированный поток новых клиентов/);
+  assert.match(html, /Как проходит покупка доли и сама сделка/);
+  assert.match(html, /Обычно это занимает три–четыре недели/);
+  assert.match(html, /Можно ли продать меньше 51% или провести сделку поэтапно/);
+  assert.match(html, /Продажа 100% и согласованный выход собственника/);
+  assert.match(html, /От чего зависит оценка компании/);
+  assert.match(html, /концентрация выручки на отдельных клиентах/);
   assert.match(html, /400\+ млн ₽/);
   assert.match(html, /1 000\+/);
   assert.match(html, /3 страны/);
-  assert.match(html, /География/);
-  assert.match(html, /Отрасли/);
-  assert.match(html, /Функции/);
-  assert.match(html, /Пять вопросов, которые действительно важно прояснить/);
-  assert.match(html, /Расскажите о компании — мы оценим точку совпадения/);
-  assert.equal(count(html, /51%/g), 1);
-  assert.ok(html.indexOf('class="button button-primary" href="#partner-form"') < html.indexOf('class="button button-secondary" href="#technology"'));
-  assert.doesNotMatch(html, /До обсуждения условий/);
-  const footer = html.split("<footer")[1] ?? "";
+  assert.match(html, /Новые регионы/);
+  assert.match(html, /Новые отрасли/);
+  assert.match(html, /Новые специализации/);
+  assert.match(html, /Расскажите о компании — найдём точку совпадения/);
+  assert.ok(count(html, /51%/g) >= 2);
+  assert.ok(html.indexOf("В чём ценность") < html.indexOf("В чём суть партнёрства"));
+  assert.ok(html.indexOf("В чём суть партнёрства") < html.indexOf("Что получает собственник"));
+  assert.ok(html.indexOf("Что получает собственник") < html.indexOf("Почему сейчас"));
+  assert.ok(html.indexOf("Почему сейчас") < html.indexOf("Частые вопросы"));
+  assert.ok(html.indexOf("Частые вопросы") < html.indexOf("Следующий шаг"));
+  assert.doesNotMatch(html, /Расти без новой рутины|Пять вопросов, которые действительно важно прояснить|Следующие контуры|До обсуждения условий/);
+  const footer = html.split("<footer")[1]?.split("</footer>")[0] ?? "";
+  const header = html.split('<header class="site-header"')[1]?.split("</header>")[0] ?? "";
+  for (const label of ["Увидеть важное", "Наладить учёт", "Понять, как это работает", "Стать партнёром"]) {
+    assert.match(header, new RegExp(label));
+    assert.match(footer, new RegExp(label));
+  }
+  assert.doesNotMatch(header, />Учёт как база<|>Как работает<|>Партнёрам</);
   assert.doesNotMatch(footer, /Обсудить партнёрство/);
+  assert.match(footer, /Основное/);
+  assert.match(footer, /Учёт и ИИ/);
+  assert.match(footer, /Доверие и связь/);
+  assert.doesNotMatch(footer, /Деньги и обязательства|Прибыль и расходы|Рост, найм и запас денег/);
 });
 
 test("assistant pages explain one complete process in four screens", async () => {
@@ -187,6 +228,8 @@ test("assistant pages explain one complete process in four screens", async () =>
     "bankovskie-operatsii",
     "kommunikatsii-s-klientami",
     "sverki-s-kontragentami",
+    "zakrytie-perioda",
+    "zarplata-i-kadry",
     "kontrol-kachestva"
   ];
 
@@ -201,6 +244,18 @@ test("assistant pages explain one complete process in four screens", async () =>
     assert.match(html, /Запросить демонстрацию/);
     assert.match(html, /drive\.google\.com\/file\/d\//);
   }
+});
+
+test("new accounting assistants describe the process without invented results", async () => {
+  const closing = await readFile(routeFile("avtomatizatsiya-ucheta/zakrytie-perioda"), "utf8");
+  const payroll = await readFile(routeFile("avtomatizatsiya-ucheta/zarplata-i-kadry"), "utf8");
+  assert.match(closing, /Стандартные проверки периода — по одному регламенту и без пропусков/);
+  assert.match(closing, /не объявляет период закрытым самостоятельно/i);
+  assert.match(payroll, /Расчёт зарплаты и кадровый учёт/);
+  assert.match(payroll, /итоговая выплата и отчётность остаются под контролем уполномоченного специалиста/i);
+  assert.match(closing, /Первый запуск/);
+  assert.match(payroll, /Первый запуск/);
+  assert.doesNotMatch(`${closing}${payroll}`, />Пилот</);
 });
 
 test("important-change page presents proactive messages instead of a question interface", async () => {
@@ -245,10 +300,14 @@ test("machine-readable discovery files include question pages", async () => {
   assert.match(sitemap, /\/vazhnoe\//);
   assert.doesNotMatch(sitemap, /\/rezultaty\//);
   assert.match(sitemap, /\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
+  assert.match(sitemap, /\/avtomatizatsiya-ucheta\/zakrytie-perioda\//);
+  assert.match(sitemap, /\/avtomatizatsiya-ucheta\/zarplata-i-kadry\//);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/voprosy\/<\/loc>/);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/istorii\/<\/loc>/);
   assert.match(robots, /OAI-SearchBot/);
   assert.match(llms, /Публичные примеры используют обезличенные учебные данные/);
+  assert.match(llms, /\/avtomatizatsiya-ucheta\/zakrytie-perioda\//);
+  assert.match(llms, /\/avtomatizatsiya-ucheta\/zarplata-i-kadry\//);
   assert.match(llms, /не гарантирует обнаружение любого события/i);
   assert.doesNotMatch(llms, /\/rezultaty\//);
 });

@@ -2430,11 +2430,6 @@ p {
     font-size: 0.78rem;
   }
 
-  .desktop-nav a:nth-child(2),
-  .desktop-nav a:nth-child(5) {
-    display: none;
-  }
-
   .hero-grid {
     grid-template-columns: minmax(0, 0.88fr) minmax(470px, 1.12fr);
     gap: 48px;

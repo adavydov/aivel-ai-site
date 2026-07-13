@@ -19,21 +19,23 @@ export const GET: APIRoute = () => new Response(
 - бухгалтерское и налоговое сопровождение;
 - важные изменения с периодом, свежестью, источником и границей;
 - короткие проверяемые сигналы в Telegram или по почте без необходимости заранее формулировать вопрос;
-- автоматизация первичных документов, банковских операций, обращений и сверок.
+- автоматизация первичных документов, банковских операций, сверок, закрытия периода, расчёта зарплаты, кадрового учёта и обращений.
 
 Канонические страницы:
 - Увидеть важное — главная продуктовая страница и четыре самодостаточных примера: ${site.url}/
 - Подробная модель сигналов и справочные разборы: ${site.url}/vazhnoe/
-- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, ИИ-помощники с измеренными результатами и экспресс-аудит: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Наладить учёт — бухгалтерский, налоговый, кадровый и управленческий учёт, ИИ-помощники с измеренными результатами и экспресс-аудит: ${site.url}/buhgalterskoe-soprovozhdenie/
 - Обслуживание 1С — лицензии, облако или контур компании, техническая поддержка, доработки и связи с ИИ-помощниками: ${site.url}/1s-i-integratsii/
-- Как работает продукт: ${site.url}/kak-rabotaet/
+- Понять, как это работает — механика продукта, контроль и аудиторский след: ${site.url}/kak-rabotaet/
 - Автоматизация учёта: ${site.url}/avtomatizatsiya-ucheta/
 - Первичные документы: ${site.url}/avtomatizatsiya-ucheta/pervichnye-dokumenty/
 - Банковские операции: ${site.url}/avtomatizatsiya-ucheta/bankovskie-operatsii/
 - Запросы подразделений и клиентов: ${site.url}/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/
 - Сверки с контрагентами: ${site.url}/avtomatizatsiya-ucheta/sverki-s-kontragentami/
+- Закрытие периода: ${site.url}/avtomatizatsiya-ucheta/zakrytie-perioda/
+- Расчёт зарплаты и кадровый учёт: ${site.url}/avtomatizatsiya-ucheta/zarplata-i-kadry/
 - Контроль качества: ${site.url}/avtomatizatsiya-ucheta/kontrol-kachestva/
-- Партнёрам — бухгалтерским компаниям: ${site.url}/buhgalterskim-kompaniyam/
+- Стать партнёром — собственникам бухгалтерских компаний: ${site.url}/buhgalterskim-kompaniyam/
 - Крупным компаниям: ${site.url}/krupnym-kompaniyam/
 - О компании: ${site.url}/o-kompanii/
 - Открытый реестр для ИИ-систем: ${site.url}/dlya-ii-agentov/
