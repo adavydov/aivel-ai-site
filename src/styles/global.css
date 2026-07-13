@@ -50,7 +50,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
   color: var(--color-ink);
   background:
     radial-gradient(circle at 84% 3%, rgb(245 201 121 / 0.16), transparent 26rem),
@@ -462,6 +462,23 @@ p {
 .mobile-menu-button,
 .mobile-menu {
   display: none;
+}
+
+.menu-icon {
+  display: grid;
+  place-items: center;
+}
+
+.menu-icon-close {
+  display: none;
+}
+
+.mobile-menu-button[aria-expanded="true"] .menu-icon-open {
+  display: none;
+}
+
+.mobile-menu-button[aria-expanded="true"] .menu-icon-close {
+  display: grid;
 }
 
 /* Hero */
@@ -2755,6 +2772,16 @@ p {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 36px 26px;
+    padding-block: 42px;
+  }
+
+  .footer-lead {
+    gap: 24px;
+    padding-block: 48px;
+  }
+
+  .footer-lead h2 {
+    font-size: clamp(2.15rem, 11vw, 3.25rem);
   }
 
   .footer-brand,

@@ -106,11 +106,12 @@ test("accounting page shows the complete foundation from sources to signal", asy
   assert.doesNotMatch(html, /1С и экспресс-аудит/);
 });
 
-test("results page starts with evidence without repeated caveat blocks", async () => {
+test("results page starts with the decision-maker outcome and then proves the accounting layer", async () => {
   const html = await readFile(routeFile("rezultaty"), "utf8");
-  assert.match(html, /Измеренные результаты ИИ‑помощников в учёте/);
-  assert.match(html, /результаты базового слоя Aivel/);
-  assert.match(html, /Надёжно выполненный учёт — фундамент/);
+  assert.match(html, /Увидеть изменение\. Понять причину\. Успеть действовать/);
+  assert.match(html, /Учебный пример/);
+  assert.match(html, /Что уже измерено во внедрениях/);
+  assert.ok(html.indexOf("Результат для руководителя") < html.indexOf("Что уже измерено во внедрениях"));
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/bankovskie-operatsii\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/kommunikatsii-s-klientami\//);
@@ -121,17 +122,19 @@ test("results page starts with evidence without repeated caveat blocks", async (
 
 test("mechanics page starts with a real operation and distinguishes Aivel from recognition", async () => {
   const html = await readFile(routeFile("kak-rabotaet"), "utf8");
-  assert.match(html, /ИИ выполняет операцию\. Человек подключается к исключению/);
+  assert.match(html, /ИИ выполняет типовую операцию\. Человек решает исключение/);
+  assert.match(html, /Учебный мини-кейс/);
+  assert.match(html, /Расхождение \+20 тыс\. ₽/);
   assert.match(html, /изолированном российском контуре или внутри контура компании/);
   assert.match(html, /Аудиторский след/);
   assert.match(html, /Обычное распознавание закрывает фрагмент\. Aivel — процесс целиком/);
   assert.match(html, /От источника — до результата в 1С/);
-  assert.ok(html.indexOf("Операция в продукте") < html.indexOf("Контроль по устройству"));
-  assert.ok(html.indexOf("Контроль по устройству") < html.indexOf("Не только распознавание"));
+  assert.ok(html.indexOf("Учебный мини-кейс") < html.indexOf("Почему можно доверять"));
+  assert.ok(html.indexOf("Почему можно доверять") < html.indexOf("Не только распознавание"));
   assert.doesNotMatch(html, /Покажем один процесс от начала до результата/);
 });
 
-test("partner page keeps one opportunity story without control-stake repetition", async () => {
+test("partner page leads with partnership and states the control stake once", async () => {
   const html = await readFile(routeFile("buhgalterskim-kompaniyam"), "utf8");
   assert.match(html, /400\+ млн ₽/);
   assert.match(html, /1 000\+/);
@@ -140,8 +143,9 @@ test("partner page keeps one opportunity story without control-stake repetition"
   assert.match(html, /Отрасли/);
   assert.match(html, /Функции/);
   assert.match(html, /Пять вопросов, которые действительно важно прояснить/);
-  assert.match(html, /Посмотрите технологию или расскажите о своей компании/);
-  assert.doesNotMatch(html, /51%|контрольн(?:ая|ой|ую) дол/i);
+  assert.match(html, /Расскажите о компании — мы оценим точку совпадения/);
+  assert.equal(count(html, /51%/g), 1);
+  assert.ok(html.indexOf('class="button button-primary" href="#partner-form"') < html.indexOf('class="button button-secondary" href="#technology"'));
   assert.doesNotMatch(html, /До обсуждения условий/);
   const footer = html.split("<footer")[1] ?? "";
   assert.doesNotMatch(footer, /Обсудить партнёрство/);
@@ -232,7 +236,7 @@ test("real product demonstrations are attached to the relevant pages", async () 
   const primary = await readFile(routeFile("avtomatizatsiya-ucheta/pervichnye-dokumenty"), "utf8");
   const bank = await readFile(routeFile("avtomatizatsiya-ucheta/bankovskie-operatsii"), "utf8");
   const reconciliation = await readFile(routeFile("avtomatizatsiya-ucheta/sverki-s-kontragentami"), "utf8");
-  assert.match(how, /drive\.google\.com\/file\/d\/13shhsfSNrURD23l5y-2YZDhtITJzx_he\/preview/);
+  assert.match(how, /drive\.google\.com\/file\/d\/1mjxxrczIp2mPWiIwWw1o2AerElWcS0vB\/preview/);
   assert.match(primary, /drive\.google\.com\/file\/d\/1mjxxrczIp2mPWiIwWw1o2AerElWcS0vB\/preview/);
   assert.match(bank, /drive\.google\.com\/file\/d\/1Brk_NX4ubphUg5mkhmDCxTWnTxE_De5A\/preview/);
   assert.match(bank, /общий обзор совместной работы нескольких помощников/i);

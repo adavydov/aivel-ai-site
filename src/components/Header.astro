@@ -3,7 +3,19 @@ import Icon from "./Icon.astro";
 import { navigation } from "../data/site";
 
 const path = Astro.url.pathname;
-const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith(href);
+const howItWorksPaths = [
+  "/avtomatizatsiya-ucheta/",
+  "/zashchita-dannyh/",
+  "/1s-i-integratsii/",
+  "/dannye-i-istochniki/",
+  "/kak-formiruetsya-otvet/",
+  "/ogranicheniya/"
+];
+const isActive = (href: string) => {
+  if (href === "/") return path === "/";
+  if (href === "/kak-rabotaet/" && howItWorksPaths.some((prefix) => path.startsWith(prefix))) return true;
+  return path.startsWith(href);
+};
 const isPartnerPage = path.startsWith("/buhgalterskim-kompaniyam/");
 const isAccountingPage = path.startsWith("/buhgalterskoe-soprovozhdenie/");
 const isEnterprisePage = [
@@ -14,9 +26,9 @@ const isEnterprisePage = [
 ].some((prefix) => path.startsWith(prefix));
 
 const contactCta = isPartnerPage
-  ? { label: "Обсудить партнёрство", topic: "partner" }
+  ? { label: "Оценить партнёрство", topic: "partner" }
   : isAccountingPage
-    ? { label: "Запросить аудит", topic: "client" }
+    ? { label: "Разобрать учёт", topic: "client" }
     : isEnterprisePage
       ? { label: "Обсудить внедрение", topic: "enterprise" }
       : null;
@@ -52,7 +64,8 @@ const contactCta = isPartnerPage
         aria-controls="mobile-menu"
         data-mobile-menu-button
       >
-        <Icon name="menu" size={24} />
+        <span class="menu-icon menu-icon-open"><Icon name="menu" size={24} /></span>
+        <span class="menu-icon menu-icon-close"><Icon name="close" size={24} /></span>
       </button>
     </div>
   </div>

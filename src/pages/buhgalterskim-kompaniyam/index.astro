@@ -129,11 +129,11 @@ const schema = [
     <div class="container partner-hero-grid">
       <div class="hero-copy">
         <p class="section-kicker">Собственникам бухгалтерских компаний</p>
-        <h1>Расти без новой операционной рутины. <span>Стать финансовым партнёром клиентов.</span></h1>
-        <p class="lead">Aivel объединяет сильные бухгалтерские компании и даёт им работающих ИИ-помощников. Технология выполняет типовые операции, команда разбирает исключения, а собственник тратит больше времени на деньги, риски и решения клиентов.</p>
+        <h1>Расти без новой рутины. <span>Стать финансовым партнёром клиентов.</span></h1>
+        <p class="lead">Aivel объединяет сильные бухгалтерские компании и даёт им работающих ИИ-помощников. Команда разбирает исключения, а собственник больше работает с деньгами, рисками и решениями клиентов.</p>
         <div class="hero-actions" aria-label="Следующие шаги">
-          <a class="button button-primary" href="#technology">Посмотреть технологию</a>
-          <a class="button button-secondary" href="#partner-form">Оценить партнёрство</a>
+          <a class="button button-primary" href="#partner-form">Оценить партнёрство</a>
+          <a class="button button-secondary" href="#technology">Посмотреть технологию</a>
         </div>
       </div>
 
@@ -161,6 +161,7 @@ const schema = [
             </article>
           ))}
         </div>
+        <p class="partnership-principle"><strong>Партнёрство с контрольной долей от 51%.</strong> Роль собственника и темп интеграции обсуждаем индивидуально.</p>
       </aside>
     </div>
   </header>
@@ -204,10 +205,9 @@ const schema = [
         </div>
 
         <div class="next-contours">
-          <div><p class="section-kicker">Следующие контуры</p><h3>Расширяем процессы без неподтверждённых обещаний.</h3></div>
+          <div><p class="section-kicker">Следующие контуры</p><h3>Подключаем новые процессы по той же схеме.</h3></div>
           <ul>{nextContours.map((item) => <li>{item}</li>)}</ul>
         </div>
-        <p class="evidence-note">Показатели относятся к измеренным контурам разных проектов. Для новой компании исходный уровень и критерии успеха определяются отдельно.</p>
       </div>
 
       <div class="owner-shift owner-shift-panel" aria-labelledby="owner-shift-title">
@@ -268,9 +268,8 @@ const schema = [
       <div class="container final-step-grid">
         <div class="final-step-copy">
           <p class="section-kicker">Следующий шаг</p>
-          <h2 id="next-step-title">Посмотрите технологию или расскажите о своей компании.</h2>
-          <p>На демонстрации покажем завершённые процессы в 1С и работу с исключениями. В анкете достаточно указать масштаб компании и вашу цель — без закрытых данных.</p>
-          <button class="button button-secondary" type="button" data-open-contact data-contact-topic="unknown">Записаться на демонстрацию</button>
+          <h2 id="next-step-title">Расскажите о компании — мы оценим точку совпадения.</h2>
+          <p>Достаточно указать масштаб, сильную экспертизу и вашу цель. На первом шаге закрытые данные не нужны.</p>
         </div>
         <div class="partner-form-shell">
           <LocalForm mode="partner" title="Короткая анкета о компании" submitLabel="Обсудить партнёрство конфиденциально" />
@@ -281,23 +280,22 @@ const schema = [
 
 <style>
   .partner-hero {
-    padding-top: clamp(24px, 4vw, 52px);
+    padding-block: clamp(22px, 3vw, 42px) clamp(48px, 6vw, 76px);
   }
 
   .partner-hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.82fr) minmax(520px, 1.18fr);
+    grid-template-columns: minmax(470px, 0.9fr) minmax(0, 1.1fr);
     gap: clamp(40px, 6vw, 82px);
     align-items: center;
   }
 
   .partner-hero h1 {
     max-width: 780px;
-    font-size: clamp(2.9rem, 4.3vw, 4.8rem);
+    font-size: clamp(2.7rem, 4vw, 4.35rem);
   }
 
   .partner-hero h1 span {
-    display: block;
     color: var(--color-gold);
   }
 
@@ -310,7 +308,7 @@ const schema = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     max-width: 650px;
-    margin-top: 30px;
+    margin-top: 24px;
   }
 
   .hero-actions .button {
@@ -387,14 +385,15 @@ const schema = [
 
   .expertise-list {
     display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
   }
 
   .expertise-list article {
     display: grid;
-    grid-template-columns: 34px 1fr;
+    grid-template-columns: 26px 1fr;
     gap: 12px;
-    padding: 14px;
+    padding: 12px;
     background: rgb(255 255 255 / 0.045);
     border: 1px solid rgb(255 255 255 / 0.1);
     border-radius: var(--radius-sm);
@@ -416,7 +415,7 @@ const schema = [
   .expertise-list strong {
     display: block;
     margin: 0;
-    font-size: 0.74rem;
+    font-size: 0.7rem;
     line-height: 1.4;
   }
 
@@ -429,11 +428,25 @@ const schema = [
     color: var(--color-gold-soft);
   }
 
+  .partnership-principle {
+    padding-top: 15px;
+    margin: 16px 0 0;
+    color: #aebdd0;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .partnership-principle strong {
+    color: white;
+  }
+
   .compact-heading {
     margin-bottom: 30px;
   }
 
   .technology-owner {
+    padding-top: clamp(64px, 7vw, 92px);
     padding-bottom: 0;
   }
 
@@ -620,13 +633,6 @@ const schema = [
     font-weight: 650;
   }
 
-  .evidence-note {
-    max-width: 900px;
-    margin: 12px 0 0;
-    color: var(--color-muted);
-    font-size: 0.68rem;
-  }
-
   .owner-shift-grid {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(500px, 1.15fr);
@@ -635,9 +641,15 @@ const schema = [
   }
 
   .owner-shift-panel {
-    padding-block: clamp(56px, 7vw, 92px);
-    margin-top: clamp(64px, 8vw, 110px);
+    width: min(100% - 48px, var(--container));
+    padding: clamp(30px, 4vw, 48px);
+    margin: clamp(26px, 4vw, 46px) auto 0;
     background: var(--color-ink);
+    border-radius: var(--radius-xl);
+  }
+
+  .owner-shift-panel > .container {
+    width: 100%;
   }
 
   .owner-shift h2 {
@@ -718,7 +730,7 @@ const schema = [
 
   .partner-faq-panel {
     padding: clamp(28px, 4vw, 48px);
-    margin-top: clamp(50px, 7vw, 88px);
+    margin-top: clamp(34px, 5vw, 58px);
     background: var(--color-warm);
     border: 1px solid #efe7d8;
     border-radius: var(--radius-xl);
@@ -792,6 +804,10 @@ const schema = [
       max-width: 820px;
     }
 
+    .expertise-list {
+      grid-template-columns: 1fr;
+    }
+
     .decision-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -863,18 +879,30 @@ const schema = [
     }
 
     .scale-facts {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .scale-facts div {
-      display: grid;
-      grid-template-columns: minmax(110px, 0.5fr) 1fr;
-      gap: 12px;
-      align-items: center;
+      display: block;
+      padding: 12px 9px;
     }
 
     .scale-facts strong {
-      margin: 0;
+      margin: 0 0 7px;
+      font-size: 1rem;
+    }
+
+    .scale-facts span {
+      font-size: 0.63rem;
+    }
+
+    .expertise-list article {
+      padding: 11px;
+    }
+
+    .owner-shift-panel {
+      width: min(100% - 28px, var(--container));
+      padding: 24px 18px;
     }
 
     .technology-card {
