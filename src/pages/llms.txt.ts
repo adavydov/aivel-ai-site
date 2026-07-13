@@ -24,7 +24,7 @@ export const GET: APIRoute = () => new Response(
 Канонические страницы:
 - Увидеть важное — главная продуктовая страница и четыре самодостаточных примера: ${site.url}/
 - Подробная модель сигналов и справочные разборы: ${site.url}/vazhnoe/
-- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, зарплата: ${site.url}/buhgalterskoe-soprovozhdenie/
+- Учёт как база — бухгалтерский, налоговый, кадровый и управленческий учёт, зарплата, измеренные результаты и доказательства по процессам: ${site.url}/buhgalterskoe-soprovozhdenie/
 - Обслуживание 1С и связи с системами: ${site.url}/1s-i-integratsii/
 - Как работает продукт: ${site.url}/kak-rabotaet/
 - Автоматизация учёта: ${site.url}/avtomatizatsiya-ucheta/
@@ -33,7 +33,6 @@ export const GET: APIRoute = () => new Response(
 - Запросы подразделений и клиентов: ${site.url}/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/
 - Сверки с контрагентами: ${site.url}/avtomatizatsiya-ucheta/sverki-s-kontragentami/
 - Контроль качества: ${site.url}/avtomatizatsiya-ucheta/kontrol-kachestva/
-- Измеренные результаты ИИ-помощников в учётных процессах: ${site.url}/rezultaty/
 - Партнёрам — бухгалтерским компаниям: ${site.url}/buhgalterskim-kompaniyam/
 - Крупным компаниям: ${site.url}/krupnym-kompaniyam/
 - О компании: ${site.url}/o-kompanii/

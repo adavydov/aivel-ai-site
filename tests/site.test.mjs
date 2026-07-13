@@ -39,7 +39,6 @@ const routes = [
   "1s-i-integratsii",
   "zashchita-dannyh",
   "ogranicheniya",
-  "rezultaty",
   "buhgalterskim-kompaniyam",
   "krupnym-kompaniyam",
   "o-kompanii",
@@ -82,6 +81,9 @@ test("homepage explains the product in three clear screens", async () => {
   assert.match(html, /Расчёт показателя/);
   assert.match(html, /Операции и источники/);
   assert.match(html, /Нужна проверка/);
+  assert.match(html, /Опыт команды/);
+  assert.match(html, /Знаем учётные процессы изнутри/);
+  assert.match(html, /Гольфстрим/);
   assert.match(html, /Записаться на демо/);
   assert.equal(count(html, /class="signal-slide"/g), 4);
   assert.doesNotMatch(html, /Что вы боитесь узнать|Посмотреть примеры сообщений|Разобрать ситуацию/);
@@ -103,21 +105,24 @@ test("accounting page shows the complete foundation from sources to signal", asy
   assert.match(html, /1С — не вид учёта, а система, в которой он ведётся/);
   assert.match(html, /Следующий контур/);
   assert.equal(count(html, /class="helper-tab"/g), 6);
-  assert.doesNotMatch(html, /1С и экспресс-аудит/);
-});
-
-test("results page starts with the decision-maker outcome and then proves the accounting layer", async () => {
-  const html = await readFile(routeFile("rezultaty"), "utf8");
-  assert.match(html, /Увидеть изменение\. Понять причину\. Успеть действовать/);
-  assert.match(html, /Учебный пример/);
   assert.match(html, /Что уже измерено во внедрениях/);
-  assert.ok(html.indexOf("Результат для руководителя") < html.indexOf("Что уже измерено во внедрениях"));
+  assert.match(html, /Доказательство по процессам/);
+  assert.match(html, /80–90%/);
+  assert.match(html, /до 30%/);
+  assert.match(html, /6–8 месяцев/);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/bankovskie-operatsii\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/kommunikatsii-s-klientami\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/sverki-s-kontragentami\//);
-  assert.doesNotMatch(html, /Важная граница|Показатель имеет смысл только вместе с периметром/);
-  assert.doesNotMatch(html, /Начать с измерения|class="final-cta"/);
+  assert.doesNotMatch(html, /1С и экспресс-аудит/);
+});
+
+test("legacy results route redirects to the accounting evidence", async () => {
+  const html = await readFile(routeFile("rezultaty"), "utf8");
+  assert.match(html, /http-equiv="refresh"/i);
+  assert.match(html, /\/buhgalterskoe-soprovozhdenie\//);
+  assert.match(html, /noindex/i);
+  assert.doesNotMatch(html, /Увидеть изменение\. Понять причину\. Успеть действовать/);
 });
 
 test("mechanics page starts with a real operation and distinguishes Aivel from recognition", async () => {
@@ -213,20 +218,22 @@ test("machine-readable discovery files include question pages", async () => {
   const llms = await readFile(path.join(dist, "llms.txt"), "utf8");
   for (const slug of questionSlugs) assert.match(sitemap, new RegExp(`/voprosy/${slug}/`));
   assert.match(sitemap, /\/vazhnoe\//);
-  assert.match(sitemap, /\/rezultaty\//);
+  assert.doesNotMatch(sitemap, /\/rezultaty\//);
   assert.match(sitemap, /\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/voprosy\/<\/loc>/);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/istorii\/<\/loc>/);
   assert.match(robots, /OAI-SearchBot/);
   assert.match(llms, /Публичные примеры используют обезличенные учебные данные/);
   assert.match(llms, /не гарантирует обнаружение любого события/i);
+  assert.doesNotMatch(llms, /\/rezultaty\//);
 });
 
 test("legacy hubs redirect without hiding question and solution pages", async () => {
   const redirects = await readFile(path.join(dist, "_redirects"), "utf8");
   assert.match(redirects, /^\/voprosy \/vazhnoe\/#voprosy 301$/m);
   assert.match(redirects, /^\/resheniya \/vazhnoe\/ 301$/m);
-  assert.match(redirects, /^\/istorii \/rezultaty\/ 301$/m);
+  assert.match(redirects, /^\/istorii \/ 301$/m);
+  assert.match(redirects, /^\/rezultaty \/buhgalterskoe-soprovozhdenie\/ 301$/m);
   assert.doesNotMatch(redirects, /\/voprosy\/\*/);
   assert.doesNotMatch(redirects, /\/resheniya\/\*/);
 });

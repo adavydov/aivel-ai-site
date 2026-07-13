@@ -10,7 +10,6 @@ export const navigation = [
   { href: "/", label: "Увидеть важное" },
   { href: "/buhgalterskoe-soprovozhdenie/", label: "Учёт как база" },
   { href: "/kak-rabotaet/", label: "Как работает" },
-  { href: "/rezultaty/", label: "Результаты" },
   { href: "/buhgalterskim-kompaniyam/", label: "Партнёрам" },
 ];
 
@@ -434,7 +433,6 @@ export const allStaticRoutes = [
   "/1s-i-integratsii/",
   "/zashchita-dannyh/",
   "/ogranicheniya/",
-  "/rezultaty/",
   "/buhgalterskim-kompaniyam/",
   "/krupnym-kompaniyam/",
   "/o-kompanii/",
