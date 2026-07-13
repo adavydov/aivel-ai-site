@@ -1,0 +1,307 @@
+---
+import BrandWall from "./BrandWall.astro";
+import Icon from "./Icon.astro";
+
+const experienceLayers = [
+  {
+    number: "01",
+    title: "Учёт изнутри",
+    body: "Знаем путь от документа и банковской операции до закрытия периода и показателя для руководителя.",
+  },
+  {
+    number: "02",
+    title: "Инженерная дисциплина",
+    body: "Сохраняем правило, источник и историю действий. Неоднозначность передаём ответственному специалисту.",
+  },
+  {
+    number: "03",
+    title: "Контекст решения",
+    body: "Согласуем, что действительно важно для бизнеса, чтобы не превращать сигналы в новый поток уведомлений.",
+  },
+];
+---
+
+<section class="team-experience-screen" id="team-experience" aria-labelledby="team-experience-title">
+  <div class="container team-experience-layout">
+    <header class="team-experience-heading" data-reveal>
+      <div>
+        <p class="section-kicker section-kicker-light">04 · Опыт команды</p>
+        <h2 id="team-experience-title">Знаем реальные учётные процессы — поэтому отличаем важное от шума.</h2>
+      </div>
+      <p>
+        Чтобы увидеть действительно важное, мало соединить источники. Нужно понимать, как устроен учёт,
+        где возникают исключения и какое изменение требует решения руководителя.
+      </p>
+    </header>
+
+    <ol class="experience-layers" aria-label="Почему опыт команды влияет на качество сигналов">
+      {experienceLayers.map((layer) => (
+        <li data-reveal>
+          <span class="experience-number" aria-hidden="true">{layer.number}</span>
+          <div>
+            <h3>{layer.title}</h3>
+            <p>{layer.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="experience-brands" data-reveal>
+      <div class="experience-brands-heading">
+        <strong>Опыт в реальных контурах</strong>
+        <span>Компании, с которыми работала команда Aivel</span>
+      </div>
+      <BrandWall compact={true} dark={true} />
+    </div>
+
+    <footer class="experience-action" data-reveal>
+      <div>
+        <h3>Посмотрите всю цепочку на одном примере.</h3>
+        <p>Покажем сообщение руководителю, правило важности, расчёт и исходные операции.</p>
+      </div>
+      <div class="experience-action-controls">
+        <a class="team-company-link" href="/o-kompanii/">
+          Подробнее о компании <Icon name="arrow" size={17} />
+        </a>
+        <button class="button button-light" type="button" data-open-contact data-contact-topic="demo">
+          Записаться на демонстрацию <Icon name="arrow" size={19} />
+        </button>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .team-experience-screen {
+    display: grid;
+    min-height: calc(100svh - var(--header-height));
+    align-items: center;
+    padding-block: clamp(36px, 4.3vw, 56px);
+    color: white;
+    scroll-margin-top: var(--header-height);
+    background:
+      radial-gradient(circle at 12% 2%, rgb(245 201 121 / 0.14), transparent 25rem),
+      radial-gradient(circle at 92% 82%, rgb(42 116 153 / 0.18), transparent 28rem),
+      var(--color-ink);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .team-experience-layout {
+    display: grid;
+    gap: clamp(16px, 1.8vw, 22px);
+  }
+
+  .team-experience-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.62fr);
+    gap: clamp(30px, 5vw, 72px);
+    align-items: end;
+  }
+
+  .team-experience-heading .section-kicker {
+    margin-bottom: 12px;
+  }
+
+  .team-experience-heading h2 {
+    max-width: 850px;
+    margin: 0;
+    color: white;
+    font-size: clamp(2.2rem, 3.3vw, 3.25rem);
+  }
+
+  .team-experience-heading > p {
+    max-width: 510px;
+    margin: 0 0 4px;
+    color: #c3cfde;
+    font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+    line-height: 1.55;
+  }
+
+  .experience-layers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .experience-layers li {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 13px;
+    padding: clamp(14px, 1.5vw, 19px);
+    background: rgb(255 255 255 / 0.055);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--radius-md);
+  }
+
+  .experience-number {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    color: var(--color-ink);
+    background: var(--color-gold-soft);
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    place-items: center;
+  }
+
+  .experience-layers h3 {
+    margin: 1px 0 6px;
+    color: white;
+    font-size: clamp(1rem, 1.35vw, 1.14rem);
+  }
+
+  .experience-layers p {
+    margin: 0;
+    color: #b7c4d6;
+    font-size: 0.81rem;
+    line-height: 1.46;
+  }
+
+  .experience-brands {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.22fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+    padding: 13px;
+    background: rgb(255 255 255 / 0.035);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-lg);
+  }
+
+  .experience-brands-heading {
+    display: grid;
+    gap: 4px;
+  }
+
+  .experience-brands-heading strong {
+    color: white;
+    font-size: 0.9rem;
+  }
+
+  .experience-brands-heading span {
+    color: #9eacc0;
+    font-size: 0.78rem;
+  }
+
+  .experience-brands :global(.brand-wall) {
+    gap: 8px;
+  }
+
+  .experience-brands :global(.brand-wall-compact .brand-tile) {
+    min-height: 62px;
+    padding: 8px;
+  }
+
+  .experience-brands :global(.brand-tile > img) {
+    max-height: 42px;
+  }
+
+  .experience-action {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    padding-top: clamp(18px, 2vw, 26px);
+    border-top: 1px solid rgb(255 255 255 / 0.13);
+  }
+
+  .experience-action h3 {
+    margin: 0 0 4px;
+    color: white;
+    font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  }
+
+  .experience-action p {
+    margin: 0;
+    color: #aebdd0;
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .team-company-link {
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-gold-soft);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .team-company-link svg {
+    transition: transform var(--transition);
+  }
+
+  .team-company-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  .experience-action-controls {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .experience-action .button {
+    min-width: 238px;
+  }
+
+  @media (max-width: 1020px) {
+    .team-experience-screen {
+      min-height: auto;
+    }
+
+    .team-experience-heading {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .team-experience-heading > p {
+      max-width: 700px;
+    }
+
+    .experience-brands {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .experience-layers {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-action {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-action-controls {
+      align-items: stretch;
+      flex-direction: column-reverse;
+    }
+
+    .experience-action .button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .team-experience-screen {
+      padding-block: 54px;
+    }
+
+    .team-experience-screen .container {
+      width: min(100% - 32px, var(--container));
+    }
+
+    .team-experience-heading h2 {
+      font-size: clamp(2.1rem, 10.8vw, 3.2rem);
+    }
+  }
+</style>

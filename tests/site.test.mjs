@@ -64,7 +64,7 @@ test("site has been built", async () => {
   await access(path.join(dist, "index.html"));
 });
 
-test("homepage explains the product in three clear screens", async () => {
+test("homepage explains the product in four clear screens", async () => {
   const html = await readFile(path.join(dist, "index.html"), "utf8");
   assert.match(html, /Вовремя узнавайте о важном в бизнесе\./);
   assert.match(html, /Сигнал для руководителя/);
@@ -83,10 +83,17 @@ test("homepage explains the product in three clear screens", async () => {
   assert.match(html, /Расчёт показателя/);
   assert.match(html, /Операции и источники/);
   assert.match(html, /Нужна проверка/);
-  assert.match(html, /Опыт команды/);
-  assert.match(html, /Знаем учётные процессы изнутри/);
+  assert.match(html, /04 · Опыт команды/);
+  assert.match(html, /Знаем реальные учётные процессы — поэтому отличаем важное от шума/);
+  assert.match(html, /Учёт изнутри/);
+  assert.match(html, /Инженерная дисциплина/);
+  assert.match(html, /Контекст решения/);
+  assert.match(html, /Опыт в реальных контурах/);
   assert.match(html, /Гольфстрим/);
-  assert.match(html, /Записаться на демо/);
+  assert.match(html, /Записаться на демонстрацию/);
+  assert.match(html, /class="team-experience-screen"/);
+  assert.doesNotMatch(html, /class="team-proof"/);
+  assert.ok(html.indexOf("За каждым сигналом — понятный путь к данным") < html.indexOf("04 · Опыт команды"));
   assert.equal(count(html, /class="signal-slide"/g), 4);
   assert.doesNotMatch(html, /Что вы боитесь узнать|Посмотреть примеры сообщений|Разобрать ситуацию/);
   assert.doesNotMatch(html, /Не отчёт ради отчёта|Четыре ИИ-помощника поддерживают данные в порядке/);

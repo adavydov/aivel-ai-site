@@ -1,6 +1,5 @@
 ---
 import Icon from "./Icon.astro";
-import BrandWall from "./BrandWall.astro";
 
 const evidenceSteps = [
   {
@@ -39,7 +38,7 @@ const evidenceSteps = [
   <div class="container signal-audit-layout">
     <header class="signal-audit-heading">
       <div>
-        <p class="section-kicker">03 · Почему можно доверять</p>
+        <p class="section-kicker">03 · Как проверить сигнал</p>
         <h2 id="signal-audit-title">За каждым сигналом — понятный путь к данным.</h2>
       </div>
       <p>
@@ -111,14 +110,6 @@ const evidenceSteps = [
 
     <p class="example-note">Учебный пример на обезличенных данных</p>
 
-    <aside class="team-proof" aria-labelledby="team-proof-title">
-      <div class="team-proof-copy">
-        <p class="section-kicker">Опыт команды</p>
-        <h3 id="team-proof-title">Знаем учётные процессы изнутри.</h3>
-        <p>Команда Aivel внедряла учётные и ИИ-решения в реальных контурах — этот опыт помогает отличать важный сигнал от обычного шума.</p>
-      </div>
-      <BrandWall compact={true} />
-    </aside>
   </div>
 </section>
 
@@ -404,32 +395,6 @@ const evidenceSteps = [
     text-align: right;
   }
 
-  .team-proof {
-    display: grid;
-    grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
-    gap: clamp(26px, 4vw, 54px);
-    align-items: center;
-    padding-top: clamp(26px, 3vw, 38px);
-    margin-top: 2px;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .team-proof-copy .section-kicker {
-    margin-bottom: 8px;
-  }
-
-  .team-proof-copy h3 {
-    margin-bottom: 8px;
-    font-size: clamp(1.35rem, 2.1vw, 1.85rem);
-  }
-
-  .team-proof-copy > p:last-child {
-    margin: 0;
-    color: var(--color-text);
-    font-size: 0.84rem;
-    line-height: 1.5;
-  }
-
   @media (max-width: 1020px) {
     .signal-audit-heading {
       grid-template-columns: 1fr;
@@ -448,9 +413,6 @@ const evidenceSteps = [
       grid-template-columns: 1fr;
     }
 
-    .team-proof {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (max-width: 680px) {

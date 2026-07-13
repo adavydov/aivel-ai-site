@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SignalDeliveryCarousel from "../components/SignalDeliveryCarousel.astro";
 import ImportantSignalMechanics from "../components/ImportantSignalMechanics.astro";
 import SignalAuditTrail from "../components/SignalAuditTrail.astro";
+import TeamExperienceScreen from "../components/TeamExperienceScreen.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 ---
@@ -33,7 +34,7 @@ import { site } from "../data/site";
         </div>
 
         <button class="button button-primary hero-demo-cta" type="button" data-open-contact data-contact-topic="demo">
-          Записаться на демо <Icon name="arrow" size={20} />
+          Записаться на демонстрацию <Icon name="arrow" size={20} />
         </button>
       </div>
 
@@ -45,6 +46,7 @@ import { site } from "../data/site";
 
   <ImportantSignalMechanics />
   <SignalAuditTrail />
+  <TeamExperienceScreen />
 </BaseLayout>
 
 <style>
