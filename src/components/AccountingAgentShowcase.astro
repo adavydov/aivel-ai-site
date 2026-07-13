@@ -1,0 +1,332 @@
+---
+import Icon from "./Icon.astro";
+import { accountingAgents } from "../data/site";
+---
+
+<section class="section agent-screen" id="rezultaty-vnedreniy" aria-labelledby="agent-screen-title">
+  <div class="container">
+    <span class="anchor-target" id="ii-pomoshchniki" aria-hidden="true"></span>
+    <div class="section-heading agent-heading">
+      <div>
+        <p class="section-kicker">ИИ-помощники в учёте</p>
+        <h2 id="agent-screen-title">Быстро обрабатывают поток. Точно ведут учёт. Не теряют исключения.</h2>
+      </div>
+      <p>ИИ-помощники выполняют типовые операции почти сразу после получения данных. Специалист подключается там, где нужны проверка и профессиональное решение.</p>
+    </div>
+
+    <div class="difference-grid" aria-label="Чем отличается подход Aivel">
+      <article><span>01</span><div><strong>Почти сразу</strong><p>Документ не ждёт общей очереди: помощник начинает обработку по мере поступления.</p></div></article>
+      <article><span>02</span><div><strong>По единым правилам</strong><p>Каждая операция проходит одни и те же проверки, поэтому качество не зависит от объёма рутины.</p></div></article>
+      <article><span>03</span><div><strong>Ничего не теряется</strong><p>Неоднозначный случай получает ответственного, срок и сохраняется в истории действий.</p></div></article>
+    </div>
+
+    <div class="agent-grid" role="list">
+      {accountingAgents.map((agent, index) => (
+        <article class="agent-card" role="listitem">
+          <a href={agent.href} aria-label={`Открыть страницу ИИ-помощника «${agent.title}»`}>
+            <span class="agent-topline">
+              <span class="agent-icon" aria-hidden="true"><Icon name={agent.icon} size={21} /></span>
+              <span class="agent-number">0{index + 1}</span>
+            </span>
+            <span class="agent-label">ИИ-помощник</span>
+            <h3>{agent.title}</h3>
+            <strong class="agent-result">{agent.result}</strong>
+            <p>{agent.scope}</p>
+            <span class="human-note"><Icon name="person" size={16} /> {agent.human}</span>
+            <span class="agent-link">Видео и весь процесс <Icon name="arrow" size={19} /></span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <a class="quality-band" href="/avtomatizatsiya-ucheta/kontrol-kachestva/">
+      <span class="quality-icon" aria-hidden="true"><Icon name="shield" size={23} /></span>
+      <span>
+        <small>Сквозной контроль качества</small>
+        <strong>Три линии проверки: согласованность данных, оценка неоднозначности и человек в контуре.</strong>
+      </span>
+      <span class="quality-link">Как устроен контроль <Icon name="arrow" size={19} /></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .agent-screen {
+    padding-block: clamp(58px, 7vw, 92px);
+    scroll-margin-top: var(--header-height);
+    background: var(--color-paper);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .anchor-target {
+    display: block;
+    position: relative;
+    top: calc(var(--header-height) * -1);
+    visibility: hidden;
+  }
+
+  .agent-heading {
+    margin-bottom: 28px;
+  }
+
+  .difference-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    padding: 1px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .difference-grid article {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+    padding: 17px;
+    background: white;
+  }
+
+  .difference-grid article > span {
+    padding-top: 2px;
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
+  }
+
+  .difference-grid strong,
+  .difference-grid p {
+    display: block;
+  }
+
+  .difference-grid strong {
+    font-size: 0.88rem;
+  }
+
+  .difference-grid p {
+    margin: 4px 0 0;
+    color: var(--color-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .agent-card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .agent-card:hover,
+  .agent-card:focus-within {
+    border-color: var(--color-ink);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .agent-card > a {
+    display: flex;
+    min-height: 100%;
+    padding: 21px;
+    color: inherit;
+    text-decoration: none;
+    flex-direction: column;
+  }
+
+  .agent-card > a:focus-visible,
+  .quality-band:focus-visible {
+    outline: 3px solid var(--color-gold-soft);
+    outline-offset: -5px;
+  }
+
+  .agent-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .agent-icon,
+  .quality-icon {
+    display: grid;
+    color: var(--color-blue);
+    background: var(--color-blue-pale);
+    border-radius: 11px;
+    place-items: center;
+  }
+
+  .agent-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .agent-number {
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    font-weight: 760;
+    letter-spacing: 0.1em;
+  }
+
+  .agent-label,
+  .quality-band small {
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .agent-card h3 {
+    min-height: 2.6em;
+    margin: 8px 0 14px;
+    font-size: 1.08rem;
+  }
+
+  .agent-result {
+    display: block;
+    min-height: 3.9em;
+    margin-bottom: 10px;
+    color: var(--color-ink);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .agent-card p {
+    margin: 0 0 15px;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .human-note {
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    padding-top: 12px;
+    color: var(--color-ink-soft);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .human-note svg {
+    flex: 0 0 auto;
+    margin-top: 1px;
+    color: var(--color-green);
+  }
+
+  .agent-link,
+  .quality-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-blue);
+    font-size: 0.82rem;
+    font-weight: 720;
+  }
+
+  .agent-link {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+
+  .quality-band {
+    display: grid;
+    min-height: 88px;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 17px 20px;
+    margin-top: 12px;
+    color: inherit;
+    text-decoration: none;
+    background: var(--color-green-pale);
+    border: 1px solid #bcdcca;
+    border-radius: var(--radius-lg);
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .quality-band:hover {
+    border-color: var(--color-green);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quality-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-green);
+    background: white;
+  }
+
+  .quality-band strong,
+  .quality-band small {
+    display: block;
+  }
+
+  .quality-band strong {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 1080px) {
+    .agent-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .agent-card h3,
+    .agent-result {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .agent-grid,
+    .difference-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .agent-card > a {
+      padding: 18px;
+    }
+
+    .quality-band {
+      grid-template-columns: 44px minmax(0, 1fr);
+      padding: 16px;
+    }
+
+    .quality-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .quality-link {
+      grid-column: 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .agent-card,
+    .quality-band {
+      transition: none;
+    }
+
+    .agent-card:hover,
+    .agent-card:focus-within {
+      transform: none;
+    }
+  }
+</style>

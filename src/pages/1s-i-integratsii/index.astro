@@ -1,28 +1,427 @@
 ---
-import TrustPage from "../../components/TrustPage.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+
+const serviceItems = [
+  { icon: "document", title: "Лицензии и запуск", text: "Подбираем и поставляем лицензии, разворачиваем стандартную базу или принимаем действующую конфигурацию." },
+  { icon: "source", title: "Облако или контур компании", text: "Размещаем базу там, где этого требуют правила доступа и работы с данными." },
+  { icon: "shield", title: "Техническое обслуживание", text: "Обновления, права, пользователи, исправления, резервное копирование и контроль изменений." },
+  { icon: "chart", title: "Доработки и обмены", text: "Связываем 1С с банками, ЭДО, рабочими системами и ИИ-помощниками Aivel." }
+] as const;
+
+const requestSteps = [
+  { title: "Зафиксировать запрос", text: "Определяем проблему, ожидаемый результат, срочность и допустимый периметр изменений." },
+  { title: "Найти причину", text: "Проверяем конфигурацию, права, данные, обмены и журнал событий — без изменений наугад." },
+  { title: "Изменить и проверить", text: "Тестируем обновление или доработку отдельно, затем переносим в рабочую базу по согласованному порядку." },
+  { title: "Показать результат", text: "Сохраняем, что было изменено, кто подтвердил работу и как вернуться к предыдущему состоянию." }
+] as const;
 ---
-<TrustPage
-  metaTitle="1С и связи с учётными системами — Aivel"
-  description="Как Aivel подключается к 1С и другим согласованным источникам без обещания универсальной совместимости."
-  kicker="1С и связи с системами"
-  title="Не нужно знать устройство 1С, чтобы вовремя увидеть важное."
-  lead="Aivel использует существующую учётную основу, если в ней есть нужные данные и можно безопасно согласовать доступ."
-  asideTitle="Без универсальных обещаний"
-  asideText="Совместимость зависит от конфигурации, аналитики, доработок, прав и качества данных."
-  sectionTitle="Что проверяем до подключения"
-  sectionText="Мы не публикуем пустую стену логотипов. Для каждой связи важно понять конкретный источник, способ доступа и ограничения."
-  steps={[
-    { title: "Конфигурация", text: "Типовая или изменённая 1С, используемые справочники, документы и аналитические разрезы." },
-    { title: "Права", text: "Только необходимый доступ в согласованном периметре и для определённых ролей." },
-    { title: "Свежесть", text: "Как быстро операция попадает в источник и когда её можно считать проверенной." },
-    { title: "Сопоставление", text: "Единые определения организаций, контрагентов, проектов и показателей." },
-    { title: "Исключения", text: "Нестандартные документы и операции получают отдельный маршрут проверки." },
-    { title: "Возврат", text: "Понятный порядок отключения, сохранения истории и удаления согласованных данных." }
-  ]}
-  noticeTitle="Aivel не требует менять 1С по умолчанию."
-  noticeText="Но если нужной аналитики или качества нет, сначала потребуется подготовить учётную основу."
-  related={[
-    { href: "/dannye-i-istochniki/", label: "Готовность данных" },
-    { href: "/zashchita-dannyh/", label: "Защита данных" }
-  ]}
-/>
+
+<BaseLayout
+  title="Обслуживание 1С: лицензии, облако, поддержка и связи — Aivel"
+  description="Aivel поставляет лицензии 1С, размещает базу в облаке или контуре компании, выполняет техническое обслуживание, доработки и связи с ИИ-помощниками."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Обслуживание 1С Aivel",
+    serviceType: "Лицензии, размещение, техническое обслуживание и доработки 1С",
+    provider: { "@type": "Organization", name: "Aivel" },
+    url: new URL("/1s-i-integratsii/", Astro.site ?? Astro.url).toString()
+  }}
+>
+  <div class="container breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a><span aria-hidden="true">/</span><a href="/buhgalterskoe-soprovozhdenie/">Учёт как база</a><span aria-hidden="true">/</span><span>Обслуживание 1С</span>
+  </div>
+
+  <header class="page-hero one-c-hero">
+    <div class="container one-c-hero-grid">
+      <div>
+        <p class="section-kicker">1С на обслуживании</p>
+        <h1>Лицензии, размещение и поддержка 1С — в одной команде с учётом.</h1>
+        <p class="lead">Aivel разворачивает стандартную базу или принимает действующую, обслуживает её и подключает ИИ-помощников. Не нужно координировать отдельно бухгалтерию, специалистов 1С и автоматизацию.</p>
+        <button class="button button-primary" type="button" data-open-contact data-contact-topic="client">Обсудить обслуживание 1С</button>
+      </div>
+      <aside class="one-c-hero-aside" aria-label="Сквозной процесс на базе 1С">
+        <span class="one-c-badge" aria-hidden="true">1С</span>
+        <p>Одна рабочая основа</p>
+        <ol>
+          <li><span>01</span>Входящий документ</li>
+          <li><span>02</span>Операция ИИ-помощника</li>
+          <li><span>03</span>Проверенная запись в 1С</li>
+          <li><span>04</span>Данные для решения</li>
+        </ol>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section section-warm service-screen" aria-labelledby="service-title">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="section-kicker">Что берём на себя</p><h2 id="service-title">1С как спокойная рабочая основа, а не отдельный проект.</h2></div>
+        <p>Можно подключить весь контур или только недостающую часть. Состав и границы обслуживания фиксируем до начала работ.</p>
+      </div>
+      <div class="service-grid">
+        {serviceItems.map((item, index) => (
+          <article>
+            <span class="service-top"><span class="service-icon"><Icon name={item.icon} size={22} /></span><small>0{index + 1}</small></span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section request-screen" aria-labelledby="request-title">
+    <div class="container request-layout">
+      <div>
+        <p class="section-kicker">Как проходит работа</p>
+        <h2 id="request-title">Каждое изменение — по понятному маршруту.</h2>
+        <p class="request-lead">Доступы выдаются по ролям, изменения сначала проверяются, а результат остаётся в истории. Это защищает рабочую базу от случайных исправлений.</p>
+        <div class="control-note"><Icon name="shield" size={21} /><span><strong>Данные остаются в согласованном периметре.</strong> Облачное размещение и контур компании поддерживаются как отдельные варианты.</span></div>
+      </div>
+      <ol class="request-steps">
+        {requestSteps.map((step, index) => (
+          <li><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section connection-screen" aria-labelledby="connection-title">
+    <div class="container connection-panel">
+      <div>
+        <p class="section-kicker section-kicker-light">Связь с ИИ-помощниками</p>
+        <h2 id="connection-title">От документа — до результата в 1С без разрыва процесса.</h2>
+        <p>ИИ-помощник получает данные, выполняет типовую операцию, передаёт исключение специалисту и сохраняет проверяемый результат в учёте. Одна команда отвечает и за процесс, и за его техническую основу.</p>
+        <div class="connection-actions">
+          <a class="button button-light" href="/buhgalterskoe-soprovozhdenie/#ii-pomoshchniki">Посмотреть ИИ-помощников <Icon name="arrow" size={19} /></a>
+          <button class="button button-outline-light" type="button" data-open-contact data-contact-topic="client">Запросить экспресс-аудит</button>
+        </div>
+      </div>
+      <div class="connection-flow" aria-label="Сквозной путь операции">
+        <span>Банк, ЭДО, почта</span><Icon name="arrow" size={20} /><span>ИИ-помощник</span><Icon name="arrow" size={20} /><span>Человек на исключениях</span><Icon name="arrow" size={20} /><strong>Результат в 1С</strong>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .one-c-hero {
+    padding-block: clamp(54px, 7vw, 92px);
+    background: linear-gradient(135deg, #f9f7f1 0%, #eef3f8 100%);
+  }
+
+  .one-c-hero-grid,
+  .request-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(390px, 0.9fr);
+    gap: clamp(44px, 8vw, 110px);
+    align-items: center;
+  }
+
+  .one-c-hero h1 {
+    max-width: 920px;
+  }
+
+  .one-c-hero .button {
+    margin-top: 14px;
+  }
+
+  .one-c-hero-aside {
+    padding: 26px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .one-c-badge {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    color: #161616;
+    background: #ffd83d;
+    border-radius: 15px;
+    font-size: 1.45rem;
+    font-weight: 850;
+    place-items: center;
+  }
+
+  .one-c-hero-aside > p {
+    margin-bottom: 12px;
+    color: var(--color-muted);
+    font-size: 0.78rem;
+    font-weight: 740;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .one-c-hero-aside ol {
+    display: grid;
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    list-style: none;
+  }
+
+  .one-c-hero-aside li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 9px;
+    padding: 13px;
+    background: var(--color-paper);
+    font-size: 0.83rem;
+    font-weight: 680;
+  }
+
+  .one-c-hero-aside li span {
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .service-screen,
+  .request-screen,
+  .connection-screen {
+    padding-block: clamp(58px, 7vw, 92px);
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .service-grid article {
+    min-width: 0;
+    min-height: 240px;
+    padding: 21px;
+    background: white;
+    border: 1px solid #e3d5be;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .service-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .service-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    color: var(--color-blue);
+    background: var(--color-blue-pale);
+    border-radius: 11px;
+    place-items: center;
+  }
+
+  .service-top small {
+    color: var(--color-gold);
+    font-weight: 780;
+    letter-spacing: 0.08em;
+  }
+
+  .service-grid h3 {
+    margin-bottom: 9px;
+    font-size: 1.05rem;
+  }
+
+  .service-grid p,
+  .request-lead {
+    color: var(--color-muted);
+  }
+
+  .service-grid p {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .request-layout {
+    align-items: start;
+  }
+
+  .request-lead {
+    max-width: 640px;
+  }
+
+  .control-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 15px;
+    margin-top: 24px;
+    color: var(--color-green);
+    background: var(--color-green-pale);
+    border: 1px solid #c7e2d2;
+    border-radius: 12px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .control-note svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+
+  .request-steps {
+    display: grid;
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    list-style: none;
+  }
+
+  .request-steps li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    padding: 17px 18px;
+    background: white;
+  }
+
+  .request-steps li > span {
+    padding-top: 2px;
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
+  }
+
+  .request-steps h3 {
+    margin: 0 0 5px;
+    font-size: 0.93rem;
+  }
+
+  .request-steps p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .connection-screen {
+    color: white;
+    background: var(--color-paper);
+  }
+
+  .connection-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
+    gap: clamp(40px, 7vw, 86px);
+    align-items: center;
+    padding: clamp(30px, 5vw, 62px);
+    background: var(--color-ink);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .connection-panel h2,
+  .connection-panel p {
+    color: white;
+  }
+
+  .connection-panel > div:first-child > p:not(.section-kicker) {
+    color: #c7d2df;
+  }
+
+  .connection-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .button-outline-light {
+    color: white;
+    background: transparent;
+    border-color: rgb(255 255 255 / 0.45);
+  }
+
+  .button-outline-light:hover {
+    background: rgb(255 255 255 / 0.08);
+    border-color: white;
+  }
+
+  .connection-flow {
+    display: grid;
+    gap: 8px;
+    justify-items: center;
+  }
+
+  .connection-flow span,
+  .connection-flow strong {
+    display: grid;
+    width: 100%;
+    min-height: 54px;
+    padding: 10px 14px;
+    text-align: center;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 11px;
+    place-items: center;
+  }
+
+  .connection-flow span {
+    color: #d1d9e4;
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .connection-flow strong {
+    color: var(--color-ink);
+    background: var(--color-gold-soft);
+  }
+
+  .connection-flow svg {
+    color: var(--color-gold-soft);
+    transform: rotate(90deg);
+  }
+
+  @media (max-width: 1000px) {
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 920px) {
+    .one-c-hero-grid,
+    .request-layout,
+    .connection-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-grid article {
+      min-height: 0;
+    }
+
+    .one-c-hero .button,
+    .connection-actions .button {
+      width: 100%;
+    }
+
+    .connection-panel {
+      padding: 24px 18px;
+      border-radius: var(--radius-lg);
+    }
+  }
+</style>

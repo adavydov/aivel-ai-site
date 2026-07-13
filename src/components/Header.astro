@@ -3,16 +3,19 @@ import Icon from "./Icon.astro";
 import { navigation } from "../data/site";
 
 const path = Astro.url.pathname;
-const howItWorksPaths = [
+const accountingPaths = [
   "/avtomatizatsiya-ucheta/",
+  "/1s-i-integratsii/"
+];
+const howItWorksPaths = [
   "/zashchita-dannyh/",
-  "/1s-i-integratsii/",
   "/dannye-i-istochniki/",
   "/kak-formiruetsya-otvet/",
   "/ogranicheniya/"
 ];
 const isActive = (href: string) => {
   if (href === "/") return path === "/";
+  if (href === "/buhgalterskoe-soprovozhdenie/" && accountingPaths.some((prefix) => path.startsWith(prefix))) return true;
   if (href === "/kak-rabotaet/" && howItWorksPaths.some((prefix) => path.startsWith(prefix))) return true;
   return path.startsWith(href);
 };

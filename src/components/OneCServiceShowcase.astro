@@ -1,0 +1,151 @@
+---
+import Icon from "./Icon.astro";
+
+const capabilities = [
+  { number: "01", title: "Лицензии и запуск", text: "Подберём и поставим лицензии, развернём типовую базу или примем действующую." },
+  { number: "02", title: "Техническое обслуживание", text: "Обновления, права, пользователи, исправления, доработки и контроль изменений." },
+  { number: "03", title: "Облако или контур компании", text: "Разместим базу в облаке либо внутри инфраструктуры заказчика — по требованиям к данным." },
+  { number: "04", title: "Связи и ИИ-помощники", text: "Настроим обмены с банками, ЭДО и рабочими системами, чтобы операции проходили сквозным процессом." }
+] as const;
+---
+
+<section class="section section-warm one-c-screen" id="one-c-service" aria-labelledby="one-c-title">
+  <div class="container one-c-layout">
+    <div class="one-c-copy">
+      <p class="section-kicker">1С на обслуживании</p>
+      <span class="one-c-badge" aria-hidden="true">1С</span>
+      <h2 id="one-c-title">Рабочая основа для учёта и ИИ-помощников.</h2>
+      <p class="one-c-lead">Aivel может взять на себя не только учёт, но и саму 1С: от лицензий и размещения до технической поддержки, доработок и обменов.</p>
+      <p class="one-c-outcome"><Icon name="check" size={19} /> В результате один исполнитель отвечает за всю цепочку — от входящего документа до записи в учёте и важного сигнала.</p>
+      <a class="button button-primary" href="/1s-i-integratsii/">Как устроено обслуживание 1С <Icon name="arrow" size={19} /></a>
+    </div>
+
+    <ol class="one-c-capabilities" aria-label="Что входит в обслуживание 1С">
+      {capabilities.map((item) => (
+        <li>
+          <span>{item.number}</span>
+          <div><h3>{item.title}</h3><p>{item.text}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .one-c-screen {
+    padding-block: clamp(58px, 7vw, 92px);
+    scroll-margin-top: var(--header-height);
+  }
+
+  .one-c-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.84fr) minmax(440px, 1.16fr);
+    gap: clamp(42px, 7vw, 96px);
+    align-items: center;
+  }
+
+  .one-c-badge {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 22px;
+    color: #161616;
+    background: #ffd83d;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgb(139 105 0 / 0.13);
+    font-size: 1.55rem;
+    font-weight: 850;
+    place-items: center;
+  }
+
+  .one-c-copy h2 {
+    margin-bottom: 16px;
+  }
+
+  .one-c-lead {
+    max-width: 620px;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+  }
+
+  .one-c-outcome {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding: 13px 14px;
+    margin: 0 0 24px;
+    color: var(--color-green);
+    background: white;
+    border: 1px solid #c7e2d2;
+    border-radius: 11px;
+    font-size: 0.85rem;
+    font-weight: 680;
+    line-height: 1.5;
+  }
+
+  .one-c-outcome svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+
+  .one-c-capabilities {
+    display: grid;
+    gap: 1px;
+    padding: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: #e3d5be;
+    border: 1px solid #e3d5be;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    list-style: none;
+  }
+
+  .one-c-capabilities li {
+    display: grid;
+    min-height: 106px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 13px;
+    align-items: center;
+    padding: 18px 20px;
+    background: white;
+  }
+
+  .one-c-capabilities li > span {
+    color: var(--color-gold);
+    font-size: 0.74rem;
+    font-weight: 780;
+    letter-spacing: 0.1em;
+  }
+
+  .one-c-capabilities h3 {
+    margin: 0 0 5px;
+    font-size: 0.98rem;
+  }
+
+  .one-c-capabilities p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 920px) {
+    .one-c-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .one-c-capabilities li {
+      min-height: 0;
+      grid-template-columns: 32px minmax(0, 1fr);
+      padding: 16px;
+    }
+
+    .one-c-copy .button {
+      width: 100%;
+    }
+  }
+</style>
