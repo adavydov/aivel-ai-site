@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
 import AccountingFoundationMap from "../../components/AccountingFoundationMap.astro";
+import AccountingResultsProof from "../../components/AccountingResultsProof.astro";
 
 const services = [
   { icon: "document", title: "Бухгалтерский учёт", text: "Первичные документы, операции, закрытие периода, обязательная отчётность и ответы на требования." },
@@ -95,6 +96,8 @@ const services = [
       </div>
     </div>
   </section>
+
+  <AccountingResultsProof />
 </BaseLayout>
 
 <style>

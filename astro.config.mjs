@@ -7,6 +7,9 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
   compressHTML: true,
+  redirects: {
+    "/rezultaty": "/buhgalterskoe-soprovozhdenie/"
+  },
   build: {
     format: "directory"
   }
