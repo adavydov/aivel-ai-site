@@ -36,28 +36,46 @@ export const implementationMetrics = [
   }
 ] as const;
 
-export const automationResults = [
+export const accountingAgents = [
   {
+    slug: "pervichnye-dokumenty",
+    icon: "document",
     title: "Первичные документы",
     result: "80% документов обрабатывались без участия человека.",
-    scope: "Распознавание, создание документа в 1С и заполнение учётных признаков."
+    scope: "Распознаёт документ, создаёт его в 1С и заполняет учётные признаки.",
+    human: "Нечитаемый или нестандартный документ получает специалист.",
+    href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/"
   },
   {
+    slug: "bankovskie-operatsii",
+    icon: "chart",
     title: "Банковские операции",
     result: "98% — точность сопоставления платежей на измеренной выборке.",
-    scope: "Извлечение реквизитов, сопоставление с договорами, разделение платежа и заполнение аналитики."
+    scope: "Сопоставляет платёж с договором, заполняет аналитику и готовит операцию для 1С.",
+    human: "Неоднозначное назначение или непривычную операцию проверяет бухгалтер.",
+    href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/"
   },
   {
-    title: "Обращения и задачи",
-    result: "Обращения распределяются по ответственным, а срок и состояние задачи становятся видимы.",
-    scope: "Письмо или запрос превращается в задачу с исполнителем и контролем срока."
-  },
-  {
+    slug: "sverki-s-kontragentami",
+    icon: "check",
     title: "Сверки с контрагентами",
     result: "До 95% сверок проходили без участия человека.",
-    scope: "Распознавание акта, создание сверки в 1С, проверка и выделение расхождений."
+    scope: "Создаёт сверку в 1С, сопоставляет данные и выделяет расхождения.",
+    human: "Расхождение или спорная операция сразу передаются специалисту.",
+    href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/"
+  },
+  {
+    slug: "kommunikatsii-s-klientami",
+    icon: "message",
+    title: "Запросы к бухгалтерии",
+    result: "Каждый запрос получает маршрут, ответственного и срок.",
+    scope: "Разбирает обращения подразделений, внутренних заказчиков или клиентов.",
+    human: "Содержательный ответ и нестандартное решение остаются у специалиста.",
+    href: "/avtomatizatsiya-ucheta/kommunikatsii-s-klientami/"
   }
 ] as const;
+
+export const automationResults = accountingAgents.map(({ title, result, scope }) => ({ title, result, scope }));
 
 export const publicClients = ["DDX", "Нефтьмагистраль", "Братья Караваевы", "Гольфстрим", "ВсеИнструменты.ру"] as const;
 

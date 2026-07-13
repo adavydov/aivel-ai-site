@@ -2,259 +2,108 @@
 import Icon from "./Icon.astro";
 
 const sources = [
-  "ЭДО",
-  "Почта",
+  "ЭДО и почта",
   "Банки",
   "ФНС и отчётность",
-  "ERP и 1С",
-  "iiko и другие транзакционные системы"
-] as const;
-
-const helpers = [
-  {
-    id: "primary",
-    icon: "document",
-    title: "Первичные документы",
-    status: "Работает",
-    statusTone: "live",
-    metric: "80%",
-    metricText: "измеренного потока прошло без ручного участия",
-    work: "Распознаёт документ, создаёт его в 1С и заполняет учётные признаки.",
-    exception: "Нечитаемые, неполные и нестандартные документы передаются специалисту.",
-    trace: "В истории остаются исходный файл, извлечённые поля, проверки и итоговое действие."
-  },
-  {
-    id: "bank",
-    icon: "chart",
-    title: "Банковские операции",
-    status: "Работает",
-    statusTone: "live",
-    metric: "98%",
-    metricText: "точности сопоставления на проверенной выборке",
-    work: "Извлекает реквизиты, сопоставляет платёж и заполняет аналитику; умеет разделять платёж.",
-    exception: "Неоднозначные назначения и непривычные операции получает бухгалтер.",
-    trace: "Можно восстановить выписку, применённое правило, выбранный договор и подтверждение человека."
-  },
-  {
-    id: "reconciliations",
-    icon: "check",
-    title: "Сверки с контрагентами",
-    status: "Работает",
-    statusTone: "live",
-    metric: "до 95%",
-    metricText: "сверок проходило без участия человека",
-    work: "Распознаёт акт, создаёт сверку в 1С, проверяет совпадение и выделяет расхождения.",
-    exception: "Расхождение или спорная операция сразу передаются специалисту.",
-    trace: "Сохраняются акт, данные 1С, результат сравнения и решение по расхождению."
-  },
-  {
-    id: "payroll",
-    icon: "person",
-    title: "Зарплата и кадры",
-    status: "Следующий контур",
-    statusTone: "next",
-    metric: "Без обещаний в цифрах",
-    metricText: "эффект фиксируется только после проверки процесса",
-    work: "Целевой контур — подготовка данных для типовых начислений и кадровых операций.",
-    exception: "Расчёт, кадровое решение и нестандартный случай подтверждает ответственный специалист.",
-    trace: "Для внедрения заранее задаются роли, проверки и перечень решений, доступных помощнику."
-  },
-  {
-    id: "accounting",
-    icon: "source",
-    title: "Бухгалтерский и налоговый учёт",
-    status: "Следующий контур",
-    statusTone: "next",
-    metric: "Правила до запуска",
-    metricText: "границы автоматизации согласуются для каждого участка",
-    work: "Целевой контур — типовые операции, календарь обязательств и проверки закрытия периода.",
-    exception: "Налоговое суждение и решение с последствиями остаются за ответственным специалистом.",
-    trace: "Каждая операция связывается с источником, правилом, версией данных и подтверждением."
-  },
-  {
-    id: "quality",
-    icon: "shield",
-    title: "Контроль качества",
-    status: "Следующий контур",
-    statusTone: "next",
-    metric: "Проверка, не догадка",
-    metricText: "помощник не заменяет профессиональное суждение",
-    work: "Целевой контур — проверка полноты, необычных значений и соблюдения согласованных правил.",
-    exception: "Помощник подсвечивает риск, а человек устанавливает причину и принимает решение.",
-    trace: "В журнале видны проверка, найденное отклонение, исполнитель и результат исправления."
-  }
+  "1С и ERP",
+  "iiko и другие рабочие системы"
 ] as const;
 ---
 
-<div class="foundation-map" data-foundation-map>
-  <div class="map-flow" aria-label="Путь данных от источников до важного сигнала">
-    <section class="map-stage source-stage" aria-labelledby="sources-title">
+<div class="foundation-map">
+  <ol class="map-flow" aria-label="Как правильные данные становятся основой для решения">
+    <li class="map-stage source-stage">
       <span class="stage-number">01</span>
-      <h3 id="sources-title">Источники</h3>
-      <p>Забираем данные по согласованному регламенту.</p>
+      <h3>Собираем данные</h3>
+      <p>Получаем документы и операции из согласованных рабочих источников.</p>
       <ul class="source-list">
         {sources.map((source) => <li>{source}</li>)}
       </ul>
-    </section>
+    </li>
 
-    <div class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
-
-    <section class="map-stage helper-stage" aria-labelledby="helpers-title">
+    <li class="map-stage operation-stage">
       <span class="stage-number">02</span>
-      <h3 id="helpers-title">ИИ-помощники выполняют операции</h3>
-      <p>Выберите помощника — справа появится его роль и граница ответственности.</p>
-      <div class="helper-tabs" role="tablist" aria-label="Примеры ИИ-помощников">
-        {helpers.map((helper, index) => (
-          <button
-            class="helper-tab"
-            type="button"
-            role="tab"
-            id={`helper-tab-${helper.id}`}
-            aria-selected={index === 0 ? "true" : "false"}
-            aria-controls={`helper-panel-${helper.id}`}
-            tabindex={index === 0 ? "0" : "-1"}
-            data-helper-tab={helper.id}
-          >
-            <span class="helper-icon" aria-hidden="true"><Icon name={helper.icon} size={18} /></span>
-            <span class="helper-copy">
-              <strong>{helper.title}</strong>
-              <small class:list={["helper-status", helper.statusTone]}>{helper.status}</small>
-            </span>
-          </button>
-        ))}
-      </div>
-    </section>
-
-    <div class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
-
-    <section class="map-stage base-stage" aria-labelledby="base-title">
-      <span class="stage-number">03</span>
-      <h3 id="base-title">Проверенная база</h3>
-      <p>Люди разбирают исключения, а каждое действие остаётся в истории.</p>
+      <span class="stage-icon" aria-hidden="true"><Icon name="spark" size={21} /></span>
+      <h3>Выполняем и проверяем</h3>
+      <p>ИИ-помощники проводят типовые операции по заданным правилам.</p>
       <div class="human-loop">
-        <span class="human-icon" aria-hidden="true"><Icon name="person" size={20} /></span>
-        <div><strong>Специалист на исключениях</strong><small>проверяет и подтверждает</small></div>
+        <span aria-hidden="true"><Icon name="person" size={19} /></span>
+        <div><strong>Человек — на исключениях</strong><small>проверяет неоднозначное и принимает решение</small></div>
       </div>
+    </li>
+
+    <li class="map-stage base-stage">
+      <span class="stage-number">03</span>
+      <h3>Формируем проверенную базу</h3>
+      <p>Каждая запись связана с источником, правилом и подтверждением.</p>
       <div class="base-layers" aria-label="Слои проверенной учётной базы">
-        <span>Управленческие разрезы</span>
+        <span>Управленческий учёт</span>
         <span>Зарплата и кадры</span>
         <span>Налоговый учёт</span>
         <span>Бухгалтерский учёт</span>
       </div>
-      <p class="trace-note"><Icon name="shield" size={17} /> Аудиторский след сохраняет источник, правило и решение.</p>
-      <p class="one-c-note"><b>1С на обслуживании</b> — система, в которой ведётся учёт, а не отдельный его вид.</p>
-    </section>
+    </li>
 
-    <div class="flow-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
-
-    <section class="map-stage important-stage" aria-labelledby="important-title">
+    <li class="map-stage important-stage">
       <span class="stage-number">04</span>
       <span class="important-icon" aria-hidden="true"><Icon name="spark" size={22} /></span>
-      <h3 id="important-title">Aivel замечает важное</h3>
-      <p>Проверяет согласованные границы и присылает руководителю короткий сигнал, когда нужно решение.</p>
+      <h3>Aivel замечает важное</h3>
+      <p>Руководитель получает короткий сигнал с причиной и следующим шагом.</p>
       <div class="signal-preview">
         <small>Важное изменение</small>
-        <strong>Запас денег опустился ниже согласованной границы</strong>
-        <span>Основание и следующий шаг — внутри сообщения</span>
+        <strong>Запас денег опустится ниже согласованной границы</strong>
+        <span>Основание можно проверить до решения</span>
       </div>
-    </section>
-  </div>
+    </li>
+  </ol>
 
-  <div class="helper-details" aria-live="polite">
-    {helpers.map((helper, index) => (
-      <article
-        class="helper-panel"
-        id={`helper-panel-${helper.id}`}
-        role="tabpanel"
-        aria-labelledby={`helper-tab-${helper.id}`}
-        tabindex="0"
-        hidden={index !== 0}
-        data-helper-panel={helper.id}
-      >
-        <div class="metric-block">
-          <span class:list={["panel-status", helper.statusTone]}>{helper.status}</span>
-          <strong>{helper.metric}</strong>
-          <p>{helper.metricText}</p>
-        </div>
-        <div class="detail-block">
-          <span>Что делает</span>
-          <p>{helper.work}</p>
-        </div>
-        <div class="detail-block">
-          <span>Когда подключается человек</span>
-          <p>{helper.exception}</p>
-        </div>
-        <div class="detail-block">
-          <span>Что можно проверить</span>
-          <p>{helper.trace}</p>
-        </div>
-      </article>
-    ))}
-  </div>
+  <p class="map-summary"><Icon name="shield" size={18} /> Правильное решение начинается не с красивого отчёта, а с полной и проверяемой цепочки данных.</p>
 </div>
-
-<script>
-  const maps = document.querySelectorAll<HTMLElement>("[data-foundation-map]");
-
-  maps.forEach((map) => {
-    const tabs = Array.from(map.querySelectorAll<HTMLButtonElement>("[data-helper-tab]"));
-    const panels = Array.from(map.querySelectorAll<HTMLElement>("[data-helper-panel]"));
-
-    const activate = (nextTab: HTMLButtonElement, moveFocus = false) => {
-      const id = nextTab.dataset.helperTab;
-
-      tabs.forEach((tab) => {
-        const selected = tab === nextTab;
-        tab.setAttribute("aria-selected", String(selected));
-        tab.tabIndex = selected ? 0 : -1;
-      });
-
-      panels.forEach((panel) => {
-        panel.hidden = panel.dataset.helperPanel !== id;
-      });
-
-      if (moveFocus) nextTab.focus();
-    };
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => activate(tab));
-      tab.addEventListener("keydown", (event) => {
-        let nextIndex: number | null = null;
-
-        if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (index + 1) % tabs.length;
-        if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === "Home") nextIndex = 0;
-        if (event.key === "End") nextIndex = tabs.length - 1;
-
-        if (nextIndex !== null) {
-          event.preventDefault();
-          activate(tabs[nextIndex], true);
-        }
-      });
-    });
-  });
-</script>
 
 <style>
   .foundation-map {
     display: grid;
-    gap: 18px;
+    gap: 14px;
   }
 
   .map-flow {
     display: grid;
-    grid-template-columns: minmax(160px, 0.76fr) 28px minmax(270px, 1.28fr) 28px minmax(220px, 1fr) 28px minmax(190px, 0.86fr);
-    gap: 8px;
-    align-items: stretch;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
   .map-stage {
+    position: relative;
     min-width: 0;
+    min-height: 310px;
     padding: 22px;
     background: white;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+  }
+
+  .map-stage:not(:last-child)::after {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: -19px;
+    display: grid;
+    width: 26px;
+    height: 26px;
+    color: var(--color-ink);
+    background: var(--color-gold-soft);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 9px rgb(15 23 42 / 0.12);
+    content: "→";
+    font-size: 0.85rem;
+    font-weight: 800;
+    place-items: center;
+    transform: translateY(-50%);
   }
 
   .map-stage h3 {
@@ -265,15 +114,30 @@ const helpers = [
   .map-stage > p {
     margin: 0;
     color: var(--color-muted);
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     line-height: 1.55;
   }
 
   .stage-number {
     color: var(--color-gold);
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 760;
     letter-spacing: 0.12em;
+  }
+
+  .stage-icon,
+  .important-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    margin-top: 18px;
+    border-radius: 11px;
+    place-items: center;
+  }
+
+  .stage-icon {
+    color: var(--color-blue);
+    background: var(--color-blue-pale);
   }
 
   .source-list {
@@ -281,7 +145,7 @@ const helpers = [
     flex-wrap: wrap;
     gap: 7px;
     padding: 0;
-    margin: 20px 0 0;
+    margin: 22px 0 0;
     list-style: none;
   }
 
@@ -296,110 +160,23 @@ const helpers = [
     line-height: 1.25;
   }
 
-  .flow-arrow {
-    display: grid;
-    color: var(--color-gold);
-    place-items: center;
-  }
-
-  .helper-tabs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 18px;
-  }
-
-  .helper-tab {
-    display: grid;
-    min-width: 0;
-    min-height: 64px;
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 9px;
-    align-items: center;
-    padding: 9px;
-    color: var(--color-ink);
-    text-align: left;
-    background: var(--color-paper);
-    border: 1px solid var(--color-border);
-    border-radius: 11px;
-    cursor: pointer;
-    transition: background 180ms ease-out, border-color 180ms ease-out, box-shadow 180ms ease-out;
-  }
-
-  .helper-tab:hover {
-    background: white;
-    border-color: var(--color-border-strong);
-  }
-
-  .helper-tab[aria-selected="true"] {
-    background: var(--color-gold-pale);
-    border-color: var(--color-gold);
-    box-shadow: inset 0 0 0 1px var(--color-gold);
-  }
-
-  .helper-tab:focus-visible,
-  .helper-panel:focus-visible {
-    outline: 3px solid var(--color-gold-soft);
-    outline-offset: 3px;
-  }
-
-  .helper-icon {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    color: var(--color-blue);
-    background: white;
-    border: 1px solid var(--color-border);
-    border-radius: 9px;
-    place-items: center;
-  }
-
-  .helper-copy {
-    display: grid;
-    min-width: 0;
-    gap: 3px;
-  }
-
-  .helper-copy strong {
-    font-size: 0.75rem;
-    line-height: 1.25;
-  }
-
-  .helper-status,
-  .panel-status {
-    width: fit-content;
-    font-size: 0.66rem;
-    font-weight: 720;
-    line-height: 1.25;
-  }
-
-  .helper-status.live,
-  .panel-status.live {
-    color: var(--color-green);
-  }
-
-  .helper-status.next,
-  .panel-status.next {
-    color: var(--color-blue);
-  }
-
   .human-loop {
     display: grid;
     grid-template-columns: 38px 1fr;
     gap: 10px;
     align-items: center;
-    padding: 10px;
-    margin: 16px 0 10px;
-    background: var(--color-blue-pale);
-    border: 1px solid #cfe5f4;
+    padding: 11px;
+    margin-top: 20px;
+    background: var(--color-green-pale);
+    border: 1px solid #c7e2d2;
     border-radius: 11px;
   }
 
-  .human-icon {
+  .human-loop > span {
     display: grid;
     width: 38px;
     height: 38px;
-    color: var(--color-blue);
+    color: var(--color-green);
     background: white;
     border-radius: 9px;
     place-items: center;
@@ -411,56 +188,35 @@ const helpers = [
   }
 
   .human-loop strong {
-    font-size: 0.79rem;
+    font-size: 0.8rem;
   }
 
   .human-loop small {
-    margin-top: 2px;
+    margin-top: 3px;
     color: var(--color-muted);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 
   .base-layers {
     display: grid;
-    gap: 3px;
+    gap: 4px;
+    margin-top: 20px;
   }
 
   .base-layers span {
-    padding: 6px 10px;
+    padding: 7px 10px;
     color: white;
-    background: var(--color-ink-soft);
+    background: #394c6a;
     border-radius: 6px;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 650;
     text-align: center;
   }
 
-  .base-layers span:nth-child(2) { background: #24344f; }
-  .base-layers span:nth-child(3) { background: #2e405e; }
-  .base-layers span:nth-child(4) { background: #394c6a; }
-
-  .trace-note,
-  .one-c-note {
-    margin-top: 10px !important;
-    font-size: 0.72rem !important;
-  }
-
-  .trace-note {
-    display: flex;
-    gap: 7px;
-    align-items: flex-start;
-    color: var(--color-green) !important;
-  }
-
-  .trace-note svg {
-    flex: 0 0 auto;
-    margin-top: 1px;
-  }
-
-  .one-c-note {
-    padding-top: 9px;
-    border-top: 1px solid var(--color-border);
-  }
+  .base-layers span:nth-child(2) { background: #324561; }
+  .base-layers span:nth-child(3) { background: #283b57; }
+  .base-layers span:nth-child(4) { background: var(--color-ink-soft); }
 
   .important-stage {
     color: white;
@@ -477,14 +233,8 @@ const helpers = [
   }
 
   .important-icon {
-    display: grid;
-    width: 44px;
-    height: 44px;
-    margin-top: 16px;
     color: var(--color-ink);
     background: var(--color-gold-soft);
-    border-radius: 12px;
-    place-items: center;
   }
 
   .signal-preview {
@@ -499,7 +249,7 @@ const helpers = [
 
   .signal-preview small {
     color: var(--color-red);
-    font-size: 0.67rem;
+    font-size: 0.7rem;
     font-weight: 760;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -507,130 +257,60 @@ const helpers = [
 
   .signal-preview strong {
     font-size: 0.8rem;
-    line-height: 1.35;
+    line-height: 1.4;
   }
 
   .signal-preview span {
     color: var(--color-muted);
-    font-size: 0.69rem;
+    font-size: 0.72rem;
     line-height: 1.4;
   }
 
-  .helper-details {
-    min-height: 174px;
-    padding: 18px;
-    background: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .helper-panel {
-    display: grid;
-    grid-template-columns: minmax(150px, 0.75fr) repeat(3, minmax(0, 1fr));
-    gap: 0;
-  }
-
-  .helper-panel[hidden] {
-    display: none;
-  }
-
-  .helper-panel > div {
-    min-width: 0;
-    padding: 6px 18px;
-    border-left: 1px solid var(--color-border);
-  }
-
-  .helper-panel > div:first-child {
-    padding-left: 6px;
-    border-left: 0;
-  }
-
-  .metric-block strong {
-    display: block;
-    margin: 8px 0 3px;
-    color: var(--color-ink);
-    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-    line-height: 1;
-  }
-
-  .metric-block p,
-  .detail-block p {
+  .map-summary {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    padding: 12px 14px;
     margin: 0;
-    font-size: 0.79rem;
-    line-height: 1.5;
+    color: var(--color-green);
+    background: var(--color-green-pale);
+    border: 1px solid #c7e2d2;
+    border-radius: 11px;
+    font-size: 0.82rem;
+    font-weight: 680;
+    line-height: 1.45;
   }
 
-  .detail-block > span {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--color-muted);
-    font-size: 0.68rem;
-    font-weight: 760;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .map-summary svg {
+    flex: 0 0 auto;
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1080px) {
     .map-flow {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .flow-arrow {
-      display: none;
+    .map-stage {
+      min-height: 280px;
     }
 
-    .helper-panel {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .helper-panel > div:nth-child(3) {
-      border-left: 0;
-    }
-
-    .helper-panel > div:nth-child(n + 3) {
-      padding-top: 18px;
-      margin-top: 12px;
-      border-top: 1px solid var(--color-border);
+    .map-stage::after {
+      display: none !important;
     }
   }
 
-  @media (max-width: 700px) {
-    .map-flow,
-    .helper-panel {
+  @media (max-width: 620px) {
+    .map-flow {
       grid-template-columns: 1fr;
     }
 
     .map-stage {
+      min-height: 0;
       padding: 18px;
     }
 
-    .helper-tabs {
-      grid-template-columns: 1fr;
-    }
-
-    .helper-tab {
-      min-height: 56px;
-    }
-
-    .helper-panel > div,
-    .helper-panel > div:first-child,
-    .helper-panel > div:nth-child(3) {
-      padding: 14px 4px;
-      margin: 0;
-      border-top: 1px solid var(--color-border);
-      border-left: 0;
-    }
-
-    .helper-panel > div:first-child {
-      padding-top: 4px;
-      border-top: 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .helper-tab {
-      transition: none;
+    .map-summary {
+      align-items: flex-start;
     }
   }
 </style>

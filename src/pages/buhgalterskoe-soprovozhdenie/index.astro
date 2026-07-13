@@ -2,26 +2,31 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
 import AccountingFoundationMap from "../../components/AccountingFoundationMap.astro";
-import AccountingResultsProof from "../../components/AccountingResultsProof.astro";
-
-const services = [
-  { icon: "document", title: "Бухгалтерский учёт", text: "Первичные документы, операции, закрытие периода, обязательная отчётность и ответы на требования." },
-  { icon: "shield", title: "Налоговый учёт", text: "Расчёты, декларации, календарь обязательств и контроль налоговых рисков вместе с ответственным специалистом." },
-  { icon: "person", title: "Зарплата и кадры", text: "Начисления, выплаты, кадровые документы, приём, переводы, увольнения и обязательная отчётность." },
-  { icon: "chart", title: "Управленческий учёт", text: "Показатели, справочники и разрезы, которые помогают видеть деньги, прибыльность и состояние направлений." }
-] as const;
-
+import AccountingAgentShowcase from "../../components/AccountingAgentShowcase.astro";
+import OneCServiceShowcase from "../../components/OneCServiceShowcase.astro";
 ---
 
 <BaseLayout
   title="Учёт как база: бухгалтерия, налоги, кадры и управленческие данные — Aivel"
-  description="Как Aivel собирает данные, выполняет типовые учётные операции, передаёт исключения специалистам и создаёт проверенную основу для важных сигналов."
+  description="Aivel ведёт бухгалтерский, налоговый, кадровый и управленческий учёт, автоматизирует операции ИИ-помощниками и обслуживает 1С. Начать можно с экспресс-аудита."
   schema={{
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Учёт как база Aivel",
     serviceType: "Бухгалтерский, налоговый, кадровый и управленческий учёт",
-    provider: { "@type": "Organization", name: "Aivel" }
+    provider: { "@type": "Organization", name: "Aivel" },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Услуги и ИИ-помощники Aivel",
+      itemListElement: [
+        "Бухгалтерский и налоговый учёт",
+        "Зарплата и кадры",
+        "Управленческий учёт",
+        "ИИ-помощники для учётных операций",
+        "Обслуживание 1С",
+        "Экспресс-аудит учётного контура"
+      ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } }))
+    }
   }}
 >
   <div class="container breadcrumbs" aria-label="Хлебные крошки">
@@ -51,53 +56,32 @@ const services = [
     <div class="container">
       <div class="foundation-intro">
         <div><p class="section-kicker">Одна цепочка</p><h2 id="foundation-title">От исходных данных — до сигнала руководителю.</h2></div>
-        <p>Не отдельная программа поверх беспорядка, а связанный процесс: источник, операция, проверка, учётная база и только затем — важное изменение.</p>
+        <p>Бухгалтерский и налоговый учёт, зарплата и кадры, управленческие разрезы образуют одну проверяемую основу. Только после этого данные становятся основанием для решения.</p>
       </div>
       <AccountingFoundationMap />
     </div>
   </section>
 
-  <section class="section section-warm coverage-screen" aria-labelledby="services-title">
-    <div class="container coverage-layout">
-      <div class="coverage-main">
-        <p class="section-kicker">Что входит в основу</p>
-        <h2 id="services-title">Весь учёт — в одном проверяемом контуре.</h2>
-        <p class="coverage-lead">Можно передать Aivel весь контур или начать с участка, который сильнее всего мешает видеть реальную картину.</p>
-        <div class="accounting-services">
-          {services.map((service) => (
-            <article>
-              <span class="service-icon"><Icon name={service.icon} size={23} /></span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-            </article>
-          ))}
+  <AccountingAgentShowcase />
+  <OneCServiceShowcase />
+
+  <section class="section audit-screen" id="ekspress-audit" aria-labelledby="audit-title">
+    <div class="container">
+      <div class="audit-panel">
+        <div class="audit-copy">
+          <p class="section-kicker section-kicker-light">Первый шаг</p>
+          <h2 id="audit-title">Экспресс-аудит покажет, с какого участка начать.</h2>
+          <p>Проверим базу 1С, закрытие периодов, остатки, обязательства, аналитику и обмены. Затем предложим последовательный путь без перестройки всего учёта сразу.</p>
+          <button class="button button-light" type="button" data-open-contact data-contact-topic="client">Запросить экспресс-аудит <Icon name="arrow" size={19} /></button>
         </div>
-      </div>
-      <div class="entry-cards">
-        <article class="entry-card audit-card">
-          <span class="entry-icon"><Icon name="check" size={22} /></span>
-          <div>
-            <p class="card-label">Первый шаг к внедрению</p>
-            <h3>Экспресс-аудит</h3>
-            <p>Проверяем базу 1С, закрытие периодов, остатки, обязательства, аналитику и обмены.</p>
-            <strong>На выходе: риски, объём восстановления и первый участок внедрения.</strong>
-          </div>
-        </article>
-        <article class="entry-card one-c-card">
-          <span class="one-c-badge" aria-hidden="true">1С</span>
-          <div>
-            <p class="card-label">Поддерживающая система</p>
-            <h3>1С на обслуживании</h3>
-            <p>Поддерживаем действующую базу, обновления, права, доработки и обмены.</p>
-            <strong>1С — не вид учёта, а система, в которой он ведётся.</strong>
-          </div>
-        </article>
-        <p class="scope-note">Состав работ фиксируем после разбора: что входит в регулярное сопровождение, что требует восстановления и какой участок можно автоматизировать первым.</p>
+        <ol class="audit-results" aria-label="Что вы получите после экспресс-аудита">
+          <li><span>01</span><div><strong>Карта рисков и пробелов</strong><p>Что мешает доверять данным и где проблема влияет на решения.</p></div></li>
+          <li><span>02</span><div><strong>Объём восстановления</strong><p>Что исправить в базе, правилах, справочниках и обменах.</p></div></li>
+          <li><span>03</span><div><strong>Первый ИИ-помощник</strong><p>Какой участок даст быстрый и измеримый эффект без лишнего риска.</p></div></li>
+        </ol>
       </div>
     </div>
   </section>
-
-  <AccountingResultsProof />
 </BaseLayout>
 
 <style>
@@ -183,133 +167,87 @@ const services = [
     max-width: 520px;
   }
 
-  .coverage-screen {
-    padding-block: clamp(56px, 7vw, 88px);
+  .audit-screen {
+    padding-block: clamp(58px, 7vw, 92px);
+    scroll-margin-top: var(--header-height);
+    background: var(--color-paper);
   }
 
-  .coverage-layout {
+  .audit-panel {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.65fr);
-    gap: clamp(36px, 6vw, 76px);
-    align-items: start;
+    grid-template-columns: minmax(0, 1.05fr) minmax(390px, 0.95fr);
+    gap: clamp(38px, 7vw, 86px);
+    align-items: center;
+    padding: clamp(30px, 5vw, 64px);
+    color: white;
+    background: var(--color-ink);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
   }
 
-  .coverage-main h2 {
-    margin-bottom: 14px;
+  .audit-copy h2,
+  .audit-copy p {
+    color: white;
   }
 
-  .coverage-lead {
+  .audit-copy h2 {
+    margin-bottom: 16px;
+  }
+
+  .audit-copy > p:not(.section-kicker) {
     max-width: 720px;
-    margin-bottom: 24px;
+    color: #c8d2df;
   }
 
-  .accounting-services {
+  .audit-copy .button {
+    margin-top: 12px;
+  }
+
+  .audit-results {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .accounting-services article {
-    display: grid;
-    min-height: 150px;
-    grid-template-columns: 42px 1fr;
-    gap: 0 12px;
-    align-content: start;
-    padding: 18px;
-    background: white;
-    border: 1px solid #eadfcb;
-    border-radius: var(--radius-md);
-  }
-
-  .service-icon {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    grid-row: 1 / span 2;
-    color: var(--color-blue);
-    background: #edf4fa;
-    border-radius: 11px;
-    place-items: center;
-  }
-
-  .accounting-services h3 {
-    margin: 2px 0 7px;
-    font-size: 1rem;
-  }
-
-  .accounting-services p {
-    grid-column: 2;
+    gap: 1px;
+    padding: 1px;
     margin: 0;
-    font-size: 0.82rem;
-    line-height: 1.5;
+    overflow: hidden;
+    background: rgb(255 255 255 / 0.17);
+    border: 1px solid rgb(255 255 255 / 0.17);
+    border-radius: var(--radius-lg);
+    list-style: none;
   }
 
-  .entry-cards {
+  .audit-results li {
     display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
     gap: 12px;
+    padding: 17px 18px;
+    background: #18243a;
   }
 
-  .entry-card {
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr);
-    gap: 14px;
-    padding: 20px;
-    background: white;
-    border: 1px solid #eadfcb;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+  .audit-results li > span {
+    padding-top: 2px;
+    color: var(--color-gold-soft);
+    font-size: 0.72rem;
+    font-weight: 780;
+    letter-spacing: 0.08em;
   }
 
-  .entry-icon,
-  .one-c-badge {
-    display: grid;
-    width: 52px;
-    height: 52px;
-    border-radius: 13px;
-    place-items: center;
-  }
-
-  .entry-icon {
-    color: var(--color-green);
-    background: var(--color-green-pale);
-  }
-
-  .one-c-badge {
-    color: #161616;
-    background: #ffd83d;
-    font-size: 1.3rem;
-    font-weight: 800;
-  }
-
-  .entry-card h3 {
-    margin: 3px 0 7px;
-  }
-
-  .entry-card p {
-    margin: 0;
-    font-size: 0.86rem;
-  }
-
-  .entry-card strong {
+  .audit-results strong {
     display: block;
-    margin-top: 10px;
-    color: var(--color-ink-soft);
-    font-size: 0.78rem;
-    line-height: 1.45;
+    color: white;
+    font-size: 0.9rem;
   }
 
-  .scope-note {
-    padding: 4px 4px 0;
-    margin: 0;
-    color: var(--color-muted);
-    font-size: 0.8rem;
-    line-height: 1.5;
+  .audit-results p {
+    margin: 4px 0 0;
+    color: #b9c5d4;
+    font-size: 0.76rem;
+    line-height: 1.45;
   }
 
   @media (max-width: 920px) {
     .compact-hero,
     .foundation-intro,
-    .coverage-layout {
+    .audit-panel {
       grid-template-columns: 1fr;
     }
 
@@ -319,8 +257,7 @@ const services = [
   }
 
   @media (max-width: 620px) {
-    .hero-chain,
-    .accounting-services {
+    .hero-chain {
       grid-template-columns: 1fr;
     }
 
@@ -341,19 +278,13 @@ const services = [
       grid-column: 2;
     }
 
-    .accounting-services article {
-      min-height: 0;
+    .audit-panel {
+      padding: 24px 18px;
+      border-radius: var(--radius-lg);
     }
 
-    .entry-card {
-      grid-template-columns: 44px minmax(0, 1fr);
-      padding: 16px;
-    }
-
-    .entry-icon,
-    .one-c-badge {
-      width: 44px;
-      height: 44px;
+    .audit-copy .button {
+      width: 100%;
     }
   }
 </style>

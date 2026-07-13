@@ -93,28 +93,53 @@ test("homepage explains the product in three clear screens", async () => {
   assert.doesNotMatch(html, /ничего важного не пропустим|всегда вовремя|в реальном времени/i);
 });
 
-test("accounting page shows the complete foundation from sources to signal", async () => {
+test("accounting page leads from a reliable foundation to agents, 1C and an audit", async () => {
   const html = await readFile(routeFile("buhgalterskoe-soprovozhdenie"), "utf8");
+  assert.match(html, /Чтобы увидеть важное, сначала нужен точный учёт/);
   assert.match(html, /От исходных данных — до сигнала руководителю/);
-  assert.match(html, /ЭДО/);
-  assert.match(html, /iiko и другие транзакционные системы/);
-  assert.match(html, /ИИ-помощники выполняют операции/);
-  assert.match(html, /Специалист на исключениях/);
-  assert.match(html, /Проверенная база/);
+  assert.match(html, /ЭДО и почта/);
+  assert.match(html, /iiko и другие рабочие системы/);
+  assert.match(html, /Выполняем и проверяем/);
+  assert.match(html, /Человек — на исключениях/);
+  assert.match(html, /Формируем проверенную базу/);
   assert.match(html, /Aivel замечает важное/);
-  assert.match(html, /1С — не вид учёта, а система, в которой он ведётся/);
-  assert.match(html, /Следующий контур/);
-  assert.equal(count(html, /class="helper-tab"/g), 6);
-  assert.match(html, /Что уже измерено во внедрениях/);
-  assert.match(html, /Доказательство по процессам/);
-  assert.match(html, /80–90%/);
-  assert.match(html, /до 30%/);
-  assert.match(html, /6–8 месяцев/);
+  assert.match(html, /Быстро обрабатывают поток. Точно ведут учёт. Не теряют исключения/);
+  assert.match(html, /Почти сразу/);
+  assert.match(html, /По единым правилам/);
+  assert.match(html, /Ничего не теряется/);
+  assert.equal(count(html, /class="agent-card"/g), 4);
+  assert.equal(count(html, /id="rezultaty-vnedreniy"/g), 1);
+  assert.match(html, /80% документов/);
+  assert.match(html, /98% — точность сопоставления/);
+  assert.match(html, /До 95% сверок/);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/pervichnye-dokumenty\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/bankovskie-operatsii\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/kommunikatsii-s-klientami\//);
   assert.match(html, /href="\/avtomatizatsiya-ucheta\/sverki-s-kontragentami\//);
-  assert.doesNotMatch(html, /1С и экспресс-аудит/);
+  assert.match(html, /1С на обслуживании/);
+  assert.match(html, /Лицензии и запуск/);
+  assert.match(html, /Облако или контур компании/);
+  assert.match(html, /href="\/1s-i-integratsii\//);
+  assert.match(html, /Экспресс-аудит покажет, с какого участка начать/);
+  assert.match(html, /Запросить экспресс-аудит/);
+  assert.ok(html.indexOf("От исходных данных — до сигнала руководителю") < html.indexOf("Быстро обрабатывают поток"));
+  assert.ok(html.indexOf("Быстро обрабатывают поток") < html.indexOf("1С на обслуживании"));
+  assert.ok(html.indexOf("1С на обслуживании") < html.indexOf("Экспресс-аудит покажет"));
+  assert.doesNotMatch(html, /class="helper-tab"|Следующий контур|Что входит в основу|Доказательство по процессам/);
+});
+
+test("1C page sells the complete service and connects it to accounting agents", async () => {
+  const html = await readFile(routeFile("1s-i-integratsii"), "utf8");
+  assert.match(html, /Лицензии, размещение и поддержка 1С — в одной команде с учётом/);
+  assert.match(html, /Лицензии и запуск/);
+  assert.match(html, /Облако или контур компании/);
+  assert.match(html, /Техническое обслуживание/);
+  assert.match(html, /Доработки и обмены/);
+  assert.match(html, /Каждое изменение — по понятному маршруту/);
+  assert.match(html, /От документа — до результата в 1С без разрыва процесса/);
+  assert.match(html, /href="\/buhgalterskoe-soprovozhdenie\/#ii-pomoshchniki"/);
+  assert.match(html, /Запросить экспресс-аудит/);
+  assert.doesNotMatch(html, /on-prem|end-to-end/i);
 });
 
 test("legacy results route redirects to the accounting evidence", async () => {
