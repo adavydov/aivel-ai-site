@@ -23,7 +23,7 @@ const schema = {
   <section class="v2-section v2-page-hero" data-v2-screen="1">
     <div class="v2-shell">
       <p class="v2-eyebrow">Кейсы</p>
-      <h1 class="v2-page-title">Результат в реальной работе.</h1>
+      <h1 class="v2-page-title">Результат в <span class="v2-accent-word">реальной работе.</span></h1>
       <p class="v2-lead">
         Не обещания автоматизации, а рост бизнеса без пропорционального роста бухгалтерской команды.
       </p>
@@ -31,48 +31,27 @@ const schema = {
     </div>
   </section>
 
-  <section class="v2-section" data-v2-screen="2" aria-labelledby="v2-ddx-title">
+  <section class="v2-section" data-v2-screen="2" aria-labelledby="v2-customer-results-title">
     <div class="v2-shell">
-      <article class="v2-client-story">
-        <div class="v2-client-story__identity">
-          <p class="v2-eyebrow">ДДХ</p>
-          <figure class="v2-case-logo">
-            <img src={v2CustomerCases[0].logos[0].src} alt={v2CustomerCases[0].logos[0].name} width="482" height="140" loading="lazy" decoding="async" />
-          </figure>
-        </div>
-        <div class="v2-client-story__copy">
-          <strong class="v2-case-metric">{v2CustomerCases[0].metric}</strong>
-          <h2 class="v2-section-title" id="v2-ddx-title">{v2CustomerCases[0].title}</h2>
-          <p class="v2-lead">{v2CustomerCases[0].text}</p>
-        </div>
-      </article>
+      <p class="v2-eyebrow">Измерено во внедрениях</p>
+      <h2 class="v2-section-title" id="v2-customer-results-title">Три компании. Два понятных результата.</h2>
+      <div class="v2-customer-grid">
+        {v2CustomerCases.map((item) => (
+          <article class="v2-customer-card">
+            <div class="v2-customer-card__head">
+              <span>{item.company}</span>
+              <img src={item.logo.src} alt={item.logo.name} loading="lazy" decoding="async" />
+            </div>
+            <strong>{item.metric}</strong>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="v2-section v2-section--soft" data-v2-screen="3" aria-labelledby="v2-primary-title">
-    <div class="v2-shell">
-      <article class="v2-client-story">
-        <div class="v2-client-story__identity">
-          <p class="v2-eyebrow">Первичные документы</p>
-          <div class="v2-case-logos" aria-label="Нефтьмагистраль и Братья Караваевы">
-            {v2CustomerCases[1].logos.map((logo) => (
-              <figure class="v2-case-logo">
-                <img src={logo.src} alt={logo.name} loading="lazy" decoding="async" />
-              </figure>
-            ))}
-          </div>
-        </div>
-        <div class="v2-client-story__copy">
-          <strong class="v2-case-metric">{v2CustomerCases[1].metric}</strong>
-          <h2 class="v2-section-title" id="v2-primary-title">{v2CustomerCases[1].title}</h2>
-          <p class="v2-lead">{v2CustomerCases[1].text}</p>
-          <a class="v2-text-link" href="/avtomatizatsiya-ucheta/pervichnye-dokumenty/">Посмотреть весь процесс</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="v2-section v2-section--auto" data-v2-screen="4" aria-labelledby="v2-processes-title">
+  <section class="v2-section v2-section--auto" data-v2-screen="3" aria-labelledby="v2-processes-title">
     <div class="v2-shell">
       <p class="v2-eyebrow">Что стоит за результатом</p>
       <h2 class="v2-section-title" id="v2-processes-title">ИИ выполняет операцию. Человек разбирает исключение.</h2>

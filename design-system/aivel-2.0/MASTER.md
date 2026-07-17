@@ -8,8 +8,8 @@
 
 **Project:** Aivel 2.0
 **Updated:** 2026-07-17
-**Category:** AI/Chatbot Platform
-**Design Dials:** Variance 3/10 (Centered / Minimal) | Motion 3/10 (Subtle) | Density 2/10 (Spacious)
+**Category:** B2B AI Accounting
+**Design Dials:** Variance 2/10 (Editorial / Minimal) | Motion 1/10 (Functional) | Density 2/10 (Spacious)
 
 ---
 
@@ -77,16 +77,16 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 .btn-primary {
   background: #155EEF;
   color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 200ms ease;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: background-color 160ms ease, border-color 160ms ease;
   cursor: pointer;
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  background: #0F46BD;
 }
 
 /* Secondary Button */
@@ -94,10 +94,11 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
   background: transparent;
   color: #090B10;
   border: 1px solid rgba(9, 11, 16, 0.2);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 200ms ease;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: border-color 160ms ease;
   cursor: pointer;
 }
 ```
@@ -107,10 +108,10 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 ```css
 .card {
   background: #FFFFFF;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 24px;
   border: 1px solid rgba(9, 11, 16, 0.12);
-  transition: all 200ms ease;
+  transition: border-color 160ms ease;
   cursor: pointer;
 }
 
@@ -159,29 +160,35 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 
 ## Style Guidelines
 
-**Style:** Exaggerated Minimalism
+**Style:** Editorial Minimalism
 
-**Keywords:** Bold minimalism, oversized typography, high contrast, negative space, loud minimal, statement design
+**Keywords:** Clear hierarchy, narrow reading measure, high contrast, generous whitespace, restrained blue accent
 
-**Best For:** Fashion, architecture, portfolios, agency landing pages, luxury brands, editorial
+**Best For:** A complex B2B product that must become understandable in one reading pass
 
-**Key Effects:** font-size: clamp(3rem 10vw 12rem), font-weight: 900, letter-spacing: -0.05em, massive whitespace
+**Key Effects:** 60px desktop / 48px mobile hero, 720px editorial column, natural-height sections, one blue semantic accent
 
 ### Page Pattern
 
-**Pattern Name:** Minimal Single Column
+**Pattern Name:** Editorial Single Column with Proof Breakouts
 
-- **Conversion Strategy:** Single CTA focus. Large typography. Lots of whitespace. No nav clutter. Mobile-first.
-- **CTA Placement:** Center, large CTA button
-- **Section Order:** 1. Hero headline, 2. Short description, 3. Benefit bullets (3 max), 4. CTA, 5. Footer
+- **Conversion Strategy:** One claim per screen, one primary action, concrete proof directly after the claim.
+- **Reading measure:** 720px for hero and narrative; up to 960px only for diagrams, cases and comparison grids.
+- **Vertical rhythm:** first content begins 88–112px from the top; later sections follow after 64–80px. Do not stretch sections to the viewport.
+- **Typography:** hero 60/62 desktop and 48/50 mobile, weight 650; section title up to 48px; body 16–19px.
+- **CTA Placement:** left-aligned with the reading column; secondary action is a text link.
+- **Homepage rule:** the first screen has one action leading to the interactive example; contact conversion follows after the product value is understood.
+- **Cases rule:** customer outcomes are scanned in a single three-card grid, not stretched into separate viewport-height stories.
 
 ### Navigation
 
-- На широком экране — фиксированная левая полоса шириной 96 пикселей.
+- На широком экране — фиксированная левая полоса шириной 100 пикселей.
+- Знак расположен сверху, меню начинается через 24 пикселя под ним, а не центрируется по высоте окна.
 - Четыре направления: «Увидеть важное», «Наладить учёт», «Кейсы», «Стать партнёром».
 - Каждый пункт содержит контурную SVG-иконку и постоянную текстовую подпись.
-- Текущий раздел выделяется синим цветом и видимым индикатором.
-- На экране до 700 пикселей эта же навигация становится нижней панелью из четырёх пунктов; содержимое получает безопасный нижний отступ.
+- Пункт занимает 64 × 64 пикселя; подпись не меньше 12 пикселей и может переноситься на две строки.
+- Текущий раздел выделяется белой плиткой с тонкой границей и лёгкой тенью; синий показывает текущее состояние.
+- На экране до 700 пикселей эта же навигация становится нижней панелью высотой 80 пикселей из четырёх пунктов; содержимое получает безопасный нижний отступ.
 
 ---
 

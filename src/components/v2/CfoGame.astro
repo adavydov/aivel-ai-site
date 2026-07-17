@@ -8,7 +8,7 @@ const answerId = `${titleId}-answer`;
   <header class="v2-game__intro">
     <p class="v2-game__eyebrow">Учебная демонстрация</p>
     <div>
-      <h1 id={titleId}>Один рабочий день с финансовым помощником</h1>
+      <h1 id={titleId}>Один рабочий день с <span class="v2-accent-word">финансовым помощником</span></h1>
       <p>
         Время идёт, в бизнесе происходят события. Помощник сам замечает то, что требует вашего
         внимания, и показывает основание вывода.
@@ -201,8 +201,8 @@ const answerId = `${titleId}-answer`;
 
   .v2-game__intro {
     display: grid;
-    grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 5vw, 5rem);
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
     align-items: start;
     max-width: 70rem;
     margin-bottom: clamp(1.75rem, 5vw, 3.5rem);
@@ -222,12 +222,12 @@ const answerId = `${titleId}-answer`;
   }
 
   .v2-game__intro h1 {
-    max-width: 13ch;
+    max-width: 15ch;
     margin: 0;
-    font-size: clamp(2.25rem, 6vw, 5.5rem);
-    font-weight: 620;
-    letter-spacing: -0.055em;
-    line-height: 0.98;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
     text-wrap: balance;
   }
 
@@ -258,9 +258,9 @@ const answerId = `${titleId}-answer`;
     overflow: hidden;
     max-width: 70rem;
     border: 1px solid var(--game-line);
-    border-radius: clamp(1.25rem, 3vw, 1.75rem);
+    border-radius: 1rem;
     background: var(--game-paper);
-    box-shadow: 0 1.6rem 4rem rgb(9 11 16 / 9%);
+    box-shadow: 0 1rem 2.5rem rgb(9 11 16 / 7%);
   }
 
   .v2-game__bar {

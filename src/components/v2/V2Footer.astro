@@ -1,5 +1,5 @@
 ---
-import { v2Navigation, v2Site } from "../../data/v2";
+import { v2Site } from "../../data/v2";
 ---
 
 <footer class="v2-footer">
@@ -11,11 +11,9 @@ import { v2Navigation, v2Site } from "../../data/v2";
       </a>
       <p>Вовремя увидеть важное.</p>
     </div>
-    <nav aria-label="Навигация в подвале">
-      {v2Navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-    </nav>
     <div class="v2-footer__contact">
       <a href={`mailto:${v2Site.email}`}>{v2Site.email}</a>
+      <a href="/v2/llms.txt">Версия для ИИ</a>
       <span>Москва · 2026</span>
     </div>
   </div>

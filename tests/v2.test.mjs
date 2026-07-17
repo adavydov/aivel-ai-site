@@ -36,14 +36,14 @@ test("every version 2 page has independent metadata and no legacy shell", async 
 test("homepage delivers one promise in four screens", async () => {
   const html = await readFile(routeFile("v2"), "utf8");
   assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Вовремя увидеть важное\./);
-  assert.match(html, /Система сообщила сама/);
+  assert.match(html, /Вовремя увидеть <span class="v2-accent-word">важное\.<\/span>/);
+  assert.equal(count(html, /Попробовать на учебном бизнесе/g), 1);
   assert.match(html, /Важное редко выглядит важным сразу/);
   assert.match(html, /Сначала сообщает\. Потом отвечает\./);
   assert.match(html, /Опыт команды/);
   assert.match(html, /Компании, с которыми работала команда Aivel/);
   assert.match(html, /href="\/v2\/primer\//);
-  assert.ok(html.indexOf("Вовремя увидеть важное") < html.indexOf("Важное редко выглядит важным сразу"));
+  assert.ok(html.indexOf("Вовремя увидеть") < html.indexOf("Важное редко выглядит важным сразу"));
   assert.ok(html.indexOf("Важное редко выглядит важным сразу") < html.indexOf("Сначала сообщает. Потом отвечает"));
   assert.ok(html.indexOf("Сначала сообщает. Потом отвечает") < html.indexOf("Опыт команды"));
   assert.doesNotMatch(html, /кадровый учёт|51%|400\+ млн/);
@@ -68,7 +68,8 @@ test("demo creates the aha before asking for contact data", async () => {
 test("accounting page connects the foundation, agents, people and 1C", async () => {
   const html = await readFile(routeFile("v2/uchet"), "utf8");
   assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Точный вывод начинается с точного учёта/);
+  assert.match(html, /Точный вывод начинается с/);
+  assert.match(html, /точного учёта/);
   assert.match(html, /ИИ ведёт поток\. Человек разбирает исключения/);
   assert.equal(count(html, /class="v2-agent-card"/g), 6);
   assert.match(html, /80% общего потока/);
@@ -83,24 +84,28 @@ test("accounting page connects the foundation, agents, people and 1C", async () 
 
 test("cases page leads with customer outcomes and keeps process evidence available", async () => {
   const html = await readFile(routeFile("v2/ii-agenty"), "utf8");
-  assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Результат в реальной работе/);
-  assert.match(html, />в 2 раза<\/strong>/);
-  assert.match(html, /Ни одного нового бухгалтера/);
+  assert.equal(count(html, /data-v2-screen=/g), 3);
+  assert.match(html, /Результат в/);
+  assert.match(html, /реальной работе/);
+  assert.match(html, />×2<\/strong>/);
+  assert.match(html, /Выросли без найма бухгалтеров/);
   assert.match(html, /ДДХ/);
   assert.match(html, /Нефтьмагистраль/);
   assert.match(html, /Братья Караваевы/);
   assert.match(html, />70%<\/strong>/);
-  assert.match(html, /Первичных документов — без участия человека/);
+  assert.equal(count(html, /class="v2-customer-card"/g), 3);
+  assert.equal(count(html, />70%<\/strong>/g), 2);
+  assert.match(html, /Первички — без участия человека/);
   assert.match(html, /ИИ выполняет операцию\. Человек разбирает исключение/);
   assert.equal(count(html, /class="v2-proof-links"/g), 1);
-  assert.equal(count(html, /Посмотреть весь процесс/g), 1);
+  assert.equal(count(html, /Посмотреть весь процесс/g), 0);
 });
 
 test("partner page states the deal clearly and answers six owner questions", async () => {
   const html = await readFile(routeFile("v2/partneram"), "utf8");
   assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Расти без найма\. Стать финансовым партнёром/);
+  assert.match(html, /Расти без найма/);
+  assert.match(html, /Стать финансовым партнёром/);
   assert.match(html, /Вы отвечаете за рост\. Мы — за производительность/);
   assert.match(html, /приобретаем от 51%/);
   assert.match(html, /корпоративным договором/);
@@ -124,13 +129,19 @@ test("version 2 machine-readable map is explicit about scope and evidence", asyn
   assert.match(text, /info@aivel\.ru/);
 });
 
-test("version 2 uses the white, black and blue visual system", async () => {
+test("version 2 uses the canonical editorial visual system", async () => {
   const css = await readFile(path.join(root, "src", "styles", "v2.css"), "utf8");
   const game = await readFile(path.join(root, "src", "components", "v2", "CfoGame.astro"), "utf8");
   assert.match(css, /--v2-bg: #fff;/);
   assert.match(css, /--v2-ink: #090b10;/);
   assert.match(css, /--v2-accent: #155eef;/);
+  assert.match(css, /--v2-rail-width: 100px;/);
+  assert.match(css, /--v2-shell: 960px;/);
   assert.match(css, /\.v2-sidebar \{/);
+  assert.match(css, /width: min\(calc\(100% - 48px\), 720px\)/);
+  assert.match(css, /margin-top: clamp\(64px, 7vw, 80px\)/);
+  assert.match(css, /grid-template-columns: repeat\(auto-fit, minmax\(250px, 1fr\)\)/);
   assert.match(css, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(css, /min-height: min\(900px/);
   assert.doesNotMatch(css + game, /#a95f14|#7d430d|#f8f9f7|#132033|#0c1727|#376650/i);
 });

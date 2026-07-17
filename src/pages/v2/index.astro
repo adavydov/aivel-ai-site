@@ -1,7 +1,7 @@
 ---
 import BrandStrip from "../../components/v2/BrandStrip.astro";
 import V2Layout from "../../layouts/V2Layout.astro";
-import { demoMailto, v2Mechanism, v2Pains, v2Site } from "../../data/v2";
+import { v2Mechanism, v2Pains, v2Site } from "../../data/v2";
 
 const title = "Вовремя увидеть важное в бизнесе — Aivel 2.0";
 const description =
@@ -25,19 +25,11 @@ const schema = {
   <section class="v2-section v2-page-hero" data-v2-screen="1">
     <div class="v2-shell">
       <p class="v2-eyebrow">Финансовый помощник для руководителя</p>
-      <h1 class="v2-title">Вовремя увидеть важное.</h1>
+      <h1 class="v2-title">Вовремя увидеть <span class="v2-accent-word">важное.</span></h1>
       <p class="v2-lead">
         Aivel сам замечает важные изменения в бизнесе, объясняет, чем они грозят, и показывает основание каждого вывода.
       </p>
-      <div class="v2-actions">
-        <a class="v2-button" href="/v2/primer/">Попробовать на учебном бизнесе</a>
-        <a class="v2-text-link" href={demoMailto}>Записаться на показ</a>
-      </div>
-      <div class="v2-hero__signal" aria-label="Пример сообщения Aivel">
-        <span>!</span>
-        <p>Через 12 дней может не хватить денег на зарплату и налоги.</p>
-        <small>Система сообщила сама</small>
-      </div>
+      <a class="v2-button" href="/v2/primer/">Попробовать на учебном бизнесе</a>
     </div>
   </section>
 
