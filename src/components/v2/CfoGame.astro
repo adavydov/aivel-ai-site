@@ -189,13 +189,13 @@ const answerId = `${titleId}-answer`;
 
 <style>
   .v2-game {
-    --game-ink: var(--v2-ink, #102a43);
-    --game-muted: var(--v2-muted, #59697a);
-    --game-line: var(--v2-line, #d9e0e6);
-    --game-paper: var(--v2-paper, #ffffff);
-    --game-soft: var(--v2-soft, #f3f5f5);
-    --game-accent: var(--v2-accent, #c7842d);
-    --game-accent-dark: var(--v2-accent-dark, #8b5616);
+    --game-ink: var(--v2-ink, #090b10);
+    --game-muted: var(--v2-muted, rgb(9 11 16 / 64%));
+    --game-line: var(--v2-line, rgb(9 11 16 / 12%));
+    --game-paper: var(--v2-paper, #fff);
+    --game-soft: var(--v2-soft, rgb(21 94 239 / 4%));
+    --game-accent: var(--v2-accent, #155eef);
+    --game-accent-dark: var(--v2-accent-dark, #0f46bd);
     color: var(--game-ink);
   }
 
@@ -260,7 +260,7 @@ const answerId = `${titleId}-answer`;
     border: 1px solid var(--game-line);
     border-radius: clamp(1.25rem, 3vw, 1.75rem);
     background: var(--game-paper);
-    box-shadow: 0 1.6rem 4rem rgb(16 42 67 / 9%);
+    box-shadow: 0 1.6rem 4rem rgb(9 11 16 / 9%);
   }
 
   .v2-game__bar {
@@ -614,7 +614,7 @@ const answerId = `${titleId}-answer`;
     min-width: 10rem;
     background: var(--game-accent);
     border-color: var(--game-accent);
-    color: #1d1a15;
+    color: #fff;
   }
 
   .v2-game__controls p {

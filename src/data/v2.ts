@@ -7,11 +7,10 @@ export const v2Site = {
 } as const;
 
 export const v2Navigation = [
-  { label: "Увидеть важное", href: "/v2/" },
-  { label: "Как работает", href: "/v2/#kak-rabotaet" },
-  { label: "Наладить учёт", href: "/v2/uchet/" },
-  { label: "Внедрения", href: "/v2/ii-agenty/" },
-  { label: "Партнёрам", href: "/v2/partneram/" }
+  { id: "important", label: "Увидеть важное", href: "/v2/" },
+  { id: "accounting", label: "Наладить учёт", href: "/v2/uchet/" },
+  { id: "cases", label: "Кейсы", href: "/v2/ii-agenty/" },
+  { id: "partner", label: "Стать партнёром", href: "/v2/partneram/" }
 ] as const;
 
 export const v2Pains = [
@@ -103,51 +102,27 @@ export const v2AccountingAgents = [
   }
 ] as const;
 
-export const v2AgentCases = [
+export const v2CustomerCases = [
   {
-    title: "Первичный документ → поступление в 1С",
-    input: "Документ из ЭДО или почты",
-    work: "Распознать, проверить и заполнить",
-    exception: "Нетипичные реквизиты — специалисту",
-    result: "Готовое поступление и след проверки",
-    proof: "80% потока без ручного участия",
-    href: "/avtomatizatsiya-ucheta/pervichnye-dokumenty/"
+    id: "ddx",
+    company: "ДДХ",
+    logos: [{ name: "ДДХ", src: "/brands/ddx.png" }],
+    metric: "в 2 раза",
+    title: "Ни одного нового бухгалтера.",
+    text:
+      "Рост объёма бизнеса не потребовал расширять бухгалтерскую команду: повторяющиеся операции взяли на себя ИИ-помощники, а специалисты сосредоточились на исключениях."
   },
   {
-    title: "Выписка → разнесённая операция",
-    input: "Банковская выписка",
-    work: "Найти основание и сопоставить",
-    exception: "Неоднозначное назначение — специалисту",
-    result: "Запись в учёте с основанием",
-    proof: "98% точности на проверенной выборке",
-    href: "/avtomatizatsiya-ucheta/bankovskie-operatsii/"
-  },
-  {
-    title: "Документы сторон → сверка",
-    input: "Акты, счета и данные 1С",
-    work: "Сопоставить и провести совпавшее",
-    exception: "Расхождения — специалисту",
-    result: "Сверка в 1С и перечень различий",
-    proof: "До 95% без участия человека",
-    href: "/avtomatizatsiya-ucheta/sverki-s-kontragentami/"
-  },
-  {
-    title: "Период → готовность к закрытию",
-    input: "Обороты и контрольные правила",
-    work: "Выполнить стандартные проверки",
-    exception: "Отклонения — ответственному бухгалтеру",
-    result: "Статус каждой проверки",
-    proof: "Итог всегда подтверждает человек",
-    href: "/avtomatizatsiya-ucheta/zakrytie-perioda/"
-  },
-  {
-    title: "Кадровое событие → расчёт",
-    input: "Табель, кадровые события и правила",
-    work: "Проверить и выполнить расчёт",
-    exception: "Нетипичное начисление — специалисту",
-    result: "Расчёт и единый перечень проверок",
-    proof: "Результат измеряется на первом запуске",
-    href: "/avtomatizatsiya-ucheta/zarplata-i-kadry/"
+    id: "primary",
+    company: "Нефтьмагистраль и Братья Караваевы",
+    logos: [
+      { name: "Нефтьмагистраль", src: "/brands/neftmagistral.png" },
+      { name: "Братья Караваевы", src: "/brands/karavaevi-wordmark.svg" }
+    ],
+    metric: "70%",
+    title: "Первичных документов — без участия человека.",
+    text:
+      "ИИ-помощник забирал документы, распознавал и проверял данные. Специалист получал только исключения, а подтверждённая операция сохраняла понятный след проверки."
   }
 ] as const;
 

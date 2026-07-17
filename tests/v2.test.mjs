@@ -24,7 +24,12 @@ test("every version 2 page has independent metadata and no legacy shell", async 
     assert.equal(count(html, /<link rel="canonical"/g), 1, `${route} must have one canonical`);
     assert.match(html, /<meta name="robots" content="noindex, follow">/);
     assert.match(html, /href="\/v2\//);
-    assert.doesNotMatch(html, /class="site-header"|class="site-footer"|contact-dialog|src="\/site\.js"/);
+    assert.equal(count(html, /class="v2-side-link"/g), 4, `${route} must have four primary destinations`);
+    assert.match(html, /Увидеть важное/);
+    assert.match(html, /Наладить учёт/);
+    assert.match(html, /Кейсы/);
+    assert.match(html, /Стать партнёром/);
+    assert.doesNotMatch(html, /class="v2-header"|class="site-header"|class="site-footer"|contact-dialog|src="\/site\.js"/);
   }
 });
 
@@ -76,18 +81,20 @@ test("accounting page connects the foundation, agents, people and 1C", async () 
   assert.ok(html.indexOf("ИИ ведёт поток") < html.indexOf("1С остаётся основой"));
 });
 
-test("implementations page keeps every number next to its process", async () => {
+test("cases page leads with customer outcomes and keeps process evidence available", async () => {
   const html = await readFile(routeFile("v2/ii-agenty"), "utf8");
   assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Не отдельная функция\. Выполненный процесс/);
-  assert.match(html, /Распознать документ — только начало/);
-  assert.equal(count(html, /class="v2-case"/g), 5);
-  assert.match(html, /Первичный документ → поступление в 1С/);
-  assert.match(html, /Выписка → разнесённая операция/);
-  assert.match(html, /Документы сторон → сверка/);
-  assert.match(html, /Период → готовность к закрытию/);
-  assert.match(html, /Кадровое событие → расчёт/);
-  assert.match(html, /Компании, с которыми работала команда Aivel/);
+  assert.match(html, /Результат в реальной работе/);
+  assert.match(html, />в 2 раза<\/strong>/);
+  assert.match(html, /Ни одного нового бухгалтера/);
+  assert.match(html, /ДДХ/);
+  assert.match(html, /Нефтьмагистраль/);
+  assert.match(html, /Братья Караваевы/);
+  assert.match(html, />70%<\/strong>/);
+  assert.match(html, /Первичных документов — без участия человека/);
+  assert.match(html, /ИИ выполняет операцию\. Человек разбирает исключение/);
+  assert.equal(count(html, /class="v2-proof-links"/g), 1);
+  assert.equal(count(html, /Посмотреть весь процесс/g), 1);
 });
 
 test("partner page states the deal clearly and answers six owner questions", async () => {
@@ -111,6 +118,19 @@ test("version 2 machine-readable map is explicit about scope and evidence", asyn
   assert.match(text, /80% общего входящего потока/);
   assert.match(text, /98% точности/);
   assert.match(text, /до 95% сверок/);
+  assert.match(text, /ДДХ: объём бизнеса вырос в 2 раза/);
+  assert.match(text, /Нефтьмагистраль и Братья Караваевы: 70% первичных документов/);
   assert.match(text, /не должны складываться/);
   assert.match(text, /info@aivel\.ru/);
+});
+
+test("version 2 uses the white, black and blue visual system", async () => {
+  const css = await readFile(path.join(root, "src", "styles", "v2.css"), "utf8");
+  const game = await readFile(path.join(root, "src", "components", "v2", "CfoGame.astro"), "utf8");
+  assert.match(css, /--v2-bg: #fff;/);
+  assert.match(css, /--v2-ink: #090b10;/);
+  assert.match(css, /--v2-accent: #155eef;/);
+  assert.match(css, /\.v2-sidebar \{/);
+  assert.match(css, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(css + game, /#a95f14|#7d430d|#f8f9f7|#132033|#0c1727|#376650/i);
 });

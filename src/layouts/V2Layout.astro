@@ -1,6 +1,6 @@
 ---
 import "../styles/v2.css";
-import V2Header from "../components/v2/V2Header.astro";
+import V2Sidebar from "../components/v2/V2Sidebar.astro";
 import V2Footer from "../components/v2/V2Footer.astro";
 import { v2Site } from "../data/v2";
 
@@ -38,7 +38,7 @@ const schemas = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f8f9f7" />
+    <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, follow" />
@@ -55,7 +55,7 @@ const schemas = [
   </head>
   <body class="v2-body">
     <a class="v2-skip-link" href="#main-content">Перейти к содержанию</a>
-    <V2Header />
+    <V2Sidebar />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>

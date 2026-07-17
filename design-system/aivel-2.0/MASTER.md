@@ -7,7 +7,7 @@
 ---
 
 **Project:** Aivel 2.0
-**Generated:** 2026-07-17 09:35:33
+**Updated:** 2026-07-17
 **Category:** AI/Chatbot Platform
 **Design Dials:** Variance 3/10 (Centered / Minimal) | Motion 3/10 (Subtle) | Density 2/10 (Spacious)
 
@@ -19,18 +19,17 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#13233B` | `--color-primary` |
+| Primary | `#090B10` | `--color-primary` |
 | On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#41536B` | `--color-secondary` |
-| Accent/CTA | `#B56A18` | `--color-accent` |
-| Background | `#F8F9F7` | `--color-background` |
-| Foreground | `#132033` | `--color-foreground` |
-| Muted | `#EFF2EE` | `--color-muted` |
-| Border | `#DDE3DE` | `--color-border` |
-| Destructive | `#DC2626` | `--color-destructive` |
-| Ring | `#B56A18` | `--color-ring` |
+| Secondary text | `rgba(9, 11, 16, 0.64)` | `--color-secondary` |
+| Accent/CTA | `#155EEF` | `--color-accent` |
+| Background | `#FFFFFF` | `--color-background` |
+| Foreground | `#090B10` | `--color-foreground` |
+| Muted surface | `rgba(21, 94, 239, 0.04)` | `--color-muted` |
+| Border | `rgba(9, 11, 16, 0.12)` | `--color-border` |
+| Ring | `#155EEF` | `--color-ring` |
 
-**Color Notes:** Сдержанная палитра Aivel: тёмно-синий для доверия, охристый только для действия, почти белый фон. Типовая «ИИ-фиолетовая» палитра намеренно исключена.
+**Color Notes:** Вся поверхность белая. Интерфейс использует только чёрный и синий: чёрный для содержания, синий для действия и текущего состояния. Приглушённые поверхности и линии получают только прозрачность этих двух цветов.
 
 ### Typography
 
@@ -76,7 +75,7 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #B56A18;
+  background: #155EEF;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -93,8 +92,8 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #13233B;
-  border: 1px solid #CBD4CE;
+  color: #090B10;
+  border: 1px solid rgba(9, 11, 16, 0.2);
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -110,14 +109,13 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
   background: #FFFFFF;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(9, 11, 16, 0.12);
   transition: all 200ms ease;
   cursor: pointer;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  border-color: #155EEF;
 }
 ```
 
@@ -126,16 +124,16 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 ```css
 .input {
   padding: 12px 16px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid rgba(9, 11, 16, 0.2);
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 200ms ease;
 }
 
 .input:focus {
-  border-color: #B56A18;
+  border-color: #155EEF;
   outline: none;
-  box-shadow: 0 0 0 3px #B56A1826;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.22);
 }
 ```
 
@@ -176,6 +174,14 @@ font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-se
 - **Conversion Strategy:** Single CTA focus. Large typography. Lots of whitespace. No nav clutter. Mobile-first.
 - **CTA Placement:** Center, large CTA button
 - **Section Order:** 1. Hero headline, 2. Short description, 3. Benefit bullets (3 max), 4. CTA, 5. Footer
+
+### Navigation
+
+- На широком экране — фиксированная левая полоса шириной 96 пикселей.
+- Четыре направления: «Увидеть важное», «Наладить учёт», «Кейсы», «Стать партнёром».
+- Каждый пункт содержит контурную SVG-иконку и постоянную текстовую подпись.
+- Текущий раздел выделяется синим цветом и видимым индикатором.
+- На экране до 700 пикселей эта же навигация становится нижней панелью из четырёх пунктов; содержимое получает безопасный нижний отступ.
 
 ---
 
