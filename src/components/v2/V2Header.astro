@@ -1,0 +1,26 @@
+---
+import { demoMailto, v2Navigation } from "../../data/v2";
+---
+
+<header class="v2-header">
+  <div class="v2-shell v2-header__inner">
+    <a class="v2-brand" href="/v2/" aria-label="Aivel 2.0 — главная">
+      <span>AIVEL</span>
+      <small>2.0</small>
+    </a>
+
+    <nav class="v2-nav" aria-label="Основная навигация">
+      {v2Navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <a class="v2-header__contact" href={demoMailto}>Записаться на показ</a>
+
+    <details class="v2-menu">
+      <summary>Меню</summary>
+      <nav aria-label="Навигация для телефона">
+        {v2Navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href={demoMailto}>Записаться на показ</a>
+      </nav>
+    </details>
+  </div>
+</header>

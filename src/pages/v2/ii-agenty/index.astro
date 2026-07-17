@@ -1,0 +1,90 @@
+---
+import BrandStrip from "../../../components/v2/BrandStrip.astro";
+import V2Layout from "../../../layouts/V2Layout.astro";
+import { processMailto, v2AgentCases, v2Site } from "../../../data/v2";
+
+const title = "Внедрения ИИ-помощников в учёте — Aivel 2.0";
+const description =
+  "Примеры сквозных учётных процессов Aivel: первичные документы, банковские операции, сверки, закрытие периода, зарплата и кадры.";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  description,
+  url: `${v2Site.url}/v2/ii-agenty/`,
+  about: v2AgentCases.map((item) => ({ "@type": "Service", name: item.title }))
+};
+---
+
+<V2Layout title={title} description={description} schema={schema}>
+  <section class="v2-section v2-page-hero" data-v2-screen="1">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Внедрения</p>
+      <h1 class="v2-page-title">Не отдельная функция. Выполненный процесс.</h1>
+      <p class="v2-lead">
+        Aivel получает данные, проверяет их, выполняет операцию в учётной системе и передаёт человеку только исключения.
+      </p>
+      <div class="v2-actions">
+        <a class="v2-button" href={processMailto}>Обсудить свой процесс</a>
+        <a class="v2-text-link" href="/v2/uchet/">Увидеть весь контур учёта</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section v2-section--soft" data-v2-screen="2" aria-labelledby="v2-difference-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Главное отличие</p>
+      <h2 class="v2-section-title" id="v2-difference-title">Распознать документ — только начало.</h2>
+      <div class="v2-compare">
+        <article>
+          <h3>Обычное распознавание</h3>
+          <p>Получает текст или поля из документа. Дальше сотрудник сам проверяет, переносит и завершает операцию.</p>
+        </article>
+        <article>
+          <h3>Aivel</h3>
+          <p>Забирает документ, проверяет данные, выполняет операцию в 1С и передаёт специалисту только неоднозначный случай.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section v2-section--auto" data-v2-screen="3" aria-labelledby="v2-cases-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Пять работающих процессов</p>
+      <h2 class="v2-section-title" id="v2-cases-title">От входящих данных — до подтверждённого результата.</h2>
+      <p class="v2-lead">Откройте нужный процесс. Подробные страницы показывают его механику, роль человека, видео и способ измерения.</p>
+      <div class="v2-case-list">
+        {v2AgentCases.map((item, index) => (
+          <details class="v2-case" open={index === 0}>
+            <summary>
+              <span>{item.title}</span>
+              <strong>{item.proof}</strong>
+            </summary>
+            <div class="v2-case__chain">
+              <div><span>Вход</span><p>{item.input}</p></div>
+              <div><span>Работа Aivel</span><p>{item.work}</p></div>
+              <div><span>Исключение</span><p>{item.exception}</p></div>
+              <div><span>Результат</span><p>{item.result}</p></div>
+            </div>
+            <a href={item.href}>Посмотреть весь процесс</a>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section v2-section--dark" data-v2-screen="4" aria-labelledby="v2-proof-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Опыт внедрений</p>
+      <h2 class="v2-section-title" id="v2-proof-title">Работает в реальных учётных контурах.</h2>
+      <p class="v2-lead">
+        Показатели относятся к своим измеренным процессам: 80% потока первичных документов без ручного участия, 98% точности сопоставления банковских операций и до 95% сверок без участия человека.
+      </p>
+      <p class="v2-muted">Компании, с которыми работала команда Aivel</p>
+      <BrandStrip />
+      <div class="v2-actions" style="margin-top: 42px">
+        <a class="v2-button" href={processMailto}>Обсудить свой процесс</a>
+      </div>
+    </div>
+  </section>
+</V2Layout>

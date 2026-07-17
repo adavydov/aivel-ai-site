@@ -1,0 +1,37 @@
+---
+import CfoGame from "../../../components/v2/CfoGame.astro";
+import V2Layout from "../../../layouts/V2Layout.astro";
+import { demoMailto, v2Site } from "../../../data/v2";
+
+const title = "Учебная демонстрация финансового помощника Aivel 2.0";
+const description =
+  "Пошаговая учебная история: Aivel сам замечает важную ситуацию, отвечает на уточнения и показывает источники, правило и ход расчёта.";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Учебная демонстрация Aivel",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Веб-браузер",
+  description,
+  url: `${v2Site.url}/v2/primer/`,
+  isAccessibleForFree: true
+};
+---
+
+<V2Layout title={title} description={description} schema={schema}>
+  <div class="v2-demo-page">
+    <div class="v2-shell">
+      <CfoGame />
+      <aside class="v2-demo-after" aria-label="Следующий шаг">
+        <div>
+          <strong>Хотите увидеть это на своих данных?</strong>
+          <p>Сначала разберём один важный для вас контур. Закрытые данные через сайт не нужны.</p>
+        </div>
+        <div class="v2-actions">
+          <a class="v2-button" href={demoMailto}>Записаться на показ</a>
+          <a class="v2-text-link" href="/v2/uchet/">Понять, откуда берутся данные</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</V2Layout>

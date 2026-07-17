@@ -1,0 +1,92 @@
+---
+import V2Layout from "../../../layouts/V2Layout.astro";
+import { accountingMailto, v2AccountingAgents, v2Site } from "../../../data/v2";
+
+const title = "Наладить учёт — надёжная основа решений Aivel 2.0";
+const description =
+  "Как Aivel соединяет учётные данные, ИИ-помощников, специалистов на исключениях и 1С, чтобы руководитель получал своевременные проверяемые выводы.";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Бухгалтерский, налоговый, кадровый и управленческий учёт Aivel",
+  description,
+  provider: { "@id": `${v2Site.url}/#organization` },
+  url: `${v2Site.url}/v2/uchet/`
+};
+---
+
+<V2Layout title={title} description={description} schema={schema}>
+  <section class="v2-section v2-page-hero" data-v2-screen="1">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Наладить учёт</p>
+      <h1 class="v2-page-title">Точный вывод начинается с точного учёта.</h1>
+      <p class="v2-lead">
+        Чтобы вовремя увидеть важное, нужно собрать полные данные, проверить их и поддерживать учёт в актуальном состоянии.
+      </p>
+      <div class="v2-flow" aria-label="Путь от данных до решения">
+        <article><span>01</span><h3>Источники</h3><p>Документы, банк, ЭДО, продажи, склад и рабочие системы.</p></article>
+        <article><span>02</span><h3>Проверенный учёт</h3><p>Операции собраны, связаны и прошли согласованные проверки.</p></article>
+        <article><span>03</span><h3>Важное изменение</h3><p>Aivel понимает отклонение в контексте именно этой компании.</p></article>
+        <article><span>04</span><h3>Решение</h3><p>Руководитель получает короткий сигнал и проверяемое основание.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section v2-section--soft v2-section--auto" data-v2-screen="2" aria-labelledby="v2-agents-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">ИИ-помощники в учёте</p>
+      <h2 class="v2-section-title" id="v2-agents-title">ИИ ведёт поток. Человек разбирает исключения.</h2>
+      <p class="v2-lead">
+        Повторяющиеся операции выполняются постоянно и по единым правилам. Специалист подключается там, где нужны суждение, проверка или ответственность.
+      </p>
+      <div class="v2-agent-grid">
+        {v2AccountingAgents.map((agent) => (
+          <article class="v2-agent-card">
+            <h3>{agent.title}</h3>
+            <p>{agent.text}</p>
+            <strong>{agent.proof}</strong>
+            <a href={agent.href}>Посмотреть весь процесс</a>
+          </article>
+        ))}
+      </div>
+      <div class="v2-human-rule">
+        <h3>Практически сразу — и без потери точности.</h3>
+        <p>Помощники не устают и не пропускают шаги. Человек видит только исключения, подтверждает профессиональное суждение и сохраняет ответственность за итог.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section" data-v2-screen="3" aria-labelledby="v2-one-c-title">
+    <div class="v2-shell v2-one-c">
+      <div class="v2-one-c__mark" aria-hidden="true">1С</div>
+      <div>
+        <p class="v2-eyebrow">Рабочая основа</p>
+        <h2 class="v2-section-title" id="v2-one-c-title">1С остаётся основой учёта.</h2>
+        <p class="v2-lead">
+          Мы продаём лицензии, размещаем систему в облаке или внутри контура компании, сопровождаем её и соединяем с ИИ-помощниками Aivel.
+        </p>
+        <ul class="v2-inline-list" aria-label="Возможности обслуживания 1С">
+          <li>Лицензии и запуск</li>
+          <li>Облако или сервер компании</li>
+          <li>Техническая поддержка</li>
+          <li>Обмены и доработки</li>
+        </ul>
+        <p>Так операция проходит весь путь — от входящего документа до готовой записи и проверяемого вывода.</p>
+        <a class="v2-text-link" href="/1s-i-integratsii/">Подробнее об обслуживании 1С</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section v2-section--soft" data-v2-screen="4">
+    <div class="v2-shell">
+      <div class="v2-final-cta">
+        <div>
+          <p class="v2-eyebrow">Первый шаг</p>
+          <h2>Проверим, готов ли учёт стать основой решений.</h2>
+          <p>Посмотрим, где данные теряются, какие операции можно передать ИИ и что нужно исправить в первую очередь.</p>
+        </div>
+        <a class="v2-button" href={accountingMailto}>Проверить готовность учёта</a>
+      </div>
+    </div>
+  </section>
+</V2Layout>
