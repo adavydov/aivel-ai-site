@@ -4,4 +4,4 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-Sitemap: https://adavydov.github.io/sitemap.xml
+Sitemap: https://adavydov.github.io/aivel-ai-site/sitemap.xml
