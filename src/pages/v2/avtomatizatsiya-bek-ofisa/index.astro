@@ -1,0 +1,231 @@
+---
+import V2Layout from "../../../layouts/V2Layout.astro";
+import { processMailto, v2CustomerCases, v2EnterpriseAgents, v2Site } from "../../../data/v2";
+
+const title = "ИИ-агенты для крупных компаний — Aivel 2.0";
+const description =
+  "Aivel автоматизирует повторяющиеся операции от получения данных до записи в 1С, передаёт специалисту исключения и сохраняет аудиторский след.";
+
+const controlSteps = [
+  {
+    number: "01",
+    title: "Получает данные",
+    text: "Забирает документы и операции только из согласованных источников."
+  },
+  {
+    number: "02",
+    title: "Действует в своей роли",
+    text: "Выполняет только разрешённые операции и проверки."
+  },
+  {
+    number: "03",
+    title: "Передаёт исключения человеку",
+    text: "Неоднозначность, расхождение или профессиональное суждение получает специалист."
+  },
+  {
+    number: "04",
+    title: "Создаёт результат в 1С",
+    text: "После проверок проводит операцию до готовой учётной записи."
+  },
+  {
+    number: "05",
+    title: "Сохраняет аудиторский след",
+    text: "Источник, проверки, действия и решение специалиста остаются в журнале."
+  }
+] as const;
+
+const measuredProcesses = new Set(["Первичные документы", "Банковские операции", "Сверки"]);
+const primaryDocumentCases = v2CustomerCases.filter(
+  (item) => item.id === "neftmagistral" || item.id === "karavaevi"
+);
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Автоматизация повторяющихся операций Aivel",
+  description,
+  serviceType: "ИИ-агенты для автоматизации учётных операций",
+  provider: { "@id": `${v2Site.url}/#organization` },
+  audience: { "@type": "BusinessAudience", audienceType: "Крупные компании" },
+  url: `${v2Site.url}/v2/avtomatizatsiya-bek-ofisa/`,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Процессы для автоматизации",
+    itemListElement: v2EnterpriseAgents.map((agent) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: agent.title,
+        description: `${agent.job} ${agent.flow}`
+      }
+    }))
+  }
+};
+
+const proofSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Измеренные внедрения Aivel",
+  itemListElement: primaryDocumentCases.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: `${item.company}: ${item.metric} первичных документов без участия человека`,
+      description: item.text
+    }
+  }))
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Чем Aivel отличается от OCR?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "OCR распознаёт данные. Aivel ведёт операцию дальше: проверяет, сопоставляет, передаёт исключения специалисту и создаёт результат в 1С с аудиторским следом."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Как Aivel сохраняет контроль?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "ИИ-агент действует в своей роли, работает только с согласованными источниками, передаёт исключения человеку и сохраняет журнал действий."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "С какого процесса начать?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Обычно начинают с повторяющегося процесса с большим потоком: первичные документы, банковские операции или сверки. Конкретный первый процесс выбирается после разбора объёма и исключений."
+      }
+    }
+  ]
+};
+---
+
+<V2Layout title={title} description={description} schema={[pageSchema, proofSchema, faqSchema]}>
+  <section class="v2-section v2-page-hero v2-enterprise-hero" data-v2-screen="1">
+    <div class="v2-shell v2-hero-grid">
+      <div>
+      <p class="v2-eyebrow">Для крупных компаний</p>
+      <h1 class="v2-page-title">Передать повторяющиеся операции ИИ. <span class="v2-accent-word">Сохранить контроль.</span></h1>
+      <p class="v2-lead">
+        Aivel автоматизирует не один кусок распознавания, а весь путь операции: получить данные, проверить, сопоставить, передать исключение человеку и создать результат в 1С.
+      </p>
+      <div class="v2-actions">
+        <a class="v2-button" href="#processy">Выбрать первый процесс</a>
+        <a class="v2-text-link" href="#kontrol">Понять контроль</a>
+      </div>
+      </div>
+      <aside class="v2-process-card" aria-label="Пример сквозного процесса">
+        <span>Операция целиком</span>
+        <h2>Счёт и акт пришли в ЭДО. Через несколько минут готово поступление в 1С.</h2>
+        <ol>
+          <li>Агент забрал документ и проверил реквизиты.</li>
+          <li>Сопоставил договор, контрагента, статью и сумму.</li>
+          <li>Передал расхождение специалисту.</li>
+          <li>После решения создал результат и сохранил журнал.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="v2-section" id="processy" data-v2-screen="2" aria-labelledby="v2-enterprise-processes-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Каталог процессов</p>
+      <h2 class="v2-section-title" id="v2-enterprise-processes-title">Выберите участок, где закрытие ломается чаще всего.</h2>
+      <p class="v2-lead">
+        По паттерну сильных AI accounting продуктов каждый агент продаётся не как “модель”, а как понятный финансово-учётный процесс с входом, выходом, исключениями и измеримым результатом.
+      </p>
+      <div class="v2-audience-surface v2-enterprise-catalog">
+        {v2EnterpriseAgents.map((agent, index) => (
+          <article class="v2-enterprise-agent-row">
+            <span class="v2-audience-surface__label">Процесс {String(index + 1).padStart(2, "0")}</span>
+            <div class="v2-enterprise-agent-row__content">
+              <h3>{agent.title}</h3>
+              <p>{agent.job}</p>
+              <p class="v2-enterprise-agent-row__flow">{agent.flow}</p>
+              <div class="v2-enterprise-agent-row__meta">
+                <strong>
+                  {measuredProcesses.has(agent.title)
+                    ? agent.proof
+                    : "Что измерим на первом запуске"}
+                </strong>
+                <a class="v2-text-link" href={agent.href}>Открыть процесс</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section" id="kontrol" data-v2-screen="3" aria-labelledby="v2-enterprise-control-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Почему этому можно доверять</p>
+      <h2 class="v2-section-title" id="v2-enterprise-control-title">ИИ делает типовое. Человек отвечает за исключения.</h2>
+      <ol class="v2-steps v2-control-steps">
+        {controlSteps.map((step) => (
+          <li>
+            <span class="v2-number">{step.number}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="v2-control-note">
+        <strong>Размещение и права задаёт компания.</strong>
+        <p>Российский контур или установка внутри компании, ролевой доступ, ограничения по ролям и журнал каждого действия.</p>
+      </div>
+      <p class="v2-process-comparison">
+        <strong>OCR заканчивается распознаванием.</strong> Aivel ведёт операцию от получения до результата в 1С и сохраняет проверяемый след.
+      </p>
+      <div class="v2-feature-grid" aria-label="Целевые возможности платформы">
+        <article><h3>Правила важности</h3><p>Для каждого процесса можно задать границы: сумма, срок, риск, роль и действие при исключении.</p></article>
+        <article><h3>Сравнение с обычным ходом бизнеса</h3><p>Агент видит не только ошибку, но и отклонение от привычного ритма операций.</p></article>
+        <article><h3>Готовый материал для внутреннего согласования</h3><p>Сигнал можно превратить в короткую записку: что произошло, эффект, основание, решение.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="v2-section" data-v2-screen="4" aria-labelledby="v2-enterprise-proof-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Доказательства</p>
+      <h2 class="v2-section-title" id="v2-enterprise-proof-title">Измерено в реальных процессах.</h2>
+      <div class="v2-proof-surface v2-enterprise-proof">
+        <div class="v2-enterprise-proof__cases">
+          {primaryDocumentCases.map((item) => (
+            <article class="v2-case-proof">
+              <div class="v2-case-proof__brand">
+                <span>{item.company}</span>
+                <img src={item.logo.src} alt={item.logo.name} loading="lazy" decoding="async" />
+              </div>
+              <strong>{item.metric}</strong>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+        <ul class="v2-process-metrics" aria-label="Измерения отдельных процессов">
+          <li><strong>80%</strong><span>общего потока первичных документов прошло без ручного участия в одном измеренном процессе.</span></li>
+          <li><strong>98%</strong><span>точности сопоставления банковских операций на проверенной выборке.</span></li>
+          <li><strong>До 95%</strong><span>сверок прошло без участия человека в одном измеренном процессе.</span></li>
+        </ul>
+      </div>
+      <div class="v2-actions">
+        <a class="v2-button" href={processMailto}>Обсудить первый процесс</a>
+      </div>
+    </div>
+  </section>
+</V2Layout>

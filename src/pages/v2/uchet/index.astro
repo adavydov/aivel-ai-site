@@ -1,91 +1,279 @@
 ---
 import V2Layout from "../../../layouts/V2Layout.astro";
-import { accountingMailto, v2AccountingAgents, v2Site } from "../../../data/v2";
+import {
+  accountingMailto,
+  v2AccountingSources,
+  v2AccountingJourneys,
+  v2AccountingPriceExamples,
+  v2CustomerCases,
+  v2EnterpriseAgents,
+  v2Site
+} from "../../../data/v2";
 
 const title = "Наладить учёт — надёжная основа решений Aivel 2.0";
 const description =
-  "Как Aivel соединяет учётные данные, ИИ-помощников, специалистов на исключениях и 1С, чтобы руководитель получал своевременные проверяемые выводы.";
-const schema = {
+  "Aivel собирает документы, банк и рабочие системы в проверенный учётный контур, чтобы руководитель получал своевременные и обоснованные выводы.";
+const showDraftPrices = import.meta.env.DEV;
+const formatRubles = (value: number) => new Intl.NumberFormat("ru-RU").format(value);
+const ddxCase = v2CustomerCases.find((item) => item.id === "ddx");
+const approvedPriceExamples = v2AccountingPriceExamples.filter(
+  (item) => item.approved && item.draftPriceRub !== null
+);
+
+const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Бухгалтерский, налоговый, кадровый и управленческий учёт Aivel",
   description,
+  serviceType: "Комплексное ведение учёта",
   provider: { "@id": `${v2Site.url}/#organization` },
   url: `${v2Site.url}/v2/uchet/`
 };
+
+const catalogItems = approvedPriceExamples.map((item) => ({
+  "@type": "Offer",
+  name: `${item.companyType}, ${item.scale}`,
+  price: item.draftPriceRub,
+  priceCurrency: "RUB",
+  url: `${v2Site.url}/v2/uchet/#stoimost`,
+  itemOffered: {
+    "@type": "Service",
+    name: `Ведение учёта: ${item.companyType}`,
+    description: item.included.join(", ")
+  }
+}));
+
+const catalogSchema = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  name: "Варианты бухгалтерского обслуживания Aivel",
+  url: `${v2Site.url}/v2/uchet/#stoimost`,
+  ...(catalogItems.length > 0 ? { itemListElement: catalogItems } : {})
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Зачем Aivel сначала настраивает учёт?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Чтобы важные сигналы были проверяемыми. Документы, банк, 1С, зарплата и рабочие системы должны сходиться в одном контуре."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Что входит в ведение учёта?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Бухгалтерский и налоговый учёт, зарплата и кадры, обязательная отчётность, управленческие разрезы, поддержка 1С и обменов в согласованном периметре."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "С чего начинается внедрение?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "С экспресс-аудита: Aivel смотрит источники, объём операций, качество первички, обмены и операции, которые можно передать ИИ."
+      }
+    }
+  ]
+};
+
+const accountingSteps = [
+  {
+    number: "01",
+    title: "Источники",
+    text: "Документы, банк, ЭДО, продажи, склад и рабочие системы."
+  },
+  {
+    number: "02",
+    title: "Проверенный учёт",
+    text: "ИИ выполняет типовые операции, специалист разбирает исключения."
+  },
+  {
+    number: "03",
+    title: "Важное изменение",
+    text: "Aivel связывает отклонение с контекстом и обычным ходом бизнеса."
+  },
+  {
+    number: "04",
+    title: "Решение",
+    text: "Руководитель получает короткий сигнал и может проверить его основание."
+  }
+] as const;
+
+const accountingAgents = v2EnterpriseAgents.filter((agent) =>
+  ["Первичные документы", "Банковские операции", "Сверки", "Закрытие периода", "Зарплата и кадры"].includes(agent.title)
+);
 ---
 
-<V2Layout title={title} description={description} schema={schema}>
+<V2Layout title={title} description={description} schema={[serviceSchema, catalogSchema, faqSchema]}>
   <section class="v2-section v2-page-hero" data-v2-screen="1">
     <div class="v2-shell">
-      <p class="v2-eyebrow">Наладить учёт</p>
       <h1 class="v2-page-title">Точный вывод начинается с <span class="v2-accent-word">точного учёта.</span></h1>
       <p class="v2-lead">
-        Чтобы вовремя увидеть важное, нужно собрать полные данные, проверить их и поддерживать учёт в актуальном состоянии.
+        Если данные грязные, любой ИИ будет красиво объяснять мусор. Поэтому Aivel сначала строит проверяемую основу: документы, банк, 1С, зарплата и рабочие системы сходятся в одном контуре.
       </p>
-      <div class="v2-flow" aria-label="Путь от данных до решения">
-        <article><span>01</span><h3>Источники</h3><p>Документы, банк, ЭДО, продажи, склад и рабочие системы.</p></article>
-        <article><span>02</span><h3>Проверенный учёт</h3><p>Операции собраны, связаны и прошли согласованные проверки.</p></article>
-        <article><span>03</span><h3>Важное изменение</h3><p>Aivel понимает отклонение в контексте именно этой компании.</p></article>
-        <article><span>04</span><h3>Решение</h3><p>Руководитель получает короткий сигнал и проверяемое основание.</p></article>
-      </div>
+      <ol class="v2-steps" aria-label="Путь от исходных данных до решения руководителя">
+        {accountingSteps.map((step) => (
+          <li>
+            <span class="v2-number">{step.number}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section class="v2-section v2-section--soft v2-section--auto" data-v2-screen="2" aria-labelledby="v2-agents-title">
+  <section class="v2-section" data-v2-screen="2" aria-labelledby="v2-foundation-title">
     <div class="v2-shell">
-      <p class="v2-eyebrow">ИИ-помощники в учёте</p>
-      <h2 class="v2-section-title" id="v2-agents-title">ИИ ведёт поток. Человек разбирает исключения.</h2>
+      <p class="v2-eyebrow">Фундамент</p>
+      <h2 class="v2-section-title" id="v2-foundation-title">Данные должны сходиться до того, как появится сигнал.</h2>
       <p class="v2-lead">
-        Повторяющиеся операции выполняются постоянно и по единым правилам. Специалист подключается там, где нужны суждение, проверка или ответственность.
+        Aivel не просит руководителя верить отчёту “в целом”. Сначала мы собираем контур, где понятно, откуда пришёл каждый факт и кто отвечает за исключение.
       </p>
-      <div class="v2-agent-grid">
-        {v2AccountingAgents.map((agent) => (
-          <article class="v2-agent-card">
-            <h3>{agent.title}</h3>
-            <p>{agent.text}</p>
-            <strong>{agent.proof}</strong>
-            <a href={agent.href}>Посмотреть весь процесс</a>
+
+      <div class="v2-source-grid" aria-label="Источники учёта">
+        {v2AccountingSources.map((source) => (
+          <article>
+            <span>{source.label}</span>
+            <p>{source.text}</p>
           </article>
         ))}
       </div>
-      <div class="v2-human-rule">
-        <h3>Практически сразу — и без потери точности.</h3>
-        <p>Помощники не устают и не пропускают шаги. Человек видит только исключения, подтверждает профессиональное суждение и сохраняет ответственность за итог.</p>
+
+      <div class="v2-audience-surface v2-segment-surface" aria-label="Маршруты по типам бизнеса">
+        {v2AccountingJourneys.map((journey) => (
+          <article class="v2-segment-row">
+            <span class="v2-surface-label">{journey.segment}</span>
+            <div>
+              <h3>{journey.job}</h3>
+              <p>{journey.foundation}</p>
+              <p class="v2-muted"><strong>Первый шаг:</strong> {journey.step}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="v2-section" data-v2-screen="3" aria-labelledby="v2-one-c-title">
-    <div class="v2-shell v2-one-c">
-      <div class="v2-one-c__mark" aria-hidden="true">1С</div>
-      <div>
-        <p class="v2-eyebrow">Рабочая основа</p>
-        <h2 class="v2-section-title" id="v2-one-c-title">1С остаётся основой учёта.</h2>
-        <p class="v2-lead">
-          Мы продаём лицензии, размещаем систему в облаке или внутри контура компании, сопровождаем её и соединяем с ИИ-помощниками Aivel.
-        </p>
-        <ul class="v2-inline-list" aria-label="Возможности обслуживания 1С">
-          <li>Лицензии и запуск</li>
-          <li>Облако или сервер компании</li>
-          <li>Техническая поддержка</li>
-          <li>Обмены и доработки</li>
-        </ul>
-        <p>Так операция проходит весь путь — от входящего документа до готовой записи и проверяемого вывода.</p>
-        <a class="v2-text-link" href="/1s-i-integratsii/">Подробнее об обслуживании 1С</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="v2-section v2-section--soft" data-v2-screen="4">
+  <section class="v2-section" id="ii-agenty" data-v2-screen="3" aria-labelledby="v2-agents-title">
     <div class="v2-shell">
-      <div class="v2-final-cta">
+      <p class="v2-eyebrow">ИИ-агенты и люди</p>
+      <h2 class="v2-section-title" id="v2-agents-title">Типовой поток ведёт ИИ. Исключения разбирает специалист.</h2>
+      <p class="v2-lead">
+        Это ключевое отличие Aivel: мы не просто распознаём документ, а доводим процесс до результата в учёте. Быстро — потому что типовые операции делает ИИ. Точно — потому что спорные случаи не теряются и уходят человеку.
+      </p>
+
+      <div class="v2-agent-showcase" aria-label="ИИ-агенты учётного контура">
+        {accountingAgents.map((agent) => (
+          <article>
+            <div>
+              <span>{agent.title}</span>
+              <h3>{agent.job}</h3>
+              <p>{agent.flow}</p>
+            </div>
+            <strong>{agent.proofShort}</strong>
+            <a class="v2-text-link" href={agent.href}>Страница агента</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="v2-one-c v2-one-c--v2">
+        <div class="v2-one-c__mark">1С</div>
         <div>
-          <p class="v2-eyebrow">Первый шаг</p>
-          <h2>Проверим, готов ли учёт стать основой решений.</h2>
-          <p>Посмотрим, где данные теряются, какие операции можно передать ИИ и что нужно исправить в первую очередь.</p>
+          <h3>1С — рабочая база, которую мы берём на обслуживание.</h3>
+          <p>
+            Лицензии, запуск, облако или контур компании, техническая поддержка, доработки и обмены. Это не “ещё одна услуга рядом”, а инфраструктура для сквозного учёта и работы ИИ-агентов.
+          </p>
+          <ul class="v2-inline-list">
+            <li>лицензии и запуск;</li>
+            <li>облако или сервер компании;</li>
+            <li>обмены с банками, ЭДО и рабочими системами;</li>
+            <li>поддержка и доработки.</li>
+          </ul>
+          <a class="v2-text-link" href="/1s-i-integratsii/">Подробнее про 1С</a>
         </div>
-        <a class="v2-button" href={accountingMailto}>Проверить готовность учёта</a>
+      </div>
+
+      {ddxCase && (
+        <aside class="v2-proof-surface v2-ddx-proof" aria-label="Результат внедрения в ДДХ">
+          <div>
+            <span class="v2-proof-metric">{ddxCase.metric}</span>
+            <p class="v2-muted">Результат конкретного внедрения</p>
+          </div>
+          <div>
+            <h3>Бизнес ДДХ вырос в два раза без найма новых бухгалтеров.</h3>
+            <p>{ddxCase.text}</p>
+          </div>
+        </aside>
+      )}
+    </div>
+  </section>
+
+  <section class="v2-section" id="stoimost" data-v2-screen="4" aria-labelledby="v2-price-title">
+    <div class="v2-shell">
+      <p class="v2-eyebrow">Покупка</p>
+      <h2 class="v2-section-title" id="v2-price-title">Узнайте себя — и начните с экспресс-аудита.</h2>
+      <p class="v2-lead">
+        Для простых случаев сайт должен сразу дать ощущение порядка: какой у вас контур, что входит в обслуживание и от чего зависит цена. Точный состав работ фиксируем после короткого разбора.
+      </p>
+
+      <div class="v2-audience-surface v2-pricing-surface" aria-label="Примеры компаний для расчёта стоимости">
+        {v2AccountingPriceExamples.map((example) => (
+          <article class="v2-pricing-row">
+            <span class="v2-surface-label">
+              {example.companyType}
+              <small>{example.scale}</small>
+            </span>
+            <div>
+              <h3>{example.volume}</h3>
+              <p>{example.included.join(" · ")}</p>
+              <p class="v2-muted">{example.qualifier}</p>
+              {example.approved && example.draftPriceRub !== null ? (
+                <p class="v2-price"><strong>от {formatRubles(example.draftPriceRub)} ₽ в месяц</strong></p>
+              ) : showDraftPrices && example.draftPriceRub !== null ? (
+                <p class="v2-price v2-price--draft">
+                  <strong>Черновой ориентир: {formatRubles(example.draftPriceRub)} ₽ в месяц</strong>
+                  <small>Требуется подтверждение перед публикацией.</small>
+                </p>
+              ) : (
+                <p class="v2-price"><strong>Рассчитаем после короткого разбора.</strong></p>
+              )}
+            </div>
+          </article>
+        ))}
+
+        <article class="v2-pricing-row v2-pricing-row--cta">
+          <span class="v2-surface-label">Своя ситуация</span>
+          <div>
+            <h3>Рассчитать для своей компании.</h3>
+            <p>Коротко разберём объём, системы и задачи. После этого назовём состав работ, стоимость и первый участок для ИИ.</p>
+            <a class="v2-text-link" href={accountingMailto}>Получить расчёт</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="v2-proof-surface v2-final-cta">
+        <div>
+          <h2 id="v2-audit-title">Начнём с экспресс-аудита.</h2>
+          <p>После короткого разбора будет понятно:</p>
+          <ul class="v2-audit-outcomes">
+            <li>где теряются данные;</li>
+            <li>какие операции передать ИИ;</li>
+            <li>что исправить первым.</li>
+          </ul>
+        </div>
+        <a class="v2-button" href={accountingMailto}>Получить расчёт и план перехода</a>
       </div>
     </div>
   </section>

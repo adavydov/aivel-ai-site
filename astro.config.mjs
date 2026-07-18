@@ -5,6 +5,9 @@ const publicSite = process.env.PUBLIC_SITE_URL ?? "https://adavydov.github.io";
 export default defineConfig({
   site: publicSite,
   output: "static",
+  devToolbar: {
+    enabled: false
+  },
   trailingSlash: "always",
   compressHTML: true,
   redirects: {

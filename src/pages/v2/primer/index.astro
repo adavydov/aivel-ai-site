@@ -1,12 +1,12 @@
 ---
 import CfoGame from "../../../components/v2/CfoGame.astro";
 import V2Layout from "../../../layouts/V2Layout.astro";
-import { demoMailto, v2Site } from "../../../data/v2";
+import { accountingMailto, demoMailto, v2Site } from "../../../data/v2";
 
-const title = "Учебная демонстрация финансового помощника Aivel 2.0";
+const title = "Посмотрите, что Aivel сообщит руководителю — учебная демонстрация";
 const description =
-  "Пошаговая учебная история: Aivel сам замечает важную ситуацию, отвечает на уточнения и показывает источники, правило и ход расчёта.";
-const schema = {
+  "Выберите тип бизнеса и посмотрите, как Aivel сам замечает важное изменение, отвечает на уточнения и показывает основание вывода.";
+const appSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "Учебная демонстрация Aivel",
@@ -16,22 +16,48 @@ const schema = {
   url: `${v2Site.url}/v2/primer/`,
   isAccessibleForFree: true
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Можно ли получить такие сигналы на своих данных?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Да, но сначала нужно проверить источники, правила учёта и качество данных. На реальных данных Aivel работает от учётного контура, а не от отдельного отчёта."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Что происходит после учебной демонстрации?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Следующий шаг — экспресс-аудит учёта: Aivel проверяет источники, объём операций и места, где данные теряются или требуют ручной проверки."
+      }
+    }
+  ]
+};
 ---
 
-<V2Layout title={title} description={description} schema={schema}>
-  <div class="v2-demo-page">
+<V2Layout title={title} description={description} schema={[appSchema, faqSchema]}>
+  <div class="v2-page-hero">
     <div class="v2-shell">
-      <CfoGame />
-      <aside class="v2-demo-after" aria-label="Следующий шаг">
+      <CfoGame ctaHref={demoMailto} />
+
+      <section class="v2-proof-surface v2-demo-bridge" aria-labelledby="v2-demo-bridge-title">
         <div>
-          <strong>Хотите увидеть это на своих данных?</strong>
-          <p>Сначала разберём один важный для вас контур. Закрытые данные через сайт не нужны.</p>
+          <p class="v2-eyebrow">Следующий шаг</p>
+          <h2 id="v2-demo-bridge-title">На ваших данных всё начинается с учёта.</h2>
+          <p>
+            В учебном примере источник уже чистый. В реальном бизнесе сначала проверяем банк, документы, 1С, обмены и правила, чтобы каждый сигнал имел основание.
+          </p>
         </div>
-        <div class="v2-actions">
-          <a class="v2-button" href={demoMailto}>Записаться на показ</a>
-          <a class="v2-text-link" href="/v2/uchet/">Понять, откуда берутся данные</a>
-        </div>
-      </aside>
+        <a class="v2-button" href={accountingMailto}>Проверить готовность учёта</a>
+      </section>
     </div>
   </div>
 </V2Layout>

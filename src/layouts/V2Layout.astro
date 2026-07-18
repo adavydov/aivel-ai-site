@@ -55,10 +55,14 @@ const schemas = [
   </head>
   <body class="v2-body">
     <a class="v2-skip-link" href="#main-content">Перейти к содержанию</a>
-    <V2Sidebar />
-    <main id="main-content" tabindex="-1">
-      <slot />
-    </main>
-    <V2Footer />
+    <div class="v2-app-shell">
+      <V2Sidebar />
+      <div class="v2-content">
+        <main id="main-content" tabindex="-1">
+          <slot />
+        </main>
+        <V2Footer />
+      </div>
+    </div>
   </body>
 </html>

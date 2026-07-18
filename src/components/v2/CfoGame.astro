@@ -1,186 +1,267 @@
 ---
-const titleId = `v2-cfo-game-${Math.random().toString(36).slice(2, 9)}`;
-const basisId = `${titleId}-basis`;
-const answerId = `${titleId}-answer`;
+type QuestionKey = "cause" | "impact" | "action";
+
+type Scenario = {
+  id: string;
+  label: string;
+  calmDate: string;
+  calmDateTime: string;
+  signalDate: string;
+  signalDateTime: string;
+  title: string;
+  summary: string;
+  changed: string;
+  why: string;
+  action: string;
+  sources: readonly { label: string; value: string; source: string; updated: string }[];
+  calculation: string;
+  rule: string;
+  questions: readonly { key: QuestionKey; label: string; answer: string }[];
+};
+
+interface Props {
+  ctaHref: string;
+}
+
+const { ctaHref } = Astro.props;
+const rootId = "v2-cfo-sandbox";
+
+const scenarios: readonly Scenario[] = [
+  {
+    id: "it-services",
+    label: "ИТ и услуги",
+    calmDate: "11 августа",
+    calmDateTime: "2026-08-11",
+    signalDate: "12 августа",
+    signalDateTime: "2026-08-12",
+    title: "Через 12 дней может не хватить 2,4 млн ₽ на зарплату и налоги.",
+    summary: "Оплата от «Горизонта» сдвинулась на две недели, а обязательные выплаты остались на прежней дате.",
+    changed: "Ожидаемые 5,8 млн ₽ придут не 12, а 26 августа.",
+    why: "До даты зарплаты и налогов других подтверждённых поступлений недостаточно.",
+    action: "Сегодня подтвердить новую дату оплаты и подготовить источник ещё 2,4 млн ₽.",
+    sources: [
+      { label: "Деньги на счетах", value: "3,1 млн ₽", source: "выписки двух банков", updated: "сегодня, 10:15" },
+      { label: "Зарплата и налоги", value: "5,5 млн ₽", source: "расчёт зарплаты и календарь платежей", updated: "сегодня, 10:06" },
+      { label: "Оплата «Горизонта»", value: "5,8 млн ₽, новая дата — 26 августа", source: "письмо клиента и реестр ожидаемых оплат", updated: "сегодня, 09:42" }
+    ],
+    calculation: "3,1 млн ₽ на счетах − 5,5 млн ₽ обязательных выплат = −2,4 млн ₽.",
+    rule: "Ситуация важна, если прогнозный остаток становится отрицательным до обязательной выплаты зарплаты или налогов.",
+    questions: [
+      { key: "cause", label: "Кто задержал оплату?", answer: "Оплату задерживает «Горизонт». В письме от 09:42 клиент перенёс платёж на 26 августа — на 14 дней позже плана." },
+      { key: "impact", label: "Что будет, если ничего не делать?", answer: "Без действий 24 августа прогнозный остаток составит −2,4 млн ₽. После оплаты 26 августа разрыв закроется, но зарплата и налоги уже будут просрочены." },
+      { key: "action", label: "Что можно перенести?", answer: "Можно перенести платёж за оборудование на 1,1 млн ₽. Это уменьшит разрыв, но останется ещё 1,3 млн ₽ — понадобится второе решение." }
+    ]
+  },
+  {
+    id: "trade-delivery",
+    label: "Торговля и доставка",
+    calmDate: "12 августа",
+    calmDateTime: "2026-08-12",
+    signalDate: "13 августа",
+    signalDateTime: "2026-08-13",
+    title: "Доходность направления «Доставка» за две недели снизилась с 24% до 16%.",
+    summary: "Расход на одну доставку вырос на 18%, а цены для клиентов не изменились.",
+    changed: "Средняя стоимость доставки выросла с 640 до 755 ₽ за заказ.",
+    why: "При текущем объёме направление недополучит около 1,2 млн ₽ валовой прибыли за месяц.",
+    action: "Проверить три убыточных маршрута и новый тариф перевозчика до следующей отгрузки.",
+    sources: [
+      { label: "Выручка направления", value: "8,6 млн ₽ за 14 дней", source: "система заказов", updated: "сегодня, 08:30" },
+      { label: "Расходы на доставку", value: "3,2 млн ₽ за 14 дней", source: "акты перевозчика и первичные документы", updated: "вчера, 19:10" },
+      { label: "Объём", value: "4 238 заказов", source: "система заказов", updated: "сегодня, 08:30" }
+    ],
+    calculation: "Доходность направления рассчитана по выручке, прямой себестоимости и расходам на доставку: 24% в прошлые две недели, 16% — сейчас.",
+    rule: "Ситуация важна, если доходность направления падает больше чем на 5 процентных пунктов и эффект превышает 500 тыс. ₽ в месяц.",
+    questions: [
+      { key: "cause", label: "Из-за чего выросла доставка?", answer: "Главное изменение связано с перевозчиком «Экспресс-Логистика»: его тариф вырос на 17% с 1 августа." },
+      { key: "impact", label: "Какой эффект за месяц?", answer: "Если условия не изменить, валовая прибыль направления за месяц будет примерно на 1,2 млн ₽ ниже обычной." },
+      { key: "action", label: "С чего начать?", answer: "Сначала пересмотреть три маршрута с отрицательной доходностью. На них приходится 62% ухудшения, поэтому это даст самый быстрый эффект." }
+    ]
+  },
+  {
+    id: "project-business",
+    label: "Проектный бизнес",
+    calmDate: "13 августа",
+    calmDateTime: "2026-08-13",
+    signalDate: "14 августа",
+    signalDateTime: "2026-08-14",
+    title: "47% просроченной задолженности теперь приходится на одного клиента.",
+    summary: "Компания «Альта» пропустила вторую согласованную дату оплаты; сумма выросла до 4,6 млн ₽.",
+    changed: "Доля одного клиента в просроченной задолженности выросла с 29% до 47%.",
+    why: "Один платёж начал определять запас денег всей компании.",
+    action: "Согласовать с «Альтой» график погашения и временно остановить новый необеспеченный объём.",
+    sources: [
+      { label: "Долг «Альты»", value: "4,6 млн ₽", source: "сверка с клиентом и учётная система", updated: "сегодня, 11:20" },
+      { label: "Вся просроченная задолженность", value: "9,8 млн ₽", source: "оборотная ведомость", updated: "сегодня, 07:45" },
+      { label: "Следующая обещанная дата", value: "не подтверждена", source: "переписка ответственного менеджера", updated: "сегодня, 11:03" }
+    ],
+    calculation: "4,6 млн ₽ ÷ 9,8 млн ₽ просроченной задолженности = 47%.",
+    rule: "Ситуация важна, если на одного клиента приходится больше 35% просроченного долга или его задержка нарушает минимальный запас денег.",
+    questions: [
+      { key: "cause", label: "Кто задержал оплату?", answer: "Оплату задерживает «Альта». Это вторая пропущенная дата; новой подтверждённой даты в переписке пока нет." },
+      { key: "impact", label: "Что будет до конца месяца?", answer: "Если 4,6 млн ₽ не поступят до конца месяца, запас денег станет на 1,6 млн ₽ ниже установленного минимума." },
+      { key: "action", label: "Как снизить риск?", answer: "Можно остановить новый необеспеченный объём для «Альты» и согласовать два частичных платежа. Это снизит дальнейший рост риска." }
+    ]
+  },
+  {
+    id: "complex-accounting",
+    label: "Сложный учёт",
+    calmDate: "14 августа",
+    calmDateTime: "2026-08-14",
+    signalDate: "15 августа",
+    signalDateTime: "2026-08-15",
+    title: "До закрытия периода два дня, но 19 операций на 3,8 млн ₽ ещё не подтверждены.",
+    summary: "По операциям нет документов или согласованной статьи учёта, поэтому отчётность может быть искажена.",
+    changed: "За день число незавершённых операций снизилось только с 23 до 19.",
+    why: "Без разбора исключений закрытие задержится минимум на два рабочих дня.",
+    action: "Назначить владельцев пяти крупнейших исключений: на них приходится 82% суммы.",
+    sources: [
+      { label: "Незавершённые операции", value: "19 на 3,8 млн ₽", source: "журнал закрытия периода", updated: "сегодня, 12:00" },
+      { label: "Без первичных документов", value: "11 операций", source: "реестр первичных документов", updated: "сегодня, 11:55" },
+      { label: "Без статьи учёта", value: "8 операций", source: "очередь исключений", updated: "сегодня, 11:58" }
+    ],
+    calculation: "Пять крупнейших исключений составляют 3,1 млн ₽ из 3,8 млн ₽, то есть 82% неподтверждённой суммы.",
+    rule: "Ситуация важна, если до закрытия меньше трёх дней, а незавершённые операции могут изменить отчётность больше чем на 1 млн ₽.",
+    questions: [
+      { key: "cause", label: "Что блокирует закрытие?", answer: "Пять крупнейших исключений закреплены за закупками, складом и руководителем направления «Доставка»." },
+      { key: "impact", label: "Что будет, если не успеть?", answer: "Отчётность выйдет минимум на два рабочих дня позже, а доходность направлений останется предварительной." },
+      { key: "action", label: "С чего начать?", answer: "Сначала разобрать пять операций на 3,1 млн ₽. Остальные 14 операций меньше по сумме и не блокируют предварительный отчёт." }
+    ]
+  }
+];
 ---
 
-<section class="v2-game" data-v2-cfo-game aria-labelledby={titleId}>
+<section class="v2-game" id={rootId} data-v2-cfo-game aria-labelledby={`${rootId}-title`}>
   <header class="v2-game__intro">
-    <p class="v2-game__eyebrow">Учебная демонстрация</p>
-    <div>
-      <h1 id={titleId}>Один рабочий день с <span class="v2-accent-word">финансовым помощником</span></h1>
-      <p>
-        Время идёт, в бизнесе происходят события. Помощник сам замечает то, что требует вашего
-        внимания, и показывает основание вывода.
-      </p>
-    </div>
+    <h1 id={`${rootId}-title`}>Посмотрите, что Aivel <span class="v2-accent-word">сообщит руководителю.</span></h1>
+    <p>Aivel сам замечает изменение, объясняет, почему оно важно, и показывает, что сделать сейчас.</p>
+    <p class="v2-game__notice" role="note">Данные учебные. Вопросы остаются в вашем браузере.</p>
   </header>
 
-  <div class="v2-game__notice" role="note">
-    <strong>Учебная компания «Север».</strong>
-    <span>Все данные и названия вымышлены. Введённые вопросы никуда не отправляются.</span>
-  </div>
-
-  <div class="v2-game__scene">
-    <div class="v2-game__bar">
-      <div>
-        <span class="v2-game__bar-label">Сегодня</span>
-        <time datetime="2026-08-12" data-game-date>12 августа</time>
-      </div>
-      <span class="v2-game__progress" data-game-progress>День 2 из 5</span>
+  <div class="v2-game__recognition">
+    <div class="v2-game__industries" role="tablist" aria-label="Выберите тип бизнеса">
+      {scenarios.map((scenario, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${rootId}-tab-${scenario.id}`}
+          aria-controls={`${rootId}-panel-${scenario.id}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          tabindex={index === 0 ? 0 : -1}
+          data-scenario-select={scenario.id}
+        >
+          {scenario.label}
+        </button>
+      ))}
     </div>
 
-    <div class="v2-game__layout">
-      <aside class="v2-game__timeline" aria-label="История учебных событий">
-        <p>История</p>
-        <ol data-history>
-          <li>11 августа — всё спокойно</li>
-          <li aria-current="step">
-            12 августа — через 12 дней может не хватить денег на зарплату и налоги
-          </li>
-        </ol>
-      </aside>
+    <div class="v2-game__workspace">
+      {scenarios.map((scenario, index) => {
+        const panelId = `${rootId}-panel-${scenario.id}`;
+        const signalId = `${panelId}-signal-title`;
+        const basisId = `${panelId}-basis`;
+        const answerId = `${panelId}-answer`;
+        const questionId = `${panelId}-question`;
 
-      <div class="v2-game__conversation">
-        <article class="v2-game__message" aria-labelledby={`${titleId}-signal`}>
-          <p class="v2-game__sender" data-signal-kicker>Финансовый помощник заметил важное</p>
-          <h2 id={`${titleId}-signal`} data-signal-title>
-            Через 12 дней может не хватить 2,4 млн ₽ на зарплату и налоги.
-          </h2>
-          <p class="v2-game__summary" data-signal-summary>
-            Оплата от «Горизонта» сдвинулась на две недели, а обязательные выплаты остались на
-            прежней дате.
-          </p>
-
-          <div data-signal-detail>
-            <dl class="v2-game__facts">
-              <div>
-                <dt>Что изменилось</dt>
-                <dd data-signal-changed>Ожидаемые 5,8 млн ₽ придут не 12, а 26 августа.</dd>
-              </div>
-              <div>
-                <dt>Почему это важно</dt>
-                <dd data-signal-why>
-                  До даты зарплаты и налогов других подтверждённых поступлений недостаточно.
-                </dd>
-              </div>
-              <div>
-                <dt>Когда проявится</dt>
-                <dd data-signal-horizon>Риск возникнет 24 августа — через 12 дней.</dd>
-              </div>
-            </dl>
-
-            <div class="v2-game__action">
-              <span>Что сделать сейчас</span>
-              <p data-signal-action>
-                Сегодня подтвердить новую дату оплаты и подготовить источник ещё 2,4 млн ₽.
-              </p>
+        return (
+          <article
+            class="v2-game__scene"
+            id={panelId}
+            role="tabpanel"
+            aria-labelledby={`${rootId}-tab-${scenario.id}`}
+            data-scenario-panel={scenario.id}
+            hidden={index !== 0}
+          >
+            <div class="v2-game__calm" data-calm-state>
+              <time datetime={scenario.calmDateTime}>{scenario.calmDate}</time>
+              <p class="v2-game__status">Aivel наблюдает за изменениями</p>
+              <h2>Пока всё спокойно.</h2>
+              <p>Новых ситуаций, требующих решения руководителя, нет.</p>
+              <button class="v2-game__next" type="button" data-next-day>Следующий день</button>
             </div>
 
-            <button
-              class="v2-game__basis-button"
-              type="button"
-              aria-expanded="true"
-              aria-controls={basisId}
-              data-basis-button
-            >
-              Скрыть основание
-            </button>
+            <div class="v2-game__signal" data-signal-state hidden>
+              <time datetime={scenario.signalDateTime}>{scenario.signalDate}</time>
+              <p class="v2-game__status">Aivel заметил важное</p>
+              <h2 id={signalId}>{scenario.title}</h2>
+              <p class="v2-game__summary">{scenario.summary}</p>
 
-            <div class="v2-game__basis" id={basisId} data-basis>
-              <h3>Откуда взялся вывод</h3>
-              <dl class="v2-game__sources" data-source-list>
-                <div class="v2-game__source">
-                  <dt>Деньги на счетах: 3,1 млн ₽</dt>
-                  <dd>выписки двух банков; обновлено сегодня, 10:15</dd>
-                </div>
-                <div class="v2-game__source">
-                  <dt>Зарплата и налоги: 5,5 млн ₽</dt>
-                  <dd>расчёт зарплаты и календарь платежей; обновлено сегодня, 10:06</dd>
-                </div>
-                <div class="v2-game__source">
-                  <dt>Оплата «Горизонта»: 5,8 млн ₽, новая дата — 26 августа</dt>
-                  <dd>письмо клиента и реестр ожидаемых оплат; обновлено сегодня, 09:42</dd>
-                </div>
+              <dl class="v2-game__facts">
+                <div><dt>Что изменилось</dt><dd>{scenario.changed}</dd></div>
+                <div><dt>Почему важно</dt><dd>{scenario.why}</dd></div>
+                <div><dt>Что сделать сейчас</dt><dd>{scenario.action}</dd></div>
               </dl>
-              <div class="v2-game__proof">
-                <div>
-                  <h4>Расчёт</h4>
-                  <p data-calculation>
-                    3,1 млн ₽ на счетах − 5,5 млн ₽ обязательных выплат = −2,4 млн ₽.
-                  </p>
-                </div>
-                <div>
-                  <h4>Правило важности</h4>
-                  <p data-rule>
-                    Ситуация важна, если прогнозный остаток становится отрицательным до
-                    обязательной выплаты зарплаты или налогов.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
 
-        <section class="v2-game__dialog" aria-labelledby={`${titleId}-dialog`} data-dialog>
-          <div>
-            <p class="v2-game__dialog-label" id={`${titleId}-dialog`}>Можно уточнить</p>
-            <div class="v2-game__prompts" aria-label="Готовые вопросы">
-              <button type="button" data-question-key="payer">Кто задержал оплату?</button>
-              <button type="button" data-question-key="consequence">
-                Что будет, если ничего не делать?
+              <button
+                class="v2-game__basis-button"
+                type="button"
+                aria-expanded="false"
+                aria-controls={basisId}
+                data-basis-button
+              >
+                <span data-basis-closed>Показать основание</span>
+                <span data-basis-open hidden>Скрыть основание</span>
               </button>
-              <button type="button" data-question-key="move">Что можно перенести?</button>
+
+              <section class="v2-game__basis" id={basisId} data-basis hidden aria-label="Основание сигнала">
+                <h3>Откуда взялся вывод</h3>
+                <dl class="v2-game__sources">
+                  {scenario.sources.map((source) => (
+                    <div>
+                      <dt>{source.label}: {source.value}</dt>
+                      <dd>{source.source}; обновлено {source.updated}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div class="v2-game__proof-row"><strong>Расчёт</strong><p>{scenario.calculation}</p></div>
+                <div class="v2-game__proof-row"><strong>Правило важности</strong><p>{scenario.rule}</p></div>
+              </section>
+
+              <section class="v2-game__dialog" aria-labelledby={`${panelId}-dialog-title`}>
+                <h3 id={`${panelId}-dialog-title`}>Уточнить сигнал</h3>
+                <div class="v2-game__prompts" aria-label="Готовые вопросы">
+                  {scenario.questions.map((question) => (
+                    <button type="button" data-question-key={question.key}>{question.label}</button>
+                  ))}
+                </div>
+
+                <form class="v2-game__form" data-question-form>
+                  <label for={questionId}>Или задайте короткий вопрос</label>
+                  <div>
+                    <input
+                      id={questionId}
+                      name="question"
+                      type="text"
+                      maxlength="180"
+                      autocomplete="off"
+                      aria-describedby={answerId}
+                      placeholder="Например: какой главный риск?"
+                      data-question-input
+                    />
+                    <button type="submit">Спросить</button>
+                  </div>
+                </form>
+
+                <div class="v2-game__answer" id={answerId} role="status" aria-live="polite" aria-atomic="true" data-answer data-state="empty">
+                  Выберите готовое уточнение или задайте короткий вопрос.
+                </div>
+
+                <div hidden aria-hidden="true" data-answer-bank>
+                  {scenario.questions.map((question) => <p data-answer-copy={question.key}>{question.answer}</p>)}
+                  <p data-answer-default>Выберите готовое уточнение или задайте короткий вопрос.</p>
+                  <p data-answer-empty>Напишите вопрос или выберите одно из трёх готовых уточнений.</p>
+                  <p data-answer-limit>В этой учебной версии я отвечаю только на три уточнения выше. Выберите ближайшее — Aivel не будет придумывать ответ.</p>
+                </div>
+              </section>
+
+              <a class="v2-button v2-game__cta" href={ctaHref}>Записаться на показ на своих данных</a>
             </div>
-          </div>
-
-          <form class="v2-game__form" data-question-form>
-            <label for={`${titleId}-question`}>Или задайте короткий вопрос</label>
-            <div>
-              <input
-                id={`${titleId}-question`}
-                name="question"
-                type="text"
-                maxlength="180"
-                autocomplete="off"
-                aria-describedby={answerId}
-                placeholder="Например: какой главный риск?"
-                data-question-input
-              />
-              <button type="submit">Спросить</button>
-            </div>
-          </form>
-
-          <div
-            class="v2-game__answer"
-            id={answerId}
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-            data-answer
-            data-state="empty"
-          >
-            Выберите готовое уточнение или задайте короткий вопрос.
-          </div>
-        </section>
-
-        <div class="v2-game__controls">
-          <button
-            class="v2-game__next"
-            type="button"
-            aria-label="Перейти к следующему учебному дню"
-            data-next-day
-          >
-            Следующий день
-          </button>
-          <p>Четыре дня — четыре разных типа сигнала.</p>
-        </div>
-      </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 
-  <p class="v2-game__live" role="status" aria-live="polite" aria-atomic="true" data-live-status>
-  </p>
+  <p class="v2-game__live" role="status" aria-live="polite" aria-atomic="true" data-live-status></p>
 </section>
 
 <script>
@@ -189,516 +270,358 @@ const answerId = `${titleId}-answer`;
 
 <style>
   .v2-game {
-    --game-ink: var(--v2-ink, #090b10);
-    --game-muted: var(--v2-muted, rgb(9 11 16 / 64%));
-    --game-line: var(--v2-line, rgb(9 11 16 / 12%));
-    --game-paper: var(--v2-paper, #fff);
-    --game-soft: var(--v2-soft, rgb(21 94 239 / 4%));
-    --game-accent: var(--v2-accent, #155eef);
-    --game-accent-dark: var(--v2-accent-dark, #0f46bd);
+    --game-ink: var(--v2-ink, #0f1722);
+    --game-soft-ink: var(--v2-ink-soft, rgb(15 23 34 / 82%));
+    --game-quiet: var(--v2-quiet, rgb(15 23 34 / 48%));
+    --game-line: var(--v2-line, rgb(15 23 34 / 10%));
+    --game-surface: var(--v2-surface, #fcfdff);
+    width: 100%;
     color: var(--game-ink);
   }
 
-  .v2-game__intro {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.9rem;
-    align-items: start;
-    max-width: 70rem;
-    margin-bottom: clamp(1.75rem, 5vw, 3.5rem);
-  }
-
-  .v2-game__eyebrow,
-  .v2-game__sender,
-  .v2-game__dialog-label,
-  .v2-game__bar-label {
-    margin: 0;
-    color: var(--game-accent-dark);
-    font-size: 0.76rem;
-    font-weight: 750;
-    letter-spacing: 0.08em;
-    line-height: 1.3;
-    text-transform: uppercase;
+  .v2-game [hidden] {
+    display: none !important;
   }
 
   .v2-game__intro h1 {
-    max-width: 15ch;
+    max-width: 900px;
     margin: 0;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 650;
-    letter-spacing: -0.03em;
-    line-height: 1.04;
+    font-size: 3.75rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.06;
     text-wrap: balance;
   }
 
-  .v2-game__intro h1 + p {
-    max-width: 42rem;
-    margin: 1.35rem 0 0;
-    color: var(--game-muted);
-    font-size: clamp(1.02rem, 2vw, 1.24rem);
-    line-height: 1.55;
+  .v2-game__intro > p:first-of-type {
+    max-width: 760px;
+    margin: 20px 0 0;
+    color: var(--game-soft-ink);
+    font-size: 1.125rem;
+    line-height: 1.625;
   }
 
   .v2-game__notice {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.65rem;
-    max-width: 70rem;
-    margin: 0 0 1rem;
-    color: var(--game-muted);
-    font-size: 0.88rem;
-    line-height: 1.5;
+    margin: 12px 0 0;
+    color: var(--game-quiet);
+    font-size: 0.8125rem;
+    line-height: 1.55;
   }
 
-  .v2-game__notice strong {
+  .v2-game__recognition {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+    gap: 48px;
+    margin-top: 32px;
+  }
+
+  .v2-game__industries {
+    display: grid;
+    align-content: start;
+  }
+
+  .v2-game__industries button {
+    min-height: 48px;
+    padding: 8px 0;
+    color: var(--game-soft-ink);
+    border: 0;
+    background: transparent;
+    font-size: 1.125rem;
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .v2-game__industries button:hover,
+  .v2-game__industries button[aria-selected="true"] {
     color: var(--game-ink);
+  }
+
+  .v2-game__industries button[aria-selected="true"] {
+    font-weight: 650;
+  }
+
+  .v2-game__workspace {
+    min-width: 0;
   }
 
   .v2-game__scene {
-    overflow: hidden;
-    max-width: 70rem;
-    border: 1px solid var(--game-line);
-    border-radius: 1rem;
-    background: var(--game-paper);
-    box-shadow: 0 1rem 2.5rem rgb(9 11 16 / 7%);
-  }
-
-  .v2-game__bar {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: center;
-    min-height: 4.7rem;
-    padding: 0.85rem clamp(1rem, 3vw, 2rem);
-    border-bottom: 1px solid var(--game-line);
-  }
-
-  .v2-game__bar > div {
-    display: grid;
-    gap: 0.15rem;
-  }
-
-  .v2-game__bar time {
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .v2-game__progress {
-    color: var(--game-muted);
-    font-size: 0.88rem;
-    white-space: nowrap;
-  }
-
-  .v2-game__layout {
-    display: grid;
-    grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
-  }
-
-  .v2-game__timeline {
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border-right: 1px solid var(--game-line);
-    background: var(--game-soft);
-  }
-
-  .v2-game__timeline > p {
-    margin: 0 0 1rem;
-    font-size: 0.82rem;
-    font-weight: 750;
-  }
-
-  .v2-game__timeline ol {
-    display: grid;
-    gap: 0.85rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .v2-game__timeline :global(li) {
-    position: relative;
-    padding-left: 1rem;
-    color: var(--game-muted);
-    font-size: 0.78rem;
-    line-height: 1.45;
-  }
-
-  .v2-game__timeline :global(li::before) {
-    position: absolute;
-    top: 0.42rem;
-    left: 0;
-    width: 0.38rem;
-    height: 0.38rem;
-    border-radius: 50%;
-    background: var(--game-line);
-    content: "";
-  }
-
-  .v2-game__timeline :global(li[aria-current="step"]) {
-    color: var(--game-ink);
-    font-weight: 700;
-  }
-
-  .v2-game__timeline :global(li[aria-current="step"]::before) {
-    background: var(--game-accent);
-  }
-
-  .v2-game__conversation {
     min-width: 0;
-    padding: clamp(1rem, 4vw, 3rem);
+    padding: 32px;
+    border: 1px solid var(--game-line);
+    border-radius: 16px;
+    background: var(--game-surface);
   }
 
-  .v2-game__message {
-    max-width: 44rem;
+  .v2-game__calm {
+    display: flex;
+    min-height: 292px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .v2-game__message h2 {
-    margin: 0.65rem 0 0;
-    font-size: clamp(1.55rem, 3.5vw, 2.65rem);
-    font-weight: 620;
-    letter-spacing: -0.035em;
-    line-height: 1.08;
-    text-wrap: balance;
+  .v2-game time,
+  .v2-game__status {
+    color: var(--game-quiet);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
+  .v2-game__status {
+    margin: 22px 0 0;
+  }
+
+  .v2-game__calm h2,
+  .v2-game__signal h2 {
+    margin: 8px 0 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+  }
+
+  .v2-game__calm > p:last-of-type,
   .v2-game__summary {
-    max-width: 40rem;
-    margin: 1rem 0 0;
-    color: var(--game-muted);
-    font-size: 1rem;
-    line-height: 1.58;
+    margin: 12px 0 0;
+    color: var(--game-soft-ink);
+    line-height: 1.6;
+  }
+
+  .v2-game__next,
+  .v2-game__form button {
+    min-height: 46px;
+    padding: 12px 20px;
+    color: #fff;
+    border: 1px solid var(--game-ink);
+    border-radius: 8px;
+    background: var(--game-ink);
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .v2-game__next {
+    margin-top: auto;
   }
 
   .v2-game__facts {
-    display: grid;
-    gap: 0;
-    margin: 1.6rem 0 0;
+    margin: 24px 0 0;
     border-top: 1px solid var(--game-line);
   }
 
   .v2-game__facts > div {
-    display: grid;
-    grid-template-columns: minmax(8.5rem, 0.34fr) minmax(0, 1fr);
-    gap: 1rem;
-    padding: 0.9rem 0;
+    padding: 16px 0;
     border-bottom: 1px solid var(--game-line);
   }
 
-  .v2-game__facts dt,
-  .v2-game__facts dd {
-    margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
   .v2-game__facts dt {
-    color: var(--game-muted);
-  }
-
-  .v2-game__facts dd {
-    font-weight: 650;
-  }
-
-  .v2-game__action {
-    margin: 1rem 0;
-    padding: 1rem 1.1rem;
-    border-left: 3px solid var(--game-accent);
-    border-radius: 0 0.75rem 0.75rem 0;
-    background: color-mix(in srgb, var(--game-accent) 9%, var(--game-paper));
-  }
-
-  .v2-game__action span {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: var(--game-accent-dark);
+    margin-bottom: 5px;
+    color: var(--game-quiet);
     font-size: 0.75rem;
-    font-weight: 750;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .v2-game__action p {
-    margin: 0;
-    font-size: 0.95rem;
     font-weight: 650;
-    line-height: 1.5;
   }
 
-  .v2-game button,
-  .v2-game input {
-    font: inherit;
-  }
-
-  .v2-game button {
-    min-height: 2.75rem;
-    cursor: pointer;
-  }
-
-  .v2-game button:focus-visible,
-  .v2-game input:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--game-accent) 55%, white);
-    outline-offset: 3px;
+  .v2-game__facts dd,
+  .v2-game__sources dd {
+    margin: 0;
+    color: var(--game-soft-ink);
+    line-height: 1.55;
   }
 
   .v2-game__basis-button {
-    padding: 0.55rem 0;
+    margin-top: 16px;
+    padding: 5px 0;
+    color: var(--game-ink);
     border: 0;
     border-bottom: 1px solid currentColor;
     background: transparent;
-    color: var(--game-accent-dark);
-    font-size: 0.9rem;
-    font-weight: 750;
+    font-weight: 650;
+    cursor: pointer;
   }
 
   .v2-game__basis {
-    margin-top: 1rem;
-    padding: clamp(1rem, 3vw, 1.5rem);
-    border: 1px solid var(--game-line);
-    border-radius: 1rem;
-    background: var(--game-soft);
-  }
-
-  .v2-game__basis[hidden],
-  [data-signal-detail][hidden],
-  .v2-game__dialog[hidden] {
-    display: none;
-  }
-
-  .v2-game__basis h3 {
-    margin: 0 0 1rem;
-    font-size: 1.05rem;
-  }
-
-  .v2-game__sources {
-    display: grid;
-    gap: 0.75rem;
-    margin: 0;
-  }
-
-  :global(.v2-game__source) {
-    display: grid;
-    grid-template-columns: minmax(10rem, 0.46fr) minmax(0, 1fr);
-    gap: 0.75rem;
-  }
-
-  :global(.v2-game__source dt),
-  :global(.v2-game__source dd) {
-    margin: 0;
-    font-size: 0.78rem;
-    line-height: 1.45;
-  }
-
-  :global(.v2-game__source dt) {
-    font-weight: 700;
-  }
-
-  :global(.v2-game__source dd) {
-    color: var(--game-muted);
-  }
-
-  .v2-game__proof {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
+    margin-top: 20px;
+    padding-top: 20px;
     border-top: 1px solid var(--game-line);
   }
 
-  .v2-game__proof h4 {
-    margin: 0 0 0.35rem;
-    color: var(--game-muted);
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  .v2-game__basis h3,
+  .v2-game__dialog h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.4;
   }
 
-  .v2-game__proof p {
-    margin: 0;
-    font-size: 0.8rem;
-    line-height: 1.5;
+  .v2-game__sources {
+    margin: 16px 0 0;
+  }
+
+  .v2-game__sources > div + div {
+    margin-top: 14px;
+  }
+
+  .v2-game__sources dt {
+    font-size: 0.875rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .v2-game__sources dd {
+    margin-top: 3px;
+    color: var(--game-quiet);
+    font-size: 0.8125rem;
+  }
+
+  .v2-game__proof-row {
+    margin-top: 18px;
+  }
+
+  .v2-game__proof-row strong {
+    font-size: 0.8125rem;
+  }
+
+  .v2-game__proof-row p {
+    margin: 5px 0 0;
+    color: var(--game-soft-ink);
+    font-size: 0.875rem;
+    line-height: 1.55;
   }
 
   .v2-game__dialog {
-    display: grid;
-    gap: 1.25rem;
-    max-width: 44rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: 28px;
+    padding-top: 24px;
     border-top: 1px solid var(--game-line);
   }
 
   .v2-game__prompts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-    margin-top: 0.7rem;
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
   }
 
   .v2-game__prompts button {
-    min-height: 2.75rem;
-    padding: 0.55rem 0.8rem;
-    border: 1px solid var(--game-line);
-    border-radius: 0.7rem;
-    background: var(--game-paper);
+    padding: 10px 12px;
     color: var(--game-ink);
-    font-size: 0.82rem;
-    font-weight: 650;
+    border: 1px solid var(--game-line);
+    border-radius: 8px;
+    background: transparent;
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
   }
 
   .v2-game__prompts button:hover {
-    border-color: var(--game-accent);
+    border-color: rgb(15 23 34 / 35%);
+  }
+
+  .v2-game__form {
+    margin-top: 18px;
   }
 
   .v2-game__form label {
     display: block;
-    margin-bottom: 0.45rem;
-    color: var(--game-muted);
-    font-size: 0.78rem;
+    margin-bottom: 8px;
+    color: var(--game-quiet);
+    font-size: 0.8125rem;
+    font-weight: 600;
   }
 
   .v2-game__form > div {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.55rem;
+    gap: 8px;
   }
 
   .v2-game__form input {
     min-width: 0;
-    min-height: 2.75rem;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--game-line);
-    border-radius: 0.7rem;
-    background: var(--game-paper);
+    min-height: 46px;
+    padding: 11px 12px;
     color: var(--game-ink);
-  }
-
-  .v2-game__form button,
-  .v2-game__next {
-    padding: 0.6rem 1rem;
-    border: 1px solid var(--game-ink);
-    border-radius: 0.7rem;
-    background: var(--game-ink);
-    color: white;
-    font-weight: 750;
+    border: 1px solid var(--game-line);
+    border-radius: 8px;
+    background: #fff;
   }
 
   .v2-game__answer {
-    overflow-wrap: anywhere;
-    min-height: 3.5rem;
-    padding: 0.9rem 1rem;
-    border-radius: 0.8rem;
-    background: var(--game-soft);
-    font-size: 0.87rem;
-    line-height: 1.55;
-  }
-
-  .v2-game__answer[data-state="empty"] {
-    color: var(--game-muted);
+    margin-top: 14px;
+    padding: 14px 0 0;
+    color: var(--game-soft-ink);
+    border-top: 1px solid var(--game-line);
+    line-height: 1.6;
   }
 
   .v2-game__answer[data-state="limited"] {
-    border-left: 3px solid var(--game-accent);
+    color: var(--game-quiet);
   }
 
-  .v2-game__controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 44rem;
-    margin-top: 1.5rem;
-  }
-
-  .v2-game__next {
-    min-width: 10rem;
-    background: var(--game-accent);
-    border-color: var(--game-accent);
-    color: #fff;
-  }
-
-  .v2-game__controls p {
-    margin: 0;
-    color: var(--game-muted);
-    font-size: 0.78rem;
+  .v2-game__cta {
+    width: 100%;
+    margin-top: 24px;
+    color: #fff !important;
+    border-color: var(--game-ink) !important;
+    background: var(--game-ink) !important;
   }
 
   .v2-game__live {
     position: absolute;
     width: 1px;
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip: rect(0 0 0 0);
     white-space: nowrap;
-    border: 0;
   }
 
-  @media (max-width: 760px) {
-    .v2-game__intro {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
-
+  @media (max-width: 767px) {
     .v2-game__intro h1 {
-      max-width: 15ch;
-      font-size: clamp(2.2rem, 13vw, 3.8rem);
+      font-size: 3rem;
+      line-height: 1.06;
     }
 
-    .v2-game__layout {
+    .v2-game__recognition {
       display: block;
+      margin-top: 28px;
     }
 
-    .v2-game__timeline {
-      padding: 0.8rem 1rem;
-      border-right: 0;
-      border-bottom: 1px solid var(--game-line);
-    }
-
-    .v2-game__timeline > p {
-      margin-bottom: 0.55rem;
-    }
-
-    .v2-game__timeline ol {
+    .v2-game__industries {
       display: flex;
-      gap: 0.45rem;
+      gap: 18px;
+      margin: 0 -24px 16px;
+      padding: 0 24px 5px;
       overflow-x: auto;
-      padding-bottom: 0.2rem;
-      scrollbar-width: thin;
+      scrollbar-width: none;
     }
 
-    .v2-game__timeline :global(li) {
-      flex: 0 0 8.5rem;
-      padding: 0.5rem 0.6rem;
-      border: 1px solid var(--game-line);
-      border-radius: 0.65rem;
-      background: var(--game-paper);
-      font-size: 0.68rem;
-    }
-
-    .v2-game__timeline :global(li::before) {
+    .v2-game__industries::-webkit-scrollbar {
       display: none;
     }
 
-    .v2-game__conversation {
-      padding: 1.15rem;
+    .v2-game__industries button {
+      min-height: 40px;
+      padding: 6px 0;
+      flex: 0 0 auto;
+      border-bottom: 1px solid transparent;
+      font-size: 0.9375rem;
+      white-space: nowrap;
     }
 
-    .v2-game__facts > div,
-    :global(.v2-game__source),
-    .v2-game__proof {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
+    .v2-game__industries button[aria-selected="true"] {
+      border-bottom-color: var(--game-ink);
     }
 
-    :global(.v2-game__source) {
-      padding-bottom: 0.65rem;
-      border-bottom: 1px solid var(--game-line);
+    .v2-game__scene {
+      padding: 24px;
     }
 
-    .v2-game__proof {
-      gap: 1rem;
+    .v2-game__calm {
+      min-height: 270px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .v2-game__intro h1 {
+      font-size: clamp(2.65rem, 12.3vw, 3rem);
     }
 
     .v2-game__form > div {
@@ -708,21 +631,6 @@ const answerId = `${titleId}-answer`;
     .v2-game__form button,
     .v2-game__next {
       width: 100%;
-    }
-
-    .v2-game__controls {
-      align-items: stretch;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .v2-game *,
-    .v2-game *::before,
-    .v2-game *::after {
-      scroll-behavior: auto !important;
-      transition-duration: 0.01ms !important;
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
     }
   }
 </style>

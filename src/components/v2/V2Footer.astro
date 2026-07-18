@@ -1,16 +1,19 @@
 ---
-import { v2Site } from "../../data/v2";
+import { v2Navigation, v2Site } from "../../data/v2";
 ---
 
 <footer class="v2-footer">
   <div class="v2-shell v2-footer__inner">
-    <div>
+    <div class="v2-footer__brand">
       <a class="v2-brand" href="/v2/" aria-label="Aivel 2.0 — главная">
-        <span>AIVEL</span>
-        <small>2.0</small>
+        <span>Aivel</span>
+        <small>AI</small>
       </a>
       <p>Вовремя увидеть важное.</p>
     </div>
+    <nav class="v2-footer__nav" aria-label="Разделы сайта">
+      {v2Navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
     <div class="v2-footer__contact">
       <a href={`mailto:${v2Site.email}`}>{v2Site.email}</a>
       <a href="/v2/llms.txt">Версия для ИИ</a>

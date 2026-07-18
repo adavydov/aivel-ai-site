@@ -1,240 +1,101 @@
-# Design System Master File
+# Aivel 2.0 — Master Design System
 
-> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.
-> If that file exists, its rules **override** this Master file.
-> If not, strictly follow the rules below.
+Статус: действующая система. Обновлено 17 июля 2026 года после точного замера `nextmovetheory.com` на 1440, 768 и 390 пикселях.
 
----
+## Принцип
 
-**Project:** Aivel 2.0
-**Updated:** 2026-07-17
-**Category:** B2B AI Accounting
-**Design Dials:** Variance 2/10 (Editorial / Minimal) | Motion 1/10 (Functional) | Density 2/10 (Spacious)
+Aivel 2.0 — редакционная продуктовая история, а не панель управления и не библиотека карточек. Один смысловой тезис получает одну законченную композицию. Визуальный язык воспроизводит геометрию и ритм референса, но использует только контент и бренд Aivel.
 
----
+## Токены
 
-## Global Rules
+| Роль | Значение |
+| --- | --- |
+| Фон | `#fcfdff` |
+| Белая поверхность | `#ffffff` |
+| Левая панель | `#f5f5f7` |
+| Основной текст | `#0f1722` |
+| Вторичный текст | `rgba(15,23,32,.82)` |
+| Тихий текст | `rgba(15,23,32,.42)` |
+| Линия | `rgba(15,23,32,.10)` |
+| Светлая заливка | `rgba(15,23,32,.04)` |
+| Тёмная кнопка/номер | `#141414` |
+| Ссылка | `#0a66d6`; hover `#0850ab` |
+| Выделенное слово | `linear-gradient(90deg,#0a4d8c,#2997ff)` |
 
-### Color Palette
+Синий — редкое смысловое выделение, а не заливка каждой кнопки, метки или карточки.
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#090B10` | `--color-primary` |
-| On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary text | `rgba(9, 11, 16, 0.64)` | `--color-secondary` |
-| Accent/CTA | `#155EEF` | `--color-accent` |
-| Background | `#FFFFFF` | `--color-background` |
-| Foreground | `#090B10` | `--color-foreground` |
-| Muted surface | `rgba(21, 94, 239, 0.04)` | `--color-muted` |
-| Border | `rgba(9, 11, 16, 0.12)` | `--color-border` |
-| Ring | `#155EEF` | `--color-ring` |
+## Типографика
 
-**Color Notes:** Вся поверхность белая. Интерфейс использует только чёрный и синий: чёрный для содержания, синий для действия и текущего состояния. Приглушённые поверхности и линии получают только прозрачность этих двух цветов.
+- Заголовки и интерфейс: `Inter, system-ui, -apple-system, sans-serif`.
+- Читаемый текст: `ui-sans-serif, system-ui, sans-serif`.
+- H1: `60/63.6`, 600, tracking `-.04em`; до 639px — `48/50.88`.
+- H2: `30/36`, 600, tracking `-.03em`.
+- Заголовок строки: `24/33`; mobile `20/27.5`.
+- Вводный/основной текст: `18/29.25`.
+- Интерфейсные подписи: 12–15px.
 
-### Typography
+## Геометрия
 
-- **Heading Font:** system-ui
-- **Body Font:** system-ui
-- **Mood:** editorial, trustworthy, readable, calm
-- **External fonts:** none; use the local system stack for speed and privacy.
+- Полезная колонка: `min(960px, 100% - 48px)`.
+- На 1440px колонка начинается в x=410; на 768px — x=124 и имеет ширину 620px; на 390px — x=24 и имеет ширину 342px.
+- Hero: 104px сверху на ширине от 640px; 88px ниже.
+- Следующий смысловой раздел: 64px.
+- Радиусы: управление 8px, карточка 16px, крупная поверхность 24px.
+- Обычные карточки без тени. Крупная редакционная поверхность: `0 1px 3px rgba(0,0,0,.02), 0 10px 44px -14px rgba(0,0,0,.05)`.
 
-**CSS Import:**
-```css
-font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-```
+## Три базовые композиции
 
-### Spacing Variables
+### 1. Узнавание
 
-*Density: 2/10 — Spacious*
+Начиная с 640px: `320px + 48px + остаток`. Слева переключатели, справа одна карточка `padding:32px`, radius16. Ниже 640px переключатели исчезают, все карточки показываются стеком с gap16 и padding24.
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--space-xs` | `4px` / `0.25rem` | Tight gaps |
-| `--space-sm` | `8px` / `0.5rem` | Icon gaps, inline spacing |
-| `--space-md` | `24px` / `1.5rem` | Standard padding |
-| `--space-lg` | `32px` / `2rem` | Section padding |
-| `--space-xl` | `48px` / `3rem` | Large gaps |
-| `--space-2xl` | `64px` / `4rem` | Section margins |
-| `--space-3xl` | `96px` / `6rem` | Hero padding |
+### 2. Нумерованные строки
 
-### Shadow Depths
+Голые строки без контейнера: круг 36px, gap20, строки разделены 36px. Номер белый на `#141414`. Никаких синих кругов, линий и теней.
 
-| Level | Value | Usage |
-|-------|-------|-------|
-| `--shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Subtle lift |
-| `--shadow-md` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
-| `--shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Modals, dropdowns |
-| `--shadow-xl` | `0 20px 25px rgba(0,0,0,0.15)` | Hero images, featured cards |
+### 3. Единая крупная поверхность
 
----
+Одна поверхность в ширину основной колонки, padding40, radius24. Каждая строка: `220px метка + 56px + содержание`. На мобильном — один столбец, padding24. Используется для опыта, тарифных профилей, каталога процессов и распределения ролей.
 
-## Component Specs
+Доказательство с крупным числом использует одну серую поверхность `rgba(15,23,32,.04)`, padding48, radius24 — не сетку декоративных плиток.
 
-### Buttons
+## Действия
 
-```css
-/* Primary Button */
-.btn-primary {
-  background: #155EEF;
-  color: white;
-  min-height: 48px;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-weight: 700;
-  transition: background-color 160ms ease, border-color 160ms ease;
-  cursor: pointer;
-}
+- Основная кнопка: фон `#141414`, белый текст, высота 46px, padding `12px 20px`, radius8, вес 600. Hover меняет только opacity до .9.
+- Дополнительное действие: синяя текстовая ссылка со стрелкой.
+- На одном смысловом экране не более одного основного действия.
 
-.btn-primary:hover {
-  background: #0F46BD;
-}
+## Навигация
 
-/* Secondary Button */
-.btn-secondary {
-  background: transparent;
-  color: #090B10;
-  border: 1px solid rgba(9, 11, 16, 0.2);
-  min-height: 48px;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-weight: 700;
-  transition: border-color 160ms ease;
-  cursor: pointer;
-}
-```
+- От 768px: липкая левая панель 100px, фон `#f5f5f7`, padding24, gap24.
+- Четыре работы: `Важное`, `Учёт`, `ИИ`, `Партнёрам`.
+- Полные маршруты: `/v2/`, `/v2/uchet/`, `/v2/avtomatizatsiya-bek-ofisa/`, `/v2/partneram/`.
+- Плитка 64×64, radius12; иконка 24px, подпись 13/13.
+- Активная плитка белая с нейтральной двухслойной тенью. Синяя активная подложка запрещена.
+- Ниже 768px панель полностью скрыта. Фиксированной нижней навигации нет; маршруты доступны в подвале и контекстных ссылках.
 
-### Cards
+## Движение
 
-```css
-.card {
-  background: #FFFFFF;
-  border-radius: 14px;
-  padding: 24px;
-  border: 1px solid rgba(9, 11, 16, 0.12);
-  transition: border-color 160ms ease;
-  cursor: pointer;
-}
+- Нативная прокрутка; без параллакса, scroll-snap и появления секций.
+- Переходы только color/opacity 150–200ms.
+- Карточки не масштабируются и не прыгают.
+- `prefers-reduced-motion` отключает переходы.
 
-.card:hover {
-  border-color: #155EEF;
-}
-```
+## Запрещено
 
-### Inputs
+- одинаковые сетки карточек для каждого раздела;
+- цветные или «милые» пиктограммы;
+- повторяющиеся синие надзаголовки;
+- синие основные кнопки и номера;
+- полноширинные чередующиеся фоны;
+- декоративные тени у обычных карточек;
+- нижняя фиксированная панель на телефоне;
+- скрывать важный текст только внутри сценария.
 
-```css
-.input {
-  padding: 12px 16px;
-  border: 1px solid rgba(9, 11, 16, 0.2);
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 200ms ease;
-}
+## Проверка
 
-.input:focus {
-  border-color: #155EEF;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.22);
-}
-```
-
-### Modals
-
-```css
-.modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-}
-
-.modal {
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: var(--shadow-xl);
-  max-width: 500px;
-  width: 90%;
-}
-```
-
----
-
-## Style Guidelines
-
-**Style:** Editorial Minimalism
-
-**Keywords:** Clear hierarchy, narrow reading measure, high contrast, generous whitespace, restrained blue accent
-
-**Best For:** A complex B2B product that must become understandable in one reading pass
-
-**Key Effects:** 60px desktop / 48px mobile hero, 720px editorial column, natural-height sections, one blue semantic accent
-
-### Page Pattern
-
-**Pattern Name:** Editorial Single Column with Proof Breakouts
-
-- **Conversion Strategy:** One claim per screen, one primary action, concrete proof directly after the claim.
-- **Reading measure:** 720px for hero and narrative; up to 960px only for diagrams, cases and comparison grids.
-- **Vertical rhythm:** first content begins 88–112px from the top; later sections follow after 64–80px. Do not stretch sections to the viewport.
-- **Typography:** hero 60/62 desktop and 48/50 mobile, weight 650; section title up to 48px; body 16–19px.
-- **CTA Placement:** left-aligned with the reading column; secondary action is a text link.
-- **Homepage rule:** the first screen has one action leading to the interactive example; contact conversion follows after the product value is understood.
-- **Cases rule:** customer outcomes are scanned in a single three-card grid, not stretched into separate viewport-height stories.
-
-### Navigation
-
-- На широком экране — фиксированная левая полоса шириной 100 пикселей.
-- Знак расположен сверху, меню начинается через 24 пикселя под ним, а не центрируется по высоте окна.
-- Четыре направления: «Увидеть важное», «Наладить учёт», «Кейсы», «Стать партнёром».
-- Каждый пункт содержит контурную SVG-иконку и постоянную текстовую подпись.
-- Пункт занимает 64 × 64 пикселя; подпись не меньше 12 пикселей и может переноситься на две строки.
-- Текущий раздел выделяется белой плиткой с тонкой границей и лёгкой тенью; синий показывает текущее состояние.
-- На экране до 700 пикселей эта же навигация становится нижней панелью высотой 80 пикселей из четырёх пунктов; содержимое получает безопасный нижний отступ.
-
----
-
-## Motion
-
-**Page Transition** (Subtle) — Trigger: route change | Duration: 200-300ms | Easing: `power1.inOut`
-
-```js
-gsap.to(main, { opacity: 0, duration: 0.2, onComplete: () => { navigate(); gsap.fromTo(main, { opacity: 0 }, { opacity: 1, duration: 0.2 }); } });
-```
-
-**Framework notes:** Pair with the router's transition hooks (Next.js App Router transitions, React Router's useNavigate, Vue Router's beforeEach/afterEach)
-
-- ✅ Preload the destination route's critical assets before the exit tween finishes
-- ❌ Don't block navigation on animation; cap exit duration at ~250ms so the app never feels unresponsive
-- ⚡ Exit animation should always resolve faster than entrance (asymmetric timing) so back/forward feels snappy
-
----
-
-## Anti-Patterns (Do NOT Use)
-
-- ❌ Heavy chrome
-- ❌ Slow response feedback
-
-### Additional Forbidden Patterns
-
-- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)
-- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer
-- ❌ **Layout-shifting hovers** — Avoid scale transforms that shift layout
-- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio
-- ❌ **Instant state changes** — Always use transitions (150-300ms)
-- ❌ **Invisible focus states** — Focus states must be visible for a11y
-
----
-
-## Pre-Delivery Checklist
-
-Before delivering any UI code, verify:
-
-- [ ] No emojis used as icons (use SVG instead)
-- [ ] All icons from consistent icon set (Heroicons/Lucide)
-- [ ] `cursor-pointer` on all clickable elements
-- [ ] Hover states with smooth transitions (150-300ms)
-- [ ] Light mode: text contrast 4.5:1 minimum
-- [ ] Focus states visible for keyboard navigation
-- [ ] `prefers-reduced-motion` respected
-- [ ] Responsive: 375px, 768px, 1024px, 1440px
-- [ ] No content hidden behind fixed navbars
-- [ ] No horizontal scroll on mobile
+- 1440: колонка 960, меню 100, H1 60.
+- 768: колонка 620, меню 100, H1 60.
+- 390: колонка 342, меню отсутствует, H1 48.
+- На 320px нет горизонтальной прокрутки.
+- Все элементы доступны клавиатурой, focus ring видим, цели нажатия не меньше 44px.

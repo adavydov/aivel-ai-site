@@ -1,70 +1,25 @@
 ---
-import V2Layout from "../../../layouts/V2Layout.astro";
-import { processMailto, v2CustomerCases, v2Site } from "../../../data/v2";
+import { v2Site } from "../../../data/v2";
 
-const title = "Кейсы внедрения ИИ в бухгалтерии — Aivel 2.0";
-const description =
-  "Кейсы Aivel: ДДХ вырос в два раза без найма новых бухгалтеров; в Нефтьмагистрали и Братьях Караваевых 70% первичных документов обрабатывались без участия человека.";
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: title,
-  description,
-  url: `${v2Site.url}/v2/ii-agenty/`,
-  hasPart: v2CustomerCases.map((item) => ({
-    "@type": "CreativeWork",
-    name: `${item.company}: ${item.metric}. ${item.title}`,
-    description: item.text
-  }))
-};
+const destination = "/v2/avtomatizatsiya-bek-ofisa/";
+const canonical = new URL(destination, v2Site.url).toString();
 ---
 
-<V2Layout title={title} description={description} schema={schema}>
-  <section class="v2-section v2-page-hero" data-v2-screen="1">
-    <div class="v2-shell">
-      <p class="v2-eyebrow">Кейсы</p>
-      <h1 class="v2-page-title">Результат в <span class="v2-accent-word">реальной работе.</span></h1>
-      <p class="v2-lead">
-        Не обещания автоматизации, а рост бизнеса без пропорционального роста бухгалтерской команды.
-      </p>
-      <a class="v2-text-link" href="/v2/uchet/">Посмотреть, как устроен учёт</a>
-    </div>
-  </section>
-
-  <section class="v2-section" data-v2-screen="2" aria-labelledby="v2-customer-results-title">
-    <div class="v2-shell">
-      <p class="v2-eyebrow">Измерено во внедрениях</p>
-      <h2 class="v2-section-title" id="v2-customer-results-title">Три компании. Два понятных результата.</h2>
-      <div class="v2-customer-grid">
-        {v2CustomerCases.map((item) => (
-          <article class="v2-customer-card">
-            <div class="v2-customer-card__head">
-              <span>{item.company}</span>
-              <img src={item.logo.src} alt={item.logo.name} loading="lazy" decoding="async" />
-            </div>
-            <strong>{item.metric}</strong>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="v2-section v2-section--auto" data-v2-screen="3" aria-labelledby="v2-processes-title">
-    <div class="v2-shell">
-      <p class="v2-eyebrow">Что стоит за результатом</p>
-      <h2 class="v2-section-title" id="v2-processes-title">ИИ выполняет операцию. Человек разбирает исключение.</h2>
-      <p class="v2-lead">Каждый процесс можно открыть отдельно: увидеть входящие данные, работу помощника, роль специалиста и измеренный результат.</p>
-      <nav class="v2-proof-links" aria-label="Подробные кейсы процессов">
-        <a href="/avtomatizatsiya-ucheta/pervichnye-dokumenty/"><span>Первичные документы</span><strong>80% потока без ручного участия</strong></a>
-        <a href="/avtomatizatsiya-ucheta/bankovskie-operatsii/"><span>Банковские операции</span><strong>98% точности сопоставления</strong></a>
-        <a href="/avtomatizatsiya-ucheta/sverki-s-kontragentami/"><span>Сверки</span><strong>До 95% без участия человека</strong></a>
-      </nav>
-      <div class="v2-actions v2-case-actions">
-        <a class="v2-button" href={processMailto}>Обсудить свой процесс</a>
-        <a class="v2-text-link" href="/v2/uchet/">Наладить учёт</a>
-      </div>
-    </div>
-  </section>
-</V2Layout>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ИИ-агенты для крупных компаний — Aivel</title>
+    <meta
+      name="description"
+      content="Раздел об ИИ-агентах Aivel переехал на страницу автоматизации операций для крупных компаний."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <p>Раздел переехал: <a href={destination}>ИИ-агенты для крупных компаний</a>.</p>
+  </body>
+</html>
