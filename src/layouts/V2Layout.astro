@@ -18,7 +18,8 @@ const {
   image = "/social-card.svg"
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, v2Site.url).toString();
+const siteRoot = v2Site.url.replace(/\/$/, "");
+const canonical = `${siteRoot}${Astro.url.pathname}`;
 const schemas = [
   {
     "@context": "https://schema.org",
@@ -50,7 +51,7 @@ const schemas = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, v2Site.url).toString()} />
+    <meta property="og:image" content={`${siteRoot}${image}`} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
   </head>
   <body class="v2-body">
