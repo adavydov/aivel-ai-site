@@ -6,6 +6,7 @@ import {
   v2AudiencePaths,
   v2AuditTrail,
   v2Comparisons,
+  demoMailto,
   v2HeroSignal,
   v2Mechanism,
   v2Pains,
@@ -16,7 +17,7 @@ import {
 
 const title = "Вовремя увидеть важное в бизнесе — Aivel 2.0";
 const description =
-  "Aivel сам замечает важные изменения в бизнесе, объясняет возможные последствия и показывает основание каждого вывода.";
+  "Aivel сам сообщает, что произошло в бизнесе. Не нужно ждать отчёт или спрашивать аналитика.";
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -41,7 +42,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text:
-          "Отчёт и дашборд требуют заранее открыть нужный показатель. Aivel сам замечает важное изменение, объясняет возможные последствия и показывает основание вывода."
+          "Отчёт и дашборд требуют заранее открыть нужный показатель. Aivel сам сообщает, что произошло в бизнесе, объясняет возможные последствия и показывает основание вывода."
       }
     },
     {
@@ -62,10 +63,10 @@ const faqSchema = {
     <div class="v2-shell v2-hero-grid">
       <div class="v2-hero-copy">
         <p class="v2-eyebrow">Новый рабочий режим руководителя</p>
-        <h1 class="v2-title">Aivel сам сообщает, что стало <span class="v2-accent-word">важным.</span></h1>
-        <p class="v2-hero-subtitle">Пока ещё можно повлиять.</p>
+        <h1 class="v2-title">Aivel сам сообщает, что произошло в <span class="v2-accent-word">бизнесе.</span></h1>
+        <p class="v2-hero-subtitle">Не нужно ждать отчёт или спрашивать аналитика.</p>
         <p class="v2-lead">
-          Не нужно ждать отчёт, открывать панель показателей или заранее выбирать метрику. Aivel следит за учётом, деньгами и операциями, приносит короткий сигнал и показывает основание.
+          Aivel следит за учётом, деньгами и операциями, сам отделяет важное от шума и приносит короткий сигнал: что произошло, почему это важно, что сделать сейчас и на чём основан вывод.
         </p>
         <div class="v2-actions">
           <a class="v2-button" href="/v2/primer/">Посмотреть сигнал</a>
@@ -112,7 +113,7 @@ const faqSchema = {
       <h2 class="v2-section-title" id="v2-recognition-title">Обычно это узнают слишком поздно.</h2>
       <PainRecognition pains={v2Pains} />
       <p class="v2-recognition__outcome">
-        Это не “ещё один отчёт”. Это момент, когда руководитель узнаёт изменение раньше, чем оно стало потерей денег, времени или контроля. <strong>Aivel сообщает раньше.</strong>
+        Это не “ещё один отчёт”. Это момент, когда руководитель узнаёт изменение раньше, чем оно стало потерей денег, времени или контроля. <strong>Aivel сам сообщает, что произошло.</strong>
       </p>
     </div>
   </section>
@@ -186,7 +187,7 @@ const faqSchema = {
         <article><span>Управленческий контекст</span><div><h3>Отличаем важное от обычного шума.</h3><p>Сигнал появляется там, где изменение влияет на деньги, обязательства, маржу, закрытие периода или решение руководителя.</p></div></article>
       </div>
 
-      <p class="v2-muted">Компании, с которыми работала команда Aivel</p>
+      <p class="v2-muted">Есть внедрения в Гольфстрим и опыт работы команды Aivel в реальных учётных контурах</p>
       <BrandStrip compact />
 
       <div class="v2-path-grid" aria-label="Выберите свой путь">
@@ -203,6 +204,15 @@ const faqSchema = {
       <div class="v2-actions">
         <a class="v2-text-link" href="/v2/uchet/">Наладить учёт</a>
         <a class="v2-text-link" href="/v2/avtomatizatsiya-bek-ofisa/">Автоматизировать операции</a>
+      </div>
+
+      <div class="v2-final-cta" aria-labelledby="v2-home-demo-title">
+        <div>
+          <p class="v2-eyebrow">Следующий шаг</p>
+          <h2 id="v2-home-demo-title">Записаться на демо.</h2>
+          <p>Покажем, как Aivel сообщает о важном событии, раскрывает основание сигнала и связывает вывод с учётом, документами и действиями специалиста.</p>
+        </div>
+        <a class="v2-button" href={demoMailto}>Записаться на демо</a>
       </div>
     </div>
   </section>

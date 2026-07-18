@@ -42,9 +42,10 @@ test("every primary version 2 page has its own metadata and four-job navigation"
 test("homepage communicates one promise in four canonical screens", async () => {
   const html = await readFile(routeFile("v2"), "utf8");
   assert.equal(count(html, /data-v2-screen=/g), 4);
-  assert.match(html, /Aivel сам сообщает, что стало <span class="v2-accent-word">важным\.<\/span>/);
-  assert.match(html, /Пока ещё можно повлиять/);
+  assert.match(html, /Aivel сам сообщает, что произошло в <span class="v2-accent-word">бизнесе\.<\/span>/);
+  assert.match(html, /Не нужно ждать отчёт или спрашивать аналитика/);
   assert.equal(count(html, /Посмотреть сигнал/g), 1);
+  assert.match(html, /Записаться на демо/);
   assert.match(html, /Сигнал для руководителя/);
   assert.match(html, /Через 12 дней может не хватить 2,4 млн ₽/);
   assert.match(html, /Почему важно/);
@@ -69,6 +70,7 @@ test("homepage communicates one promise in four canonical screens", async () => 
   assert.equal(count(html, /class="v2-path-grid"/g), 1);
   assert.match(html, /Владельцу и CEO/);
   assert.match(html, /class="v2-audience-surface v2-team-surface"/);
+  assert.match(html, /Есть внедрения в Гольфстрим/);
   assert.doesNotMatch(html, /v2-team-mark|v2-team-grid|v2-trust-surface/);
   assert.ok(html.indexOf("Aivel сам сообщает") < html.indexOf("Обычно это узнают слишком поздно"));
   assert.ok(html.indexOf("Обычно это узнают слишком поздно") < html.indexOf("Сигнал появляется не из воздуха"));
@@ -188,13 +190,14 @@ test("partner page states the model and answers six owner questions", async () =
 
 test("machine-readable map mirrors the four jobs, price boundary and evidence", async () => {
   const text = await readFile(path.join(dist, "v2", "llms.txt"), "utf8");
-  assert.match(text, /финансовый помощник, который сам замечает/);
+  assert.match(text, /финансовый помощник, который сам сообщает, что произошло в бизнесе/);
   assert.match(text, /\/v2\/primer\//);
   assert.match(text, /\/v2\/uchet\//);
   assert.match(text, /\/v2\/avtomatizatsiya-bek-ofisa\//);
   assert.match(text, /Кейсы не образуют отдельного раздела/);
   assert.match(text, /Числовые цены Aivel пока не утверждены/);
   assert.match(text, /Отчёт|Дашборд/);
+  assert.match(text, /Есть внедрения в Гольфстрим/);
   assert.doesNotMatch(text, /80 000|120 000|300 000|priceCurrency/);
   assert.match(text, /80% общего входящего потока/);
   assert.match(text, /98% точности/);
