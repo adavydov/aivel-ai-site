@@ -1,7 +1,8 @@
-User-agent: *
+User-Agent: *
 Allow: /
 
-User-agent: OAI-SearchBot
+User-Agent: OAI-SearchBot
 Allow: /
 
+Host: https://adavydov.github.io
 Sitemap: https://adavydov.github.io/aivel-ai-site/sitemap.xml

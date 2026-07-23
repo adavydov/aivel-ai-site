@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[2588,[],""]
+3:I[5994,[],""]
+:HL["/aivel-ai-site/_next/static/css/d29803e97552a2ce.css","style"]
+0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/aivel-ai-site/_next/static/css/d29803e97552a2ce.css","precedence":"next"}]],["$","html",null,{"lang":"ru","children":["$","body",null,{"children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://adavydov.github.io/aivel-ai-site/#organization\",\"name\":\"Aivel\",\"url\":\"https://adavydov.github.io/aivel-ai-site\"},{\"@type\":\"WebSite\",\"@id\":\"https://adavydov.github.io/aivel-ai-site/#website\",\"name\":\"Aivel\",\"url\":\"https://adavydov.github.io/aivel-ai-site\",\"inLanguage\":\"ru-RU\",\"publisher\":{\"@id\":\"https://adavydov.github.io/aivel-ai-site/#organization\"}}]}"}}],["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"0i66PhMu_1P3rkkzuXFZ8"}
