@@ -2676,3 +2676,58 @@
     padding-inline: 16px !important;
   }
 }
+
+/* Keep the circular control loop only while all six cards clear the center. */
+@media (min-width: 761px) and (max-width: 860px) {
+  .manageability-cycle {
+    height: auto;
+    margin-top: 28px;
+  }
+
+  .manageability-orbit,
+  .manageability-center {
+    display: none;
+  }
+
+  .manageability-ring {
+    border-left: 1px solid var(--line);
+    padding-left: 22px;
+  }
+
+  .manageability-ring::before {
+    content: "Known-class rate · 69%";
+    background: var(--ink);
+    color: #ff725d;
+    font: 600 22px/1.2 var(--sans);
+    display: block;
+    margin: 0 0 12px -22px;
+    padding: 22px;
+  }
+
+  .manageability-node,
+  .manageability-node--1,
+  .manageability-node--2,
+  .manageability-node--3,
+  .manageability-node--4,
+  .manageability-node--5,
+  .manageability-node--6 {
+    width: 100%;
+    min-height: 0;
+    box-shadow: none;
+    position: relative;
+    inset: auto;
+    transform: none;
+    padding: 16px 0;
+  }
+
+  .manageability-node::after,
+  .manageability-node--1::after,
+  .manageability-node--2::after,
+  .manageability-node--3::after,
+  .manageability-node--4::after,
+  .manageability-node--5::after,
+  .manageability-node--6::after {
+    content: "↓";
+    inset: auto auto -8px -23px;
+  }
+}
