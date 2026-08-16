@@ -18,25 +18,26 @@
     script.remove();
   };
 
-  const decrypt = async (password) => {
-    const response = await fetch(`./protected-payload.json?v=${Date.now()}`, {
+  const payloadUrls = ["./protected-payload.json", "./recovery-payload.json"];
+
+  const loadEnvelope = async (url) => {
+    const response = await fetch(`${url}?v=${Date.now()}`, {
       cache: "no-store",
       credentials: "omit",
     });
     if (!response.ok) throw new Error("payload_unavailable");
+    return response.json();
+  };
 
-    const envelope = await response.json();
-    if (
-      envelope.version !== 1 ||
-      envelope.cipher !== "AES-GCM-256" ||
-      envelope.kdf !== "PBKDF2-SHA-256"
-    ) {
-      throw new Error("payload_invalid");
-    }
+  const isValidEnvelope = (envelope) =>
+    envelope?.version === 1 &&
+    envelope?.cipher === "AES-GCM-256" &&
+    envelope?.kdf === "PBKDF2-SHA-256";
 
+  const decryptEnvelope = async (envelope, passwordBytes) => {
     const passwordKey = await crypto.subtle.importKey(
       "raw",
-      new TextEncoder().encode(password),
+      passwordBytes,
       "PBKDF2",
       false,
       ["deriveKey"],
@@ -59,6 +60,29 @@
       fromBase64(envelope.ciphertext),
     );
     return JSON.parse(new TextDecoder().decode(plaintext));
+  };
+
+  const decrypt = async (password) => {
+    const results = await Promise.allSettled(payloadUrls.map(loadEnvelope));
+    const envelopes = results
+      .filter((result) => result.status === "fulfilled")
+      .map((result) => result.value);
+
+    if (envelopes.length === 0) throw new Error("payload_unavailable");
+
+    const validEnvelopes = envelopes.filter(isValidEnvelope);
+    if (validEnvelopes.length === 0) throw new Error("payload_invalid");
+
+    const passwordBytes = new TextEncoder().encode(password);
+    for (const envelope of validEnvelopes) {
+      try {
+        return await decryptEnvelope(envelope, passwordBytes);
+      } catch {
+        // The password may belong to the other encrypted snapshot.
+      }
+    }
+
+    throw new Error("password_invalid");
   };
 
   form.addEventListener("submit", async (event) => {
