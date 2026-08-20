@@ -18,7 +18,7 @@
     script.remove();
   };
 
-  const payloadUrls = ["./protected-payload.json", "./recovery-payload.json"];
+  const payloadUrls = ["./recovery-payload.json"];
 
   const loadEnvelope = async (url) => {
     const response = await fetch(`${url}?v=${Date.now()}`, {
