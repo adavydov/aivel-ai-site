@@ -131,7 +131,9 @@ th:last-child, td:last-child { padding-right: 0; }
 .status-grid { margin-top: 28px; }
 .history-table table { min-width: 1050px; }
 .round-metrics { border-top-color: var(--accent); border-bottom-color: var(--accent); }
+.source-links a { color: var(--accent-dark); font-weight: 700; text-underline-offset: 2px; }
 .allocation-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 28px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.allocation-grid.investor-brief { grid-template-columns: repeat(2, 1fr); }
 .allocation-grid article { padding: 23px 18px; }
 .allocation-grid article:first-child { padding-left: 0; }
 .allocation-grid article:last-child { padding-right: 0; }
