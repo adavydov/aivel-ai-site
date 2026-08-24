@@ -126,9 +126,12 @@ th:last-child, td:last-child { padding-right: 0; }
 .waterfall-step--accent strong { color: var(--accent); }
 .waterfall-step--final { background: var(--soft); }
 .waterfall-step--final strong { color: var(--accent-dark); }
-.money-waterfall-table table { min-width: 1040px; table-layout: fixed; }
-.money-waterfall-table th, .money-waterfall-table td { width: 14.28%; text-align: left; }
-.pmi-table table { min-width: 900px; }
+.money-waterfall-table table { min-width: 0; }
+.money-waterfall-table th:last-child, .money-waterfall-table td:last-child { text-align: right; }
+.money-waterfall-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
+.pmi-table table { min-width: 0; }
+.pmi-table th:last-child, .pmi-table td:last-child { text-align: right; }
+.pmi-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
 .portfolio-table table { min-width: 700px; }
 .roic-table table { min-width: 920px; }
 .coverage-table table { min-width: 900px; }
