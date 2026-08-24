@@ -132,6 +132,13 @@ th:last-child, td:last-child { padding-right: 0; }
 .pmi-table table { min-width: 0; }
 .pmi-table th:last-child, .pmi-table td:last-child { text-align: right; }
 .pmi-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
+.layers-table table { min-width: 0; table-layout: fixed; }
+.layers-table th, .layers-table td { width: 33.33%; text-align: left; }
+.layers-table th:nth-child(2), .layers-table td:nth-child(2) { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.layers-table td { font-weight: 600; }
+.market-structure-table table { min-width: 0; }
+.market-structure-table th:last-child, .market-structure-table td:last-child { text-align: right; }
+.market-structure-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
 .portfolio-table table { min-width: 700px; }
 .roic-table table { min-width: 0; table-layout: fixed; }
 .roic-table th:first-child, .roic-table td:first-child { width: 12%; }
