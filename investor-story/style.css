@@ -68,19 +68,24 @@ th { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .05
 th:first-child, td:first-child { padding-left: 0; text-align: left; }
 th:last-child, td:last-child { padding-right: 0; }
 .table-wrap tbody tr:last-child td { border-bottom: 0; }
-.operations-table table { min-width: 720px; table-layout: fixed; }
-.operations-table th, .operations-table td { width: 19%; text-align: center; }
+.operations-table table { min-width: 620px; table-layout: fixed; }
+.operations-table th, .operations-table td { width: 25.33%; text-align: center; }
 .operations-table th:first-child, .operations-table td:first-child { width: 24%; text-align: left; }
 .operations-table th { white-space: pre-line; }
-.operations-table :is(th, td):nth-child(3) { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.operations-table :is(th, td):nth-child(2) { background: color-mix(in srgb, var(--accent) 6%, transparent); }
 .operations-table :is(th, td):nth-child(4) { background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.operations-table th:nth-child(3), .operations-table th:nth-child(4) { color: var(--accent-dark); }
-.operations-table td:nth-child(3), .operations-table td:nth-child(4) { color: var(--accent-dark); font-weight: 800; }
+.operations-table th:nth-child(2), .operations-table th:nth-child(4) { color: var(--accent-dark); }
+.operations-table td:nth-child(2), .operations-table td:nth-child(4) { color: var(--accent-dark); font-weight: 800; }
 .autonomy-callout { display: grid; grid-template-columns: 1fr auto; gap: 8px 30px; align-items: end; margin-top: 28px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .autonomy-callout > span { color: var(--accent); }
 .autonomy-callout strong { color: var(--accent); font: 600 clamp(38px,5vw,65px)/.9 var(--sans); letter-spacing: -.065em; }
 .autonomy-callout b { padding: 0 7px; font-weight: 400; }
 .autonomy-callout p { grid-column: 1 / -1; margin: 0; color: var(--muted); font: 13px/1.4 var(--sans); }
+.autonomy-callout--three { align-items: center; }
+.autonomy-trend { display: flex; align-items: center; gap: 10px; }
+.autonomy-trend strong { text-align: center; white-space: nowrap; }
+.autonomy-trend small { display: block; margin-top: 8px; color: var(--muted); font: 800 10px/1.25 var(--sans); letter-spacing: .04em; text-transform: uppercase; }
+.autonomy-trend > b { color: var(--accent); font: 400 25px/1 var(--sans); }
 .split-grid { display: grid; grid-template-columns: 1.75fr 1fr; margin-top: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .split-grid article { padding: 22px 0; }
 .split-grid article + article { padding-left: 28px; border-left: 1px solid var(--line); }
@@ -110,6 +115,7 @@ th:last-child, td:last-child { padding-right: 0; }
 .learning-flow article:first-child { padding-left: 0; }
 .learning-flow article:last-child { padding-right: 0; background: var(--soft); }
 .learning-flow span { display: block; color: var(--accent); font: 800 10px/1 var(--sans); }
+.learning-flow em { display: block; margin-top: 8px; color: var(--muted); font: 800 9px/1.25 var(--sans); font-style: normal; letter-spacing: .03em; text-transform: uppercase; }
 .learning-flow strong { display: block; margin-top: 12px; font: 600 14px/1.25 var(--sans); }
 .small-metrics .metric > strong { font-size: clamp(20px,2.3vw,30px); }
 .self-sufficiency-ladder { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 38px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
@@ -204,6 +210,8 @@ th:last-child, td:last-child { padding-right: 0; }
   .screen-lead { font-size: 18px; }
   .autonomy-callout { grid-template-columns: 1fr; }
   .autonomy-callout strong { font-size: 50px; }
+  .autonomy-trend { flex-wrap: wrap; gap: 7px; }
+  .autonomy-trend strong { font-size: clamp(30px, 10vw, 46px); }
   .subheading { margin-top: 36px; }
   .learning-flow { grid-template-columns: 1fr; }
   .learning-flow article, .learning-flow article:first-child, .learning-flow article:last-child { padding: 16px 0; border-left: 0; }
