@@ -126,6 +126,12 @@ th:last-child, td:last-child { padding-right: 0; }
 .waterfall-step--accent strong { color: var(--accent); }
 .waterfall-step--final { background: var(--soft); }
 .waterfall-step--final strong { color: var(--accent-dark); }
+.money-waterfall-table table { min-width: 1040px; table-layout: fixed; }
+.money-waterfall-table th, .money-waterfall-table td { width: 14.28%; text-align: left; }
+.pmi-table table { min-width: 900px; }
+.portfolio-table table { min-width: 700px; }
+.roic-table table { min-width: 920px; }
+.coverage-table table { min-width: 900px; }
 .process-flow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .process-flow span { display: flex; align-items: center; gap: 8px; padding: 7px 9px; background: var(--soft); font: 700 11px/1.25 var(--sans); }
 .process-flow b { color: var(--accent); font-size: 14px; }
