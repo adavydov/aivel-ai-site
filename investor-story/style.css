@@ -271,6 +271,8 @@ th:last-child, td:last-child { padding-right: 0; }
 .channel-grid strong { display: block; margin-top: 14px; font: 600 21px/1.2 var(--sans); letter-spacing: -.035em; }
 .channel-grid p { margin: 10px 0 0; color: var(--muted); font: 14px/1.45 var(--sans); }
 .status-grid { margin-top: 28px; }
+.pipeline-table table { min-width: 1080px; }
+.pipeline-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
 .history-table table { min-width: 1050px; }
 .scale-metrics .metric { padding-right: 12px; padding-left: 12px; }
 .scale-metrics .metric:first-child { padding-left: 0; }
