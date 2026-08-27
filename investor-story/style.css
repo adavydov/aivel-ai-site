@@ -199,6 +199,8 @@ th:last-child, td:last-child { padding-right: 0; }
 .cohort-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
 .pmi-table table { min-width: 0; }
 .pmi-table th:last-child, .pmi-table td:last-child { text-align: right; }
+.pmi-table tbody tr:nth-child(3) td { padding-top: 18px; padding-bottom: 9px; border-bottom: 0; color: var(--accent); font: 800 10px/1.35 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.pmi-table tbody tr:nth-child(3) td:last-child { color: transparent; }
 .pmi-table tbody tr:last-child td { color: var(--accent); font-weight: 800; }
 .layers-table table { min-width: 0; table-layout: fixed; }
 .layers-table th, .layers-table td { width: 33.33%; text-align: left; }
@@ -311,10 +313,18 @@ th:last-child, td:last-child { padding-right: 0; }
 .deal-card-steps em { color: var(--ink); font: 700 14px/1.35 var(--sans); font-style: normal; }
 .deal-card-steps b { color: var(--accent); font: 400 20px/1 var(--sans); }
 .deal-card small { display: block; margin-top: 28px; color: var(--accent); font: 800 12px/1.3 var(--sans); letter-spacing: .05em; text-transform: uppercase; }
-.deal-anchor { display: grid; grid-template-columns: .85fr 1fr 1.4fr; gap: 20px; align-items: center; margin-top: 18px; padding: 19px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.deal-anchor strong { font: 600 22px/1.1 var(--sans); letter-spacing: -.04em; }
-.deal-anchor strong small { display: block; margin-top: 5px; color: var(--muted); font: 700 11px/1.3 var(--sans); letter-spacing: .03em; }
-.deal-anchor p { margin: 0; color: var(--muted); font: 13px/1.4 var(--sans); }
+.potential-investors { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 24px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.investor-brief { min-width: 0; padding: 24px 24px 24px 0; }
+.investor-brief + .investor-brief { padding-right: 0; padding-left: 24px; border-left: 1px solid var(--line); }
+.investor-wordmark { display: inline-flex; align-items: baseline; gap: 7px; color: var(--ink); font: 800 27px/.9 var(--sans); letter-spacing: -.065em; text-decoration: none; }
+.investor-wordmark span { color: var(--accent); font-size: 12px; letter-spacing: .08em; }
+.investor-wordmark--phystech { color: #333; font-weight: 700; letter-spacing: -.055em; }
+.investor-wordmark--phystech span { color: #4f8a68; font-size: 15px; letter-spacing: -.045em; }
+.investor-brief p { margin: 17px 0 0; color: var(--muted); font: 13px/1.45 var(--sans); }
+.investor-brief ul { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.investor-brief li { position: relative; padding-left: 15px; font: 700 13px/1.38 var(--sans); }
+.investor-brief li::before { position: absolute; left: 0; color: var(--accent); content: "•"; }
+.investor-brief small { display: block; margin-top: 18px; color: var(--muted); font: 800 9px/1.35 var(--sans); letter-spacing: .04em; text-transform: uppercase; }
 .cap-table-flow { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 24px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .cap-table-flow article { position: relative; min-width: 0; padding: 20px 18px; }
 .cap-table-flow article:first-child { padding-left: 0; }
@@ -374,8 +384,9 @@ th:last-child, td:last-child { padding-right: 0; }
   .investment-chain article { border-bottom: 1px solid var(--line); border-left: 0; }
   .investment-chain article:nth-child(even) { border-left: 1px solid var(--line); }
   .investment-chain article:last-child { border-bottom: 0; }
-  .deal-anchor { grid-template-columns: 1fr 1fr; }
-  .deal-anchor p { grid-column: 1 / -1; }
+  .potential-investors { grid-template-columns: 1fr; }
+  .investor-brief, .investor-brief + .investor-brief { padding: 22px 0; border-left: 0; }
+  .investor-brief + .investor-brief { border-top: 1px solid var(--line); }
 }
 @media (max-width: 580px) {
   body { font-size: 16px; }
@@ -430,8 +441,6 @@ th:last-child, td:last-child { padding-right: 0; }
   .deal-structure-intro { flex-wrap: wrap; gap: 10px; }
   .deal-structure-intro strong { font-size: clamp(28px, 9vw, 38px); }
   .deal-card { min-height: 0; padding: 22px; }
-  .deal-anchor { grid-template-columns: 1fr; gap: 10px; }
-  .deal-anchor p { grid-column: auto; }
   .cap-table-flow article, .cap-table-flow article:first-child, .cap-table-flow article:last-child { padding: 18px 0; border-left: 0; }
   .cap-table-flow article + article { border-top: 1px solid var(--line); }
   .cap-table-flow article:not(:last-child)::after { right: auto; left: 0; top: auto; bottom: -9px; transform: none; }
