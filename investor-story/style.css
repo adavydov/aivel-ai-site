@@ -74,8 +74,8 @@ th:last-child, td:last-child { padding-right: 0; }
 .operations-table th { white-space: pre-line; }
 .operations-table :is(th, td):nth-child(2) { background: color-mix(in srgb, var(--accent) 6%, transparent); }
 .operations-table :is(th, td):nth-child(6) { background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.operations-table th:nth-child(2), .operations-table th:nth-child(5) { color: var(--accent-dark); }
-.operations-table td:nth-child(2), .operations-table td:nth-child(5) { color: var(--accent-dark); font-weight: 800; }
+.operations-table th:nth-child(2), .operations-table th:nth-child(6) { color: var(--accent-dark); }
+.operations-table td:nth-child(2), .operations-table td:nth-child(6) { color: var(--accent-dark); font-weight: 800; }
 .autonomy-callout { display: grid; grid-template-columns: 1fr auto; gap: 8px 30px; align-items: end; margin-top: 28px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .autonomy-callout > span { color: var(--accent); }
 .autonomy-callout strong { color: var(--accent); font: 600 clamp(38px,5vw,65px)/.9 var(--sans); letter-spacing: -.065em; }
