@@ -71,6 +71,14 @@
   white-space: nowrap;
 }
 
+.hero--round .hero-thesis .hero-thesis__uplift {
+  display: inline-block;
+  padding: 2px 8px 4px;
+  background: var(--accent);
+  color: #fff;
+  line-height: 1;
+}
+
 .hero-moic {
   margin-top: 22px;
   padding: 22px 24px;
@@ -133,6 +141,11 @@
 
 .hero-market-metrics {
   margin-top: 14px;
+}
+
+.hero-market-growth b {
+  color: var(--accent);
+  font-weight: 800;
 }
 
 .portfolio-metrics .metric > strong,
@@ -633,7 +646,7 @@
 
 .return-bridge {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   align-items: end;
   margin-top: 18px;
@@ -655,12 +668,17 @@
 }
 
 .return-step--proof {
-  min-height: 215px;
+  min-height: 205px;
   background: rgba(226, 75, 52, .11);
 }
 
 .return-step--target {
-  min-height: 252px;
+  min-height: 232px;
+  background: rgba(226, 75, 52, .18);
+}
+
+.return-step--rerate {
+  min-height: 260px;
   background: var(--ink);
   color: #fff;
 }
@@ -706,13 +724,13 @@
   font: 600 10px/1.4 var(--sans);
 }
 
-.return-step--target > span,
-.return-step--target > strong,
-.return-step--target > small {
+.return-step--rerate > span,
+.return-step--rerate > strong,
+.return-step--rerate > small {
   color: #ffa592;
 }
 
-.return-step--target > small {
+.return-step--rerate > small {
   border-top-color: rgba(255, 255, 255, .22);
 }
 
@@ -884,6 +902,19 @@
   .market-russia {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .return-bridge {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .return-step,
+  .return-step--base,
+  .return-step--proof,
+  .return-step--target,
+  .return-step--rerate {
+    min-height: 0;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1000,7 +1031,8 @@
   .return-step,
   .return-step--base,
   .return-step--proof,
-  .return-step--target {
+  .return-step--target,
+  .return-step--rerate {
     min-height: 0;
     padding: 20px 0;
     background: transparent;
@@ -1011,13 +1043,13 @@
     border-top: 1px solid var(--line);
   }
 
-  .return-step--target > span,
-  .return-step--target > strong,
-  .return-step--target > small {
+  .return-step--rerate > span,
+  .return-step--rerate > strong,
+  .return-step--rerate > small {
     color: var(--accent);
   }
 
-  .return-step--target > small {
+  .return-step--rerate > small {
     border-top-color: rgba(33, 33, 31, .18);
   }
 
