@@ -1,4 +1,7 @@
 .password-visibility {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   margin-top: 10px;
   padding: 0;
   border: 0;
@@ -646,7 +649,7 @@
 
 .return-bridge {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   align-items: end;
   margin-top: 18px;
@@ -664,20 +667,15 @@
 }
 
 .return-step--base {
-  min-height: 178px;
+  min-height: 180px;
 }
 
 .return-step--proof {
-  min-height: 205px;
+  min-height: 220px;
   background: rgba(226, 75, 52, .11);
 }
 
 .return-step--target {
-  min-height: 232px;
-  background: rgba(226, 75, 52, .18);
-}
-
-.return-step--rerate {
   min-height: 260px;
   background: var(--ink);
   color: #fff;
@@ -724,14 +722,24 @@
   font: 600 10px/1.4 var(--sans);
 }
 
-.return-step--rerate > span,
-.return-step--rerate > strong,
-.return-step--rerate > small {
+.return-step--target > span,
+.return-step--target > strong,
+.return-step--target > small {
   color: #ffa592;
 }
 
-.return-step--rerate > small {
+.return-step--target > small {
   border-top-color: rgba(255, 255, 255, .22);
+}
+
+.investor-return-formula {
+  margin: 18px 0 0;
+  padding: 17px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  font: 700 clamp(17px, 1.8vw, 24px)/1.28 var(--sans);
+  letter-spacing: -.025em;
 }
 
 .margin-bars {
@@ -904,7 +912,7 @@
   }
 
   .return-bridge {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
   }
 
@@ -941,6 +949,14 @@
     padding: 6px 0 2px;
   }
 
+  .page-nav a,
+  .page-lock {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    touch-action: manipulation;
+  }
+
   .page-lock {
     grid-column: 2;
     grid-row: 1;
@@ -966,8 +982,7 @@
     padding: 14px 0;
   }
 
-  .entry-economics__row > div + b,
-  .entry-economics__row > b + div {
+  .entry-economics__row > div + b {
     border-top: 1px solid var(--line);
   }
 
@@ -985,6 +1000,79 @@
   .margin-bar-copy {
     grid-template-columns: 92px minmax(0, 1fr);
     gap: 12px;
+  }
+
+  .market-proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-proof-grid article,
+  .market-proof-grid article:first-child,
+  .market-proof-grid article:last-child,
+  .market-proof-grid .market-proof-grid__platform {
+    padding: 21px 0;
+    background: transparent;
+  }
+
+  .market-proof-grid article + article {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .market-proof-grid article:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .market-proof-grid .market-multiple {
+    white-space: normal;
+  }
+
+  .ai-proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pilot-logo img {
+    max-width: 100%;
+  }
+
+  .pilot-logo--text span,
+  .pilot-logo--text small {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .return-bridge {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    border-bottom: 0;
+  }
+
+  .return-step,
+  .return-step--base,
+  .return-step--proof,
+  .return-step--target {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .return-step--base {
+    width: calc(100% - 32px);
+    background: var(--soft);
+  }
+
+  .return-step--proof {
+    width: calc(100% - 16px);
+    background: rgba(226, 75, 52, .11);
+  }
+
+  .return-step--target {
+    width: 100%;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .return-step + .return-step {
+    border-top: 0;
   }
 }
 
@@ -1021,36 +1109,6 @@
 
   .round-pipeline-box {
     padding: 18px 16px;
-  }
-
-  .return-bridge {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .return-step,
-  .return-step--base,
-  .return-step--proof,
-  .return-step--target,
-  .return-step--rerate {
-    min-height: 0;
-    padding: 20px 0;
-    background: transparent;
-    color: var(--ink);
-  }
-
-  .return-step + .return-step {
-    border-top: 1px solid var(--line);
-  }
-
-  .return-step--rerate > span,
-  .return-step--rerate > strong,
-  .return-step--rerate > small {
-    color: var(--accent);
-  }
-
-  .return-step--rerate > small {
-    border-top-color: rgba(33, 33, 31, .18);
   }
 
   .market-proof-grid article,
