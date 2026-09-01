@@ -61,7 +61,7 @@
 }
 
 .hero--round .self-sufficiency-ladder {
-  margin-top: 38px;
+  margin-top: 18px;
 }
 
 .hero--round .hero-thesis strong {
@@ -69,6 +69,70 @@
   font-family: var(--sans);
   font-weight: 700;
   white-space: nowrap;
+}
+
+.hero-moic {
+  margin-top: 22px;
+  padding: 22px 24px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--sans);
+}
+
+.hero-moic > span {
+  display: block;
+  color: #ffa592;
+  font: 800 10px/1.35 var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.hero-moic__formula {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 18px;
+  align-items: center;
+  margin-top: 13px;
+}
+
+.hero-moic__formula > div {
+  min-width: 0;
+}
+
+.hero-moic__formula strong,
+.hero-moic__formula small {
+  display: block;
+}
+
+.hero-moic__formula strong {
+  color: #fff;
+  font: 600 clamp(23px, 2.5vw, 34px)/1 var(--sans);
+  letter-spacing: -.05em;
+  white-space: nowrap;
+}
+
+.hero-moic__formula small {
+  margin-top: 8px;
+  color: #d9d5cc;
+  font: 700 10px/1.35 var(--sans);
+}
+
+.hero-moic__formula > b {
+  color: #ffa592;
+  font: 400 24px/1 var(--sans);
+}
+
+.hero-moic__formula .hero-moic__result strong,
+.hero-moic__formula .hero-moic__result small {
+  color: #ffa592;
+}
+
+.hero-market-context {
+  margin-top: 34px !important;
+}
+
+.hero-market-metrics {
+  margin-top: 14px;
 }
 
 .portfolio-metrics .metric > strong,
@@ -457,6 +521,27 @@
 @media (max-width: 580px) {
   .hero--round h1 {
     font-size: clamp(40px, 11vw, 52px);
+  }
+
+  .hero-moic {
+    padding: 20px 16px;
+  }
+
+  .hero-moic__formula {
+    grid-template-columns: 1fr auto 1fr auto .72fr;
+    gap: 7px;
+  }
+
+  .hero-moic__formula strong {
+    font-size: 18px;
+  }
+
+  .hero-moic__formula small {
+    font-size: 8px;
+  }
+
+  .hero-moic__formula > b {
+    font-size: 17px;
   }
 
   .market-proof-grid,
