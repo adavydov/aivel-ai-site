@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'"
+    />
+    <link rel="stylesheet" href="../investor-story/style.css?v=20260831-4" />
+    <link rel="stylesheet" href="../investor-story/password-gate.css" />
+    <link rel="stylesheet" href="./page.css?v=20260901-1" />
+    <link rel="shortcut icon" href="../investor-story/favicon.svg" />
+    <link rel="icon" href="../investor-story/favicon.svg" />
+    <link
+      rel="canonical"
+      href="https://adavydov.github.io/aivel-ai-site/next-round/"
+    />
+    <title>Закрытая страница Aivel</title>
+    <script src="./gate.js?v=20260901-1" defer></script>
+  </head>
+  <body class="locked-page">
+    <main class="unlock-shell">
+      <section class="unlock-card" aria-labelledby="unlock-title">
+        <p class="unlock-kicker">Aivel · закрытые материалы</p>
+        <h1 id="unlock-title">Введите пароль</h1>
+        <p class="unlock-copy">
+          Содержимое страницы зашифровано и расшифровывается только в этом
+          браузере.
+        </p>
+        <form id="unlock-form" class="unlock-form">
+          <label for="unlock-password">Пароль доступа</label>
+          <div class="unlock-control">
+            <input
+              id="unlock-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+              autofocus
+            />
+            <button type="submit">Открыть</button>
+          </div>
+          <button
+            id="password-visibility"
+            class="password-visibility"
+            type="button"
+            aria-pressed="false"
+          >
+            Показать пароль
+          </button>
+          <p id="unlock-error" class="unlock-error" role="alert" aria-live="polite"></p>
+        </form>
+        <p class="unlock-note">
+          Пароль не отправляется на сервер и не сохраняется на устройстве.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
