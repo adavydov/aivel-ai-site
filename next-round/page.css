@@ -252,6 +252,46 @@
   letter-spacing: -.025em;
 }
 
+.split-grid--round {
+  grid-template-columns: 1.45fr 1fr;
+}
+
+.split-grid--round .round-rd {
+  padding-right: 24px;
+}
+
+.rd-payback {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+  font-family: var(--sans);
+}
+
+.rd-payback > span {
+  display: block;
+  color: var(--accent);
+  font: 800 10px/1.35 var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.rd-payback > strong {
+  margin-top: 10px;
+  font-size: clamp(19px, 1.85vw, 25px);
+  line-height: 1.18;
+}
+
+.rd-payback b {
+  color: var(--accent);
+}
+
+.rd-payback > small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font: 600 11px/1.45 var(--sans);
+}
+
 .fact-label {
   display: inline-block;
   margin-left: 7px;
@@ -703,6 +743,10 @@
 
   .scenario-list .margin-step {
     grid-template-columns: 1fr;
+  }
+
+  .split-grid--round .round-rd {
+    padding-right: 0;
   }
 
   .source-table table {
