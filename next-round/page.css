@@ -237,8 +237,21 @@
 }
 
 .pilot-logo--text {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.pilot-logo--text span {
   font: 700 17px/1.15 var(--sans);
   letter-spacing: -.025em;
+}
+
+.pilot-logo--text small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font: 600 10px/1.25 var(--sans);
 }
 
 .portfolio-quality {
@@ -563,36 +576,59 @@
 }
 
 .margin-bar-track {
+  display: flex;
   height: 18px;
   overflow: hidden;
   background: var(--soft);
 }
 
-.margin-bar-track i {
+.margin-bar-segment {
   display: block;
-  width: 0;
+  flex: 0 0 auto;
   height: 100%;
+  position: relative;
+}
+
+.margin-bar-segment--base {
+  width: 41.6%;
   background: #8d8980;
 }
 
-.margin-bar-row:nth-child(1) .margin-bar-track i {
-  width: 41.6%;
+.margin-bar-segment--august {
+  width: 7.6%;
+  background: #e98a79;
+  box-shadow: inset 2px 0 rgba(255, 255, 255, .72);
 }
 
-.margin-bar-row:nth-child(2) .margin-bar-track i {
-  width: 49.2%;
+.margin-bar-segment--september {
+  width: 6.8%;
+  background: var(--accent);
+  box-shadow: inset 2px 0 rgba(255, 255, 255, .72);
 }
 
-.margin-bar-row:nth-child(3) .margin-bar-track i {
-  width: 56%;
+.margin-bar-segment b {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font: 800 9px/1 var(--sans);
+  font-style: normal;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+}
+
+.margin-bar-row--accent .margin-bar-segment--base,
+.margin-bar-row--result .margin-bar-segment--base {
+  background: #c4c0b7;
+}
+
+.margin-bar-row--result .margin-bar-segment--august {
+  background: #efaa9d;
 }
 
 .margin-bar-row--accent .margin-bar-copy strong {
   color: var(--accent);
-}
-
-.margin-bar-row--accent .margin-bar-track i {
-  background: #e98a79;
 }
 
 .margin-bar-row--result .margin-bar-copy strong {
@@ -601,10 +637,6 @@
 
 .margin-bar-row--result .margin-bar-copy span {
   font-weight: 700;
-}
-
-.margin-bar-row--result .margin-bar-track i {
-  background: var(--accent);
 }
 
 .scenario-list {
@@ -708,6 +740,17 @@
     grid-template-columns: 1fr;
     gap: 6px;
   }
+
+  .margin-bar-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .margin-bar-copy {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+  }
 }
 
 @media (max-width: 580px) {
@@ -758,19 +801,12 @@
     grid-column: auto;
   }
 
-  .margin-bar-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 15px 0;
-  }
-
-  .margin-bar-copy {
-    grid-template-columns: 92px minmax(0, 1fr);
-    gap: 12px;
-  }
-
   .margin-bar-track {
     height: 14px;
+  }
+
+  .margin-bar-segment b {
+    display: none;
   }
 
   .ai-proof-grid {
