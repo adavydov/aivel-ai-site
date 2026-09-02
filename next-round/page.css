@@ -773,6 +773,176 @@
   line-height: 1.25;
 }
 
+.market-headline strong {
+  color: var(--accent);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.market-dual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 28px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-family: var(--sans);
+}
+
+.market-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 24px 26px 22px 0;
+}
+
+.market-panel + .market-panel {
+  padding-right: 0;
+  padding-left: 26px;
+  border-left: 1px solid var(--line);
+}
+
+.market-panel__eyebrow,
+.market-panel__title {
+  display: block;
+}
+
+.market-panel__eyebrow {
+  color: var(--accent);
+  font: 800 9px/1.3 var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.market-panel__title {
+  margin-top: 10px;
+  font: 700 clamp(19px, 1.85vw, 25px)/1.15 var(--sans);
+  letter-spacing: -.035em;
+}
+
+.market-deals,
+.market-multiple-ladder {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.market-deal {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.market-deal span,
+.market-deal b {
+  display: block;
+}
+
+.market-deal span {
+  color: var(--muted);
+  font: 700 9px/1.25 var(--sans);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.market-deal b {
+  margin-top: 4px;
+  font: 700 14px/1.25 var(--sans);
+}
+
+.market-deal > strong {
+  max-width: 150px;
+  color: var(--ink);
+  font: 700 14px/1.25 var(--sans);
+  text-align: right;
+}
+
+.market-deal:first-child > strong {
+  color: var(--accent);
+}
+
+.market-multiple-step {
+  padding: 17px 18px;
+}
+
+.market-multiple-step--platform {
+  background: rgba(226, 75, 52, .1);
+}
+
+.market-multiple-step span,
+.market-multiple-step strong,
+.market-multiple-step small {
+  display: block;
+}
+
+.market-multiple-step span {
+  color: var(--muted);
+  font: 800 9px/1.3 var(--sans);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.market-multiple-step strong {
+  margin-top: 8px;
+  font: 700 clamp(26px, 2.6vw, 36px)/1 var(--sans);
+  letter-spacing: -.055em;
+}
+
+.market-multiple-step--platform strong {
+  color: var(--accent);
+}
+
+.market-multiple-step small {
+  margin-top: 8px;
+  color: var(--muted);
+  font: 700 11px/1.35 var(--sans);
+}
+
+.market-multiple-arrow {
+  display: block;
+  padding: 5px 18px;
+  color: var(--accent);
+  font: 800 18px/1 var(--sans);
+}
+
+.market-panel__takeaway {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.market-panel__takeaway span,
+.market-panel__takeaway strong,
+.market-panel__takeaway p {
+  display: block;
+}
+
+.market-panel__takeaway span {
+  color: var(--accent);
+  font: 800 9px/1.3 var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.market-panel__takeaway strong {
+  margin-top: 8px;
+  font: 700 clamp(25px, 2.6vw, 36px)/1 var(--sans);
+  letter-spacing: -.05em;
+}
+
+.market-panel__takeaway p {
+  margin: 7px 0 0;
+  color: var(--ink);
+  font: 700 12px/1.4 var(--sans);
+}
+
+.market-panel__sources {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font: 600 9px/1.4 var(--sans);
+}
+
 .valuation-calc {
   margin-top: 30px;
   border-top: 1px solid var(--ink);
@@ -1481,6 +1651,20 @@
     white-space: normal;
   }
 
+  .market-dual {
+    grid-template-columns: 1fr;
+  }
+
+  .market-panel,
+  .market-panel + .market-panel {
+    padding: 22px 0;
+    border-left: 0;
+  }
+
+  .market-panel + .market-panel {
+    border-top: 1px solid var(--ink);
+  }
+
   .ai-proof-grid {
     grid-template-columns: 1fr;
   }
@@ -1628,6 +1812,20 @@
 
   .market-proof-grid article:nth-child(3) {
     grid-column: auto;
+  }
+
+  .market-headline strong {
+    white-space: normal;
+  }
+
+  .market-deal {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .market-deal > strong {
+    max-width: none;
+    text-align: left;
   }
 
   .margin-bar-track {
