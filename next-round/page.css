@@ -327,9 +327,9 @@
 
 .hero.hero--round > p.hero-market-sources {
   max-width: none;
-  margin: 10px 0 0;
+  margin: 16px 0 0;
   color: var(--muted);
-  font: 700 11px/1.4 var(--sans);
+  font: 500 12px/1.45 var(--sans);
 }
 
 .portfolio-heading {
@@ -1463,18 +1463,18 @@
 }
 
 .margin-bar-segment--base {
-  width: 69.333%;
+  width: 67.532%;
   background: #a09c94;
 }
 
 .margin-bar-segment--august {
-  width: 12.667%;
+  width: 12.338%;
   background: var(--accent);
   box-shadow: inset 2px 0 rgba(255, 255, 255, .72);
 }
 
 .margin-bar-segment--september {
-  width: 11.333%;
+  width: 11.039%;
   background: repeating-linear-gradient(
     135deg,
     rgba(226, 75, 52, .10) 0 6px,
@@ -1518,6 +1518,36 @@
 
 .margin-bar-row--result .margin-bar-copy span {
   font-weight: 700;
+}
+
+.margin-bar-segment--target {
+  width: 9.091%;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(226, 75, 52, .03) 0 6px,
+    rgba(226, 75, 52, .16) 6px 9px
+  );
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.margin-bar-row--target .margin-bar-segment--base {
+  background: #a09c94;
+}
+
+.margin-bar-row--target .margin-bar-segment--august {
+  background: var(--accent);
+}
+
+.margin-bar-row--target .margin-bar-copy strong {
+  color: var(--accent);
+}
+
+.margin-bar-row--target .margin-bar-copy span {
+  font-weight: 700;
+}
+
+.margin-bar-segment--target b {
+  color: var(--accent-dark);
 }
 
 .scenario-list {
@@ -2289,7 +2319,7 @@
   display: grid;
   grid-template-rows: auto auto;
   gap: 5px;
-  align-self: end;
+  align-self: start;
   margin: 0;
   padding: 0;
   color: var(--muted);
@@ -2903,6 +2933,32 @@
   margin: 11px 0 0;
   color: var(--muted);
   font: 600 9px/1.4 var(--sans);
+}
+
+/* Shared section-label rhythm and headline emphasis across proof screens. */
+.hero .hero-context,
+.subheading,
+.ai-proof-grid > article > span,
+.market-landscape__heading > span,
+#raise .round-outcome > span,
+.split-grid--round > article > span,
+.round-valuation-formula > span,
+.rd-payback > span,
+.exit-strategies > article > span {
+  font-size: 12px;
+  line-height: 1.35;
+  letter-spacing: .075em;
+}
+
+.story .subheading,
+#terms .investor-return-heading {
+  margin-top: 32px;
+}
+
+.story .screen h2 strong,
+.story .screen--featured h2 strong {
+  color: var(--accent);
+  font-weight: inherit;
 }
 
 @media (max-width: 900px) {
