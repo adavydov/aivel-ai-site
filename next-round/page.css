@@ -3687,3 +3687,123 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Phone composition: keep each use-of-funds story as one compact visual formula. */
+@media (max-width: 720px) {
+  #raise .round-use-blocks {
+    margin-top: 21px;
+  }
+
+  #raise .round-use-block {
+    padding: 17px 0 19px;
+  }
+
+  #raise .round-use-chain {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 10px;
+  }
+
+  #raise .round-use-chain > p {
+    min-height: 102px;
+    justify-content: flex-start;
+    gap: 9px;
+    padding: 14px 10px 13px;
+    font-family: var(--sans);
+  }
+
+  #raise .round-use-chain > p:first-of-type {
+    padding-left: 0;
+  }
+
+  #raise .round-use-chain > p:not(:first-of-type) {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+
+  #raise .round-use-chain > p small {
+    min-height: 24px;
+    font-size: 8px;
+    line-height: 1.35;
+  }
+
+  #raise .round-use-chain > p strong {
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.06;
+  }
+
+  #raise .round-use-chain > p:first-of-type strong {
+    white-space: nowrap;
+  }
+
+  #raise .round-use-chain__result {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  #raise .round-pipeline-box--embedded {
+    gap: 7px;
+    padding: 14px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--accent);
+    border-left: 0;
+    background: rgba(226, 75, 52, .055);
+  }
+
+  #raise .round-pipeline-box--embedded > strong {
+    font-size: 17px;
+    line-height: 1.15;
+  }
+
+  #raise .round-pipeline-box--embedded > p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  #raise .round-product-items {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 12px;
+  }
+
+  #raise .round-product-items li {
+    display: grid;
+    grid-template-columns: 102px minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+    min-height: 0;
+    padding: 11px 0;
+  }
+
+  #raise .round-product-items b {
+    font-size: 12px;
+  }
+
+  #raise .round-product-items span {
+    font-size: 11px;
+  }
+
+  #raise .round-payback {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3px 14px;
+    margin-top: 12px;
+    padding-top: 13px;
+  }
+
+  #raise .round-payback > small {
+    font-size: 9px;
+  }
+
+  #raise .round-payback > strong {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: 0;
+    align-self: center;
+    font-size: 25px;
+    white-space: nowrap;
+  }
+
+  #raise .round-payback > span {
+    grid-column: 1;
+    font-size: 10px;
+  }
+}
