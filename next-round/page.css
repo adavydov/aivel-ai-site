@@ -3150,3 +3150,299 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Round / valuation / exit clarity pass. Numbers and assumptions are unchanged. */
+#raise .round-outcome--drivers > .round-outcome__driver {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.18fr);
+  gap: 18px;
+  align-items: stretch;
+  padding: 0;
+}
+
+#raise .round-outcome__driver > p {
+  display: flex;
+  min-width: 0;
+  min-height: 98px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  padding: 18px 0;
+}
+
+#raise .round-outcome__driver > p small {
+  order: -1;
+  color: var(--muted);
+  font: 800 10px/1.3 var(--sans);
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+#raise .round-outcome__driver > p strong {
+  font-size: clamp(25px, 2.2vw, 32px);
+  line-height: 1.05;
+}
+
+#raise .round-outcome__driver > b {
+  display: grid;
+  min-width: 24px;
+  place-items: center;
+  color: var(--accent);
+  font: 600 20px/1 var(--sans);
+}
+
+#raise .round-outcome__driver > .round-outcome__result {
+  padding-right: 18px;
+  padding-left: 18px;
+  background: #eadfd7;
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+#raise .round-outcome__driver > .round-outcome__result strong {
+  color: var(--accent-dark);
+}
+
+#raise .round-pipeline-box {
+  grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr);
+  gap: 28px;
+  padding: 20px 22px;
+}
+
+#raise .split-grid--round-product article {
+  padding-bottom: 0;
+}
+
+#raise .split-grid--round-product ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: none;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+#raise .split-grid--round-product li {
+  min-height: 64px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+  font: 600 14px/1.42 var(--sans);
+}
+
+#terms .round-valuation-formula > div {
+  grid-template-columns: 1.15fr auto auto 1.08fr auto auto 1.08fr;
+}
+
+#terms .round-valuation-formula__result {
+  background: #eadfd7;
+  color: var(--accent-dark);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+#terms .investor-return-table th:first-child,
+#terms .investor-return-table td:first-child {
+  width: 21%;
+}
+
+#terms .investor-return-table th:nth-child(2),
+#terms .investor-return-table td:nth-child(2) {
+  width: 14%;
+}
+
+#terms .investor-return-table th:nth-child(3),
+#terms .investor-return-table td:nth-child(3) {
+  width: 12%;
+}
+
+#terms .investor-return-table th:nth-child(4),
+#terms .investor-return-table td:nth-child(4) {
+  width: 15%;
+}
+
+#terms .investor-return-table th:nth-child(5),
+#terms .investor-return-table td:nth-child(5) {
+  width: 25%;
+}
+
+#terms .investor-return-table th:last-child,
+#terms .investor-return-table td:last-child {
+  width: 13%;
+  text-align: center;
+}
+
+#terms .investor-return-table td:last-child b {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#terms .investor-return-table tbody tr:last-child td {
+  background: rgba(226, 75, 52, .075);
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+#terms .investor-return-table tbody tr:last-child td b {
+  color: var(--ink);
+}
+
+#terms .investor-return-table tbody tr:last-child td:last-child b {
+  color: var(--accent);
+}
+
+#terms .investor-return-table tbody tr:last-child td small {
+  color: var(--muted);
+}
+
+.exit-strategies {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.exit-strategies > article {
+  padding: 23px 28px 23px 0;
+}
+
+.exit-strategies > article + article {
+  padding-left: 28px;
+}
+
+.exit-strategies > article > strong {
+  font-size: clamp(20px, 1.8vw, 25px);
+  line-height: 1.16;
+}
+
+.exit-strategies ul {
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.exit-strategies li {
+  font-size: 13px;
+  line-height: 1.42;
+}
+
+.exit-return-heading {
+  margin-top: 28px;
+}
+
+.exit-return-grid span {
+  font-size: 9px;
+}
+
+.exit-dividends--strip {
+  display: grid;
+  grid-template-columns: minmax(250px, .9fr) minmax(230px, .8fr) minmax(0, 1.35fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 20px 22px !important;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: #efede7;
+  font-family: var(--sans);
+}
+
+.exit-dividends--strip > div > span {
+  display: block;
+  color: var(--accent);
+  font: 800 12px/1.3 var(--sans);
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+.exit-dividends--strip > div > strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent-dark);
+  font: 700 clamp(25px, 2.2vw, 32px)/1.05 var(--sans);
+  letter-spacing: -.04em;
+}
+
+.exit-dividends--strip > div > p {
+  margin: 0;
+  font: 600 13px/1.4 var(--sans);
+}
+
+.exit-dividends--strip > div > b {
+  display: block;
+  margin-top: 10px;
+  font: 800 14px/1.35 var(--sans);
+}
+
+.exit-dividends--strip > small {
+  display: block;
+  margin: 0;
+  padding: 0 0 0 28px;
+  border-top: 0;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font: 500 11px/1.48 var(--sans);
+}
+
+@media (max-width: 900px) {
+  #raise .round-outcome--drivers > .round-outcome__driver {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.1fr);
+    gap: 10px;
+  }
+
+  #raise .round-pipeline-box,
+  .exit-dividends--strip {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .exit-dividends--strip > small {
+    padding: 12px 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  #raise .round-outcome--drivers > .round-outcome__driver {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #raise .round-outcome__driver > p {
+    min-height: 0;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  #raise .round-outcome__driver > b {
+    display: none;
+  }
+
+  #raise .round-outcome__driver > .round-outcome__result {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  #raise .split-grid--round-product ul,
+  .exit-strategies {
+    grid-template-columns: 1fr;
+  }
+
+  #raise .split-grid--round-product li {
+    min-height: 0;
+  }
+
+  #terms .round-valuation-formula > div {
+    grid-template-columns: 1fr;
+  }
+
+  #terms .round-valuation-formula b {
+    justify-content: flex-start;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .exit-strategies > article,
+  .exit-strategies > article + article {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
