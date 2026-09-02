@@ -3474,3 +3474,216 @@
     padding-left: 0;
   }
 }
+
+/* Final simplified value chain: one entry multiple, one operating uplift, one platform multiple. */
+.value-chain--simple {
+  grid-template-columns: 1.08fr .88fr 1.08fr 1fr;
+}
+
+/* Round use of funds: M&A first, product/R&D second. */
+#raise .round-use-blocks {
+  margin-top: 28px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-family: var(--sans);
+}
+
+#raise .round-use-block {
+  padding: 22px 0 25px;
+}
+
+#raise .round-use-block + .round-use-block {
+  border-top: 1px solid var(--ink);
+}
+
+#raise .round-use-block > span {
+  display: block;
+  color: var(--accent);
+  font: 800 12px/1.35 var(--sans);
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+#raise .round-use-chain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1.15fr);
+  align-items: stretch;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+#raise .round-use-chain > p {
+  display: flex;
+  min-width: 0;
+  min-height: 92px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  padding: 17px 0;
+}
+
+#raise .round-use-chain > p small {
+  color: var(--muted);
+  font: 800 10px/1.3 var(--sans);
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+#raise .round-use-chain > p strong {
+  font: 600 clamp(25px, 2.2vw, 32px)/1.05 var(--sans);
+  letter-spacing: -.035em;
+}
+
+#raise .round-use-chain > b {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font: 600 20px/1 var(--sans);
+}
+
+#raise .round-use-chain__result {
+  padding-right: 18px !important;
+  padding-left: 18px !important;
+  background: #eadfd7;
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+#raise .round-use-chain__result strong {
+  color: var(--accent-dark);
+}
+
+#raise .round-pipeline-box--embedded {
+  display: grid;
+  grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+  gap: 26px;
+  align-items: center;
+  margin: 0;
+  padding: 17px 20px;
+  border: 0;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  background: rgba(226, 75, 52, .055);
+}
+
+#raise .round-pipeline-box--embedded > strong {
+  font-size: clamp(18px, 1.65vw, 23px);
+  line-height: 1.15;
+}
+
+#raise .round-pipeline-box--embedded > p {
+  margin: 0;
+  font: 500 14px/1.45 var(--sans);
+}
+
+#raise .round-product-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 17px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#raise .round-product-items li {
+  display: flex;
+  min-height: 68px;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 16px;
+  border-top: 1px solid var(--line);
+}
+
+#raise .round-product-items b {
+  font: 700 14px/1.3 var(--sans);
+}
+
+#raise .round-product-items span {
+  color: var(--muted);
+  font: 500 12px/1.4 var(--sans);
+}
+
+#raise .round-payback {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 24px;
+  align-items: end;
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid var(--ink);
+}
+
+#raise .round-payback > small {
+  color: var(--accent);
+  font: 800 12px/1.35 var(--sans);
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+#raise .round-payback > strong {
+  grid-row: span 2;
+  color: var(--accent-dark);
+  font: 600 clamp(27px, 2.5vw, 36px)/1 var(--sans);
+  letter-spacing: -.04em;
+}
+
+#raise .round-payback > span {
+  color: var(--muted);
+  font: 500 12px/1.45 var(--sans);
+}
+
+@media (max-width: 900px) {
+  #raise .round-pipeline-box--embedded {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+}
+
+@media (max-width: 820px) {
+  .value-chain--simple {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  #raise .round-use-chain,
+  #raise .round-product-items,
+  #raise .round-payback {
+    grid-template-columns: 1fr;
+  }
+
+  #raise .round-use-chain > b {
+    display: none;
+  }
+
+  #raise .round-use-chain > p {
+    min-height: 0;
+    padding: 15px 0;
+  }
+
+  #raise .round-use-chain > p + p {
+    border-top: 1px solid var(--line);
+  }
+
+  #raise .round-use-chain__result {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+
+  #raise .round-product-items li {
+    min-height: 0;
+  }
+
+  #raise .round-payback > strong {
+    grid-row: auto;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 580px) {
+  .value-chain--simple {
+    grid-template-columns: 1fr;
+  }
+}
