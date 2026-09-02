@@ -1879,6 +1879,34 @@
   }
 }
 
+/* Keep the five hero metrics dominant; calculations sit lower as annotations. */
+@media (min-width: 581px) {
+  .value-chain__step,
+  .value-chain__step:first-child,
+  .value-chain__step:last-child {
+    grid-template-rows: 18px 48px minmax(62px, 1fr);
+    gap: 12px;
+    min-height: 184px;
+  }
+}
+
+.value-chain__step > p {
+  gap: 3px;
+  padding-top: 7px;
+}
+
+.value-chain__step > p > span,
+.value-chain__step > p b {
+  font-size: 10px;
+  line-height: 1.42;
+}
+
+@media (max-width: 580px) {
+  .value-chain__step > p {
+    padding-top: 4px;
+  }
+}
+
 @media (max-width: 580px) {
   .hero--round h1 {
     font-size: clamp(40px, 11vw, 52px);
