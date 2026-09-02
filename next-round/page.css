@@ -571,7 +571,7 @@
 }
 
 .split-grid--round {
-  grid-template-columns: 1.45fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .split-grid--round .round-rd {
@@ -610,6 +610,24 @@
 
 .round-pipeline-box b {
   font-weight: 800;
+}
+
+.round-headline strong {
+  color: var(--accent);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.round-rd > strong b {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.round-ai-progress {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font: 700 11px/1.4 var(--sans);
 }
 
 .rd-payback {
@@ -1020,23 +1038,28 @@
 
 .investor-return-table th:first-child,
 .investor-return-table td:first-child {
-  width: 24%;
+  width: 21%;
   text-align: left;
 }
 
 .investor-return-table th:nth-child(2),
 .investor-return-table td:nth-child(2) {
-  width: 15%;
+  width: 13%;
 }
 
 .investor-return-table th:nth-child(3),
 .investor-return-table td:nth-child(3) {
-  width: 17%;
+  width: 14%;
 }
 
 .investor-return-table th:nth-child(4),
 .investor-return-table td:nth-child(4) {
-  width: 34%;
+  width: 12%;
+}
+
+.investor-return-table th:nth-child(5),
+.investor-return-table td:nth-child(5) {
+  width: 30%;
 }
 
 .investor-return-table th:last-child,
@@ -1062,6 +1085,10 @@
 
 .investor-return-table tbody tr:last-child td b {
   color: #ffa592;
+}
+
+.investor-return-table tbody tr:last-child td small {
+  color: rgba(255, 255, 255, .62);
 }
 
 .investor-return-note {
