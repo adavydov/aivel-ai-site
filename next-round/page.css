@@ -549,24 +549,45 @@
 }
 
 .investor-return-table table {
-  min-width: 760px;
+  min-width: 820px;
   table-layout: fixed;
 }
 
 .investor-return-table th,
 .investor-return-table td {
-  width: 20%;
   font-variant-numeric: tabular-nums;
-  text-align: right;
+  text-align: left;
 }
 
 .investor-return-table th:first-child,
 .investor-return-table td:first-child {
+  width: 24%;
   text-align: left;
 }
 
+.investor-return-table th:nth-child(2),
+.investor-return-table td:nth-child(2) {
+  width: 15%;
+}
+
+.investor-return-table th:nth-child(3),
+.investor-return-table td:nth-child(3) {
+  width: 17%;
+}
+
+.investor-return-table th:nth-child(4),
+.investor-return-table td:nth-child(4) {
+  width: 34%;
+}
+
+.investor-return-table th:last-child,
+.investor-return-table td:last-child {
+  width: 10%;
+  text-align: right;
+}
+
 .investor-return-table td {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -576,7 +597,12 @@
 }
 
 .investor-return-table tbody tr:last-child td {
-  background: var(--soft);
+  background: var(--ink);
+  color: #fff;
+}
+
+.investor-return-table tbody tr:last-child td b {
+  color: #ffa592;
 }
 
 .investor-return-note {
