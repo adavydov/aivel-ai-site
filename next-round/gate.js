@@ -30,8 +30,8 @@
     typeof envelope?.aad === "string" &&
     typeof envelope?.ciphertext === "string";
 
-  const loadEnvelope = async () => {
-    const response = await fetch(`./payload.json?v=${Date.now()}`, {
+  const loadEnvelope = async (name) => {
+    const response = await fetch(`./${name}?v=${Date.now()}`, {
       cache: "no-store",
       credentials: "omit",
       referrerPolicy: "no-referrer",
@@ -76,7 +76,7 @@
     return JSON.parse(new TextDecoder().decode(plaintext));
   };
 
-  const render = (payload) => {
+  const render = (payload, version) => {
     if (
       typeof payload?.title !== "string" ||
       typeof payload?.body !== "string"
@@ -86,10 +86,12 @@
     document.title = payload.title;
     document.body.className = "";
     document.body.innerHTML = payload.body;
+    document.documentElement.lang = "ru";
     window.scrollTo({ top: 0, behavior: "auto" });
     document.getElementById("lock-page")?.addEventListener("click", () => {
       window.location.reload();
     });
+    window.dispatchEvent(new CustomEvent("aivel:unlocked", { detail: { version } }));
   };
 
   visibilityButton.addEventListener("click", () => {
@@ -112,9 +114,19 @@
     passwordInput.value = "";
 
     try {
-      const envelope = await loadEnvelope();
-      const payload = await decrypt(envelope, password);
-      render(payload);
+      const candidates = [["payload-v2.json", "v2"], ["payload-v1.json", "v1"]];
+      let unlocked = null;
+      for (const [name, version] of candidates) {
+        try {
+          const envelope = await loadEnvelope(name);
+          unlocked = { payload: await decrypt(envelope, password), version };
+          break;
+        } catch (candidateError) {
+          if (candidateError?.message === "payload_unavailable") throw candidateError;
+        }
+      }
+      if (!unlocked) throw new Error("password_invalid");
+      render(unlocked.payload, unlocked.version);
     } catch (unlockError) {
       const networkFailure = unlockError?.message === "payload_unavailable";
       error.textContent = networkFailure
