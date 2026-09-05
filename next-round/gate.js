@@ -76,12 +76,42 @@
     return JSON.parse(new TextDecoder().decode(plaintext));
   };
 
-  const render = (payload, version) => {
+  const loadPresentationStylesheet = async (stylesheet) => {
+    if (
+      typeof stylesheet !== "string" ||
+      !/^\.\/v2-presentation\.css\?v=[0-9a-f]{12}$/.test(stylesheet)
+    ) {
+      throw new Error("presentation_unavailable");
+    }
+    const url = new URL(stylesheet, window.location.href);
+    if (url.origin !== window.location.origin) {
+      throw new Error("presentation_unavailable");
+    }
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url.href;
+    await new Promise((resolve, reject) => {
+      link.onload = resolve;
+      link.onerror = () => {
+        link.remove();
+        reject(new Error("presentation_unavailable"));
+      };
+      document.head.append(link);
+    });
+    document.querySelectorAll('link[rel="stylesheet"]').forEach((previous) => {
+      if (previous !== link) previous.disabled = true;
+    });
+  };
+
+  const render = async (payload, version) => {
     if (
       typeof payload?.title !== "string" ||
       typeof payload?.body !== "string"
     ) {
       throw new Error("payload_invalid");
+    }
+    if (version === "v2" && payload.stylesheet !== undefined) {
+      await loadPresentationStylesheet(payload.stylesheet);
     }
     document.title = payload.title;
     document.body.className = "";
@@ -126,9 +156,9 @@
         }
       }
       if (!unlocked) throw new Error("password_invalid");
-      render(unlocked.payload, unlocked.version);
+      await render(unlocked.payload, unlocked.version);
     } catch (unlockError) {
-      const networkFailure = unlockError?.message === "payload_unavailable";
+      const networkFailure = ["payload_unavailable", "presentation_unavailable"].includes(unlockError?.message);
       error.textContent = networkFailure
         ? "Не удалось загрузить зашифрованные данные. Обновите страницу."
         : "Не удалось открыть страницу. Проверьте пароль.";
