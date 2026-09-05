@@ -22,9 +22,11 @@ const priorEnvelope=JSON.parse(await readFile(path.join(outputDir,"payload-v2.js
 await decrypt(priorEnvelope); // Verify reuse of the existing V2 password.
 const v1Before=hash(await readFile(path.join(outputDir,"payload-v1.json")));
 const source=await readFile(sourcePath,"utf8");
-const styleBlocks=[...source.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)];
-if(styleBlocks.length!==1)throw new Error("Expected one complete standalone stylesheet.");
-const css=styleBlocks[0][1];
+const styleBlocks=[...source.matchAll(/<style\b([^>]*)>([\s\S]*?)<\/style>/gi)];
+if(styleBlocks.length<1||styleBlocks.length>2||styleBlocks[0][1].trim()!==""||
+  (styleBlocks.length===2&&!/^\s+id\s*=\s*(["'])aivel-final-consistency-20260905\1\s*$/.test(styleBlocks[1][1])))
+  throw new Error("Expected the baseline stylesheet, optionally followed by aivel-final-consistency-20260905.");
+const css=styleBlocks.map(block=>block[2]).join("\n");
 const bodyMatch=source.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i);
 if(!bodyMatch)throw new Error("Missing presentation body.");
 const body=bodyMatch[1].replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,"").trim();
